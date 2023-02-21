@@ -1,0 +1,227 @@
+.code-line-number {
+  color: #8b949e;
+}
+
+/* light theme */
+.code-light code {
+  color: #66accc;
+}
+
+.code-light .hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.code-light .hljs-doctag,
+.code-light .hljs-keyword,
+.code-light .hljs-meta .hljs-keyword,
+.code-light .hljs-template-tag,
+.code-light .hljs-template-variable,
+.code-light .hljs-type,
+.code-light .hljs-variable.language_ {
+  color: #ab47bc;
+}
+
+.code-light .hljs-title,
+.code-light .hljs-title.class_,
+.code-light .hljs-title.class_.inherited__,
+.code-light .hljs-title.function_ {
+  color: #2979ff;
+}
+
+.code-light .hljs-class {
+  color: #ffa000;
+}
+
+.code-light .hljs-attr,
+.code-light .hljs-attribute,
+.code-light .hljs-literal,
+.code-light .hljs-meta,
+.code-light .hljs-operator,
+.code-light .hljs-selector-attr,
+.code-light .hljs-selector-class,
+.code-light .hljs-selector-id,
+.code-light .hljs-variable {
+  color: #d19a66;
+}
+
+.code-light .hljs-number {
+  color: #ff7042;
+}
+
+.code-light .hljs-meta .hljs-string,
+.code-light .hljs-regexp {
+  color: #80cbc4;
+}
+
+.code-light .hljs-string {
+  color: #7cb342;
+}
+
+.code-light .hljs-built_in,
+.code-light .hljs-symbol {
+  color: #5c6bc0;
+}
+
+.code-light .hljs-code,
+.code-light .hljs-comment,
+.code-light .hljs-formula {
+  color: #8b949e;
+  font-style: italic;
+}
+
+.code-light .hljs-name,
+.code-light .hljs-quote,
+.code-light .hljs-selector-pseudo,
+.code-light .hljs-selector-tag {
+  color: #e06c75;
+}
+
+.code-light .hljs-subst {
+  color: #c9d1d9;
+}
+
+.code-light .hljs-section {
+  color: #1f6feb;
+  font-weight: 700;
+}
+
+.code-light .hljs-bullet {
+  color: #f2cc60;
+}
+
+.code-light .hljs-emphasis {
+  color: #c9d1d9;
+  font-style: italic;
+}
+
+.code-light .hljs-strong {
+  color: #c9d1d9;
+  font-weight: 700;
+}
+
+.code-light .hljs-addition {
+  color: #aff5b4;
+  background-color: #033a16;
+}
+
+.code-light .hljs-deletion {
+  color: #ffdcd7;
+  background-color: #67060c;
+}
+
+.code-light .hljs-link {
+  text-decoration: underline;
+}
+
+/* dark theme */
+.code-dark code {
+  color: #e06c75;
+}
+
+.code-dark .hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.code-dark .hljs-doctag,
+.code-dark .hljs-keyword,
+.code-dark .hljs-meta .hljs-keyword,
+.code-dark .hljs-template-tag,
+.code-dark .hljs-template-variable,
+.code-dark .hljs-type,
+.code-dark .hljs-variable.language_ {
+  color: #c678dd;
+}
+
+.code-dark .hljs-title,
+.code-dark .hljs-title.class_,
+.code-dark .hljs-title.class_.inherited__,
+.code-dark .hljs-title.function_ {
+  color: #61afef;
+}
+
+.code-dark .hljs-class {
+  color: #e5c07b;
+}
+
+.code-dark .hljs-attr,
+.code-dark .hljs-attribute,
+.code-dark .hljs-literal,
+.code-dark .hljs-meta,
+.code-dark .hljs-operator,
+.code-dark .hljs-selector-attr,
+.code-dark .hljs-selector-class,
+.code-dark .hljs-selector-id,
+.code-dark .hljs-variable {
+  color: #d19a66;
+}
+
+.code-dark .hljs-number {
+  color: #d19a66;
+}
+
+.code-dark .hljs-meta .hljs-string,
+.code-dark .hljs-regexp {
+  color: #a5d6ff;
+}
+
+.code-dark .hljs-string {
+  color: #98c379;
+}
+
+.code-dark .hljs-built_in,
+.code-dark .hljs-symbol {
+  color: #61aeee;
+}
+
+.code-dark .hljs-code,
+.code-dark .hljs-comment,
+.code-dark .hljs-formula {
+  color: #8b949e;
+  font-style: italic;
+}
+
+.code-dark .hljs-name,
+.code-dark .hljs-quote,
+.code-dark .hljs-selector-pseudo,
+.code-dark .hljs-selector-tag {
+  color: #e06c75;
+}
+
+.code-dark .hljs-subst {
+  color: #c9d1d9;
+}
+
+.code-dark .hljs-section {
+  color: #1f6feb;
+  font-weight: 700;
+}
+
+.code-dark .hljs-bullet {
+  color: #f2cc60;
+}
+
+.code-dark .hljs-emphasis {
+  color: #c9d1d9;
+  font-style: italic;
+}
+
+.code-dark .hljs-strong {
+  color: #c9d1d9;
+  font-weight: 700;
+}
+
+.code-dark .hljs-addition {
+  color: #aff5b4;
+  background-color: #033a16;
+}
+
+.code-dark .hljs-deletion {
+  color: #ffdcd7;
+  background-color: #67060c;
+}
+
+.code-dark .hljs-link {
+  text-decoration: underline;
+}
