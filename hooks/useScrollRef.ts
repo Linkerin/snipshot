@@ -36,7 +36,7 @@ export default function useScrollRef({
 
   const targetRef = useRef(null);
 
-  const handleObserver = useCallback(([entry]) => {
+  const handleObserver = useCallback(([entry]: IntersectionObserverEntry[]) => {
     if (entry.isIntersecting) {
       setIsIntersecting(true);
       return;
