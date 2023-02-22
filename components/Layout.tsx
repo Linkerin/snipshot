@@ -11,7 +11,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         <GridItem>
           <SideBar />
         </GridItem>
-        <GridItem as="main" px={3} pt={3}>
+        <GridItem as="main" px={3} py={3} height="100vh" overflowY="scroll">
           {children}
         </GridItem>
       </Grid>

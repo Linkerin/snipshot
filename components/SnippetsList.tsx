@@ -1,26 +1,10 @@
 import { useEffect, useState } from 'react';
-import { SimpleGrid } from '@chakra-ui/react';
+import { Box, Center, SimpleGrid, Spinner, VStack } from '@chakra-ui/react';
 
 import Snippet from '@/components/Snippet/Snippet';
 import { SnippetType } from '@/services/types';
 import usePaginatedHandler from '@/hooks/usePaginatedHandler';
 import useScrollRef from '@/hooks/useScrollRef';
-
-const snippet: SnippetType = {
-  id: '36ef4ef2-3ab3-4945-8712-38c0287511dc',
-  title: 'Do not translate text',
-  snippet: '<p translate="no">Untranslatable text</p>',
-  tree: '',
-  lang: 'Bash',
-  tags: ['translate', 'html', 'p', 'text', 'paragraph'],
-  verified: false,
-  snippets_ratings: [{ id: '1', rating: 0 }],
-  created: '2022-04-18 12:08:20.008539+00',
-  slug: 'do-not-translate-text',
-  profiles: {
-    name: 'linkerin'
-  }
-};
 
 interface SnippetsListProps {
   snippetsData: SnippetType[];
@@ -57,11 +41,46 @@ function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
   }, [snippetsData]);
 
   return (
-    <SimpleGrid minChildWidth="30vw" spacingX={5} spacingY={3}>
-      {snippets.map(snippet => (
-        <Snippet key={snippet.id} snippet={snippet} />
-      ))}
-    </SimpleGrid>
+    <>
+      <SimpleGrid minChildWidth="35vw" spacingX={4}>
+        <VStack alignItems="flex-start" spacing={4}>
+          {snippets.map((snippet, index) => {
+            const refItem = index === snippets.length - 2;
+            if (index % 2 === 0)
+              return (
+                <Snippet
+                  key={snippet.id}
+                  snippet={snippet}
+                  provideRef={refItem ? targetRef : undefined}
+                />
+              );
+          })}
+        </VStack>
+        <VStack alignItems="flex-start" spacing={4}>
+          {snippets.map((snippet, index) => {
+            const refItem = index === snippets.length - 2;
+            if (index % 2 !== 0)
+              return (
+                <Snippet
+                  key={snippet.id}
+                  snippet={snippet}
+                  provideRef={refItem ? targetRef : undefined}
+                />
+              );
+          })}
+        </VStack>
+      </SimpleGrid>
+      <Center my={5}>
+        {isLoading && (
+          <Spinner
+            thickness="5px"
+            emptyColor="gray.200"
+            size="xl"
+            speed="0.5s"
+          />
+        )}
+      </Center>
+    </>
   );
 }
 

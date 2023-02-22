@@ -6,7 +6,14 @@ import { tagTheme } from './tagTheme';
 // const whiteColor = hour > 18 || hour < 9 ? '#fffff3' : '#fafdfa';
 
 const theme = extendTheme({
-  components: { Tag: tagTheme }
+  colors: {
+    white: '#fafdfa',
+    black: '#282a36'
+  },
+  components: { Tag: tagTheme },
+  fontSizes: {
+    codeSize: '0.8rem'
+  }
 });
 
 export default theme;

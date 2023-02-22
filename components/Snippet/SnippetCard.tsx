@@ -59,14 +59,7 @@ function SnippetCard({
   };
 
   return (
-    <Card
-      variant="elevated"
-      size="sm"
-      borderRadius={10}
-      mt={mt}
-      mb={mb}
-      // w="40%"
-    >
+    <Card variant="elevated" size="sm" borderRadius={10} mt={mt} mb={mb}>
       <CardHeader py={1.5}>
         <SnippetBar>
           <SnippetTitle title={title} slug={slug} lang={lang} />
@@ -81,9 +74,9 @@ function SnippetCard({
         onMouseLeave={handleMouseLeave}
         className={codeClassName}
         cursor="pointer"
-        lineHeight="8"
+        lineHeight="5"
         position="relative"
-        fontSize="sm"
+        fontSize="codeSize"
       >
         <CopyIcon
           boxSize={5}

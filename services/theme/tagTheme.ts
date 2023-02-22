@@ -11,7 +11,7 @@ const baseStyle = definePartsStyle({
     }
   },
   label: {
-    color: '#000'
+    color: 'black'
   }
 });
 

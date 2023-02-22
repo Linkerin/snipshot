@@ -1,3 +1,5 @@
+import { chakra } from '@chakra-ui/react';
+
 import SnippetCard from './SnippetCard';
 import SnippetCode from './SnippetCode';
 import { SnippetType } from '@/services/types';
@@ -10,7 +12,7 @@ export interface SnippetProps {
 function Snippet({ snippet, provideRef }: SnippetProps) {
   const snippetContent = snippet.tree ? snippet.tree : snippet.snippet;
   return (
-    <article ref={provideRef}>
+    <chakra.article ref={provideRef} w="100%">
       <SnippetCard
         title={snippet.title}
         snippet={snippetContent}
@@ -68,7 +70,7 @@ function Snippet({ snippet, provideRef }: SnippetProps) {
             {parseDate(snippet.created) ?? ''}
           </Typography>
         </Stack> */}
-    </article>
+    </chakra.article>
   );
 }
 
