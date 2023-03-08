@@ -47,14 +47,14 @@ export interface SnippetType {
   lang: LangsType;
   slug: string;
   verified: boolean;
-  profiles: {
+  author: {
     name: string;
   };
   created: string;
-  snippets_ratings: {
+  rating: {
     id: string;
     rating: number;
-  }[];
+  };
   tags?: string[];
 }
 // export interface SnippetType

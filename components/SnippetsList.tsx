@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Center, SimpleGrid, Spinner, VStack } from '@chakra-ui/react';
+import { Center, SimpleGrid, Spinner, VStack } from '@chakra-ui/react';
 
 import Snippet from '@/components/Snippet/Snippet';
 import { SnippetType } from '@/services/types';
@@ -14,7 +14,6 @@ interface SnippetsListProps {
 function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
   const [snippets, setSnippets] = useState(snippetsData);
   const [isLoading, setIsLoading] = useState(false);
-
   const [isIntersecting, targetRef, updateObserver] = useScrollRef();
   const [fetchData, hasMore] = usePaginatedHandler<SnippetType>(fetchUrl);
 

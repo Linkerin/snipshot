@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import NextLink from 'next/link';
 import {
   chakra,
@@ -5,6 +6,7 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
+  Box,
   LinkBox,
   LinkOverlay,
   List,
@@ -12,14 +14,27 @@ import {
   useColorModeValue
 } from '@chakra-ui/react';
 
+import { AuthContext } from '@/context/AuthContext';
 import CenteredListItem from '../CenteredListItem';
 import CodeIcon from '@/components/Icons/CodeIcon';
 import LanguagesList from '../LanguagesList';
 import SettingsIcon from '@/components/Icons/SettingsIcon';
+import SignInIcon from '@/components/Icons/SignInIcon';
 import SignOutIcon from '@/components/Icons/SignOutIcon';
 import UserIcon from '@/components/Icons/UserIcon';
 
 function SideMenu() {
+  const user = useContext(AuthContext);
+
+  const handleLogOut = async (e: React.MouseEvent) => {
+    const supabase = (await import('@/services/supabase')).default;
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error(error.message);
+    }
+  };
+
   const menuItemHoverColor = useColorModeValue(
     'blackAlpha.50',
     'whiteAlpha.200'
@@ -36,19 +51,37 @@ function SideMenu() {
   const StyledMenuItem = chakra(CenteredListItem, menuItemStyles);
 
   return (
-    <List as="menu" spacing={2}>
-      <LinkBox as={StyledMenuItem}>
-        <ListIcon as={UserIcon} />
-        <LinkOverlay as={NextLink} href="/profile" aria-label="Profile page">
-          Profile
-        </LinkOverlay>
-      </LinkBox>
-      <LinkBox as={StyledMenuItem}>
-        <ListIcon as={SettingsIcon} />
-        <LinkOverlay as={NextLink} href="#" aria-label="Settings page">
-          Settings
-        </LinkOverlay>
-      </LinkBox>
+    <List as="menu" spacing={1}>
+      {user?.id && (
+        <>
+          <LinkBox as={StyledMenuItem}>
+            <ListIcon as={UserIcon} />
+            <LinkOverlay
+              as={NextLink}
+              href="/profile"
+              aria-label="Profile page"
+            >
+              Profile
+            </LinkOverlay>
+          </LinkBox>
+          <LinkBox as={StyledMenuItem}>
+            <ListIcon as={SettingsIcon} />
+            <LinkOverlay as={NextLink} href="#" aria-label="Settings page">
+              Settings
+            </LinkOverlay>
+          </LinkBox>
+        </>
+      )}
+
+      {!user?.id && (
+        <LinkBox as={StyledMenuItem}>
+          <ListIcon as={SignInIcon} />
+          <LinkOverlay as={NextLink} href="/login" aria-label="Settings page">
+            Sign In
+          </LinkOverlay>
+        </LinkBox>
+      )}
+
       <CenteredListItem>
         <Accordion allowToggle w="100%">
           <AccordionItem border="none">
@@ -62,12 +95,15 @@ function SideMenu() {
           </AccordionItem>
         </Accordion>
       </CenteredListItem>
-      <LinkBox as={StyledMenuItem}>
-        <ListIcon as={SignOutIcon} />
-        <LinkOverlay as={NextLink} href="/logout" aria-label="Logout">
-          Logout
-        </LinkOverlay>
-      </LinkBox>
+
+      {user?.id && (
+        <StyledMenuItem>
+          <Box as="button" onClick={handleLogOut}>
+            <ListIcon as={SignOutIcon} />
+            Logout
+          </Box>
+        </StyledMenuItem>
+      )}
     </List>
   );
 }

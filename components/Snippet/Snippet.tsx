@@ -2,6 +2,7 @@ import { chakra } from '@chakra-ui/react';
 
 import SnippetCard from './SnippetCard';
 import SnippetCode from './SnippetCode';
+import SnippetInfoFooter from './SnippetInfoFooter';
 import { SnippetType } from '@/services/types';
 
 export interface SnippetProps {
@@ -23,6 +24,12 @@ function Snippet({ snippet, provideRef }: SnippetProps) {
       >
         <SnippetCode snippetTree={!!snippet.tree} />
       </SnippetCard>
+      <SnippetInfoFooter
+        author={snippet.author}
+        created={snippet.created}
+        rating={snippet.rating}
+        verified={snippet.verified}
+      />
       {/* <Stack
           direction="row"
           alignItems="center"

@@ -1,4 +1,4 @@
-function GuestAvatar() {
+function GuestAvatarSvg() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -879,4 +879,4 @@ function GuestAvatar() {
   );
 }
 
-export default GuestAvatar;
+export default GuestAvatarSvg;

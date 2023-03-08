@@ -34,7 +34,6 @@ export default function usePaginatedHandler<T>(
   }
 
   const fetchData = useCallback(async () => {
-    console.log(process.env.NEXT_PUBLIC_API);
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API}${url}`);
       if (!res.ok) {

@@ -1,23 +1,19 @@
-import Image from 'next/image';
-import { Box } from '@chakra-ui/react';
+import { useContext } from 'react';
+import { Box, Image } from '@chakra-ui/react';
 
-import GuestAvatar from './GuestAvatar';
+import { AuthContext } from '@/context/AuthContext';
+import UserIcon from '@/components/Icons/UserIcon';
+import GuestAvatarSvg from './GuestAvatarSvg';
 // ADD credits to guest avatar svg
 // <a href='https://www.freepik.com/vectors/cute-sloth'>Cute sloth vector created by catalyststuff - www.freepik.com</a>
 
 interface UserAvatarProps {
-  url?: string;
-  username?: string;
-  profile?: boolean;
   small?: boolean;
 }
 
-function UserAvatar({
-  url,
-  username,
-  profile = false,
-  small = false
-}: UserAvatarProps) {
+function UserAvatar({ small = false }: UserAvatarProps) {
+  const user = useContext(AuthContext);
+
   const AvatarContainer = ({ children }: { children: React.ReactElement }) => {
     return (
       <Box
@@ -49,7 +45,15 @@ function UserAvatar({
 
   return (
     <AvatarContainer>
-      {url ? <Image src={url} alt={`${username} avatar`} /> : <GuestAvatar />}
+      {user?.avatar ? (
+        <Image
+          src={user?.avatar}
+          alt={`${user.username} avatar`}
+          fallback={<UserIcon />}
+        />
+      ) : (
+        <GuestAvatarSvg />
+      )}
     </AvatarContainer>
   );
 }

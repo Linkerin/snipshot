@@ -7,7 +7,7 @@ function SnippetTagsList({ tags }: { tags?: string[] }) {
       {tags &&
         tags.map(tag => (
           <LinkBox key={tag} display="flex" alignItems="center">
-            <Tag size="sm" borderRadius="full" variant="outline" m={0}>
+            <Tag size="sm" variant="outline" borderRadius="full" m={0} py={1}>
               <TagLabel>
                 <LinkOverlay as={NextLink} href={`/tags/${tag}`}>
                   {tag.toLowerCase()}

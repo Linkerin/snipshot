@@ -473,7 +473,7 @@ Other files:
 ## Future features and plans <a id="plans"></a>
 
 - [x] Try [Supabase](https://supabase.com) as a backend alternative for Django.
-- [ ] Add support for GitHub / Google authorization.
+- [x] Add support for GitHub authorization.
 - [ ] Add fancy animations for better UI/UX.
 - [ ] Add testing and logging.
 - [x] Add ratings for snippets.
