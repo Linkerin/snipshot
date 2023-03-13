@@ -3,6 +3,7 @@ import { Card, CardBody, CardHeader, Center, Heading } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
 import Logo from '../Logo';
+import ProfileStats from './ProfileStats';
 import SideMenu from './SideMenu';
 import UserAvatar from '@/components/Avatars/UserAvatar';
 
@@ -26,6 +27,7 @@ function SideBar() {
           >
             {user?.username ?? 'Hello, Guest!'}
           </Heading>
+          <ProfileStats userId={user?.id} />
         </Center>
         <SideMenu />
       </CardBody>
