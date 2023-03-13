@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { Grid, GridItem } from '@chakra-ui/react';
 
-import AddSnippetButton from '@/components/Snippet/AddSnippetButton';
+import AddSnippetButton from '@/components/AddSnippetButton';
 import { DeviceContext } from '@/context/DeviceContext';
 import Meta from '@/components/Meta/Meta';
 import SideBar from '@/components/SideBar/SideBar';

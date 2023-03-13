@@ -59,7 +59,14 @@ function SnippetCard({
   };
 
   return (
-    <Card variant="elevated" size="sm" borderRadius={10} mt={mt} mb={mb}>
+    <Card
+      variant="elevated"
+      size="sm"
+      borderRadius={10}
+      mt={mt}
+      mb={mb}
+      h="max-content"
+    >
       <CardHeader py={1.5}>
         <SnippetBar>
           <SnippetTitle title={title} slug={slug} lang={lang} />

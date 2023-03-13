@@ -6,7 +6,7 @@ function SnippetHeadCircle({ color }: { color: string }) {
 
 function SnippetBar({ children }: { children: React.ReactElement }) {
   return (
-    <HStack as="header" spacing={1}>
+    <HStack as="header" spacing={1} h={4}>
       <SnippetHeadCircle color="#f18549" />
       <SnippetHeadCircle color="#ffe600" />
       <SnippetHeadCircle color="#0ad787" />

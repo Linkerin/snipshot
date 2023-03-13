@@ -1,17 +1,15 @@
 import React from 'react';
 import { ListItem, ListItemProps } from '@chakra-ui/react';
 
-interface CenteredListItemProps extends ListItemProps {
-  children: React.ReactElement | string | (string | React.ReactElement)[];
-}
-
-function CenteredListItem(props: CenteredListItemProps) {
+function CenteredListItem(props: ListItemProps) {
   return (
     <ListItem
       css={{
         display: 'flex',
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        width: '100%'
       }}
       {...props}
     >
