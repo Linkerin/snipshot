@@ -5,6 +5,7 @@ import AddSnippetButton from '@/components/AddSnippetButton';
 import { DeviceContext } from '@/context/DeviceContext';
 import Meta from '@/components/Meta/Meta';
 import SideBar from '@/components/SideBar/SideBar';
+import TopBar from '@/components/TopBar/TopBar';
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { isMobile } = useContext(DeviceContext);
@@ -20,8 +21,11 @@ function Layout({ children }: { children: React.ReactNode }) {
             <SideBar />
           </GridItem>
         )}
-        <GridItem as="main" px={3} py={3} height="100vh" overflowY="scroll">
-          {children}
+        <GridItem pb={3} pl={1} height="100vh" overflowY="scroll">
+          {!isMobile && <TopBar />}
+          <GridItem as="main" px={3}>
+            {children}
+          </GridItem>
         </GridItem>
         {!isMobile && <AddSnippetButton />}
       </Grid>
