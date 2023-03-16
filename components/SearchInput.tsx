@@ -4,6 +4,8 @@ import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
 import SearchIcon from './Icons/SearchIcon';
 import { SearchFocusHandler, SnippetInfo } from '@/services/types';
 
+const delay = 600; // 600ms delay before making a search request to the server
+
 interface SearchBoxProps {
   onChange: ChangeEventHandler<HTMLInputElement>;
   value: string;
@@ -18,7 +20,6 @@ function SearchInput({
   handleFocus
 }: SearchBoxProps) {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-  const delay = 600; // 600ms delay before making a search request to the server
 
   useEffect(() => {
     const fetchSearchResults = async () => {

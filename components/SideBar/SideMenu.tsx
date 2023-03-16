@@ -58,7 +58,7 @@ function SideMenu() {
             <ListIcon as={UserIcon} />
             <LinkOverlay
               as={NextLink}
-              href="/profile"
+              href={`/users/${user?.username}`}
               aria-label="Profile page"
             >
               Profile

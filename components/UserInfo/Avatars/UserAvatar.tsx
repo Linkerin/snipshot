@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { Box, Image } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -8,12 +7,12 @@ import GuestAvatarSvg from './GuestAvatarSvg';
 // <a href='https://www.freepik.com/vectors/cute-sloth'>Cute sloth vector created by catalyststuff - www.freepik.com</a>
 
 interface UserAvatarProps {
+  avatar?: string;
+  username?: string;
   small?: boolean;
 }
 
-function UserAvatar({ small = false }: UserAvatarProps) {
-  const user = useContext(AuthContext);
-
+function UserAvatar({ avatar, username, small = false }: UserAvatarProps) {
   const AvatarContainer = ({ children }: { children: React.ReactElement }) => {
     return (
       <Box
@@ -45,10 +44,10 @@ function UserAvatar({ small = false }: UserAvatarProps) {
 
   return (
     <AvatarContainer>
-      {user?.avatar ? (
+      {avatar ? (
         <Image
-          src={user?.avatar}
-          alt={`${user.username} avatar`}
+          src={avatar}
+          alt={`${username} avatar`}
           fallback={<UserIcon />}
         />
       ) : (

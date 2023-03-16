@@ -11,7 +11,7 @@ import { LANGS } from '@/services/constants';
 
 interface LanguagesListProps {
   noLinks?: boolean;
-  handleItemClick: MouseEventHandler;
+  handleItemClick?: MouseEventHandler;
 }
 
 function LanguagesList({

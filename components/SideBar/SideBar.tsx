@@ -1,11 +1,10 @@
 import { useContext } from 'react';
-import { Card, CardBody, CardHeader, Center, Heading } from '@chakra-ui/react';
+import { Card, CardBody, CardHeader, Center } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
 import Logo from '../Logo';
-import ProfileStats from './ProfileStats';
 import SideMenu from './SideMenu';
-import UserAvatar from '@/components/Avatars/UserAvatar';
+import UserInfo from '@/components/UserInfo/UserInfo';
 
 function SideBar() {
   const user = useContext(AuthContext);
@@ -15,19 +14,13 @@ function SideBar() {
       <CardHeader as="header" p={2}>
         <Logo isLink />
       </CardHeader>
-      <CardBody width="100%" pr={0} pl={2}>
+      <CardBody width="100%" px={2}>
         <Center mb={5} flexDirection="column">
-          <UserAvatar />
-          <Heading
-            as="h2"
-            fontSize="1.6rem"
-            fontWeight="medium"
-            mt={1}
-            cursor="default"
-          >
-            {user?.username ?? 'Hello, Guest!'}
-          </Heading>
-          <ProfileStats userId={user?.id} />
+          <UserInfo
+            avatar={user?.avatar}
+            username={user?.username}
+            userId={user?.id}
+          />
         </Center>
         <SideMenu />
       </CardBody>

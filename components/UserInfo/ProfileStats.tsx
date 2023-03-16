@@ -7,7 +7,11 @@ interface ProfileStatsProps {
   username?: string;
 }
 
-function ProfileStats({ userId, username = 'Linkerin' }: ProfileStatsProps) {
+/**
+ * `userId` property prevails over `username`. If `userId` provided,
+ * stats fetching will be implemented for that user.
+ */
+function ProfileStats({ userId, username }: ProfileStatsProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [numOfSnippets, setNumOfSnippets] = useState<number | null>(null);
   const [numOfFavorites, setNumOfFavorites] = useState<number | null>(null);
@@ -63,7 +67,14 @@ function ProfileStats({ userId, username = 'Linkerin' }: ProfileStatsProps) {
   return isLoading || (!userId && !username) ? (
     <></>
   ) : (
-    <Stack direction="row" mt={4} w="100%" justifyContent="space-evenly">
+    <Stack
+      direction="row"
+      justifyContent="space-evenly"
+      mt={2}
+      w="100%"
+      px={1}
+      spacing={0}
+    >
       <Stack alignItems="center" spacing={0}>
         <Text as="b">{numOfSnippets}</Text>
         <Text fontSize="sm" color="gray.500">
@@ -75,6 +86,13 @@ function ProfileStats({ userId, username = 'Linkerin' }: ProfileStatsProps) {
         <Text as="b">{numOfFavorites}</Text>
         <Text fontSize="sm" color="gray.500">
           favorites
+        </Text>
+      </Stack>
+      <Box sx={{ borderLeft: '1px solid currentColor' }} />
+      <Stack alignItems="center" spacing={0}>
+        <Text as="b">{numOfFavorites}</Text>
+        <Text fontSize="sm" color="gray.500">
+          rating
         </Text>
       </Stack>
     </Stack>
