@@ -5,15 +5,13 @@ import SearchBox from './SearchBox';
 function TopBar() {
   return (
     <Flex
-      h="58px"
-      w="100%"
-      mb={2}
-      pt={3}
+      alignItems="center"
+      pt={4}
+      pb={2}
       px={3}
-      position="sticky"
-      top={0}
       zIndex={1}
       bgColor="white"
+      mb={3}
     >
       <SearchBox />
     </Flex>

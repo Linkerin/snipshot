@@ -14,16 +14,31 @@ function Layout({ children }: { children: React.ReactNode }) {
     <>
       <Meta />
       <Grid
-        gridTemplateColumns={{ base: '1fr', md: '25vw 1fr', lg: '18vw 1fr' }}
+        templateAreas={`"sidebar topbar"
+                        "sidebar main"`}
+        gridTemplateColumns={{
+          base: '1fr',
+          md: '25vw 1fr',
+          lg: '22vw 1fr',
+          xl: '18vw 1fr'
+        }}
+        h="100vh"
       >
         {!isMobile && (
-          <GridItem>
+          <GridItem area="sidebar" zIndex={2}>
             <SideBar />
           </GridItem>
         )}
-        <GridItem pb={3} pl={1} height="100vh" overflowY="scroll">
-          {!isMobile && <TopBar />}
-          <GridItem as="main" px={3}>
+        <GridItem
+          cursor="default"
+          maxHeight="100vh"
+          height="100vh"
+          overflowY="scroll"
+        >
+          <GridItem area="topbar" position="sticky" top={0} zIndex={1}>
+            {!isMobile && <TopBar />}
+          </GridItem>
+          <GridItem as="main" px={3} area="main" h="calc(100% - 76px)">
             {children}
           </GridItem>
         </GridItem>

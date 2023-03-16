@@ -32,7 +32,7 @@ function Login() {
   };
 
   return (
-    <Center height="100%">
+    <Center h="100%">
       {user?.id ? (
         <Spinner thickness="5px" emptyColor="gray.200" size="xl" speed="0.5s" />
       ) : (
