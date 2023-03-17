@@ -1,6 +1,8 @@
 import { GetServerSideProps } from 'next';
+import { Grid, GridItem } from '@chakra-ui/react';
 
 import { cleanObjDataTypesForNextJS } from '@/services/utils';
+import CommentsContainer from '@/components/Comments/CommentsContainer';
 import getBySlug from '@/services/prisma/snippetsService/getBySlug';
 import Meta from '@/components/Meta/Meta';
 import Snippet from '@/components/Snippet/Snippet';
@@ -25,7 +27,14 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
           keywordsTags ? `, ${keywordsTags}` : ''
         }`}
       />
-      <Snippet snippet={snippet} />
+      <Grid templateColumns="4fr 3fr" gap={1}>
+        <GridItem>
+          <Snippet snippet={snippet} />
+        </GridItem>
+        <GridItem h="60vh">
+          <CommentsContainer snippetId={snippet.id} />
+        </GridItem>
+      </Grid>
     </>
   );
 }

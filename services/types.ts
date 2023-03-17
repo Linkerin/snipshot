@@ -104,11 +104,11 @@ export type SearchFocusHandler = (
 export interface CommentType {
   id: string;
   comment: string;
-  parent?: string;
+  parent?: string | null;
   created: string;
   updated?: string;
   deleted: boolean;
-  profiles: {
+  author: {
     id: string;
     name: string;
     avatar: string;
