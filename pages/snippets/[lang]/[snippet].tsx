@@ -1,3 +1,4 @@
+import { createContext } from 'react';
 import { GetServerSideProps } from 'next';
 import { Grid, GridItem } from '@chakra-ui/react';
 
@@ -7,6 +8,8 @@ import getBySlug from '@/services/prisma/snippetsService/getBySlug';
 import Meta from '@/components/Meta/Meta';
 import Snippet from '@/components/Snippet/Snippet';
 import { SnippetType } from '@/services/types';
+
+export const SnippetIdContext = createContext<string | null>(null);
 
 function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
   const [snippet] = snippetData;
@@ -32,7 +35,9 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
           <Snippet snippet={snippet} />
         </GridItem>
         <GridItem h="60vh">
-          <CommentsContainer snippetId={snippet.id} />
+          <SnippetIdContext.Provider value={snippet.id}>
+            <CommentsContainer />
+          </SnippetIdContext.Provider>
         </GridItem>
       </Grid>
     </>

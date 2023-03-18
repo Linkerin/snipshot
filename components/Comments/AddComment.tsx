@@ -1,19 +1,24 @@
-import { useRef, useState } from 'react';
+import { MouseEventHandler, useContext, useRef, useState } from 'react';
 import {
   FormControl,
   FormHelperText,
   IconButton,
   Input,
   InputGroup,
-  InputRightElement,
-  Textarea
+  InputRightElement
 } from '@chakra-ui/react';
 
+import { AuthContext } from '@/context/AuthContext';
 import SendIcon from '@/components/Icons/SendIcon';
+import { SnippetIdContext } from '@/pages/snippets/[lang]/[snippet]';
 
 function AddComment() {
   const [comment, setComment] = useState('');
   const [helper, setHelper] = useState('');
+  const [isSavingComment, setIsSavingComment] = useState(false);
+
+  const snippetId = useContext(SnippetIdContext);
+  const user = useContext(AuthContext);
 
   const sendBtnRef = useRef<HTMLButtonElement | null>(null);
 
@@ -42,6 +47,30 @@ function AddComment() {
     }
   };
 
+  const handleSave: MouseEventHandler<HTMLButtonElement> = async e => {
+    e.preventDefault();
+    if (isSavingComment || comment.length === 0 || !snippetId) return;
+
+    setIsSavingComment(true);
+    try {
+      const supabase = (await import('../../services/supabase')).default;
+
+      const { data, error } = await supabase.rpc('create_comment', {
+        comment_content: comment,
+        user_key: user?.id,
+        parent_comment_key: null,
+        snippet_key: snippetId
+      });
+      if (error) throw error;
+
+      setComment('');
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsSavingComment(false);
+    }
+  };
+
   return (
     <FormControl>
       <InputGroup>
@@ -52,6 +81,7 @@ function AddComment() {
           maxLength={513}
           value={comment}
           resize="vertical"
+          isDisabled={isSavingComment}
           onChange={handleChange}
           onKeyDown={handleInputKeyDown}
         />
@@ -61,8 +91,10 @@ function AddComment() {
             icon={<SendIcon />}
             aria-label="Publish your comment"
             isDisabled={!comment}
+            isLoading={isSavingComment}
             variant="outline"
             size="sm"
+            onClick={handleSave}
           />
         </InputRightElement>
       </InputGroup>

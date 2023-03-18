@@ -45,7 +45,7 @@ function UserAvatar({
   username,
   size = 'lg',
   disabled = false,
-  noBorder = true
+  noBorder = false
 }: UserAvatarProps) {
   const AvatarContainer = ({ children }: { children: React.ReactNode }) => {
     return (
