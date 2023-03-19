@@ -42,7 +42,7 @@ function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
   return (
     <>
       <SimpleGrid minChildWidth="35vw" spacingX={4}>
-        <VStack alignItems="flex-start" spacing={4}>
+        <VStack alignItems="flex-start" spacing={3}>
           {snippets.map((snippet, index) => {
             const refItem = index === snippets.length - 2;
             if (index % 2 === 0)

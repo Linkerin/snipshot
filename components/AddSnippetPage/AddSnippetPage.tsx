@@ -24,6 +24,7 @@ import SnippetCard from '@/components/Snippet/SnippetCard';
 import SnippetCode from '@/components/Snippet/SnippetCode';
 import SnippetTagsList from '../Snippet/SnippetTagsList';
 import useButtonDisabled from '@/hooks/useButtonDisabled';
+import supabase from '@/services/supabase';
 
 interface UserInput {
   title: string;
@@ -210,20 +211,26 @@ function AddSnippetPage() {
       if (!value && key !== 'tag') return;
     }
 
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title: userInput.title,
-        snippet: userInput.snippet,
-        lang: userInput.lang,
-        tags: tags
-      })
-    };
-
     try {
+      // Get user's JWT
+      const { data, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
+      const jwt = data.session?.access_token;
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: userInput.title,
+          snippet: userInput.snippet,
+          lang: userInput.lang,
+          tags: tags,
+          jwt
+        })
+      };
+
       const res = await fetch('/api/snippets/', options);
 
       if (!res.ok) {

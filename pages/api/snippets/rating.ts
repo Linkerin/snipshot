@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { createClient, PostgrestError } from '@supabase/supabase-js';
 
-import { createServerSupabaseClient } from '@supabase/auth-helpers-nextjs';
+import { createClient, PostgrestError } from '@supabase/supabase-js';
+import { getUserIdByJwt } from '@/services/snippetsApi';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY ?? '';
@@ -11,10 +11,10 @@ type FetchRatingFunc = (
   action: 'increment_rating' | 'decrement_rating' | 'revoke_rating',
   rating_key: string,
   user_key: string
-) => Promise<{ message: string; rating: number[] | number | null }>;
+) => Promise<{ message: string; rating: string }>;
 
 const fetchRating: FetchRatingFunc = async (action, rating_key, user_key) => {
-  const { data, error } = await supabase.rpc<string, PostgrestError>(action, {
+  const { data, error } = await supabase.rpc(action, {
     rating_key,
     user_key
   });
@@ -28,17 +28,17 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const { ratingId, action } = req.body;
+    const { ratingId, action, jwt } = req.body;
 
-    if (!ratingId || !action) {
+    if (!ratingId || !action || !jwt) {
       return res.status(400).json({
-        message: '`ratingId` and `action` are required fields'
+        message: '`ratingId`, `action` and `jwt` are required fields'
       });
     }
 
-    const { user } = await supabase.auth.api.getUserByCookie(req);
+    const userId = await getUserIdByJwt(jwt);
 
-    if (!user?.id) {
+    if (!userId) {
       return res.status(401).json({ message: 'User was not found' });
     }
 
@@ -48,7 +48,7 @@ export default async function handler(
           const incResult = await fetchRating(
             'increment_rating',
             ratingId,
-            user?.id
+            userId
           );
 
           return res.json(incResult);
@@ -57,7 +57,7 @@ export default async function handler(
           const decResult = await fetchRating(
             'decrement_rating',
             ratingId,
-            user?.id
+            userId
           );
 
           return res.json(decResult);
@@ -66,7 +66,7 @@ export default async function handler(
           const revokeResult = await fetchRating(
             'revoke_rating',
             ratingId,
-            user?.id
+            userId
           );
 
           return res.json(revokeResult);

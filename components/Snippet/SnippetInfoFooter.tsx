@@ -10,6 +10,7 @@ import {
 
 import CheckedIcon from '@/components/Icons/CheckedIcon';
 import { parseDate } from '@/services/date';
+import Rating from './Rating';
 import { SnippetType } from '@/services/types';
 
 type SnippetInfoFooterProps = Pick<
@@ -24,14 +25,14 @@ function SnippetInfoFooter({
   verified
 }: SnippetInfoFooterProps) {
   return (
-    <Stack ml={2} mt={2}>
+    <Stack ml={2} mb={2} mt={0.5} spacing={0.5}>
       <Stack
         direction="row"
         align="center"
         wrap="wrap-reverse"
         justifyContent="space-between"
       >
-        {/* <Rating id={rating.id} rating={rating.rating} /> */}
+        <Rating id={rating.id} rating={rating.rating} />
         {verified && (
           <Tag
             variant="outline"

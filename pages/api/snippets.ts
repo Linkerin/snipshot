@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { LANGS } from '@/services/constants';
-import * as snippetService from '@/services/snippetsApi';
+import { create as createSnippet } from '@/services/snippetsApi';
 import get from '@/services/prisma/snippetsService/get';
 import { cleanObjDataTypesForNextJS } from '@/services/utils';
 
@@ -11,11 +11,11 @@ export default async function handler(
 ) {
   if (req.method === 'POST') {
     try {
-      const { title, snippet, lang, tags } = req.body;
+      const { title, snippet, lang, tags, jwt } = req.body;
 
-      if (!title || !snippet || !lang) {
+      if (!title || !snippet || !lang || !jwt) {
         return res.status(400).json({
-          message: 'Title, snippet and language are required fields.'
+          message: 'Title, snippet, language and token are required fields.'
         });
       }
 
@@ -25,12 +25,12 @@ export default async function handler(
         });
       }
 
-      const result = await snippetService.create({
+      const result = await createSnippet({
         title,
         snippet,
         lang,
         tags,
-        req
+        jwt
       });
       if (result.status === 'error') {
         return res.status(400).json(result);

@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
+import { Button, Flex, Text } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
-import supabase from '@/services/supabase';
-
 import { SnippetType } from '@/services/types';
+import supabase from '@/services/supabase';
 
 type RatingProps = Pick<SnippetType['rating'], 'id' | 'rating'>;
 
@@ -17,26 +17,37 @@ function Rating({ id, rating }: RatingProps) {
   const fetchRatingUpdate = async (
     action: 'increment' | 'decrement' | 'revoke'
   ) => {
-    const res = await fetch('/api/snippets/rating', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        ratingId: id,
-        action
-      })
-    });
+    try {
+      // Get user's JWT
+      const { data, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
+      const jwt = data.session?.access_token;
 
-    if (!res.ok) {
-      console.error(await res.json());
+      const res = await fetch('/api/snippets/rating', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ratingId: id,
+          action,
+          jwt
+        })
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw err;
+      }
+
+      const updatedRating = await res.json();
+
+      return updatedRating.rating as number;
+    } catch (err) {
+      console.error(err);
       return null;
     }
-
-    const updatedRating = await res.json();
-
-    return updatedRating.rating as number;
   };
 
   interface HandlebackendResponsePropsArgs {
@@ -204,48 +215,39 @@ function Rating({ id, rating }: RatingProps) {
   }, [id, user, currentRating, isChangingRating]);
 
   return currentRating !== null ? (
-    <Stack direction="row" spacing={1} alignItems="center">
+    <Flex alignItems="center" gap={1} position="relative" left="-1.5">
       <Button
         size="small"
         aria-label="Like snippet"
-        color="secondary"
-        disabled={!user}
-        sx={{ minWidth: 34 }}
+        colorScheme="cyan"
+        isDisabled={!user}
+        minHeight="2rem"
+        minWidth="2rem"
         onClick={handleLike}
+        textColor={user?.id && status !== 'liked' ? 'currentColor' : undefined}
+        variant="ghost"
       >
-        <Typography
-          color={user && status !== 'liked' ? 'text.primary' : undefined}
-          fontWeight="fontWeightBold"
-        >
-          ++
-        </Typography>
+        <Text fontWeight="bold">++</Text>
       </Button>
-      <Typography
-        color="text.primary"
-        fontWeight="fontWeightBold"
-        align="center"
-        sx={{ cursor: 'default', width: 9 }}
-      >
-        {currentRating}
-      </Typography>
+      <Text fontWeight="bold">{currentRating}</Text>
       <Button
         size="small"
         aria-label="Dislike snippet"
-        color="error"
-        disabled={!user}
-        sx={{ minWidth: 34 }}
+        colorScheme="red"
+        isDisabled={!user}
+        minHeight="2rem"
+        minWidth="2rem"
         onClick={handleDislike}
+        textColor={
+          user?.id && status !== 'disliked' ? 'currentColor' : undefined
+        }
+        variant="ghost"
       >
-        <Typography
-          color={user && status !== 'disliked' ? 'text.secondary' : undefined}
-          fontWeight="fontWeightBold"
-        >
-          ––
-        </Typography>
+        <Text fontWeight="bold">––</Text>
       </Button>
-    </Stack>
+    </Flex>
   ) : (
-    <RatingSkeleton />
+    <></> // TODO: load skeleton
   );
 }
 

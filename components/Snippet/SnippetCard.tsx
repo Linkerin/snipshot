@@ -6,6 +6,7 @@ import {
   CardBody,
   CardFooter,
   Divider,
+  IconButton,
   Link,
   useColorModeValue,
   useToast
@@ -85,11 +86,14 @@ function SnippetCard({
         position="relative"
         fontSize="codeSize"
       >
-        <CopyIcon
-          boxSize={5}
-          css={{ position: 'absolute', right: '0.3rem', top: '0.3rem' }}
-          focusable
+        <IconButton
+          aria-label="Copy snippet"
+          icon={<CopyIcon boxSize={5} focusable />}
+          css={{ position: 'absolute', right: '0.1rem', top: '0.1rem' }}
+          variant="ghost"
+          size="sm"
         />
+
         {React.Children.map(children, (child: React.ReactElement) => {
           return React.cloneElement(child, { ...child.props, snippet, lang });
         })}

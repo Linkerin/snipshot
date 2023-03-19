@@ -1,4 +1,3 @@
-import { ReactNode } from 'react';
 import { lowlight } from 'lowlight';
 import { Span, Text } from 'lowlight/lib/core';
 import haskell from 'highlight.js/lib/languages/haskell';
@@ -89,7 +88,7 @@ function changeClassForLineNumbers(
  * @param lang
  * @returns Tree object of the code snippet
  */
-export function createSnippetTree(snippet: string, lang: LangsType): ReactNode {
+export function createSnippetTree(snippet: string, lang: LangsType) {
   const populatedSnippet = addLineNumsToSnippet(snippet);
 
   let tree =
