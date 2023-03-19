@@ -10,11 +10,11 @@ function SideBar() {
   const user = useContext(AuthContext);
 
   return (
-    <Card h="100vh" borderRadius="0 10px 10px 0">
+    <Card h="100vh" borderRadius="0 10px 10px 0" overflowY="scroll">
       <CardHeader as="header" p={2}>
         <Logo isLink />
       </CardHeader>
-      <CardBody width="100%" px={2}>
+      <CardBody width="100%" mt={4} px={2} py={0}>
         <Center mb={5} flexDirection="column">
           <UserInfo
             avatar={user?.avatar}
