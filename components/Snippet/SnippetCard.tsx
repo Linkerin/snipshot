@@ -6,6 +6,7 @@ import {
   CardBody,
   CardFooter,
   Divider,
+  Flex,
   IconButton,
   Link,
   useColorModeValue,
@@ -85,18 +86,20 @@ function SnippetCard({
         lineHeight="5"
         position="relative"
         fontSize="codeSize"
+        pr={1}
       >
-        <IconButton
-          aria-label="Copy snippet"
-          icon={<CopyIcon boxSize={5} focusable />}
-          css={{ position: 'absolute', right: '0.1rem', top: '0.1rem' }}
-          variant="ghost"
-          size="sm"
-        />
-
-        {React.Children.map(children, (child: React.ReactElement) => {
-          return React.cloneElement(child, { ...child.props, snippet, lang });
-        })}
+        <Flex justifyContent="space-between">
+          {React.Children.map(children, (child: React.ReactElement) => {
+            return React.cloneElement(child, { ...child.props, snippet, lang });
+          })}
+          <IconButton
+            aria-label="Copy snippet"
+            icon={<CopyIcon boxSize={5} focusable />}
+            top="-2"
+            variant="ghost"
+            size="sm"
+          />
+        </Flex>
       </CardBody>
       <CardFooter pt={0}>
         <Link
