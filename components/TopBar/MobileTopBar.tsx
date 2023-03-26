@@ -1,24 +1,23 @@
 import { Flex } from '@chakra-ui/react';
 
-import SearchBox from './SearchBox';
 import ThemeSwitch from './ThemeSwitch';
+import Logo from '../Logo';
 
-function TopBar() {
+function MobileTopBar() {
   return (
     <Flex
       as="header"
       alignItems="center"
       justifyContent="space-between"
-      pt={4}
-      pb={2}
       px={3}
+      py={2}
       zIndex={1}
-      mb={0}
+      mb={1}
     >
-      <SearchBox />
-      <ThemeSwitch />
+      <Logo height={45} isLink />
+      <ThemeSwitch mr={0} />
     </Flex>
   );
 }
 
-export default TopBar;
+export default MobileTopBar;

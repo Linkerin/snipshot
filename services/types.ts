@@ -84,13 +84,6 @@ export interface UserType {
 }
 
 /**
- * Modal close function for mobile navigation
- */
-export interface HandleMenuCloseFunc {
-  (e: {}): void;
-}
-
-/**
  * onBlur / onFocus handler function type for SearchBar component.
  */
 export type SearchFocusHandler = (

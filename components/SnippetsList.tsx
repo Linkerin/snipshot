@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Center, SimpleGrid, Spinner, VStack } from '@chakra-ui/react';
+import { Center, Grid, GridItem, Spinner, VStack } from '@chakra-ui/react';
 
 import Snippet from '@/components/Snippet/Snippet';
 import { SnippetType } from '@/services/types';
@@ -41,8 +41,8 @@ function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
 
   return (
     <>
-      <SimpleGrid minChildWidth="35vw" spacingX={4}>
-        <VStack alignItems="flex-start" spacing={3}>
+      <Grid templateColumns={{ base: '1fr', lg: '1fr 1fr' }} gap={4}>
+        <GridItem as={VStack} alignItems="flex-start" spacing={3}>
           {snippets.map((snippet, index) => {
             const refItem = index === snippets.length - 2;
             if (index % 2 === 0)
@@ -54,8 +54,8 @@ function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
                 />
               );
           })}
-        </VStack>
-        <VStack alignItems="flex-start" spacing={4}>
+        </GridItem>
+        <GridItem as={VStack} alignItems="flex-start" spacing={4}>
           {snippets.map((snippet, index) => {
             const refItem = index === snippets.length - 2;
             if (index % 2 !== 0)
@@ -67,18 +67,18 @@ function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
                 />
               );
           })}
-        </VStack>
-      </SimpleGrid>
-      <Center my={5}>
-        {isLoading && (
+        </GridItem>
+      </Grid>
+      {isLoading && (
+        <Center my={5}>
           <Spinner
             thickness="5px"
             emptyColor="gray.200"
             size="xl"
             speed="0.5s"
           />
-        )}
-      </Center>
+        </Center>
+      )}
     </>
   );
 }

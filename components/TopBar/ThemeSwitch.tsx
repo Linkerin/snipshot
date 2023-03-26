@@ -1,9 +1,16 @@
-import { IconButton, useColorMode } from '@chakra-ui/react';
+import {
+  HTMLChakraProps,
+  IconButton,
+  ThemingProps,
+  useColorMode
+} from '@chakra-ui/react';
 
 import MoonIcon from '@/components/Icons/MoonIcon';
 import SunIcon from '@/components/Icons/SunIcon';
 
-function ThemeSwitch() {
+function ThemeSwitch(
+  props?: ThemingProps<'Button'> & HTMLChakraProps<'button'>
+) {
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <IconButton
@@ -20,6 +27,7 @@ function ThemeSwitch() {
       onClick={toggleColorMode}
       variant="outline"
       mr={5}
+      {...props}
     />
   );
 }

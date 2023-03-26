@@ -2,11 +2,16 @@ import React from 'react';
 import NextLink from 'next/link';
 import { Box, useColorMode } from '@chakra-ui/react';
 
-function Logo({ isLink }: { isLink?: boolean }) {
+interface LogoProps {
+  height?: number;
+  isLink?: boolean;
+}
+
+function Logo({ isLink, height }: LogoProps) {
   const { colorMode } = useColorMode();
 
   const containerStyling = {
-    svg: { height: 50, width: 'auto' }
+    svg: { height: height ?? 50, width: 'auto' }
   };
 
   const LogoContainer = ({ children }: { children: React.ReactElement }) => {

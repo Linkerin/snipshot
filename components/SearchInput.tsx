@@ -1,24 +1,34 @@
 import { ChangeEventHandler, useEffect, useRef } from 'react';
-import { Input, InputGroup, InputLeftElement } from '@chakra-ui/react';
+import {
+  Input,
+  InputGroup,
+  InputLeftElement,
+  InputProps
+} from '@chakra-ui/react';
 
 import SearchIcon from './Icons/SearchIcon';
 import { SearchFocusHandler, SnippetInfo } from '@/services/types';
 
 const delay = 600; // 600ms delay before making a search request to the server
 
-interface SearchBoxProps {
+interface SearchInputProps {
   onChange: ChangeEventHandler<HTMLInputElement>;
   value: string;
-  handleResults: (resData: SnippetInfo[]) => void;
+  handleResults: (resData: {
+    fetched: boolean;
+    snippets: SnippetInfo[];
+  }) => void;
   handleFocus?: SearchFocusHandler;
+  size?: InputProps['size'];
 }
 
 function SearchInput({
   onChange,
   value,
   handleResults,
-  handleFocus
-}: SearchBoxProps) {
+  handleFocus,
+  size = 'md'
+}: SearchInputProps) {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
@@ -28,7 +38,7 @@ function SearchInput({
       }
 
       if (!value || value.length < 1) {
-        handleResults([]);
+        handleResults({ fetched: false, snippets: [] });
         return;
       }
 
@@ -38,11 +48,11 @@ function SearchInput({
             `${process.env.NEXT_PUBLIC_API}/snippets/search?q=${value}`
           );
           if (!res.ok) {
-            handleResults([]);
+            handleResults({ fetched: true, snippets: [] });
             return;
           }
 
-          handleResults(await res.json());
+          handleResults({ fetched: true, snippets: await res.json() });
         } catch (err) {
           console.error('Error occured while fetching search results');
         }
@@ -62,13 +72,13 @@ function SearchInput({
 
   return (
     <InputGroup>
-      <InputLeftElement>
+      <InputLeftElement h="100%">
         <SearchIcon />
       </InputLeftElement>
       <Input
         name="search"
         value={value}
-        size="md"
+        size={size}
         placeholder="Search"
         onChange={onChange}
         onBlur={handleFocus ? e => handleFocus(false, e) : undefined}

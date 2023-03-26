@@ -16,7 +16,10 @@ import { SearchFocusHandler, SnippetInfo } from '@/services/types';
 
 function SearchBox() {
   const [searchValue, setSearchValue] = useState<string>('');
-  const [results, setResults] = useState([] as SnippetInfo[]);
+  const [results, setResults] = useState({
+    fetched: false,
+    snippets: [] as SnippetInfo[]
+  });
   const [focused, setFocused] = useState(false);
 
   const searchResultsRef = useRef<HTMLDivElement>(null);
@@ -28,9 +31,12 @@ function SearchBox() {
     setSearchValue(value);
   };
 
-  const handleSearchResults = useCallback((searchResults: SnippetInfo[]) => {
-    setResults(searchResults);
-  }, []);
+  const handleSearchResults = useCallback(
+    (searchResults: { fetched: boolean; snippets: SnippetInfo[] }) => {
+      setResults(searchResults);
+    },
+    []
+  );
 
   const handleFocus: SearchFocusHandler = (focused, e) => {
     if (e) {
@@ -49,7 +55,7 @@ function SearchBox() {
         handleResults={handleSearchResults}
         handleFocus={handleFocus}
       />
-      {focused && results?.length > 0 && (
+      {focused && searchValue && results?.fetched && (
         <Card
           ref={searchResultsRef}
           position="absolute"
@@ -58,21 +64,27 @@ function SearchBox() {
           w="100%"
         >
           <List>
-            {results.map(result => (
-              <LinkBox key={result.title} onClick={e => setFocused(false)}>
-                <CenteredListItem px={3} py={2} tabIndex={0}>
-                  <ListIcon>
-                    <LangIcon lang={result.lang} />
-                  </ListIcon>
-                  <LinkOverlay
-                    as={NextLink}
-                    href={`/snippets/${result.lang}/${result.slug}`}
-                  >
-                    {result.title}
-                  </LinkOverlay>
-                </CenteredListItem>
-              </LinkBox>
-            ))}
+            {results?.snippets.length > 0 ? (
+              results.snippets.map(snippet => (
+                <LinkBox key={snippet.title} onClick={e => setFocused(false)}>
+                  <CenteredListItem px={3} py={2} tabIndex={0}>
+                    <ListIcon>
+                      <LangIcon lang={snippet.lang} />
+                    </ListIcon>
+                    <LinkOverlay
+                      as={NextLink}
+                      href={`/snippets/${snippet.lang}/${snippet.slug}`}
+                    >
+                      {snippet.title}
+                    </LinkOverlay>
+                  </CenteredListItem>
+                </LinkBox>
+              ))
+            ) : (
+              <CenteredListItem px={3} py={2}>
+                Nothing found
+              </CenteredListItem>
+            )}
           </List>
         </Card>
       )}
