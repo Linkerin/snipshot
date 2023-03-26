@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Center, Grid, GridItem, Spinner, VStack } from '@chakra-ui/react';
-import { log } from 'next-axiom';
 
 import Snippet from '@/components/Snippet/Snippet';
 import { SnippetType } from '@/services/types';
@@ -33,7 +32,6 @@ function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
       setIsLoading(false);
     };
 
-    log.warn('Test log. Snippets were fetched.', { test: 'my value' });
     fetchSnippets();
   }, [isIntersecting, isLoading, hasMore, updateObserver, fetchData]);
 
