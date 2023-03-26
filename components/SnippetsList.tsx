@@ -33,7 +33,7 @@ function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
       setIsLoading(false);
     };
 
-    log.info('Test log. Snippets were fetched.', { test: 'my value' });
+    log.warn('Test log. Snippets were fetched.', { test: 'my value' });
     fetchSnippets();
   }, [isIntersecting, isLoading, hasMore, updateObserver, fetchData]);
 
