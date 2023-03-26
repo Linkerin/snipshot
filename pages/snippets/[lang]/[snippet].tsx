@@ -54,7 +54,7 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
           keywordsTags ? `, ${keywordsTags}` : ''
         }`}
       />
-      <Grid templateColumns="4fr 3fr" gap={1}>
+      <Grid templateColumns={{ base: '1fr', lg: '4fr 3fr' }} gap={1}>
         <GridItem>
           <Snippet snippet={snippet} />
           {!snippet.verified && user?.appRole?.includes('admin') && (
@@ -72,7 +72,7 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
             </Button>
           )}
         </GridItem>
-        <GridItem h="60vh">
+        <GridItem>
           <SnippetIdContext.Provider value={snippet.id}>
             <CommentsContainer />
           </SnippetIdContext.Provider>
