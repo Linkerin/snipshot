@@ -62,7 +62,7 @@ function LanguagesList({
       {LANGS.map(lang => {
         if (lang)
           return (
-            <LinkBox key={lang}>
+            <LinkBox key={lang} w="100%">
               <CenteredListItem
                 id={`lang-list-${lang.toLowerCase()}`}
                 aria-label={`${lang} Page`}
