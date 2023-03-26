@@ -5,9 +5,10 @@ import {
   FormControl,
   FormLabel,
   FormHelperText,
+  Grid,
+  GridItem,
   Input,
   ListIcon,
-  SimpleGrid,
   SpaceProps,
   Text,
   Textarea,
@@ -251,85 +252,95 @@ function AddSnippetPage() {
   return (
     <>
       <Alerts error={error} />
-      <SimpleGrid
+      <Grid
+        templateAreas={{
+          base: `"preview"
+                 "form"`,
+          lg: `"form preview"`
+        }}
         as="section"
-        columns={{ sm: 1, md: 2 }}
-        spacing={{ sm: 1, md: 3 }}
+        templateColumns={{ sm: '1fr', lg: '1fr 1fr' }}
+        gap={{ base: 2, lg: 4 }}
       >
-        <VStack as="form" autoComplete="off" spacing={3}>
-          <FormControl isRequired>
-            <AddSnippetFormLabel label="Title" mb={0} />
-            <Input
-              id="title"
-              name="title"
-              title="No more than 50 symbols"
-              onChange={handleChange}
-              value={userInput.title}
-              variant="flushed"
-              maxLength={50}
-              autoFocus
-            />
-            {!!inputHelpers.title && (
-              <FormHelperText>{inputHelpers.title}</FormHelperText>
+        <GridItem area="form">
+          <VStack as="form" autoComplete="off" spacing={3}>
+            <FormControl isRequired>
+              <AddSnippetFormLabel label="Title" mb={0} />
+              <Input
+                id="title"
+                name="title"
+                title="No more than 50 symbols"
+                onChange={handleChange}
+                value={userInput.title}
+                variant="flushed"
+                maxLength={50}
+                autoFocus
+                px={4}
+              />
+              {!!inputHelpers.title && (
+                <FormHelperText>{inputHelpers.title}</FormHelperText>
+              )}
+            </FormControl>
+            <FormControl isRequired>
+              <AddSnippetFormLabel label="Code Snippet" mb={1} />
+              <Textarea
+                id="snippet"
+                name="snippet"
+                title="No more than 10 rows of 80 symbols"
+                onChange={handleChange}
+                value={userInput.snippet}
+                maxLength={818}
+                resize="none"
+                rows={5}
+              />
+              {!!inputHelpers.snippet && (
+                <FormHelperText>{inputHelpers.snippet}</FormHelperText>
+              )}
+            </FormControl>
+            <FormControl>
+              <AddSnippetFormLabel label="Tags (separated by `Space`)" mb={1} />
+              <Input
+                id="tag"
+                name="tag"
+                title="No more than 10 tags"
+                onChange={handleChange}
+                value={userInput.tag}
+                maxLength={33}
+              />
+              {!!inputHelpers.tag && (
+                <FormHelperText>{inputHelpers.tag}</FormHelperText>
+              )}
+            </FormControl>
+            {tags.length > 0 && (
+              <SnippetTagsList tags={tags} handleTagDelete={handleTagDelete} />
             )}
-          </FormControl>
-          <FormControl isRequired>
-            <AddSnippetFormLabel label="Code Snippet" mb={1} />
-            <Textarea
-              id="snippet"
-              name="snippet"
-              title="No more than 10 rows of 80 symbols"
+            <SelectInput
+              id="lang"
+              name="lang"
+              placeholder="Select language"
+              value={userInput.lang}
               onChange={handleChange}
-              value={userInput.snippet}
-              maxLength={818}
-              resize="none"
-              rows={5}
-            />
-            {!!inputHelpers.snippet && (
-              <FormHelperText>{inputHelpers.snippet}</FormHelperText>
-            )}
-          </FormControl>
-          <FormControl>
-            <AddSnippetFormLabel label="Tags (separated by `Space`)" mb={1} />
-            <Input
-              id="tag"
-              name="tag"
-              title="No more than 10 tags"
-              onChange={handleChange}
-              value={userInput.tag}
-              maxLength={33}
-            />
-            {!!inputHelpers.tag && (
-              <FormHelperText>{inputHelpers.tag}</FormHelperText>
-            )}
-          </FormControl>
-          {tags.length > 0 && (
-            <SnippetTagsList tags={tags} handleTagDelete={handleTagDelete} />
-          )}
-          <SelectInput
-            id="lang"
-            name="lang"
-            placeholder="Select language"
-            value={userInput.lang}
-            onChange={handleChange}
-          >
-            {LANGS.map(lang => {
-              return (
-                <SelectOption key={lang} value={lang}>
-                  <ListIcon boxSize={6}>
-                    <LangIcon lang={lang} />
-                  </ListIcon>
-                  {lang}
-                </SelectOption>
-              );
-            })}
-          </SelectInput>
-          <Button disabled={disabledSaveBtn} onClick={handleSave} w="100%">
-            Save
-          </Button>
-        </VStack>
+            >
+              {LANGS.map(lang => {
+                return (
+                  <SelectOption key={lang} value={lang}>
+                    <ListIcon boxSize={6}>
+                      <LangIcon lang={lang} />
+                    </ListIcon>
+                    {lang}
+                  </SelectOption>
+                );
+              })}
+            </SelectInput>
+            <Button disabled={disabledSaveBtn} onClick={handleSave} w="100%">
+              Save
+            </Button>
+          </VStack>
+        </GridItem>
         {userInput.snippet && (
-          <SnippetCard
+          <GridItem
+            area="preview"
+            as={SnippetCard}
             title={userInput.title}
             snippet={userInput.snippet}
             lang={userInput.lang}
@@ -338,9 +349,9 @@ function AddSnippetPage() {
             mb={1}
           >
             <SnippetCode snippet={userInput.snippet} lang={userInput.lang} />
-          </SnippetCard>
+          </GridItem>
         )}
-      </SimpleGrid>
+      </Grid>
     </>
   );
 }
