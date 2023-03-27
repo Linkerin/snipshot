@@ -13,7 +13,7 @@ class NextLocalStorage {
    * Dispatches a storage event on Window objects holding an equivalent Storage object.
    */
   setItem(key: string, value: string) {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && typeof Storage !== undefined) {
       localStorage.setItem(key, value);
       return true;
     }
@@ -26,7 +26,7 @@ class NextLocalStorage {
    * Returns the current value associated with the given key, or null if the given key does not exist.
    */
   getItem(key: string) {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && typeof Storage !== undefined) {
       return localStorage.getItem(key);
     }
     return null;
@@ -39,7 +39,7 @@ class NextLocalStorage {
    * Dispatches a storage event on Window objects holding an equivalent Storage object.
    */
   removeItem(key: string) {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && typeof Storage !== undefined) {
       localStorage.removeItem(key);
       return true;
     }

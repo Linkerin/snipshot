@@ -84,6 +84,11 @@ interface SelectInputProps extends Omit<BoxProps, 'children' | 'onChange'> {
   value?: string | number | readonly string[];
 }
 
+interface OptionsPositionState {
+  top?: number;
+  bottom?: number;
+}
+
 function SelectInput({
   children,
   id,
@@ -95,9 +100,23 @@ function SelectInput({
   ...props
 }: SelectInputProps) {
   const [open, setOpen] = useState(false);
+  const [optionsPosition, setOptionsPosition] = useState<OptionsPositionState>({
+    top: undefined,
+    bottom: undefined
+  });
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleSelectClick = () => {
+    // Set which direction options list will be opened regarding to the select container
+    if (typeof window !== 'undefined') {
+      const top = containerRef?.current?.getBoundingClientRect().top;
+      if (top && window.innerHeight / 2 < top) {
+        setOptionsPosition({ bottom: 12, top: undefined });
+      } else {
+        setOptionsPosition({ bottom: undefined, top: 12 });
+      }
+    }
+
     setOpen(prevState => !prevState);
   };
 
@@ -183,7 +202,8 @@ function SelectInput({
       {open && (
         <Card
           position="absolute"
-          top="12"
+          bottom={optionsPosition.bottom}
+          top={optionsPosition.top}
           left="0"
           maxHeight={optionsListHeight ?? '30vh'}
           overflowY="scroll"
