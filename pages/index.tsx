@@ -1,10 +1,10 @@
 import { GetServerSideProps } from 'next';
+import { withAxiomGetServerSideProps } from 'next-axiom';
 
 import { cleanObjDataTypesForNextJS } from '@/services/utils';
 import get from '@/services/prisma/snippetsService/get';
 import SnippetsList from '@/components/SnippetsList';
 import { SnippetType } from '@/services/types';
-import { withAxiomGetServerSideProps } from 'next-axiom';
 
 interface HomeProps {
   snippetsData: SnippetType[];

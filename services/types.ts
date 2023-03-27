@@ -107,3 +107,12 @@ export interface CommentType {
     avatar: string;
   };
 }
+
+/**
+ * Props type for `/snippets/tags/[tag]` page
+ */
+export interface TagPageProps {
+  snippetsData: SnippetType[];
+  tag: string;
+  apiHandlerUrl: string;
+}

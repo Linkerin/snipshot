@@ -15,7 +15,7 @@ import Comment from './Comment';
 import CommentsIcon from '@/components/Icons/CommentsIcon';
 import { CommentType } from '@/services/types';
 import NoComments from './NoComments';
-import { SnippetIdContext } from '@/pages/snippets/[lang]/[snippet]';
+import { SnippetIdContext } from '../Pages/SnippetPage';
 import supabase from '@/services/supabase';
 
 function CommentsContainer() {

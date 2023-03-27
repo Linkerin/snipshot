@@ -1,51 +1,38 @@
 import { GetServerSideProps } from 'next';
-import { Text } from '@chakra-ui/react';
+import { withAxiomGetServerSideProps } from 'next-axiom';
 
 import { cleanObjDataTypesForNextJS } from '@/services/utils';
 import get from '@/services/prisma/snippetsService/get';
-import Meta from '@/components/Meta/Meta';
-import SnippetsList from '@/components/SnippetsList';
-import { SnippetType } from '@/services/types';
+import TagPage from '@/components/Pages/TagPage';
+import { TagPageProps } from '@/services/types';
 
-interface TagProps {
-  snippetsData: SnippetType[];
-  tag: string;
-  apiHandlerUrl: string;
-}
-
-function Tag({ snippetsData, tag, apiHandlerUrl }: TagProps) {
-  if (snippetsData.length === 0) {
-    return (
-      <Text mt={5} fontSize="2xl" textAlign="center">
-        {`No snippets for "${tag}" tag yet 😞`}
-      </Text>
-    );
-  }
+function Tag({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
   return (
-    <>
-      <Meta
-        title={`snipshot — ${tag} code snippets`}
-        keywords={`${tag}, development, programming, snippets, code, samples`}
-        description={`Code snippets for ${tag} on snipshot. Get and share your snips for ${tag}`}
-      />
-      <SnippetsList snippetsData={snippetsData} fetchUrl={apiHandlerUrl} />
-    </>
+    <TagPage
+      snippetsData={snippetsData}
+      tag={tag}
+      apiHandlerUrl={apiHandlerUrl}
+    />
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const apiHandlerUrl = `/snippets?tag=${params?.tag}`;
-  try {
-    const snippets = await get({ tag: params?.tag });
-    const snippetsData = snippets.map(snippet =>
-      cleanObjDataTypesForNextJS(snippet)
-    );
+export const getServerSideProps: GetServerSideProps =
+  withAxiomGetServerSideProps(async ({ params, log }) => {
+    const apiHandlerUrl = `/snippets?tag=${params?.tag}`;
+    try {
+      const snippets = await get({ tag: params?.tag });
+      const snippetsData = snippets.map(snippet =>
+        cleanObjDataTypesForNextJS(snippet)
+      );
 
-    return { props: { snippetsData, apiHandlerUrl, tag: params?.tag } };
-  } catch (err) {
-    console.error(err);
-    return { props: { snippetsData: [], apiHandlerUrl, tag: params?.tag } };
-  }
-};
+      return { props: { snippetsData, apiHandlerUrl, tag: params?.tag } };
+    } catch (err) {
+      log.error(`Error while fetchind data for '${params?.tag}' tag page`, {
+        err
+      });
+
+      return { props: { snippetsData: [], apiHandlerUrl, tag: params?.tag } };
+    }
+  });
 
 export default Tag;

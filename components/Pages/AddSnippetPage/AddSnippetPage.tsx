@@ -18,12 +18,12 @@ import {
 import Alerts from './Alerts';
 import { isAscii } from '@/services/utils';
 import { LANGS } from '@/services/constants';
-import LangIcon from '../Icons/LangIcons/LangIcon';
+import LangIcon from '../../Icons/LangIcons/LangIcon';
 import { LangsType } from '@/services/types';
-import SelectInput, { SelectOption } from '../SelectInput';
+import SelectInput, { SelectOption } from '../../SelectInput';
 import SnippetCard from '@/components/Snippet/SnippetCard';
 import SnippetCode from '@/components/Snippet/SnippetCode';
-import SnippetTagsList from '../Snippet/SnippetTagsList';
+import SnippetTagsList from '../../Snippet/SnippetTagsList';
 import useButtonDisabled from '@/hooks/useButtonDisabled';
 import supabase from '@/services/supabase';
 

@@ -1,4 +1,4 @@
-import AddSnippetPage from '@/components/AddSnippetPage/AddSnippetPage';
+import AddSnippetPage from '@/components/Pages/AddSnippetPage/AddSnippetPage';
 
 function Add() {
   return <AddSnippetPage />;

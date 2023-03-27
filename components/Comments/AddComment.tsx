@@ -10,7 +10,7 @@ import {
 
 import { AuthContext } from '@/context/AuthContext';
 import SendIcon from '@/components/Icons/SendIcon';
-import { SnippetIdContext } from '@/pages/snippets/[lang]/[snippet]';
+import { SnippetIdContext } from '../Pages/SnippetPage';
 
 function AddComment() {
   const [comment, setComment] = useState('');
