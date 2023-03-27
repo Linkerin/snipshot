@@ -1,0 +1,58 @@
+import { useContext } from 'react';
+import { As, Box, Flex, Text } from '@chakra-ui/react';
+
+import { DeviceContext } from '@/context/DeviceContext';
+import MobileProfileStats from './MobileProfileStats';
+import UserAvatar from '@/components/UserInfo/Avatars/UserAvatar';
+import Username from '@/components/UserInfo/Username';
+import ProfileStats from '@/components/UserInfo/ProfileStats';
+
+interface UserInfoProps {
+  as?: As<any>;
+  avatar?: string;
+  registered?: string;
+  userId?: string;
+  username?: string;
+}
+
+function MobileUserInfo({
+  as,
+  avatar,
+  registered,
+  userId,
+  username
+}: UserInfoProps) {
+  const { isMobile } = useContext(DeviceContext);
+
+  return (
+    <>
+      <Flex
+        as={as}
+        alignItems="center"
+        justifyContent="flex-start"
+        gap={3}
+        w="100%"
+        position="sticky"
+        top={0}
+        zIndex={1}
+        bgColor="white"
+        pb={1}
+      >
+        <UserAvatar avatar={avatar} username={username} size="sm" />
+        <Box w="100%">
+          <Username username={username} fontSize="xl" />
+          <Text
+            fontSize="xs"
+            color={registered ? 'gray.500' : 'transparent'}
+            cursor="default"
+          >
+            Member since {registered}
+          </Text>
+        </Box>
+      </Flex>
+      <MobileProfileStats userId={userId} username={username} />
+    </>
+  );
+}
+
+export default MobileUserInfo;

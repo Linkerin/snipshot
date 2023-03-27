@@ -58,16 +58,16 @@ function UserAvatar({
           border: noBorder ? 'none' : undefined,
           margin: 0,
           padding: sizes[size].padding,
-          height: sizes[size].height,
-          width: sizes[size].width,
+          height: 'fit-content',
+          width: 'fit-content',
           svg: {
-            width: '100%',
+            width: sizes[size].width,
             height: 'auto',
             borderRadius: '50%'
           },
           img: {
-            width: '100%',
             height: 'auto',
+            width: sizes[size].width,
             borderRadius: '50%'
           }
         }}

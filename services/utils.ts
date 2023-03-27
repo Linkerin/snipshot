@@ -103,3 +103,13 @@ export function cleanObjDataTypesForNextJS(data: any) {
 
   return data;
 }
+
+/**
+ * CSS properties that hide scroll bar for different browsers.
+ */
+export const hideScrollbarCss = {
+  scrollbarWidth: 'none', // Firefox
+  '&::-webkit-scrollbar': {
+    display: 'none' // Chrome
+  }
+};

@@ -9,6 +9,7 @@ interface DeviceContextValue {
   isMobile: boolean;
   isTablet: boolean;
   isAppleMobile: boolean;
+  mobileNavHeightvh: '8.5vh' | '7vh';
 }
 
 export const DeviceContext = createContext({
@@ -22,6 +23,7 @@ export const DeviceProvider = ({ children }: DeviceProviderProps) => {
   const isMobile = ['base', 'sm'].includes(breakpoint);
   const isTablet = breakpoint === 'md';
   const [isAppleMobile, setIsAppleMobile] = useState(false);
+  const mobileNavHeightvh = isAppleMobile ? '8.5vh' : '7vh';
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -31,7 +33,9 @@ export const DeviceProvider = ({ children }: DeviceProviderProps) => {
   }, []);
 
   return (
-    <DeviceContext.Provider value={{ isMobile, isTablet, isAppleMobile }}>
+    <DeviceContext.Provider
+      value={{ isMobile, isTablet, isAppleMobile, mobileNavHeightvh }}
+    >
       {children}
     </DeviceContext.Provider>
   );

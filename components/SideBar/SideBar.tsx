@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Card, CardBody, CardHeader, Center } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
+import { hideScrollbarCss } from '@/services/utils';
 import Logo from '../Logo';
 import SideMenu from './SideMenu';
 import UserInfo from '@/components/UserInfo/UserInfo';
@@ -10,7 +11,12 @@ function SideBar() {
   const user = useContext(AuthContext);
 
   return (
-    <Card h="100vh" borderRadius="0 10px 10px 0" overflowY="scroll">
+    <Card
+      h="100vh"
+      borderRadius="0 10px 10px 0"
+      overflowY="scroll"
+      sx={hideScrollbarCss}
+    >
       <CardHeader as="header" p={2}>
         <Logo isLink />
       </CardHeader>

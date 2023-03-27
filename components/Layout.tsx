@@ -10,7 +10,7 @@ import SideBar from '@/components/SideBar/SideBar';
 import TopBar from '@/components/TopBar/TopBar';
 
 function Layout({ children }: { children: React.ReactNode }) {
-  const { isMobile, isAppleMobile } = useContext(DeviceContext);
+  const { isMobile, mobileNavHeightvh } = useContext(DeviceContext);
 
   return (
     <>
@@ -27,7 +27,8 @@ function Layout({ children }: { children: React.ReactNode }) {
           base: '1fr',
           md: '25vw 1fr',
           lg: '22vw 1fr',
-          xl: '18vw 1fr'
+          xl: '18vw 1fr',
+          '2xl': '15vw 1fr'
         }}
         h="100vh"
       >
@@ -36,7 +37,12 @@ function Layout({ children }: { children: React.ReactNode }) {
             <SideBar />
           </GridItem>
         )}
-        <GridItem cursor="default" maxHeight="100vh" height="100vh">
+        <GridItem
+          cursor="default"
+          maxHeight="100vh"
+          height="100vh"
+          px={{ base: 0, '2xl': 10 }}
+        >
           <GridItem area="topbar" position="sticky" top={0} zIndex={1}>
             {isMobile ? <MobileTopBar /> : <TopBar />}
           </GridItem>
@@ -46,7 +52,7 @@ function Layout({ children }: { children: React.ReactNode }) {
             area="main"
             h={
               isMobile
-                ? `calc(100vh - 65px - ${isAppleMobile ? '8.5vh' : '7vh'})`
+                ? `calc(100vh - 65px - ${mobileNavHeightvh})`
                 : 'calc(100vh - 64px)'
             }
             overflowY="scroll"

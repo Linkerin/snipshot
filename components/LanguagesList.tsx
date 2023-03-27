@@ -4,10 +4,9 @@ import { useRouter } from 'next/router';
 import { LinkBox, LinkOverlay, List, ListIcon } from '@chakra-ui/react';
 
 import CenteredListItem from './CenteredListItem';
+import { DeviceContext } from '@/context/DeviceContext';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
 import { LANGS } from '@/services/constants';
-
-// import { DeviceContext } from '../context/DeviceContext';
 
 interface LanguagesListProps {
   noLinks?: boolean;
@@ -19,8 +18,7 @@ function LanguagesList({
   handleItemClick
 }: LanguagesListProps) {
   const router = useRouter();
-
-  //   const { isMobile } = useContext(DeviceContext);
+  const { isMobile } = useContext(DeviceContext);
 
   return noLinks ? (
     <List
@@ -43,7 +41,7 @@ function LanguagesList({
                 <LangIcon
                   lang={lang}
                   disabled={
-                    router.query.lang === lang // || isMobile ? false : true
+                    router.query.lang === lang || isMobile ? false : true
                   }
                 />
               </ListIcon>
@@ -74,11 +72,15 @@ function LanguagesList({
                   <LangIcon
                     lang={lang}
                     disabled={
-                      router.query.lang === lang // || isMobile ? false : true
+                      router.query.lang === lang || isMobile ? false : true
                     }
                   />
                 </ListIcon>
-                <LinkOverlay as={NextLink} href={`/snippets/${lang}`}>
+                <LinkOverlay
+                  as={NextLink}
+                  href={`/snippets/${lang}`}
+                  prefetch={false}
+                >
                   {lang}
                 </LinkOverlay>
               </CenteredListItem>

@@ -42,7 +42,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return { props: { snippetData } };
   } catch (err) {
-    console.warn('Error while all snippets for SSG');
+    console.warn('Error while fetching all snippets for SSG');
     console.error(err);
 
     return { props: { snippetsData: [] } };

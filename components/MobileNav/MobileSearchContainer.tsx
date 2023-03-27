@@ -40,7 +40,7 @@ function MobileSearchContainer() {
       <Card
         variant="none"
         justifyContent="flex-end"
-        h="55vh"
+        h="50vh"
         overflowY="scroll"
         mb={2}
       >

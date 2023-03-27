@@ -75,15 +75,6 @@ export interface SnippetInfo {
 }
 
 /**
- * User's profile info
- */
-export interface UserType {
-  username: string;
-  email: string;
-  snippets: SnippetInfo[];
-}
-
-/**
  * onBlur / onFocus handler function type for SearchBar component.
  */
 export type SearchFocusHandler = (
@@ -106,13 +97,4 @@ export interface CommentType {
     name: string;
     avatar: string;
   };
-}
-
-/**
- * Props type for `/snippets/tags/[tag]` page
- */
-export interface TagPageProps {
-  snippetsData: SnippetType[];
-  tag: string;
-  apiHandlerUrl: string;
 }

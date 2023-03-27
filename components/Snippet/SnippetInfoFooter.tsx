@@ -51,7 +51,11 @@ function SnippetInfoFooter({
       <Stack direction="row" spacing={2}>
         <Text fontSize="xs" sx={{ fontWeight: author?.name && 'bold' }}>
           {author?.name ? (
-            <Link as={NextLink} href={`/users/${author?.name}`}>
+            <Link
+              as={NextLink}
+              href={`/users/${author?.name}`}
+              prefetch={false}
+            >
               {author?.name}
             </Link>
           ) : (

@@ -2,7 +2,7 @@ import { Text } from '@chakra-ui/react';
 
 import Meta from '../Meta/Meta';
 import SnippetsList from '../SnippetsList';
-import { TagPageProps } from '@/services/types';
+import { TagPageProps } from '@/pages/tags/[tag]';
 
 function TagPage({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
   if (snippetsData.length === 0) {

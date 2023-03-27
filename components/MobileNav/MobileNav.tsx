@@ -20,7 +20,7 @@ const openedDefaultState = {
 
 function MobileNav() {
   const [opened, setOpened] = useState(openedDefaultState);
-  const { isAppleMobile } = useContext(DeviceContext);
+  const { isAppleMobile, mobileNavHeightvh } = useContext(DeviceContext);
   const user = useContext(AuthContext);
 
   const router = useRouter();
@@ -87,7 +87,7 @@ function MobileNav() {
       <Card borderRadius={0}>
         <CardBody p={0}>
           <ButtonGroup
-            h={isAppleMobile ? '8.5vh' : '7vh'}
+            h={mobileNavHeightvh}
             w="100%"
             spacing={0}
             isAttached
@@ -111,6 +111,7 @@ function MobileNav() {
               onClick={() => handleMenuClick('search')}
             />
             <IconButton
+              variant="ghost"
               aria-label="Add Snippet"
               icon={<PlusIcon boxSize={6} />}
               w="100%"
@@ -137,11 +138,7 @@ function MobileNav() {
           </ButtonGroup>
         </CardBody>
       </Card>
-      <MobileNavModal
-        isOpen={opened.search}
-        onClose={handleMenuClose}
-        maxHeightvh="90vh"
-      >
+      <MobileNavModal isOpen={opened.search} onClose={handleMenuClose}>
         <MobileSearchContainer />
       </MobileNavModal>
       <MobileNavModal isOpen={opened.languages} onClose={handleMenuClose}>

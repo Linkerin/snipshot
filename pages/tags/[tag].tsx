@@ -3,8 +3,14 @@ import { withAxiomGetServerSideProps } from 'next-axiom';
 
 import { cleanObjDataTypesForNextJS } from '@/services/utils';
 import get from '@/services/prisma/snippetsService/get';
+import { SnippetType } from '@/services/types';
 import TagPage from '@/components/Pages/TagPage';
-import { TagPageProps } from '@/services/types';
+
+export interface TagPageProps {
+  snippetsData: SnippetType[];
+  tag: string;
+  apiHandlerUrl: string;
+}
 
 function Tag({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
   return (

@@ -1,10 +1,15 @@
-import { Heading } from '@chakra-ui/react';
+import { Heading, HeadingProps } from '@chakra-ui/react';
 
-function Username({ username }: { username?: string }) {
+interface UsernameProps {
+  fontSize?: HeadingProps['fontSize'];
+  username?: string;
+}
+
+function Username({ username, fontSize = '1.6rem' }: UsernameProps) {
   return (
     <Heading
       as="h2"
-      fontSize="1.6rem"
+      fontSize={fontSize}
       fontWeight="medium"
       mt={1}
       cursor="default"
