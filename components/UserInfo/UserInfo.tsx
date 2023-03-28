@@ -26,7 +26,7 @@ function UserInfo({ as, avatar, registered, userId, username }: UserInfoProps) {
       <Username username={username} />
       <Text
         fontSize="xs"
-        color={registered ? 'gray.500' : 'transparent'}
+        color={registered ? 'text-secondary' : 'transparent'}
         cursor="default"
       >
         Member since {registered}

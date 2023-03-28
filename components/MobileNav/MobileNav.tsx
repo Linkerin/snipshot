@@ -84,7 +84,7 @@ function MobileNav() {
 
   return (
     <>
-      <Card borderRadius={0}>
+      <Card borderRadius={0} bg="chakra-body-bg">
         <CardBody p={0}>
           <ButtonGroup
             h={mobileNavHeightvh}
@@ -113,7 +113,7 @@ function MobileNav() {
             <IconButton
               variant="ghost"
               aria-label="Add Snippet"
-              icon={<PlusIcon boxSize={6} />}
+              icon={<PlusIcon boxSize={6} color="primary" />}
               w="100%"
               h="100%"
               onClick={() => handleMenuClick('add')}

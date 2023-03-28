@@ -1,4 +1,4 @@
-import { Card, CardBody, Stack, Text } from '@chakra-ui/react';
+import { Box, Stack, Text } from '@chakra-ui/react';
 
 import VerticalDivider from '@/components/VerticalDivider';
 import useFetchUserProfileStats from '@/hooks/useFetchUserProfileStats';
@@ -21,9 +21,8 @@ function MobileProfileStats({ userId, username }: MobileProfileStatsProps) {
   return isLoading || (!userId && !username) ? (
     <></>
   ) : (
-    <Card mb={4} mt={1} variant="outline">
-      <CardBody
-        as={Stack}
+    <Box mb={3}>
+      <Stack
         direction="row"
         justifyContent="space-evenly"
         w="100%"
@@ -34,30 +33,30 @@ function MobileProfileStats({ userId, username }: MobileProfileStatsProps) {
           <Text fontSize="sm" as="b">
             {snippets !== null ? snippets : '–'}
           </Text>
-          <Text fontSize="xs" color="gray.500">
+          <Text fontSize="xs" color="text-secondary">
             snips
           </Text>
         </Stack>
-        <VerticalDivider color="#E2E8F0" />
+        <VerticalDivider />
         <Stack alignItems="center" spacing={0} py={0.5}>
           <Text fontSize="sm" as="b">
             {favorites !== null ? favorites : '–'}
           </Text>
-          <Text fontSize="xs" color="gray.500">
+          <Text fontSize="xs" color="text-secondary">
             favorites
           </Text>
         </Stack>
-        <VerticalDivider color="#E2E8F0" />
+        <VerticalDivider />
         <Stack alignItems="center" spacing={0} py={0.5}>
           <Text fontSize="sm" as="b">
             {rating !== null ? rating : '–'}
           </Text>
-          <Text fontSize="xs" color="gray.500">
+          <Text fontSize="xs" color="text-secondary">
             rating
           </Text>
         </Stack>
-      </CardBody>
-    </Card>
+      </Stack>
+    </Box>
   );
 }
 

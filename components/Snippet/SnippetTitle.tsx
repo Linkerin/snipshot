@@ -7,7 +7,7 @@ type SnippetTitleProps = Pick<SnippetType, 'title' | 'slug' | 'lang'>;
 
 function SnippetTitle({ title, slug, lang }: SnippetTitleProps) {
   return (
-    <Heading as="h3" size="xs" noOfLines={1} pl={1}>
+    <Heading as="h3" fontSize="0.8rem" noOfLines={1} pl={1}>
       {slug ? (
         <Link as={NextLink} href={`/snippets/${lang}/${slug}/`}>
           {title}

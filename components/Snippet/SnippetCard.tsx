@@ -43,6 +43,12 @@ function SnippetCard({
   const [hovered, handleMouseEnter, handleMouseLeave] = useHovered();
 
   const codeClassName = useColorModeValue('code-light', 'code-dark');
+  const headingDividerColor = useColorModeValue('gray.300', 'chakra-body-bg');
+  const copyIconColor = useColorModeValue('text-secondary', 'custom-white');
+  const copyIconHoverBgColor = useColorModeValue(
+    'blackAlpha.50',
+    'whiteAlpha.200'
+  );
 
   const snippetCopiedToast = useToast();
 
@@ -74,7 +80,7 @@ function SnippetCard({
           <SnippetTitle title={title} slug={slug} lang={lang} />
         </SnippetBar>
       </CardHeader>
-      <Divider />
+      <Divider color={headingDividerColor} />
       <CardBody
         as="section"
         title="Click to copy"
@@ -98,6 +104,8 @@ function SnippetCard({
             top="-2"
             variant="ghost"
             size="sm"
+            color={copyIconColor}
+            _hover={{ color: 'primary', bg: copyIconHoverBgColor }}
           />
         </Flex>
       </CardBody>

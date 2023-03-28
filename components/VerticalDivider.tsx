@@ -1,11 +1,11 @@
 import { chakra } from '@chakra-ui/react';
 
 export function VerticalDivider({
-  color = 'currentColor'
+  color = 'primary-dark'
 }: {
   color?: string;
 }) {
-  return <chakra.div borderLeft={`1px solid ${color}`} />;
+  return <chakra.div borderLeft={`1px`} borderColor={color} />;
 }
 
 export default VerticalDivider;

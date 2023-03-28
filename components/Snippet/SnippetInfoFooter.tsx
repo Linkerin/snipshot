@@ -37,19 +37,28 @@ function SnippetInfoFooter({
           <Tag
             variant="outline"
             size="sm"
+            border="1px"
+            borderColor={'primary'}
             borderRadius="full"
+            boxShadow="none"
             _hover={{ bg: 'none' }}
             pl={1}
             pr={1.5}
             py={1}
           >
-            <TagLeftIcon as={CheckedIcon} boxSize={4} mr={1} />
-            <TagLabel cursor="default">Verified</TagLabel>
+            <TagLeftIcon as={CheckedIcon} boxSize={4} color="primary" mr={1} />
+            <TagLabel color="primary" cursor="default">
+              Verified
+            </TagLabel>
           </Tag>
         )}
       </Stack>
       <Stack direction="row" spacing={2}>
-        <Text fontSize="xs" sx={{ fontWeight: author?.name && 'bold' }}>
+        <Text
+          fontSize="xs"
+          sx={{ fontWeight: author?.name && 'bold' }}
+          color="text-secondary"
+        >
           {author?.name ? (
             <Link
               as={NextLink}
@@ -62,7 +71,9 @@ function SnippetInfoFooter({
             'anonymous'
           )}
         </Text>
-        <Text fontSize="xs">{parseDate(created) ?? ''}</Text>
+        <Text fontSize="xs" color="text-secondary">
+          {parseDate(created) ?? ''}
+        </Text>
       </Stack>
     </Stack>
   );

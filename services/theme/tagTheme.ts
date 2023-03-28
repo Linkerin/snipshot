@@ -7,11 +7,16 @@ const { definePartsStyle, defineMultiStyleConfig } =
 const baseStyle = definePartsStyle({
   container: {
     _hover: {
-      bg: 'blackAlpha.50'
+      bg: 'tag-hover-bg'
     }
   },
   label: {
-    color: 'black'
+    color: 'chakra-body-text',
+    a: {
+      _hover: {
+        color: 'chakra-body-text'
+      }
+    }
   }
 });
 

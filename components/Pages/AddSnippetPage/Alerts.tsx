@@ -20,7 +20,7 @@ function Alerts({ error }: { error: boolean }) {
           <AlertIcon boxSize={4} />
           <AlertDescription fontSize="sm">
             Hey, how about{' '}
-            <Link as={NextLink} href="/login" color="red">
+            <Link as={NextLink} href="/login" color="primary">
               logging in
             </Link>{' '}
             to be the author of your snippet? 😊

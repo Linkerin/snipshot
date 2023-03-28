@@ -31,21 +31,21 @@ function ProfileStats({ userId, username }: ProfileStatsProps) {
     >
       <Stack alignItems="center" spacing={0}>
         <Text as="b">{snippets !== null ? snippets : '–'}</Text>
-        <Text fontSize="sm" color="gray.500">
+        <Text fontSize="sm" color="text-secondary">
           snips
         </Text>
       </Stack>
       <VerticalDivider />
       <Stack alignItems="center" spacing={0}>
         <Text as="b">{favorites !== null ? favorites : '–'}</Text>
-        <Text fontSize="sm" color="gray.500">
+        <Text fontSize="sm" color="text-secondary">
           favorites
         </Text>
       </Stack>
       <VerticalDivider />
       <Stack alignItems="center" spacing={0}>
         <Text as="b">{rating !== null ? rating : '–'}</Text>
-        <Text fontSize="sm" color="gray.500">
+        <Text fontSize="sm" color="text-secondary">
           rating
         </Text>
       </Stack>

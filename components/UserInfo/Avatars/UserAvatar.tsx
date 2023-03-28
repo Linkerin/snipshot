@@ -10,25 +10,25 @@ const sizes = {
     width: 34,
     height: 34,
     borderWidth: '1px',
-    padding: 2
+    padding: '2px'
   },
   sm: {
     width: 50,
     height: 50,
     borderWidth: '1px',
-    padding: 3
+    padding: '3px'
   },
   md: {
     width: 80,
     height: 80,
     borderWidth: '2px',
-    padding: 4
+    padding: '4px'
   },
   lg: {
     width: 100,
     height: 100,
     borderWidth: '2px',
-    padding: 5
+    padding: '5px'
   }
 };
 
@@ -50,10 +50,10 @@ function UserAvatar({
   const AvatarContainer = ({ children }: { children: React.ReactNode }) => {
     return (
       <Box
-        css={{
+        sx={{
           borderWidth: sizes[size].borderWidth,
           borderStyle: 'solid',
-          borderColor: 'currentColor',
+          borderColor: 'primary',
           borderRadius: '50%',
           border: noBorder ? 'none' : undefined,
           margin: 0,
@@ -80,7 +80,7 @@ function UserAvatar({
   return (
     <AvatarContainer>
       {disabled ? (
-        <UserIcon bgColor="gray.200" p={sizes[size].padding / 4} />
+        <UserIcon bgColor="gray.200" />
       ) : avatar ? (
         <Image
           src={avatar}

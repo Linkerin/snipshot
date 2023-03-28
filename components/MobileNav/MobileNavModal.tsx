@@ -8,7 +8,9 @@ import {
   ModalOverlay
 } from '@chakra-ui/react';
 
-function HeaderButton({ color }: { color: string }) {
+const defaultHeaderBtnColor = '#bdbdbd';
+
+function HeaderButton({ color = defaultHeaderBtnColor }: { color: string }) {
   return (
     <Box
       bgColor={color}
@@ -36,19 +38,20 @@ function MobileNavModal({
   children
 }: MobileNavModalProps) {
   const [startTouchY, setStartTouchY] = useState<number | null>(null);
-  const [barColor, setBarColor] = useState('red');
+  const [btnColor, setBtnColor] = useState(defaultHeaderBtnColor);
   const [bottomPosition, setBottomPosition] = useState(0);
+
   const modalContentRef = useRef<HTMLDivElement>(null);
 
   const handleTouchStart = (e: React.TouchEvent) => {
     if (modalContentRef.current?.contains(e.target as HTMLElement)) return;
 
-    setBarColor('green');
+    setBtnColor('primary-dark');
     setStartTouchY(e.touches[0].clientY);
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
-    setBarColor('red');
+    setBtnColor(defaultHeaderBtnColor);
     const endTouchY = e.changedTouches[0].clientY;
 
     if (startTouchY && endTouchY - startTouchY > 30) {
@@ -91,9 +94,11 @@ function MobileNavModal({
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
           onTouchMove={handleTouchMove}
+          maxWidth="100%"
+          bgColor="chakra-body-bg"
         >
           <ModalHeader py={3} onClick={onClose}>
-            <HeaderButton color={barColor} />
+            <HeaderButton color={btnColor} />
           </ModalHeader>
           <ModalBody
             ref={modalContentRef}

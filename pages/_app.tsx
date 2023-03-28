@@ -21,5 +21,3 @@ export default function App({ Component, pageProps }: AppProps) {
     </Chakra>
   );
 }
-
-export { getServerSideProps } from '@/components/Chakra';
