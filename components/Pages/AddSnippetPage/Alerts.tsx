@@ -16,7 +16,7 @@ function Alerts({ error }: { error: boolean }) {
   return (
     <VStack spacing={2} mb={3}>
       {!user?.id && (
-        <Alert status="info" py={2} px={3}>
+        <Alert status="info" py={2} px={3} variant="info">
           <AlertIcon boxSize={4} />
           <AlertDescription fontSize="sm">
             Hey, how about{' '}

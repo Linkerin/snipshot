@@ -1,5 +1,6 @@
 import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
 
+import { alertTheme } from './alertTheme';
 import { cardTheme } from './cardTheme';
 import { linkTheme } from './linkTheme';
 import { tagTheme } from './tagTheme';
@@ -102,6 +103,7 @@ const theme = extendTheme({
     }
   },
   components: {
+    Alert: alertTheme,
     Card: cardTheme,
     Link: linkTheme,
     Tag: tagTheme
