@@ -13,7 +13,7 @@
 
 ![snipshot demo](./readme_images/snipshot.webp)
 
-[`snipshot`](https://snipshot.dev) is a web application for sharing code snippets. From time to time we use various one-liners and useful pieces of code that could be easily forgotten. Having separate files containing these code fragments is a common pratice for developers. With `snipshot` you now have a convenient place for storing your code snippets. Futhermore, you can also share your experiece and ideas through these snippet.`snipshot` is a source of inspiration, no less!
+[`snipshot`](https://snipshot.dev) is a web application for sharing code snippets. From time to time we use various one-liners and useful pieces of code that could be easily forgotten. Having separate files containing these code fragments is a common pratice for developers. With `snipshot` you now have a convenient place for storing your code snippets. Futhermore, you can also share your experience and ideas through these snippet.`snipshot` is a source of inspiration, no less!
 
 Application URL: [snipshot.dev](https://snipshot.dev)  
 Video Demo: [`snipshot` for CS50W](https://youtu.be/sf1jSBhbXSs)
