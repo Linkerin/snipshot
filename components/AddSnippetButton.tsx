@@ -1,19 +1,23 @@
 import NextLink from 'next/link';
-import { IconButton } from '@chakra-ui/react';
+import { IconButton, useColorModeValue } from '@chakra-ui/react';
 
 import PlusIcon from '@/components/Icons/PlusIcon';
 
 function AddSnippetButton() {
+  const buttonColor = useColorModeValue(
+    'primary-light-theme',
+    'primary-dark-theme'
+  );
+
   return (
     <IconButton
       as={NextLink}
       href="/snippets/add"
+      colorScheme={buttonColor}
       aria-label="Add Snippet"
-      icon={<PlusIcon boxSize={9} color={'white'} />}
-      bgColor="primary"
+      icon={<PlusIcon boxSize={9} color={'custom-white'} />}
       shadow="dark-lg"
-      _hover={{ bgColor: 'purple.600' }}
-      css={{
+      sx={{
         position: 'absolute',
         bottom: 30,
         right: 30,

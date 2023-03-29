@@ -8,7 +8,6 @@ import {
   Divider,
   Flex,
   IconButton,
-  Link,
   useColorModeValue,
   useToast
 } from '@chakra-ui/react';
@@ -100,24 +99,31 @@ function SnippetCard({
           })}
           <IconButton
             aria-label="Copy snippet"
-            icon={<CopyIcon boxSize={5} focusable />}
+            icon={
+              <CopyIcon
+                boxSize={5}
+                color={hovered ? 'primary' : copyIconColor}
+                focusable
+              />
+            }
+            bg={hovered ? copyIconHoverBgColor : undefined}
             top="-2"
             variant="ghost"
             size="sm"
-            color={copyIconColor}
-            _hover={{ color: 'primary', bg: copyIconHoverBgColor }}
           />
         </Flex>
       </CardBody>
       <CardFooter pt={0}>
-        <Link
+        <IconButton
           as={NextLink}
           href={`/snippets/${lang}`}
           aria-label={`${lang} snippets`}
+          icon={<LangIcon lang={lang} focusable />}
+          variant="ghost"
+          size="sm"
           mr={2}
-        >
-          <LangIcon lang={lang} />
-        </Link>
+          colorScheme="none"
+        />
         <SnippetTagsList tags={tags} />
       </CardFooter>
     </Card>

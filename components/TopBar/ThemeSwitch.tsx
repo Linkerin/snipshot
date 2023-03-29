@@ -14,7 +14,9 @@ function ThemeSwitch(
   const { colorMode, toggleColorMode } = useColorMode();
   return (
     <IconButton
-      colorScheme="purple"
+      colorScheme={
+        colorMode === 'light' ? 'primary-light-theme' : 'primary-dark-theme'
+      }
       aria-label="Theme color switch"
       borderRadius="30%"
       icon={

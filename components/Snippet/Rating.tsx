@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Button, Flex, Text } from '@chakra-ui/react';
+import { Button, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
 import { SnippetType } from '@/services/types';
@@ -11,6 +11,11 @@ function Rating({ id, rating }: RatingProps) {
   const [currentRating, setCurrentRating] = useState<number>(Number(rating));
   const [status, setStatus] = useState<'liked' | 'disliked' | null>(null);
   const [isChangingRating, setIsChangingRating] = useState<boolean>(false);
+
+  const increaseRatingBtnColor = useColorModeValue(
+    'secondary-light-theme',
+    'secondary-dark-theme'
+  );
 
   const user = useContext(AuthContext);
 
@@ -219,17 +224,19 @@ function Rating({ id, rating }: RatingProps) {
       <Button
         size="small"
         aria-label="Like snippet"
-        colorScheme="cyan"
+        colorScheme={increaseRatingBtnColor}
         isDisabled={!user}
         minHeight="2rem"
         minWidth="2rem"
         onClick={handleLike}
-        textColor={user?.id && status !== 'liked' ? 'currentColor' : undefined}
+        textColor={!user?.id ? 'text' : status !== 'liked' ? 'text' : undefined}
         variant="ghost"
       >
         <Text fontWeight="bold">++</Text>
       </Button>
-      <Text fontWeight="bold">{currentRating}</Text>
+      <Text fontWeight="bold" minWidth="1rem" textAlign="center">
+        {currentRating}
+      </Text>
       <Button
         size="small"
         aria-label="Dislike snippet"
@@ -239,7 +246,11 @@ function Rating({ id, rating }: RatingProps) {
         minWidth="2rem"
         onClick={handleDislike}
         textColor={
-          user?.id && status !== 'disliked' ? 'currentColor' : undefined
+          !user?.id
+            ? 'text'
+            : status !== 'disliked'
+            ? 'text-secondary'
+            : 'red.600'
         }
         variant="ghost"
       >

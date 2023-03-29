@@ -20,7 +20,7 @@ function SideBar() {
       <CardHeader as="header" p={2}>
         <Logo isLink />
       </CardHeader>
-      <CardBody width="100%" mt={4} px={2} py={0}>
+      <CardBody width="100%" mt={4} px={0} py={0}>
         <Center mb={5} flexDirection="column">
           <UserInfo
             avatar={user?.avatar}

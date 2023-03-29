@@ -1,7 +1,8 @@
 import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
 
-import { tagTheme } from './tagTheme';
 import { cardTheme } from './cardTheme';
+import { linkTheme } from './linkTheme';
+import { tagTheme } from './tagTheme';
 
 const hour = new Date().getHours();
 const whiteColor = hour > 18 || hour < 9 ? '#fffff3' : '#fafdfa';
@@ -16,11 +17,61 @@ const theme = extendTheme({
   config,
   styles: {
     global: {
-      a: {
-        _hover: {
-          color: 'primary'
-        }
+      '*': {
+        padding: 0,
+        margin: 0,
+        ' box-sizing': 'border-box'
       }
+    }
+  },
+  colors: {
+    'primary-light-theme': {
+      50: '#f0e9ff',
+      100: '#d0bff5',
+      200: '#c2adf0',
+      300: '#b095ea',
+      400: '#916be1',
+      500: '#7141d7',
+      600: '#5828bd',
+      700: '#441e94',
+      800: '#31166b',
+      900: '#1d0c41'
+    },
+    'primary-dark-theme': {
+      50: '#abffff',
+      100: '#7afff8',
+      200: '#1affe2',
+      300: '#00e6c1',
+      400: '#00d4b2',
+      500: '#00b3a2',
+      600: '#019486',
+      700: '#00807c',
+      800: '#004d4e',
+      900: '#001c1c'
+    },
+    'secondary-light-theme': {
+      50: '#ddfff8',
+      100: '#b3f9ea',
+      200: '#89f4dc',
+      300: '#5cefce',
+      400: '#34ebc1',
+      500: '#1dd1a7',
+      600: '#10a382',
+      700: '#03745d',
+      800: '#004738',
+      900: '#001913'
+    },
+    'secondary-dark-theme': {
+      50: '#ffe91a',
+      100: '#ffed4b',
+      200: '#ffe91a',
+      300: '#ffe600',
+      400: '#e6cf00',
+      500: '#cfba00',
+      600: '#b3a100',
+      700: '#807300',
+      800: '#4d4500',
+      900: '#1c1700'
     }
   },
   semanticTokens: {
@@ -47,16 +98,19 @@ const theme = extendTheme({
       'custom-black': blackColor,
       'card-background': {
         _dark: '#373945'
-      },
-      'tag-hover-bg': {
-        _light: 'blackAlpha.50',
-        _dark: 'whiteAlpha.200'
       }
     }
   },
-  components: { Tag: tagTheme, Card: cardTheme },
+  components: {
+    Card: cardTheme,
+    Link: linkTheme,
+    Tag: tagTheme
+  },
   fontSizes: {
     codeSize: '0.8rem'
+  },
+  shadows: {
+    base: '0 1px 3px 0 rgba(0, 0, 0, 0.15), 0 1px 2px 0 rgba(0, 0, 0, 0.06)'
   }
 });
 

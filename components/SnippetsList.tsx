@@ -107,6 +107,7 @@ function SnippetsList({
         <Center my={5}>
           <Spinner
             thickness="5px"
+            color="primary"
             emptyColor="gray.200"
             size="xl"
             speed="0.5s"

@@ -6,12 +6,15 @@ import get from '@/services/prisma/snippetsService/get';
 import SnippetsList from '@/components/SnippetsList';
 import { SnippetType } from '@/services/types';
 
+import { useTheme } from '@chakra-ui/react';
+
 interface HomeProps {
   snippetsData: SnippetType[];
   apiHandlerUrl: string;
 }
 
 export default function Home({ snippetsData, apiHandlerUrl }: HomeProps) {
+  console.log(useTheme());
   return <SnippetsList snippetsData={snippetsData} fetchUrl={apiHandlerUrl} />;
 }
 

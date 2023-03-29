@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 import {
-  Stack,
   Link,
+  Stack,
   Text,
   Tag,
   TagLabel,
@@ -25,7 +25,7 @@ function SnippetInfoFooter({
   verified
 }: SnippetInfoFooterProps) {
   return (
-    <Stack ml={2} mb={2} mt={0.5} spacing={0.5}>
+    <Stack ml={2} mb={2} mt={1} spacing={0.5}>
       <Stack
         direction="row"
         align="center"

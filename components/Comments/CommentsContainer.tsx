@@ -158,9 +158,7 @@ function CommentsContainer() {
       <CardHeader px={3} pt={2} pb={0}>
         <Flex alignItems="center" gap={1}>
           <CommentsIcon boxSize={5} />
-          <Text fontSize="lg" fontWeight="medium">
-            {commentsNumber} comments
-          </Text>
+          <Text fontSize="lg">{commentsNumber} comments</Text>
         </Flex>
       </CardHeader>
       <CardBody as={Flex} flexDirection="column" gap={2} px={3} py={2}>

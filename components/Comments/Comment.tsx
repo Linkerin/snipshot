@@ -60,7 +60,7 @@ function Comment({ comment }: { comment: CommentType }) {
                 {comment.author.name}
               </Link>
             </Text>
-            <Text fontSize="xs">
+            <Text fontSize="xs" color="text-secondary">
               {parseDate(comment.created, {
                 year: 'numeric',
                 month: 'numeric',
@@ -71,7 +71,7 @@ function Comment({ comment }: { comment: CommentType }) {
             </Text>
           </Flex>
           {comment.deleted ? (
-            <Text fontSize="sm" fontStyle="italic">
+            <Text fontSize="sm" fontStyle="italic" color="text-secondary">
               This comment was removed
             </Text>
           ) : (

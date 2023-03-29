@@ -63,15 +63,7 @@ interface SelectOptionProps extends Omit<ListItemProps, 'value'> {
 }
 
 export function SelectOption(props: SelectOptionProps) {
-  return (
-    <CenteredListItem
-      cursor="pointer"
-      tabIndex={0}
-      _hover={{ bgColor: 'gray.200' }}
-      p={3}
-      {...props}
-    />
-  );
+  return <CenteredListItem variant="selectable" {...props} />;
 }
 
 interface SelectInputProps extends Omit<BoxProps, 'children' | 'onChange'> {
@@ -111,9 +103,9 @@ function SelectInput({
     if (typeof window !== 'undefined') {
       const top = containerRef?.current?.getBoundingClientRect().top;
       if (top && window.innerHeight / 2 < top) {
-        setOptionsPosition({ bottom: 12, top: undefined });
+        setOptionsPosition({ bottom: 14, top: undefined });
       } else {
-        setOptionsPosition({ bottom: undefined, top: 12 });
+        setOptionsPosition({ bottom: undefined, top: 14 });
       }
     }
 
@@ -184,7 +176,7 @@ function SelectInput({
       aria-expanded={open}
       tabIndex={0}
       position="relative"
-      zIndex={1}
+      cursor="pointer"
       {...props}
     >
       {value ? (
@@ -207,7 +199,9 @@ function SelectInput({
           left="0"
           maxHeight={optionsListHeight ?? '30vh'}
           overflowY="scroll"
+          bgColor="chakra-body-bg"
           w="100%"
+          zIndex={1}
         >
           <List display="flex" flexDirection="column" alignItems="flex-start">
             {Children.map(children, child => {

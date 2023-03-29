@@ -12,7 +12,8 @@ import {
   SpaceProps,
   Text,
   Textarea,
-  VStack
+  VStack,
+  useColorModeValue
 } from '@chakra-ui/react';
 
 import Alerts from './Alerts';
@@ -35,7 +36,7 @@ interface AddSnippetFormLabelProps {
 
 function AddSnippetFormLabel({ label, mb, ml }: AddSnippetFormLabelProps) {
   return (
-    <FormLabel mb={mb} ml={ml ?? 2}>
+    <FormLabel mb={mb} ml={ml ?? 2} sx={{ span: { color: 'primary' } }}>
       <Text fontSize="xs" display="inline">
         {label}
       </Text>
@@ -49,6 +50,11 @@ function AddSnippetPage() {
   const [error, setError] = useState(false);
 
   const disabledSaveBtn = useButtonDisabled(userInput, ['tag']);
+  const saveBtnColor = useColorModeValue(
+    'primary-light-theme',
+    'primary-dark-theme'
+  );
+
   const router = useRouter();
   const { isMobile, isTablet } = useContext(DeviceContext);
 
@@ -179,7 +185,13 @@ function AddSnippetPage() {
                 );
               })}
             </SelectInput>
-            <Button isDisabled={disabledSaveBtn} onClick={handleSave} w="100%">
+            <Button
+              isDisabled={disabledSaveBtn}
+              onClick={handleSave}
+              colorScheme={saveBtnColor}
+              variant="outline"
+              w="100%"
+            >
               Save
             </Button>
           </VStack>

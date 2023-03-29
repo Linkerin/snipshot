@@ -61,6 +61,7 @@ function SearchBox() {
           position="absolute"
           top={12}
           zIndex={1}
+          bg="chakra-body-bg"
           w="100%"
         >
           <List>

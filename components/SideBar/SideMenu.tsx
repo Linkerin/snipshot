@@ -93,7 +93,8 @@ function SideMenu() {
             <AccordionPanel
               maxHeight="35vh"
               overflowY="scroll"
-              ml={5}
+              ml={7}
+              p={0}
               sx={hideScrollbarCss}
             >
               <LanguagesList />
