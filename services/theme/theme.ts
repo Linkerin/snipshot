@@ -5,7 +5,7 @@ import { linkTheme } from './linkTheme';
 import { tagTheme } from './tagTheme';
 
 const hour = new Date().getHours();
-const whiteColor = hour > 18 || hour < 9 ? '#fffff3' : '#fafdfa';
+const whiteColor = hour >= 18 || hour < 9 ? '#fffff3' : '#fafdfa';
 const blackColor = '#282a36';
 
 const config: ThemeConfig = {

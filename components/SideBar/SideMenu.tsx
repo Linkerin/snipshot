@@ -53,7 +53,7 @@ function SideMenu() {
   const StyledMenuItem = chakra(CenteredListItem, menuItemStyles);
 
   return (
-    <List as="menu" spacing={1}>
+    <List as="menu" spacing={0}>
       {user?.id && (
         <>
           <LinkBox as={StyledMenuItem}>

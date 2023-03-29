@@ -7,23 +7,19 @@ import {
   Text,
   Stack,
   SystemStyleObject,
-  UnorderedList,
-  useColorModeValue
+  UnorderedList
 } from '@chakra-ui/react';
 
-import CopyIcon from '../Icons/CopyIcon';
+const accentWordsStyles: SystemStyleObject = {
+  px: '2',
+  py: '1',
+  borderRadius: '10px',
+  bg: 'primary',
+  fontWeight: 'medium',
+  color: 'chakra-body-bg'
+};
 
 export function AboutPage() {
-  const accentFontColor = useColorModeValue('custom-white', 'text');
-  const accentWordsStyles: SystemStyleObject = {
-    px: '2',
-    py: '1',
-    borderRadius: '10px',
-    bg: 'primary',
-    fontWeight: 'medium',
-    color: accentFontColor
-  };
-
   return (
     <>
       <Stack
@@ -41,22 +37,24 @@ export function AboutPage() {
           </Highlight>
         </Heading>
 
-        <Text align="left" lineHeight="7" fontSize="xl">
+        <Text align="left" lineHeight="8" fontSize="xl">
           <Highlight query={['store', 'share']} styles={accentWordsStyles}>
             We are an application for developers to store and share their
             favorite code snippets with others.
           </Highlight>
         </Text>
 
-        <Text align="left" lineHeight="7" fontSize="xl">
+        <Text align="left" lineHeight="8" fontSize="xl">
+          <Highlight query="snipshot" styles={{ color: 'primary' }}>
+            With snipshot your useful one-liners won&apos;t be forgotten.
+          </Highlight>
+          Futhermore, you can share your experience and ideas with others.
           <Highlight query="inspiration" styles={accentWordsStyles}>
-            With Snipshot your useful one-liners won&apos;t be forgotten.
-            Futhermore, you can share your experience and ideas with others.
             Sounds like a source of inspiration, doesn&apos;t it?
           </Highlight>
         </Text>
 
-        <Text align="left" lineHeight="7" fontSize="xl">
+        <Text align="left" lineHeight="8" fontSize="xl">
           <Highlight query="now" styles={accentWordsStyles}>
             Our platform is designed to be user-friendly and intuitive. Start
             using it now!
