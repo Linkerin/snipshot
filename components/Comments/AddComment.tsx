@@ -5,7 +5,8 @@ import {
   IconButton,
   Input,
   InputGroup,
-  InputRightElement
+  InputRightElement,
+  useColorModeValue
 } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -21,6 +22,11 @@ function AddComment() {
   const user = useContext(AuthContext);
 
   const sendBtnRef = useRef<HTMLButtonElement | null>(null);
+
+  const sendBtnColor = useColorModeValue(
+    'primary-light-theme',
+    'primary-dark-theme'
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -53,7 +59,7 @@ function AddComment() {
 
     setIsSavingComment(true);
     try {
-      const supabase = (await import('../../services/supabase')).default;
+      const supabase = (await import('@/services/supabase')).default;
 
       const { data, error } = await supabase.rpc('create_comment', {
         comment_content: comment,
@@ -93,6 +99,7 @@ function AddComment() {
             isDisabled={!comment}
             isLoading={isSavingComment}
             variant="outline"
+            colorScheme={sendBtnColor}
             size="sm"
             onClick={handleSave}
           />

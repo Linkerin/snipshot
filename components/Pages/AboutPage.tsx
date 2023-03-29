@@ -47,8 +47,8 @@ export function AboutPage() {
         <Text align="left" lineHeight="8" fontSize="xl">
           <Highlight query="snipshot" styles={{ color: 'primary' }}>
             With snipshot your useful one-liners won&apos;t be forgotten.
-          </Highlight>
-          Futhermore, you can share your experience and ideas with others.
+          </Highlight>{' '}
+          Futhermore, you can share your experience and ideas with others.{' '}
           <Highlight query="inspiration" styles={accentWordsStyles}>
             Sounds like a source of inspiration, doesn&apos;t it?
           </Highlight>

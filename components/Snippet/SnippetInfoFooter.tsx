@@ -53,9 +53,9 @@ function SnippetInfoFooter({
           </Tag>
         )}
       </Stack>
-      <Stack direction="row" spacing={2}>
+      <Stack direction="row" spacing={2} alignItems="flex-end">
         <Text
-          fontSize="xs"
+          fontSize="sm"
           sx={{ fontWeight: author?.name && 'bold' }}
           color="text-secondary"
         >
@@ -71,7 +71,7 @@ function SnippetInfoFooter({
             'anonymous'
           )}
         </Text>
-        <Text fontSize="xs" color="text-secondary">
+        <Text fontSize="xs" color="text-secondary" lineHeight="21px">
           {parseDate(created) ?? ''}
         </Text>
       </Stack>

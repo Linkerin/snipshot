@@ -154,15 +154,27 @@ function CommentsContainer() {
   }, [handleCommentInsert, handleCommentDeleteUpdate]);
 
   return (
-    <Card variant="outline" as="section">
-      <CardHeader px={3} pt={2} pb={0}>
+    <Card
+      variant="outline"
+      as="section"
+      bgColor="chakra-body-bg"
+      maxHeight={{ base: '100%', lg: '85vh' }}
+    >
+      <CardHeader px={3} pt={2} pb={2}>
         <Flex alignItems="center" gap={1}>
           <CommentsIcon boxSize={5} />
           <Text fontSize="lg">{commentsNumber} comments</Text>
         </Flex>
+        <Divider mt={2} />
       </CardHeader>
-      <CardBody as={Flex} flexDirection="column" gap={2} px={3} py={2}>
-        <Divider />
+      <CardBody
+        as={Flex}
+        flexDirection="column"
+        gap={2}
+        px={3}
+        py={1}
+        overflowY="scroll"
+      >
         {comments.length > 0 ? (
           comments.map(comment => (
             <Comment key={comment.id} comment={comment} />
@@ -172,7 +184,7 @@ function CommentsContainer() {
         )}
       </CardBody>
       {user?.id && (
-        <CardFooter as={Flex} flexDirection="column" gap={3} px={3} py={1}>
+        <CardFooter as={Flex} flexDirection="column" gap={3} px={3} py={2}>
           <Divider />
           <AddComment />
         </CardFooter>
