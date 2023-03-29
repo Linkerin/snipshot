@@ -30,10 +30,17 @@ function SearchInput({
   size = 'md'
 }: SearchInputProps) {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleIconClick = () => {
+    if (inputRef && inputRef?.current) {
+      inputRef.current.focus();
+    }
+  };
 
   useEffect(() => {
     const fetchSearchResults = async () => {
-      if (timerRef.current) {
+      if (timerRef?.current) {
         clearTimeout(timerRef.current);
       }
 
@@ -72,10 +79,11 @@ function SearchInput({
 
   return (
     <InputGroup>
-      <InputLeftElement h="100%">
+      <InputLeftElement h="100%" cursor="pointer" onClick={handleIconClick}>
         <SearchIcon />
       </InputLeftElement>
       <Input
+        ref={inputRef}
         name="search"
         value={value}
         size={size}
