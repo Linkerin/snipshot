@@ -18,6 +18,7 @@ import { AuthContext } from '@/context/AuthContext';
 import CenteredListItem from '../CenteredListItem';
 import CodeIcon from '@/components/Icons/CodeIcon';
 import { hideScrollbarCss } from '@/services/utils';
+import InfoIcon from '../Icons/InfoIcon';
 import LanguagesList from '../LanguagesList';
 import SettingsIcon from '@/components/Icons/SettingsIcon';
 import SignInIcon from '@/components/Icons/SignInIcon';
@@ -111,6 +112,13 @@ function SideMenu() {
           </Box>
         </StyledMenuItem>
       )}
+
+      <LinkBox as={StyledMenuItem}>
+        <ListIcon as={InfoIcon} />
+        <LinkOverlay as={NextLink} href="/about" aria-label="About page">
+          About
+        </LinkOverlay>
+      </LinkBox>
     </List>
   );
 }

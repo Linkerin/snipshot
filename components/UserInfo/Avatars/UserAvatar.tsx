@@ -2,8 +2,6 @@ import { Box, Image } from '@chakra-ui/react';
 
 import UserIcon from '@/components/Icons/UserIcon';
 import GuestAvatarSvg from './GuestAvatarSvg';
-// ADD credits to guest avatar svg
-// <a href='https://www.freepik.com/vectors/cute-sloth'>Cute sloth vector created by catalyststuff - www.freepik.com</a>
 
 const sizes = {
   xs: {
