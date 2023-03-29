@@ -4,8 +4,8 @@ const baseStyle = defineStyle({
   _hover: {
     color: 'primary',
     textDecoration: 'none',
-    '-webkit-text-decoration': 'none',
-    'text-decoration-color': 'none'
+    textDecorationColor: 'none',
+    WebkitTextDecorationColor: 'none'
   }
 });
 

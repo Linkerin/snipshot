@@ -7,6 +7,7 @@ import {
   FormHelperText,
   Grid,
   GridItem,
+  Heading,
   Input,
   ListIcon,
   SpaceProps,
@@ -197,17 +198,20 @@ function AddSnippetPage() {
           </VStack>
         </GridItem>
         {userInput.snippet && (
-          <GridItem
-            area="preview"
-            as={SnippetCard}
-            title={userInput.title}
-            snippet={userInput.snippet}
-            lang={userInput.lang}
-            tags={tags}
-            mt={0}
-            mb={1}
-          >
-            <SnippetCode snippet={userInput.snippet} lang={userInput.lang} />
+          <GridItem area="preview" mt={0} mb={1}>
+            {!isMobile && (
+              <Heading size="sm" mb={2}>
+                Preview
+              </Heading>
+            )}
+            <SnippetCard
+              title={userInput.title}
+              snippet={userInput.snippet}
+              lang={userInput.lang}
+              tags={tags}
+            >
+              <SnippetCode snippet={userInput.snippet} lang={userInput.lang} />
+            </SnippetCard>
           </GridItem>
         )}
       </Grid>
