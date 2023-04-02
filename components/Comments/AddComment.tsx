@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
+import { fetchIsPostingAllowed } from '@/services/utils';
 import SendIcon from '@/components/Icons/SendIcon';
 import { SnippetIdContext } from '../Pages/SnippetPage';
 
@@ -57,21 +58,34 @@ function AddComment() {
     e.preventDefault();
     if (isSavingComment || comment.length === 0 || !snippetId) return;
 
+    if (helper) setHelper('');
     setIsSavingComment(true);
     try {
       const supabase = (await import('@/services/supabase')).default;
+      const { data, error: sessionError } = await supabase.auth.getSession();
+      if (sessionError) throw sessionError;
 
-      const { data, error } = await supabase.rpc('create_comment', {
-        comment_content: comment,
-        user_key: user?.id,
-        parent_comment_key: null,
-        snippet_key: snippetId
-      });
-      if (error) throw error;
+      const userId = data.session?.user.id;
+      const postingPermission = await fetchIsPostingAllowed(userId);
 
-      setComment('');
+      if (postingPermission.allowed) {
+        const { data, error } = await supabase.rpc('create_comment', {
+          comment_content: comment,
+          user_key: user?.id,
+          parent_comment_key: null,
+          snippet_key: snippetId
+        });
+        if (error) throw error;
+
+        setComment('');
+
+        return;
+      } else {
+        setHelper(postingPermission.message);
+      }
     } catch (err) {
       console.error(err);
+      setHelper('Something went wrong. Please, try again later.');
     } finally {
       setIsSavingComment(false);
     }

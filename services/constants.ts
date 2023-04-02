@@ -24,3 +24,9 @@ export const LANGS: ReadonlyArray<LangsType> = [
   'TypeScript',
   'Other'
 ];
+
+/**
+ * Amount of time that the user should wait before posting new content.
+ * Determined in seconds.
+ */
+export const POSTING_COOLDOWN_SEC = 60;

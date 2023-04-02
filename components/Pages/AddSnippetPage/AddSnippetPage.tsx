@@ -19,12 +19,13 @@ import {
 
 import Alerts from './Alerts';
 import { DeviceContext } from '@/context/DeviceContext';
+import { fetchIsPostingAllowed } from '@/services/utils';
 import { LANGS } from '@/services/constants';
-import LangIcon from '../../Icons/LangIcons/LangIcon';
+import LangIcon from '@/components/Icons/LangIcons/LangIcon';
 import SelectInput, { SelectOption } from '../../SelectInput';
 import SnippetCard from '@/components/Snippet/SnippetCard';
 import SnippetCode from '@/components/Snippet/SnippetCode';
-import SnippetTagsList from '../../Snippet/SnippetTagsList';
+import SnippetTagsList from '@/components/Snippet/SnippetTagsList';
 import useButtonDisabled from '@/hooks/useButtonDisabled';
 import supabase from '@/services/supabase';
 import useSnippetInputHandler from '@/hooks/useSnippetInputHandler';
@@ -65,9 +66,19 @@ function AddSnippetPage() {
     }
 
     try {
-      // Get user's JWT
+      // Get user's id and JWT
       const { data, error: sessionError } = await supabase.auth.getSession();
       if (sessionError) throw sessionError;
+
+      const postingPermission = await fetchIsPostingAllowed(
+        data.session?.user.id
+      );
+      if (!postingPermission.allowed) {
+        setError(true);
+        console.log(postingPermission.message);
+        return;
+      }
+
       const jwt = data.session?.access_token;
 
       const options = {
