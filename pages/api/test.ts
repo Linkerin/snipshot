@@ -6,8 +6,15 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // console.log(req.socket.remoteAddress);
-  const ipAddress = req.socket.remoteAddress;
+  let ipAddress = req.headers['x-real-ip'];
+  const forwardedFor = req.headers['x-forwarded-for'] as string;
+  console.log(forwardedFor);
+  if (!ipAddress && forwardedFor) {
+    ipAddress = forwardedFor?.split(',').at(0) ?? 'Unknown';
+  }
+
+  console.log(ipAddress);
+  return res.status(200).json({ forwardedFor, ipAddress });
 
   if (!ipAddress) {
     return res.status(400).json({ message: 'Bad Request' });
