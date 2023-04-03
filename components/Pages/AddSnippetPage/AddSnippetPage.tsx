@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import {
   Button,
@@ -17,18 +18,23 @@ import {
   useColorModeValue
 } from '@chakra-ui/react';
 
-import Alerts from './Alerts';
 import { snippetContextValueDefault } from '@/context/SnippetContext';
 import { DeviceContext } from '@/context/DeviceContext';
 import { fetchIsPostingAllowed } from '@/services/utils';
 import { LANGS } from '@/services/constants';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
 import SelectInput, { SelectOption } from '../../SelectInput';
-import Snippet from '@/components/Snippet/Snippet';
-import SnippetTagsList from '@/components/Snippet/Body/SnippetTagsList';
 import useButtonDisabled from '@/hooks/useButtonDisabled';
-import supabase from '@/services/supabase';
 import useSnippetInputHandler from '@/hooks/useSnippetInputHandler';
+
+const Alerts = dynamic(() => import('./Alerts'), { ssr: false });
+const Snippet = dynamic(() => import('@/components/Snippet/Snippet'), {
+  ssr: false
+});
+const SnippetTagsList = dynamic(
+  () => import('@/components/Snippet/Body/SnippetTagsList'),
+  { ssr: false }
+);
 
 interface AddSnippetFormLabelProps {
   label: string;
@@ -67,6 +73,7 @@ function AddSnippetPage() {
 
     try {
       // Get user's id and JWT
+      const supabase = (await import('@/services/supabase')).default;
       const { data, error: sessionError } = await supabase.auth.getSession();
       if (sessionError) throw sessionError;
 

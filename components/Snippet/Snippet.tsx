@@ -1,4 +1,3 @@
-import { createContext } from 'react';
 import { chakra } from '@chakra-ui/react';
 
 import SnippetCard from './Body/SnippetCard';

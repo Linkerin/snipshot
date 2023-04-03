@@ -52,6 +52,11 @@ export default async function handler(
       cleanObjDataTypesForNextJS(snippet)
     );
 
+    res.setHeader(
+      'Cache-Control',
+      'public, s-maxage=10, stale-while-revalidate=59'
+    );
+
     return res.json(snippets);
   }
 

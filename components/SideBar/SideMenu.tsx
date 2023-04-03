@@ -62,6 +62,7 @@ function SideMenu() {
               as={NextLink}
               href={`/users/${user?.username}`}
               aria-label="Profile page"
+              prefetch={false}
             >
               Profile
             </LinkOverlay>
@@ -78,7 +79,12 @@ function SideMenu() {
       {!user?.id && (
         <LinkBox as={StyledMenuItem}>
           <ListIcon as={SignInIcon} />
-          <LinkOverlay as={NextLink} href="/login" aria-label="Settings page">
+          <LinkOverlay
+            as={NextLink}
+            href="/login"
+            aria-label="Settings page"
+            prefetch={false}
+          >
             Sign In
           </LinkOverlay>
         </LinkBox>
@@ -115,7 +121,12 @@ function SideMenu() {
 
       <LinkBox as={StyledMenuItem}>
         <ListIcon as={InfoIcon} />
-        <LinkOverlay as={NextLink} href="/about" aria-label="About page">
+        <LinkOverlay
+          as={NextLink}
+          href="/about"
+          aria-label="About page"
+          prefetch={false}
+        >
           About
         </LinkOverlay>
       </LinkBox>

@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from 'react';
+import { SyntheticEvent, useCallback, useState } from 'react';
 import {
   Button,
   Center,
@@ -11,7 +11,6 @@ import {
 } from '@chakra-ui/react';
 
 import GithubIcon from '@/components/Icons/GithubIcon';
-import supabase from '@/services/supabase';
 import useAuth from '@/hooks/useAuth';
 
 function LoginPage() {
@@ -19,26 +18,30 @@ function LoginPage() {
   const user = useAuth(true);
   const authErrorToast = useToast();
 
-  const handeGitHubLogin = async (e: SyntheticEvent) => {
-    setIsAuthorizing(true);
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'github',
-      options: { redirectTo: '/' }
-    });
-
-    if (error) {
-      authErrorToast({
-        description: 'GitHub authorization failed. Please, try again',
-        status: 'error',
-        duration: 2000,
-        isClosable: true,
-        variant: 'subtle'
+  const handeGitHubLogin = useCallback(
+    async (e: SyntheticEvent) => {
+      setIsAuthorizing(true);
+      const supabase = (await import('@/services/supabase')).default;
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'github',
+        options: { redirectTo: '/' }
       });
-      setIsAuthorizing(false);
 
-      return;
-    }
-  };
+      if (error) {
+        authErrorToast({
+          description: 'GitHub authorization failed. Please, try again',
+          status: 'error',
+          duration: 2000,
+          isClosable: true,
+          variant: 'subtle'
+        });
+        setIsAuthorizing(false);
+
+        return;
+      }
+    },
+    [authErrorToast]
+  );
 
   return (
     <Center h="80%" flexDirection="column">

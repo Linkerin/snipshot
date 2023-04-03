@@ -9,7 +9,11 @@ function SnippetTitle() {
   return (
     <Heading as="h3" fontSize="0.85rem" noOfLines={1} pl={1}>
       {slug ? (
-        <Link as={NextLink} href={`/snippets/${lang}/${slug}/`}>
+        <Link
+          as={NextLink}
+          href={`/snippets/${lang}/${slug}/`}
+          prefetch={false}
+        >
           {title}
         </Link>
       ) : (
