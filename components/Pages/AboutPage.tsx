@@ -27,7 +27,7 @@ export function AboutPage() {
         direction="column"
         align="left"
         spacing={6}
-        w={{ base: '100%', md: '50%' }}
+        w={{ base: '100%', md: '75%', xl: '50%' }}
         my={4}
         px={6}
       >

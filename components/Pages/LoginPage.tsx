@@ -42,7 +42,11 @@ function LoginPage() {
 
   return (
     <Center h="80%" flexDirection="column">
-      <VStack w={{ base: '75vw', lg: '18vw' }} mb={12} spacing={7}>
+      <VStack
+        w={{ base: '75vw', md: '40vw', lg: '30vw', xl: '24vw' }}
+        mb={12}
+        spacing={7}
+      >
         <Heading
           as="p"
           textAlign="left"
