@@ -1,5 +1,4 @@
 import { FocusEvent } from 'react';
-// import { Rating, Snippet, User } from '@prisma/client';
 
 /**
  * Possible language values
@@ -30,8 +29,6 @@ export type LangsType =
   | ''
   | typeof undefined;
 
-// export type LangsType = keyof LangIconsType | '' | typeof undefined;
-
 export interface TagType {
   tag: string;
 }
@@ -48,6 +45,7 @@ export interface SnippetType {
   slug?: string;
   verified: boolean;
   author: {
+    id: string;
     name: string;
   };
   created: string;
@@ -57,13 +55,6 @@ export interface SnippetType {
   };
   tags?: string[];
 }
-// export interface SnippetType
-//   extends Omit<Snippet, 'updated' | 'userId' | 'lang' | 'slug'> {
-//   slug?: Pick<Snippet, 'slug'>;
-//   lang: LangsType;
-//   rating: Pick<Rating, 'id' | 'rating'>;
-//   author: Pick<User, 'name'>;
-// }
 
 /**
  * Brief information about a snippet

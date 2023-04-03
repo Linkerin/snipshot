@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import NextLink from 'next/link';
 import {
   Card,
@@ -14,31 +14,24 @@ import {
 
 import CopyIcon from '@/components/Icons/CopyIcon';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
-import SnippetBar from './SnippetBar';
+import SnippetBar from '../Header/SnippetBar';
+import SnippetContext from '@/context/SnippetContext';
 import SnippetTagsList from './SnippetTagsList';
-import SnippetTitle from './SnippetTitle';
+import SnippetTitle from '../Header/SnippetTitle';
 import { SnippetType } from '@/services/types';
 import useHovered from '@/hooks/useHovered';
 
-interface SnippetCardProps
-  extends Pick<SnippetType, 'title' | 'snippet' | 'slug' | 'lang' | 'tags'> {
+interface SnippetCardProps {
+  snippet: SnippetType['snippet'];
   source?: string;
   mt?: number;
   mb?: number;
   children: React.ReactElement;
 }
 
-function SnippetCard({
-  title,
-  snippet,
-  source,
-  slug,
-  lang,
-  tags,
-  mt,
-  mb,
-  children
-}: SnippetCardProps) {
+function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
+  const { lang, tags } = useContext(SnippetContext);
+
   const [hovered, handleMouseEnter, handleMouseLeave] = useHovered();
 
   const codeClassName = useColorModeValue('code-light', 'code-dark');
@@ -74,9 +67,9 @@ function SnippetCard({
       mb={mb}
       h="max-content"
     >
-      <CardHeader py={1.5}>
+      <CardHeader py={1.5} pr={1}>
         <SnippetBar>
-          <SnippetTitle title={title} slug={slug} lang={lang} />
+          <SnippetTitle />
         </SnippetBar>
       </CardHeader>
       <Divider color={headingDividerColor} />

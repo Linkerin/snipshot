@@ -18,14 +18,14 @@ import {
 } from '@chakra-ui/react';
 
 import Alerts from './Alerts';
+import { snippetContextValueDefault } from '@/context/SnippetContext';
 import { DeviceContext } from '@/context/DeviceContext';
 import { fetchIsPostingAllowed } from '@/services/utils';
 import { LANGS } from '@/services/constants';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
 import SelectInput, { SelectOption } from '../../SelectInput';
-import SnippetCard from '@/components/Snippet/SnippetCard';
-import SnippetCode from '@/components/Snippet/SnippetCode';
-import SnippetTagsList from '@/components/Snippet/SnippetTagsList';
+import Snippet from '@/components/Snippet/Snippet';
+import SnippetTagsList from '@/components/Snippet/Body/SnippetTagsList';
 import useButtonDisabled from '@/hooks/useButtonDisabled';
 import supabase from '@/services/supabase';
 import useSnippetInputHandler from '@/hooks/useSnippetInputHandler';
@@ -215,14 +215,16 @@ function AddSnippetPage() {
                 Preview
               </Heading>
             )}
-            <SnippetCard
-              title={userInput.title}
-              snippet={userInput.snippet}
-              lang={userInput.lang}
-              tags={tags}
-            >
-              <SnippetCode snippet={userInput.snippet} lang={userInput.lang} />
-            </SnippetCard>
+            <Snippet
+              snippet={{
+                ...snippetContextValueDefault,
+                title: userInput.title,
+                lang: userInput.lang,
+                snippet: userInput.snippet,
+                tags
+              }}
+              noFooter
+            />
           </GridItem>
         )}
       </Grid>

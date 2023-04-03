@@ -1,4 +1,6 @@
-import { Box, HStack } from '@chakra-ui/react';
+import { Box, Flex, Spacer } from '@chakra-ui/react';
+
+import SnippetBarOptions from './SnippetBarOptions';
 
 function SnippetHeadCircle({ color }: { color: string }) {
   return <Box bg={color} borderRadius="50%" w="0.5rem" h="0.5rem" />;
@@ -6,12 +8,14 @@ function SnippetHeadCircle({ color }: { color: string }) {
 
 function SnippetBar({ children }: { children: React.ReactElement }) {
   return (
-    <HStack as="header" spacing={1} h={4}>
+    <Flex as="header" gap={1} alignItems="center" h={4} w="100%">
       <SnippetHeadCircle color="#f18549" />
       <SnippetHeadCircle color="#ffe600" />
       <SnippetHeadCircle color="#0ad787" />
       {children}
-    </HStack>
+      <Spacer />
+      <SnippetBarOptions />
+    </Flex>
   );
 }
 

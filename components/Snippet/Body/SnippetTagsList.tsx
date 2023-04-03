@@ -1,9 +1,9 @@
 import NextLink from 'next/link';
 import { LinkBox, LinkOverlay, TagLabel } from '@chakra-ui/react';
 
-import CloseIcon from '../Icons/CloseIcon';
-import TagWrapper from '../CustomTag/TagWrapper';
-import TagsListContainer from '../CustomTag/TagsListContainer';
+import CloseIcon from '@/components/Icons/CloseIcon';
+import TagWrapper from '@/components/CustomTag/TagWrapper';
+import TagsListContainer from '@/components/CustomTag/TagsListContainer';
 
 interface SnippetTagsListProps {
   tags?: string[];

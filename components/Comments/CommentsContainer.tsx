@@ -47,6 +47,7 @@ function CommentsContainer() {
           parent: addedComment.parent,
           created: addedComment.created,
           deleted: addedComment.deleted,
+          snippetId: addedComment.snippet_id,
           author: {
             id: addedComment.user_id,
             name: userInfo.name,

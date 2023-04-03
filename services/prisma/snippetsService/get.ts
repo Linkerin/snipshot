@@ -74,7 +74,7 @@ async function get({ page = '1', tag = [], lang }: GetFuncArgs = {}) {
       tags: true,
       created: true,
       author: {
-        select: { name: true }
+        select: { id: true, name: true }
       },
       rating: {
         select: {

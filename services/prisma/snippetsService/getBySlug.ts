@@ -22,7 +22,7 @@ async function getBySlug(slug: Snippet['slug']) {
       tags: true,
       created: true,
       author: {
-        select: { name: true }
+        select: { id: true, name: true }
       },
       rating: {
         select: {

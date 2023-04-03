@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import NextLink from 'next/link';
 import {
   Link,
@@ -11,19 +12,11 @@ import {
 import CheckedIcon from '@/components/Icons/CheckedIcon';
 import { parseDate } from '@/services/date';
 import Rating from './Rating';
-import { SnippetType } from '@/services/types';
+import SnippetContext from '@/context/SnippetContext';
 
-type SnippetInfoFooterProps = Pick<
-  SnippetType,
-  'author' | 'created' | 'rating' | 'verified'
->;
+function SnippetInfoFooter() {
+  const { author, created, rating, verified } = useContext(SnippetContext);
 
-function SnippetInfoFooter({
-  author,
-  created,
-  rating,
-  verified
-}: SnippetInfoFooterProps) {
   return (
     <Stack ml={2} mb={2} mt={1} spacing={0.5}>
       <Stack

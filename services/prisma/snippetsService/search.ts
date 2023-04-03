@@ -21,7 +21,7 @@ async function search(query: string | string[]) {
       tags: true,
       created: true,
       author: {
-        select: { name: true }
+        select: { id: true, name: true }
       },
       rating: {
         select: {

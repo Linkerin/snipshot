@@ -1,11 +1,11 @@
+import { useContext } from 'react';
 import NextLink from 'next/link';
 import { Heading, Link } from '@chakra-ui/react';
 
-import { SnippetType } from '@/services/types';
+import SnippetContext from '@/context/SnippetContext';
 
-type SnippetTitleProps = Pick<SnippetType, 'title' | 'slug' | 'lang'>;
-
-function SnippetTitle({ title, slug, lang }: SnippetTitleProps) {
+function SnippetTitle() {
+  const { lang, slug, title } = useContext(SnippetContext);
   return (
     <Heading as="h3" fontSize="0.85rem" noOfLines={1} pl={1}>
       {slug ? (
