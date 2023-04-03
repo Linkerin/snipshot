@@ -44,6 +44,11 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
 
   const snippetCopiedToast = useToast();
 
+  let escapedLang: string | undefined = lang;
+  if (lang) {
+    escapedLang = encodeURIComponent(lang);
+  }
+
   const handleCopyClick = async () => {
     await navigator.clipboard.writeText(source || snippet);
     snippetCopiedToast({
@@ -109,7 +114,7 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
       <CardFooter pt={0}>
         <IconButton
           as={NextLink}
-          href={`/snippets/${lang}`}
+          href={`/snippets/${escapedLang}`}
           aria-label={`${lang} snippets`}
           icon={<LangIcon lang={lang} focusable />}
           variant="ghost"

@@ -21,6 +21,11 @@ function LanguagesListItem({ lang }: { lang: LangsType }) {
   const { isMobile } = useContext(DeviceContext);
   const [hovered, handleMouseEnter, handleMouseLeave] = useHovered();
 
+  let escapedLang: LangsType | string = lang;
+  if (lang) {
+    escapedLang = encodeURIComponent(lang);
+  }
+
   return (
     <LinkBox w="100%">
       <CenteredListItem
@@ -41,7 +46,11 @@ function LanguagesListItem({ lang }: { lang: LangsType }) {
             }
           />
         </ListIcon>
-        <LinkOverlay as={NextLink} href={`/snippets/${lang}`} prefetch={false}>
+        <LinkOverlay
+          as={NextLink}
+          href={`/snippets/${escapedLang}`}
+          prefetch={false}
+        >
           {lang}
         </LinkOverlay>
       </CenteredListItem>

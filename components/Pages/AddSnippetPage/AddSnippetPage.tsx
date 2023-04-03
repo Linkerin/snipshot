@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
+import { log } from 'next-axiom';
 import {
   Button,
   FormControl,
@@ -55,6 +56,7 @@ function AddSnippetFormLabel({ label, mb, ml }: AddSnippetFormLabelProps) {
 function AddSnippetPage() {
   const { userInput, tags, inputHelpers, handleChange, handleTagDelete } =
     useSnippetInputHandler();
+  const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState(false);
 
   const disabledSaveBtn = useButtonDisabled(userInput, ['tag']);
@@ -102,20 +104,27 @@ function AddSnippetPage() {
         })
       };
 
+      setIsUploading(true);
       const res = await fetch('/api/snippets/', options);
 
       if (!res.ok) {
-        console.error(await res.json());
-        setError(true);
+        const err = await res.json();
+        throw err;
       }
 
       if (res.status === 201) {
         const data = await res.json();
-        router.push(`/snippets/${data.snippet.lang}/${data.snippet.slug}/`);
+        router.push(
+          `/snippets/${encodeURIComponent(data.snippet.lang)}/${
+            data.snippet.slug
+          }/`
+        );
       }
     } catch (err) {
-      console.error(err);
+      log.error('Error while adding snippet', { err });
       setError(true);
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -207,6 +216,7 @@ function AddSnippetPage() {
             <Button
               isDisabled={disabledSaveBtn}
               onClick={handleSave}
+              isLoading={isUploading}
               colorScheme={saveBtnColor}
               variant="outline"
               w="100%"
