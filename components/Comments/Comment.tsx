@@ -25,7 +25,7 @@ function Comment({ comment }: { comment: CommentType }) {
 
     setRemoving(true);
     try {
-      const supabase = (await import('../../services/supabase')).default;
+      const supabase = (await import('@/services/supabase')).default;
 
       const { data, error } = await supabase
         .from('comments')

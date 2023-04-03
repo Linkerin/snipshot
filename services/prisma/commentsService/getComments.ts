@@ -2,33 +2,30 @@ import prisma from '../prisma';
 
 async function getComments(snippetId: string) {
   try {
-    const data = await prisma.snippetsComments.findMany({
+    const data = await prisma.comment.findMany({
       where: { snippetId: { equals: snippetId } },
       select: {
-        comments: {
+        id: true,
+        comment: true,
+        parent: true,
+        snippetId: true,
+        created: true,
+        updated: true,
+        deleted: true,
+        author: {
           select: {
             id: true,
-            comment: true,
-            parent: true,
-            created: true,
-            updated: true,
-            deleted: true,
-            author: {
-              select: {
-                id: true,
-                name: true,
-                avatar: true
-              }
-            }
+            name: true,
+            avatar: true
           }
         }
       },
       orderBy: {
-        comments: { created: 'asc' }
+        created: 'asc'
       }
     });
-    const comments = data.map(commentObj => {
-      const comment = commentObj.comments;
+
+    const comments = data.map(comment => {
       if (comment.deleted) {
         comment.comment = '';
       }

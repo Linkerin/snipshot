@@ -89,6 +89,7 @@ export interface CommentType {
   id: string;
   comment: string;
   parent?: string | null;
+  snippetId: string;
   created: string;
   updated?: string;
   deleted: boolean;

@@ -2,7 +2,7 @@ import prisma from '../prisma';
 
 async function getNumberOfComments(snippetId: string) {
   try {
-    const number = await prisma.snippetsComments.count({
+    const number = await prisma.comment.count({
       where: { snippetId: { equals: snippetId } }
     });
 

@@ -8,81 +8,71 @@ datasource db {
 }
 
 model Comment {
-  id                String             @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  comment           String
-  authorId          String             @db.Uuid @map("user_id")
-  parent            String?            @db.Uuid
-  created           DateTime           @default(now()) @db.Timestamptz(6)
-  updated           DateTime           @default(now()) @db.Timestamptz(6)
-  deleted           Boolean            @default(false)
-  author            User               @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  snippetsComments  SnippetsComments?
+  id        String   @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  comment   String
+  authorId  String   @map("user_id") @db.Uuid
+  parent    String?  @db.Uuid
+  created   DateTime @default(now()) @db.Timestamptz(6)
+  updated   DateTime @default(now()) @db.Timestamptz(6)
+  deleted   Boolean  @default(false)
+  snippetId String   @map("snippet_id") @db.Uuid
+  snippets  Snippet  @relation(fields: [snippetId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  author    User     @relation(fields: [authorId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("comments")
 }
 
 model User {
-  id          String       @id @db.Uuid
-  name        String?      @unique
-  created     DateTime?    @default(now()) @db.Timestamptz(6)
-  updated     DateTime?    @default(now()) @db.Timestamptz(6)
-  avatar      String?
-  comments    Comment[]
-  snippets    Snippet[]
+  id         String    @id @db.Uuid
+  name       String?   @unique
+  created    DateTime? @default(now()) @db.Timestamptz(6)
+  updated    DateTime? @default(now()) @db.Timestamptz(6)
+  avatar     String?
+  comments   Comment[]
+  snippets   Snippet[]
   usersRoles Role?
 
   @@map("profiles")
 }
 
 model Snippet {
-  id                String              @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  title             String              @db.VarChar
-  snippet           String              @db.VarChar
-  tree              String?
-  lang              String              @db.VarChar
-  slug              String?             @unique @db.VarChar
-  tags              String[]
-  created           DateTime            @default(now()) @db.Timestamptz(6)
-  updated           DateTime            @default(now()) @db.Timestamptz(6)
-  userId            String?             @db.Uuid @map("user_id")
-  verified          Boolean             @default(false)
-  author          User?               @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  snippetsComments  SnippetsComments[]
-  rating            Rating?
+  id       String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  title    String    @db.VarChar
+  snippet  String    @db.VarChar
+  tree     String?
+  lang     String    @db.VarChar
+  slug     String?   @unique @db.VarChar
+  tags     String[]
+  created  DateTime  @default(now()) @db.Timestamptz(6)
+  updated  DateTime  @default(now()) @db.Timestamptz(6)
+  userId   String?   @map("user_id") @db.Uuid
+  verified Boolean   @default(false)
+  comments Comment[]
+  author   User?     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  rating   Rating?
 
   @@map("snippets")
 }
 
-model SnippetsComments {
-  id         BigInt   @id @default(autoincrement())
-  commentId  String   @unique @db.Uuid @map("comment_id")
-  snippetId  String   @db.Uuid @map("snippet_id")
-  created    DateTime @default(now()) @db.Timestamptz(6)
-  comments   Comment  @relation(fields: [commentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  snippets   Snippet  @relation(fields: [snippetId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-
-  @@map("snippets_comments")
-}
-
 model Rating {
-  id                       String                     @id(map: "snippets_ratings_pkey1") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  rating                   BigInt                     @default(0)
-  snippetId                String                     @unique @db.Uuid @map("snippet_id")
-  created                  DateTime                   @default(now()) @db.Timestamptz(6)
-  updated                  DateTime                   @default(now()) @db.Timestamptz(6)
-  snippet                  Snippet                    @relation(fields: [snippetId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  ratingRecord             RatingRecord[]
+  id           String         @id(map: "snippets_ratings_pkey1") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  rating       BigInt         @default(0)
+  snippetId    String         @unique @map("snippet_id") @db.Uuid
+  created      DateTime       @default(now()) @db.Timestamptz(6)
+  updated      DateTime       @default(now()) @db.Timestamptz(6)
+  snippet      Snippet        @relation(fields: [snippetId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  ratingRecord RatingRecord[]
 
   @@map("snippets_ratings")
 }
 
 model RatingRecord {
-  id               String           @id(map: "snippets_ratings_pkey") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
-  ratingId         String           @db.Uuid @map("rating_id")
-  userId           String           @db.Uuid @map("user_id")
-  action           String           @db.VarChar
-  created          DateTime         @default(now()) @db.Timestamptz(6)
-  rating           Rating           @relation(fields: [ratingId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  id       String   @id(map: "snippets_ratings_pkey") @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+  ratingId String   @map("rating_id") @db.Uuid
+  userId   String   @map("user_id") @db.Uuid
+  action   String   @db.VarChar
+  created  DateTime @default(now()) @db.Timestamptz(6)
+  rating   Rating   @relation(fields: [ratingId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 
   @@unique([ratingId, userId], map: "unique_rating")
   @@map("snippets_ratings_records")

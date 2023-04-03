@@ -56,24 +56,21 @@ function AddComment() {
 
   const handleSave: MouseEventHandler<HTMLButtonElement> = async e => {
     e.preventDefault();
-    if (isSavingComment || comment.length === 0 || !snippetId) return;
+    if (isSavingComment || comment.length === 0 || !snippetId || !user?.id)
+      return;
 
     if (helper) setHelper('');
     setIsSavingComment(true);
     try {
-      const supabase = (await import('@/services/supabase')).default;
-      const { data, error: sessionError } = await supabase.auth.getSession();
-      if (sessionError) throw sessionError;
-
-      const userId = data.session?.user.id;
-      const postingPermission = await fetchIsPostingAllowed(userId);
+      const postingPermission = await fetchIsPostingAllowed(user?.id);
 
       if (postingPermission.allowed) {
-        const { data, error } = await supabase.rpc('create_comment', {
-          comment_content: comment,
-          user_key: user?.id,
-          parent_comment_key: null,
-          snippet_key: snippetId
+        const supabase = (await import('@/services/supabase')).default;
+        const { error } = await supabase.from('comments').insert({
+          user_id: user?.id,
+          snippet_id: snippetId,
+          parent: null,
+          comment
         });
         if (error) throw error;
 
