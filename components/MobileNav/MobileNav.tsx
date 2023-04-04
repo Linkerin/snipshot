@@ -42,7 +42,7 @@ function MobileNav() {
 
         case 'add':
           if (typeof window !== 'undefined') {
-            router.push('/snippets/add');
+            router.push('/add');
           }
           break;
 
