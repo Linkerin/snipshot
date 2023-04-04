@@ -1,6 +1,6 @@
 import { GetServerSideProps } from 'next';
 import {
-  ChakraProvider,
+  ChakraBaseProvider,
   cookieStorageManagerSSR,
   localStorageManager
 } from '@chakra-ui/react';
@@ -18,9 +18,9 @@ export function Chakra({ cookies, children }: ChakraProps) {
       : localStorageManager;
 
   return (
-    <ChakraProvider colorModeManager={colorModeManager} theme={theme}>
+    <ChakraBaseProvider colorModeManager={colorModeManager} theme={theme}>
       {children}
-    </ChakraProvider>
+    </ChakraBaseProvider>
   );
 }
 
