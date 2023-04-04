@@ -43,29 +43,32 @@ function MobileSearchContainer() {
         h="50vh"
         overflowY="scroll"
         mb={2}
+        bgColor="chakra-body-bg"
       >
         <List>
-          {searchValue && results?.fetched && results?.snippets.length > 0 ? (
-            results.snippets.map(snippet => (
-              <LinkBox key={snippet.title}>
-                <CenteredListItem px={3} py={2} tabIndex={0}>
-                  <ListIcon>
-                    <LangIcon lang={snippet.lang} />
-                  </ListIcon>
-                  <LinkOverlay
-                    as={NextLink}
-                    href={`/snippets/${snippet.lang}/${snippet.slug}`}
-                  >
-                    {snippet.title}
-                  </LinkOverlay>
-                </CenteredListItem>
-              </LinkBox>
-            ))
-          ) : (
-            <CenteredListItem px={3} py={2}>
-              Nothing found
-            </CenteredListItem>
-          )}
+          {searchValue &&
+            results?.fetched &&
+            (results?.snippets.length > 0 ? (
+              results.snippets.map(snippet => (
+                <LinkBox key={snippet.title}>
+                  <CenteredListItem px={3} py={2} tabIndex={0}>
+                    <ListIcon>
+                      <LangIcon lang={snippet.lang} />
+                    </ListIcon>
+                    <LinkOverlay
+                      as={NextLink}
+                      href={`/snippets/${snippet.lang}/${snippet.slug}`}
+                    >
+                      {snippet.title}
+                    </LinkOverlay>
+                  </CenteredListItem>
+                </LinkBox>
+              ))
+            ) : (
+              <CenteredListItem px={3} py={2}>
+                Nothing found
+              </CenteredListItem>
+            ))}
         </List>
       </Card>
       <SearchInput

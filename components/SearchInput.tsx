@@ -88,6 +88,8 @@ function SearchInput({
         value={value}
         size={size}
         placeholder="Search"
+        autoFocus={false}
+        autoComplete="off"
         onChange={onChange}
         onBlur={handleFocus ? e => handleFocus(false, e) : undefined}
         onFocus={handleFocus ? e => handleFocus(true) : undefined}
