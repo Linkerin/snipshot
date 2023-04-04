@@ -1,14 +1,18 @@
 import { useContext } from 'react';
+import dynamic from 'next/dynamic';
 import { Grid, GridItem, Flex, Text } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
 import CodeIcon from '../Icons/CodeIcon';
 import { DeviceContext } from '@/context/DeviceContext';
 import { hideScrollbarCss } from '@/services/utils';
-import MobileUserInfo from '../UserInfo/MobileUserInfo';
 import SnippetsList from '@/components/SnippetsList';
-import UserInfo from '@/components/UserInfo/UserInfo';
 import { UserPageProps } from '@/pages/users/[user]';
+
+const MobileUserInfo = dynamic(
+  () => import('@/components/UserInfo/MobileUserInfo')
+);
+const UserInfo = dynamic(() => import('@/components/UserInfo/UserInfo'));
 
 const gridTempalate = {
   base: '1fr',

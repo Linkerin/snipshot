@@ -1,13 +1,22 @@
 import { useContext } from 'react';
+import dynamic from 'next/dynamic';
 import { Grid, GridItem } from '@chakra-ui/react';
 
-import AddSnippetButton from '@/components/AddSnippetButton';
 import { DeviceContext } from '@/context/DeviceContext';
 import Meta from '@/components/Meta/Meta';
-import MobileNav from '@/components/MobileNav/MobileNav';
-import MobileTopBar from './TopBar/MobileTopBar';
-import SideBar from '@/components/SideBar/SideBar';
-import TopBar from '@/components/TopBar/TopBar';
+
+const AddSnippetButton = dynamic(
+  () => import('@/components/AddSnippetButton'),
+  { ssr: false }
+);
+const MobileNav = dynamic(() => import('@/components/MobileNav/MobileNav'));
+const MobileTopBar = dynamic(() => import('@/components/TopBar/MobileTopBar'), {
+  ssr: false
+});
+const SideBar = dynamic(() => import('@/components/SideBar/SideBar'));
+const TopBar = dynamic(() => import('@/components/TopBar/TopBar'), {
+  ssr: false
+});
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { isMobile, mobileNavHeightvh } = useContext(DeviceContext);

@@ -1,28 +1,30 @@
+import dynamic from 'next/dynamic';
 import { IconProps } from '@chakra-ui/react';
 
 import { LangsType } from '@/services/types';
-import BashIcon from './BashIcon';
-import CIcon from './CIcon';
-import CPlusPlusIcon from './CPlusPlusIcon';
-import CSharpIcon from './CSharpIcon';
-import CssIcon from './CssIcon';
-import GoIcon from './GoIcon';
-import HaskellIcon from './HaskellIcon';
-import HtmlIcon from './HtmlIcon';
-import JavaIcon from './JavaIcon';
-import JavaScriptIcon from './JavaScriptIcon';
-import KotlinIcon from './KotlinIcon';
-import NextIcon from './NextIcon';
-import OtherLangIcon from './OtherLangIcon';
-import PhpIcon from './PhpIcon';
-import PythonIcon from './PythonIcon';
-import RIcon from './RIcon';
-import ReactIcon from './ReactIcon';
-import RubyIcon from './RubyIcon';
-import RustIcon from './RustIcon';
-import SqlIcon from './SqlIcon';
-import SwiftIcon from './SwiftIcon';
-import TypeScriptIcon from './TypeScriptIcon';
+
+const BashIcon = dynamic(() => import('./BashIcon'));
+const CIcon = dynamic(() => import('./CIcon'));
+const CPlusPlusIcon = dynamic(() => import('./CPlusPlusIcon'));
+const CSharpIcon = dynamic(() => import('./CSharpIcon'));
+const CssIcon = dynamic(() => import('./CssIcon'));
+const GoIcon = dynamic(() => import('./GoIcon'));
+const HaskellIcon = dynamic(() => import('./HaskellIcon'));
+const HtmlIcon = dynamic(() => import('./HtmlIcon'));
+const JavaIcon = dynamic(() => import('./JavaIcon'));
+const JavaScriptIcon = dynamic(() => import('./JavaScriptIcon'));
+const KotlinIcon = dynamic(() => import('./KotlinIcon'));
+const NextIcon = dynamic(() => import('./NextIcon'));
+const OtherLangIcon = dynamic(() => import('./OtherLangIcon'));
+const PhpIcon = dynamic(() => import('./PhpIcon'));
+const PythonIcon = dynamic(() => import('./PythonIcon'));
+const RIcon = dynamic(() => import('./RIcon'));
+const ReactIcon = dynamic(() => import('./ReactIcon'));
+const RubyIcon = dynamic(() => import('./RubyIcon'));
+const RustIcon = dynamic(() => import('./RustIcon'));
+const SqlIcon = dynamic(() => import('./SqlIcon'));
+const SwiftIcon = dynamic(() => import('./SwiftIcon'));
+const TypeScriptIcon = dynamic(() => import('./TypeScriptIcon'));
 
 interface LangIconProps extends IconProps {
   lang: LangsType;
