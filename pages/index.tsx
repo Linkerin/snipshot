@@ -16,7 +16,7 @@ export default function Home({ snippetsData, apiHandlerUrl }: HomeProps) {
 }
 
 export const getServerSideProps: GetServerSideProps =
-  withAxiomGetServerSideProps(async ({ log }) => {
+  withAxiomGetServerSideProps(async ({ res, log }) => {
     const apiHandlerUrl = '/snippets';
 
     try {
@@ -24,6 +24,11 @@ export const getServerSideProps: GetServerSideProps =
 
       const snippetsData = snippets.map(snippet =>
         cleanObjDataTypesForNextJS(snippet)
+      );
+
+      res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
       );
 
       return { props: { snippetsData, apiHandlerUrl } };
