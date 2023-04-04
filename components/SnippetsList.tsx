@@ -87,7 +87,7 @@ function SnippetsList({
                 );
             })}
           </GridItem>
-          <GridItem as={VStack} alignItems="flex-start" spacing={4}>
+          <GridItem as={VStack} alignItems="flex-start" spacing={3}>
             {snippets.map((snippet, index) => {
               const refItem = index === snippets.length - 2;
               if (index % 2 !== 0)

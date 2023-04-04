@@ -16,12 +16,12 @@ import {
 
 import SnippetContext from '@/context/SnippetContext';
 
-interface SnippetDeleModalProps {
+interface SnippetDeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleModalProps) {
+function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
   const [isRemoving, setIsRemoving] = useState(false);
   const { id, author, title } = useContext(SnippetContext);
 
