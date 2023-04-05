@@ -113,8 +113,8 @@ function SideMenu() {
       </CenteredListItem>
 
       {user?.id && (
-        <StyledMenuItem>
-          <Box as="button" onClick={handleLogOut}>
+        <StyledMenuItem onClick={handleLogOut} cursor="pointer">
+          <Box as="button">
             <ListIcon as={SignOutIcon} />
             Logout
           </Box>
