@@ -24,11 +24,8 @@ import supabase from '@/services/supabase';
 type LoadStatuses = 'idle' | 'loading' | 'finished';
 
 function CommentsContainer() {
-  const [commentsNumLoadStatus, setCommentsNumLoadStatus] =
-    useState<LoadStatuses>('idle');
   const [commentsLoadStatus, setCommentsLoadStatus] =
     useState<LoadStatuses>('idle');
-  const [commentsNumber, setCommentsNumber] = useState<number>(0);
   const [comments, setComments] = useState<CommentType[]>([]);
 
   const user = useContext(AuthContext);
@@ -90,39 +87,6 @@ function CommentsContainer() {
     });
   }, []);
 
-  // Fetch total number of comments
-  useEffect(() => {
-    if (commentsLoadStatus !== 'finished') return;
-
-    setCommentsNumLoadStatus('loading');
-    let controller = new AbortController();
-
-    const fetchCommentsNumber = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API}/comments/number?snippetId=${snippetId}`,
-          { signal: controller.signal }
-        );
-        const data = await res.json();
-
-        if (typeof data?.numOfComments === 'number') {
-          setCommentsNumber(data.numOfComments);
-        }
-      } catch (err) {
-        log.error('Error while fetching total number of comments', {
-          err,
-          snippetId
-        });
-      } finally {
-        setCommentsNumLoadStatus('finished');
-      }
-    };
-
-    fetchCommentsNumber();
-
-    return () => controller.abort();
-  }, [snippetId, comments, commentsLoadStatus]);
-
   // Fetch all comments
   useEffect(() => {
     setCommentsLoadStatus('loading');
@@ -183,12 +147,12 @@ function CommentsContainer() {
         <Flex alignItems="center" gap={1}>
           <CommentsIcon boxSize={5} />
           <Text fontSize="lg">
-            {commentsNumLoadStatus !== 'finished' && (
+            {commentsLoadStatus !== 'finished' && (
               <Skeleton as="span" speed={2}>
                 00
               </Skeleton>
             )}
-            {commentsNumLoadStatus === 'finished' && commentsNumber} comments
+            {commentsLoadStatus === 'finished' && comments.length} comments
           </Text>
         </Flex>
         <Divider mt={2} />
