@@ -29,7 +29,7 @@ function Lang({ snippetsData, lang, apiHandlerUrl }: LangProps) {
   return (
     <>
       <Meta
-        title={`snipshot — ${lang} code snippets`}
+        title={`${lang} code snippets – snipshot`}
         keywords={`${lang}, development, programming, snippets, code, samples`}
         description={`${lang} code snippets on snipshot. Get and share your ${lang} snips`}
       />
