@@ -23,7 +23,7 @@ function Tag({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps =
-  withAxiomGetServerSideProps(async ({ params, log }) => {
+  withAxiomGetServerSideProps(async ({ res, params, log }) => {
     const apiHandlerUrl = `/snippets?tag=${params?.tag}`;
     try {
       const snippets = await get({ tag: params?.tag });
@@ -31,10 +31,16 @@ export const getServerSideProps: GetServerSideProps =
         cleanObjDataTypesForNextJS(snippet)
       );
 
+      res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+      );
+
       return { props: { snippetsData, apiHandlerUrl, tag: params?.tag } };
     } catch (err) {
       log.error(`Error while fetchind data for '${params?.tag}' tag page`, {
-        err
+        err,
+        params
       });
 
       return { props: { snippetsData: [], apiHandlerUrl, tag: params?.tag } };
