@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import {
   chakra,
@@ -19,11 +20,12 @@ import CenteredListItem from '../CenteredListItem';
 import CodeIcon from '@/components/Icons/CodeIcon';
 import { hideScrollbarCss } from '@/services/utils';
 import InfoIcon from '../Icons/InfoIcon';
-import LanguagesList from '../LanguagesList';
 import SettingsIcon from '@/components/Icons/SettingsIcon';
 import SignInIcon from '@/components/Icons/SignInIcon';
 import SignOutIcon from '@/components/Icons/SignOutIcon';
 import UserIcon from '@/components/Icons/UserIcon';
+
+const LanguagesList = dynamic(() => import('@/components/LanguagesList'));
 
 function SideMenu() {
   const user = useContext(AuthContext);
