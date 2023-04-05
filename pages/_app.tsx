@@ -21,3 +21,5 @@ export default function App({ Component, pageProps }: AppProps) {
     </Chakra>
   );
 }
+
+export { reportWebVitals } from 'next-axiom';
