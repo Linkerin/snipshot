@@ -1,8 +1,15 @@
-import { useContext, useEffect, useState } from 'react';
-import { Center, Grid, GridItem, Spinner, VStack } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import {
+  Center,
+  Grid,
+  GridItem,
+  Spinner,
+  VStack,
+  useBreakpoint
+} from '@chakra-ui/react';
 import { log } from 'next-axiom';
 
-import { DeviceContext } from '@/context/DeviceContext';
+import { MOBILE_BREAKPOINTS } from '@/services/constants';
 import Snippet from '@/components/Snippet/Snippet';
 import { SnippetType } from '@/services/types';
 import usePaginatedHandler from '@/hooks/usePaginatedHandler';
@@ -22,7 +29,7 @@ function SnippetsList({
   const [snippets, setSnippets] = useState(snippetsData);
   const [isLoading, setIsLoading] = useState(false);
 
-  const { isMobile, isTablet } = useContext(DeviceContext);
+  const breakpoint = useBreakpoint();
 
   const [isIntersecting, targetRef, updateObserver] = useScrollRef();
   const [fetchData, hasMore] = usePaginatedHandler<SnippetType>(fetchUrl);
@@ -57,7 +64,7 @@ function SnippetsList({
 
   return (
     <>
-      {isMobile || isTablet || oneColumn ? (
+      {MOBILE_BREAKPOINTS.includes(breakpoint) || oneColumn ? (
         <Grid templateColumns="1fr" gap={4}>
           <GridItem as={VStack} alignItems="flex-start" spacing={3}>
             {snippets.map((snippet, index) => {

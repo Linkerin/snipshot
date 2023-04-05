@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { log } from 'next-axiom';
@@ -12,6 +12,7 @@ import {
   Heading,
   Input,
   ListIcon,
+  Show,
   SpaceProps,
   Text,
   Textarea,
@@ -20,7 +21,6 @@ import {
 } from '@chakra-ui/react';
 
 import { snippetContextValueDefault } from '@/context/SnippetContext';
-import { DeviceContext } from '@/context/DeviceContext';
 import { fetchIsPostingAllowed } from '@/services/utils';
 import { LANGS } from '@/services/constants';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
@@ -67,7 +67,6 @@ function AddSnippetPage() {
   );
 
   const router = useRouter();
-  const { isMobile, isTablet } = useContext(DeviceContext);
 
   const handleSave = async () => {
     for (let [key, value] of Object.entries(userInput)) {
@@ -190,7 +189,7 @@ function AddSnippetPage() {
                 title="No more than 10 tags"
                 onChange={handleChange}
                 value={userInput.tag}
-                size={isMobile || isTablet ? 'lg' : 'md'}
+                size={{ base: 'lg', lg: 'md' }}
                 maxLength={33}
               />
               {!!inputHelpers.tag && (
@@ -204,7 +203,7 @@ function AddSnippetPage() {
               id="lang"
               name="lang"
               placeholder="Select language"
-              h={isMobile || isTablet ? 12 : 10}
+              h={{ base: 12, lg: 10 }}
               value={userInput.lang}
               onChange={handleChange}
             >
@@ -233,11 +232,11 @@ function AddSnippetPage() {
         </GridItem>
         {userInput.snippet && (
           <GridItem area="preview" mt={0} mb={1}>
-            {!isMobile && (
+            <Show above="lg">
               <Heading size="sm" mb={2}>
                 Preview
               </Heading>
-            )}
+            </Show>
             <Snippet
               snippet={{
                 ...snippetContextValueDefault,
