@@ -8,7 +8,6 @@ export function middleware(request: NextRequest) {
 
     const response = NextResponse.next({
       request: {
-        // New request headers
         headers: requestHeaders
       }
     });

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import { useBreakpoint } from '@chakra-ui/react';
 
 interface DeviceProviderProps {
@@ -7,23 +7,27 @@ interface DeviceProviderProps {
 
 interface DeviceContextValue {
   isMobile: boolean;
-  isTablet: boolean;
   isAppleMobile: boolean;
   mobileNavHeightvh: '8.5vh' | '7vh';
 }
 
 export const DeviceContext = createContext({
   isMobile: true,
-  isTablet: false,
   isAppleMobile: false
 } as DeviceContextValue);
 
 export const DeviceProvider = ({ children }: DeviceProviderProps) => {
   const breakpoint = useBreakpoint();
-  const isMobile = ['base', 'sm'].includes(breakpoint);
-  const isTablet = breakpoint === 'md';
+  const isMobile = useMemo(
+    () => ['base', 'sm'].includes(breakpoint),
+    [breakpoint]
+  );
+
   const [isAppleMobile, setIsAppleMobile] = useState(false);
-  const mobileNavHeightvh = isAppleMobile ? '8.5vh' : '7vh';
+  const mobileNavHeightvh = useMemo(
+    () => (isAppleMobile ? '8.5vh' : '7vh'),
+    [isAppleMobile]
+  );
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -34,7 +38,7 @@ export const DeviceProvider = ({ children }: DeviceProviderProps) => {
 
   return (
     <DeviceContext.Provider
-      value={{ isMobile, isTablet, isAppleMobile, mobileNavHeightvh }}
+      value={{ isMobile, isAppleMobile, mobileNavHeightvh }}
     >
       {children}
     </DeviceContext.Provider>

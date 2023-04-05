@@ -1,13 +1,25 @@
 import { createContext, useContext, useState } from 'react';
-import { Button, Grid, GridItem } from '@chakra-ui/react';
+import dynamic from 'next/dynamic';
+import { log } from 'next-axiom';
+import { Grid, GridItem } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
-import CheckedIcon from '../Icons/CheckedIcon';
-import CommentsContainer from '../Comments/CommentsContainer';
 import Meta from '@/components/Meta/Meta';
 import Snippet from '../Snippet/Snippet';
 import { SnippetType } from '@/services/types';
-import supabase from '@/services/supabase';
+
+const Button = dynamic(
+  () => import('@chakra-ui/react').then(chakra => chakra.Button),
+  { ssr: false }
+);
+
+const CheckedIcon = dynamic(() => import('@/components/Icons/CheckedIcon'), {
+  ssr: false
+});
+const CommentsContainer = dynamic(
+  () => import('@/components/Comments/CommentsContainer'),
+  { ssr: false }
+);
 
 export const SnippetIdContext = createContext<string | null>(null);
 
@@ -29,14 +41,17 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
 
     setVerifying(true);
     try {
+      const supabase = (await import('@/services/supabase')).default;
       const { data, error } = await supabase
         .from('snippets')
         .update({ verified: true })
         .eq('id', snippet.id);
       if (error) throw error;
     } catch (err) {
-      console.error(`Error while verifying snippet ID ${snippet.id}`);
-      console.error(err);
+      log.error(`Error while verifying snippet ID ${snippet.id}`, {
+        err,
+        snippetId: snippet.id
+      });
     } finally {
       setVerifying(false);
     }
