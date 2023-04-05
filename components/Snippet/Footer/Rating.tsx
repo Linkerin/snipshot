@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { log } from 'next-axiom';
 import { Button, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -182,11 +183,10 @@ function Rating({ id, rating }: RatingProps) {
 
   // Get user's activity on the rating (liked, disliked or not rated)
   useEffect(() => {
+    if (!user?.id || isChangingRating) return;
     const controller = new AbortController();
 
     const fetchRatingStatus = async () => {
-      if (!user || isChangingRating) return;
-
       try {
         const { data, error } = await supabase
           .from('snippets_ratings_records')
@@ -210,14 +210,17 @@ function Rating({ id, rating }: RatingProps) {
         if (data[0]?.action === 'decrement') setStatus('disliked');
         return;
       } catch (err) {
-        console.error(err);
+        log.error("Error while fetching user's activity on rating", {
+          err,
+          ratingId: id
+        });
       }
     };
 
     fetchRatingStatus();
 
     return () => controller.abort();
-  }, [id, user, currentRating, isChangingRating]);
+  }, [id, user?.id, isChangingRating]);
 
   return currentRating !== null ? (
     <Flex alignItems="center" gap={1} position="relative" left="-1.5">

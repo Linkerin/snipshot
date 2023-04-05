@@ -6,6 +6,7 @@ import { AuthContext } from '@/context/AuthContext';
 import CodeIcon from '../Icons/CodeIcon';
 import { DeviceContext } from '@/context/DeviceContext';
 import { hideScrollbarCss } from '@/services/utils';
+import Meta from '@/components/Meta/Meta';
 import SnippetsList from '@/components/SnippetsList';
 import { UserPageProps } from '@/pages/users/[user]';
 
@@ -32,59 +33,66 @@ function UserPage({
   const { isMobile, mobileNavHeightvh } = useContext(DeviceContext);
 
   return (
-    <Grid
-      // gridTemplateColumns={username === user?.username ? '1fr' : gridTempalate}
-      gridTemplateColumns={gridTempalate}
-    >
-      {/* {username !== user?.username && ( */}
-      {username && !isMobile && (
-        <>
-          <GridItem />
-          <GridItem
-            mt={1.5}
-            position="fixed"
-            top="76px"
-            w={{ md: '25vw', lg: '22vw', xl: '18vw', '2xl': '15vw' }}
-          >
-            <UserInfo
+    <>
+      <Meta
+        title={`${username} profile – snipshot`}
+        description="Post a code snippet to snipshot on this page"
+        keywords={`profile, user, ${username}, snippets`}
+      />
+      <Grid
+        // gridTemplateColumns={username === user?.username ? '1fr' : gridTempalate}
+        gridTemplateColumns={gridTempalate}
+      >
+        {/* {username !== user?.username && ( */}
+        {username && !isMobile && (
+          <>
+            <GridItem />
+            <GridItem
+              mt={1.5}
+              position="fixed"
+              top="76px"
+              w={{ md: '25vw', lg: '22vw', xl: '18vw', '2xl': '15vw' }}
+            >
+              <UserInfo
+                avatar={avatar}
+                username={username}
+                registered={registered}
+              />
+            </GridItem>
+          </>
+        )}
+        <GridItem
+          px={{ sm: 2, lg: 7, '2xl': 14 }}
+          h={
+            isMobile
+              ? `calc(100vh - 85px - ${mobileNavHeightvh})`
+              : 'calc(100vh - 76px'
+          }
+          overflowY="scroll"
+          sx={hideScrollbarCss}
+        >
+          {isMobile && (
+            <MobileUserInfo
               avatar={avatar}
               username={username}
               registered={registered}
             />
-          </GridItem>
-        </>
-      )}
-      <GridItem
-        px={{ sm: 2, lg: 7, '2xl': 14 }}
-        h={
-          isMobile
-            ? `calc(100vh - 85px - ${mobileNavHeightvh})`
-            : 'calc(100vh - 76px'
-        }
-        overflowY="scroll"
-        sx={hideScrollbarCss}
-      >
-        {isMobile && (
-          <MobileUserInfo
-            avatar={avatar}
-            username={username}
-            registered={registered}
-          />
-        )}
+          )}
 
-        {!isMobile && (
-          <Flex alignItems="center" mb={3} gap={1}>
-            <CodeIcon boxSize={5} />
-            <Text fontSize="xl">Snippets</Text>
-          </Flex>
-        )}
-        <SnippetsList
-          snippetsData={snippetsData}
-          fetchUrl={`/users/${username}`}
-          oneColumn
-        />
-      </GridItem>
-    </Grid>
+          {!isMobile && (
+            <Flex alignItems="center" mb={3} gap={1}>
+              <CodeIcon boxSize={5} />
+              <Text fontSize="xl">Snippets</Text>
+            </Flex>
+          )}
+          <SnippetsList
+            snippetsData={snippetsData}
+            fetchUrl={`/users/${username}`}
+            oneColumn
+          />
+        </GridItem>
+      </Grid>
+    </>
   );
 }
 

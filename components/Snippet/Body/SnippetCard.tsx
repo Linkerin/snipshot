@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import NextLink from 'next/link';
 import {
   Card,
@@ -49,7 +49,9 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
     escapedLang = encodeURIComponent(lang);
   }
 
-  const handleCopyClick = async () => {
+  const handleCopyClick = useCallback(async () => {
+    if (typeof navigator === 'undefined') return;
+
     await navigator.clipboard.writeText(source || snippet);
     snippetCopiedToast({
       description: 'Snippet copied!',
@@ -61,7 +63,7 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
     });
 
     return;
-  };
+  }, [snippet, source, snippetCopiedToast]);
 
   return (
     <Card

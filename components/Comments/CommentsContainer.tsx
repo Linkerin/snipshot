@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
+import { log } from 'next-axiom';
 import {
   Card,
   CardBody,
@@ -6,6 +7,8 @@ import {
   CardHeader,
   Divider,
   Flex,
+  Skeleton,
+  SkeletonText,
   Text
 } from '@chakra-ui/react';
 
@@ -18,8 +21,11 @@ import NoComments from './NoComments';
 import { SnippetIdContext } from '../Pages/SnippetPage';
 import supabase from '@/services/supabase';
 
+type LoadStatuses = 'idle' | 'loading' | 'finished';
+
 function CommentsContainer() {
-  const [commentsNumber, setCommentsNumber] = useState<number>(0);
+  const [commentsLoadStatus, setCommentsLoadStatus] =
+    useState<LoadStatuses>('idle');
   const [comments, setComments] = useState<CommentType[]>([]);
 
   const user = useContext(AuthContext);
@@ -81,34 +87,9 @@ function CommentsContainer() {
     });
   }, []);
 
-  // Fetch total number of comments
-  useEffect(() => {
-    let controller = new AbortController();
-
-    const fetchCommentsNumber = async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API}/comments/number?snippetId=${snippetId}`,
-          { signal: controller.signal }
-        );
-        const data = await res.json();
-
-        if (typeof data?.numOfComments === 'number') {
-          setCommentsNumber(data.numOfComments);
-        }
-      } catch (err) {
-        console.error('Error while fetching total number of comments');
-        console.error(err);
-      }
-    };
-
-    fetchCommentsNumber();
-
-    return () => controller.abort();
-  }, [snippetId, comments]);
-
   // Fetch all comments
   useEffect(() => {
+    setCommentsLoadStatus('loading');
     let controller = new AbortController();
 
     const fetchComments = async () => {
@@ -123,8 +104,9 @@ function CommentsContainer() {
           setComments(data.comments);
         }
       } catch (err) {
-        console.error('Error while fetching comments');
-        console.error(err);
+        log.error('Error while fetching comments', { err, snippetId });
+      } finally {
+        setCommentsLoadStatus('finished');
       }
     };
 
@@ -164,7 +146,14 @@ function CommentsContainer() {
       <CardHeader px={3} pt={2} pb={2}>
         <Flex alignItems="center" gap={1}>
           <CommentsIcon boxSize={5} />
-          <Text fontSize="lg">{commentsNumber} comments</Text>
+          <Text fontSize="lg">
+            {commentsLoadStatus !== 'finished' && (
+              <Skeleton as="span" speed={2}>
+                00
+              </Skeleton>
+            )}
+            {commentsLoadStatus === 'finished' && comments.length} comments
+          </Text>
         </Flex>
         <Divider mt={2} />
       </CardHeader>
@@ -176,13 +165,23 @@ function CommentsContainer() {
         py={1}
         overflowY="scroll"
       >
-        {comments.length > 0 ? (
-          comments.map(comment => (
-            <Comment key={comment.id} comment={comment} />
-          ))
-        ) : (
-          <NoComments />
+        {commentsLoadStatus !== 'finished' && (
+          <SkeletonText
+            speed={2}
+            noOfLines={3}
+            spacing="3"
+            skeletonHeight="3"
+            mb={1}
+          />
         )}
+        {commentsLoadStatus === 'finished' &&
+          (comments.length > 0 ? (
+            comments.map(comment => (
+              <Comment key={comment.id} comment={comment} />
+            ))
+          ) : (
+            <NoComments />
+          ))}
       </CardBody>
       {user?.id && (
         <CardFooter as={Flex} flexDirection="column" gap={3} px={3} py={2}>

@@ -24,6 +24,7 @@ import { DeviceContext } from '@/context/DeviceContext';
 import { fetchIsPostingAllowed } from '@/services/utils';
 import { LANGS } from '@/services/constants';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
+import Meta from '@/components/Meta/Meta';
 import SelectInput, { SelectOption } from '../../SelectInput';
 import useButtonDisabled from '@/hooks/useButtonDisabled';
 import useSnippetInputHandler from '@/hooks/useSnippetInputHandler';
@@ -130,6 +131,11 @@ function AddSnippetPage() {
 
   return (
     <>
+      <Meta
+        title="Create a new snippet – snipshot"
+        description="Post a code snippet to snipshot on this page"
+        keywords="add, create, post, new, snippet, code, snipshot"
+      />
       <Alerts error={error} />
       <Grid
         templateAreas={{

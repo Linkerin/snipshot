@@ -63,7 +63,7 @@ function Meta({
 }
 
 Meta.defaultProps = {
-  title: 'snipshot - Code snippets for your inspiration',
+  title: 'snipshot – code snippets for your inspiration',
   keywords: 'development, programming, snippets, code, samples',
   description:
     'Explore and share code snippets for your favorite programming language. Insights are gained on shipshot.',

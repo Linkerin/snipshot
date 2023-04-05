@@ -1,4 +1,5 @@
 import { GetServerSideProps } from 'next';
+import { withAxiomGetServerSideProps } from 'next-axiom';
 import { Text } from '@chakra-ui/react';
 
 import { cleanObjDataTypesForNextJS } from '@/services/utils';
@@ -29,7 +30,7 @@ function Lang({ snippetsData, lang, apiHandlerUrl }: LangProps) {
   return (
     <>
       <Meta
-        title={`snipshot — ${lang} code snippets`}
+        title={`${lang} code snippets – snipshot`}
         keywords={`${lang}, development, programming, snippets, code, samples`}
         description={`${lang} code snippets on snipshot. Get and share your ${lang} snips`}
       />
@@ -38,21 +39,30 @@ function Lang({ snippetsData, lang, apiHandlerUrl }: LangProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const apiHandlerUrl = `/snippets?lang=${params?.lang}`;
+export const getServerSideProps: GetServerSideProps =
+  withAxiomGetServerSideProps(async ({ res, params, log }) => {
+    const apiHandlerUrl = `/snippets?lang=${params?.lang}`;
 
-  try {
-    const snippets = await get({ lang: params?.lang });
-    const snippetsData = snippets.map(snippet =>
-      cleanObjDataTypesForNextJS(snippet)
-    );
+    try {
+      const snippets = await get({ lang: params?.lang });
+      const snippetsData = snippets.map(snippet =>
+        cleanObjDataTypesForNextJS(snippet)
+      );
 
-    return { props: { snippetsData, apiHandlerUrl, lang: params?.lang } };
-  } catch (err) {
-    console.log('Error while getting props for /snippets/lang page');
-    console.error(err);
-    return { props: { snippetsData: [], apiHandlerUrl, lang: params?.lang } };
-  }
-};
+      res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+      );
+
+      return { props: { snippetsData, apiHandlerUrl, lang: params?.lang } };
+    } catch (err) {
+      log.error('Error while getting props for /snippets/lang page', {
+        err,
+        params
+      });
+
+      return { props: { snippetsData: [], apiHandlerUrl, lang: params?.lang } };
+    }
+  });
 
 export default Lang;

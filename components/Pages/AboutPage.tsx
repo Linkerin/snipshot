@@ -10,6 +10,8 @@ import {
   UnorderedList
 } from '@chakra-ui/react';
 
+import Meta from '@/components/Meta/Meta';
+
 const accentWordsStyles: SystemStyleObject = {
   px: '2',
   py: '1',
@@ -22,6 +24,11 @@ const accentWordsStyles: SystemStyleObject = {
 export function AboutPage() {
   return (
     <>
+      <Meta
+        title="About – snipshot"
+        description="Page about the snipshot project"
+        keywords="about, information, snipshot"
+      />
       <Stack
         as="article"
         direction="column"

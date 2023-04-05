@@ -15,7 +15,7 @@ function TagPage({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
   return (
     <>
       <Meta
-        title={`snipshot — ${tag} code snippets`}
+        title={`${tag} code snippets – snipshot`}
         keywords={`${tag}, development, programming, snippets, code, samples`}
         description={`Code snippets for ${tag} on snipshot. Get and share your snips for ${tag}`}
       />
