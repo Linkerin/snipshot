@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 import dynamic from 'next/dynamic';
 import {
   IconButton,
@@ -7,7 +7,8 @@ import {
   MenuList,
   MenuItem,
   SystemStyleObject,
-  useDisclosure
+  useDisclosure,
+  useToast
 } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -37,7 +38,26 @@ function SnippetBarOptions() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const user = useContext(AuthContext);
-  const { author } = useContext(SnippetContext);
+  const { slug, lang, author } = useContext(SnippetContext);
+
+  const toast = useToast();
+
+  const handleShareClick = useCallback(async () => {
+    if (typeof navigator === 'undefined') return;
+
+    const url = `${process.env.NEXT_PUBLIC_BASE_URL}/snippets/${lang}/${slug}/`;
+    await navigator.clipboard.writeText(url);
+    toast({
+      description: 'Link to the snippet copied!',
+      status: 'success',
+      duration: 2000,
+      isClosable: true,
+      position: 'bottom-left',
+      variant: 'subtle'
+    });
+
+    return;
+  }, [lang, slug, toast]);
 
   return (
     <>
@@ -54,9 +74,9 @@ function SnippetBarOptions() {
             bgColor="inherit"
             icon={<ShareIcon />}
             _hover={{ bgColor: itemHoverBgColor }}
-            borderRadius="6px 6px 0 0 "
-            isDisabled
-            title="Sharing is coming soon"
+            borderRadius="6px 6px 0 0"
+            onClick={handleShareClick}
+            title="Click to copy snippet's URL"
           >
             Share
           </MenuItem>
