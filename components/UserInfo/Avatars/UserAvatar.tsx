@@ -45,7 +45,6 @@ function UserAvatar({
     <Avatar
       name={disabled ? '' : username}
       src={disabled ? '' : avatar ?? '/images/GuestAvatar.svg'}
-      icon={<CustomSpinner size="xl" emptyColor="transparent" />}
       loading="lazy"
       borderColor="primary"
       showBorder={disabled ? false : !noBorder}
