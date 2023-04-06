@@ -10,7 +10,7 @@ import Layout from '@/components/Layout';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Chakra cookies={pageProps.cookies}>
+    <Chakra>
       <AuthProvider>
         <DeviceProvider>
           <Layout>
