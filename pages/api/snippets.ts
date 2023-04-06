@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { LANGS } from '@/services/constants';
-import { create as createSnippet } from '@/services/snippetsApi';
+import { create as createSnippet } from '@/services/supabase/snippetsApi';
 import get from '@/services/prisma/snippetsService/get';
 import { cleanObjDataTypesForNextJS } from '@/services/utils';
 

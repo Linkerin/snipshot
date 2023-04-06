@@ -41,7 +41,7 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
 
     setVerifying(true);
     try {
-      const supabase = (await import('@/services/supabase')).default;
+      const supabase = (await import('@/services/supabase/supabase')).default;
       const { data, error } = await supabase
         .from('snippets')
         .update({ verified: true })

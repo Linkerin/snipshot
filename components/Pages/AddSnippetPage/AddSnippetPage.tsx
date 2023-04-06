@@ -75,7 +75,7 @@ function AddSnippetPage() {
 
     try {
       // Get user's id and JWT
-      const supabase = (await import('@/services/supabase')).default;
+      const supabase = (await import('@/services/supabase/supabase')).default;
       const { data, error: sessionError } = await supabase.auth.getSession();
       if (sessionError) throw sessionError;
 

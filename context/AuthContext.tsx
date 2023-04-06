@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { Session } from '@supabase/supabase-js';
 
-import supabase from '@/services/supabase';
+import supabase from '@/services/supabase/supabase';
 
 interface AuthProviderProps {
   children: React.ReactElement;

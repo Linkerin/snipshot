@@ -4,7 +4,7 @@ import { cleanObjDataTypesForNextJS } from '@/services/utils';
 import getByUser from '@/services/prisma/snippetsService/getByUser';
 import { parseDate } from '@/services/date';
 import { SnippetType } from '@/services/types';
-import supabase from '@/services/supabase';
+import supabase from '@/services/supabase/supabase';
 import UserPage from '@/components/Pages/UserPage';
 
 export interface UserPageProps {

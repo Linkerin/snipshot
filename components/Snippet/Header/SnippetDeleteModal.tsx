@@ -37,7 +37,7 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
     e.preventDefault();
 
     try {
-      const supabase = (await import('@/services/supabase')).default;
+      const supabase = (await import('@/services/supabase/supabase')).default;
       const { data: sessionData, error: sessionError } =
         await supabase.auth.getSession();
       if (sessionError) throw sessionError;

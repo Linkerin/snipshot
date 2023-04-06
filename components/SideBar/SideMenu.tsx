@@ -31,7 +31,7 @@ function SideMenu() {
   const user = useContext(AuthContext);
 
   const handleLogOut = async (e: React.MouseEvent) => {
-    const supabase = (await import('@/services/supabase')).default;
+    const supabase = (await import('@/services/supabase/supabase')).default;
     const { error } = await supabase.auth.signOut();
 
     if (error) {

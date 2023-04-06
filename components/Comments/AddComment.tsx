@@ -65,7 +65,7 @@ function AddComment() {
       const postingPermission = await fetchIsPostingAllowed(user?.id);
 
       if (postingPermission.allowed) {
-        const supabase = (await import('@/services/supabase')).default;
+        const supabase = (await import('@/services/supabase/supabase')).default;
         const { error } = await supabase.from('comments').insert({
           user_id: user?.id,
           snippet_id: snippetId,

@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { createClient, PostgrestError } from '@supabase/supabase-js';
-import { getUserIdByJwt } from '@/services/snippetsApi';
+import getUserIdByJwt from '@/services/supabase/getUserIdByJwt';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? '';
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_KEY ?? '';

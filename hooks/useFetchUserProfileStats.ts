@@ -44,7 +44,7 @@ export default function useFetchUserProfileStats({
       let id: string;
 
       try {
-        const supabase = (await import('@/services/supabase')).default;
+        const supabase = (await import('@/services/supabase/supabase')).default;
         if (userId) {
           id = userId;
         } else {

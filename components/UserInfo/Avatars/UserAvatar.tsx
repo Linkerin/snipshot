@@ -1,10 +1,6 @@
-// import NextImage from 'next/image';
 import { Avatar, AvatarProps } from '@chakra-ui/react';
 
 import CustomSpinner from '@/components/CustomSpinner';
-
-// import UserIcon from '@/components/Icons/UserIcon';
-// import GuestAvatar from '@/public/images/GuestAvatar.svg';
 
 const sizes = {
   xs: {

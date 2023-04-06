@@ -22,7 +22,7 @@ function LoginPage() {
   const handeGitHubLogin = useCallback(
     async (e: SyntheticEvent) => {
       setIsAuthorizing(true);
-      const supabase = (await import('@/services/supabase')).default;
+      const supabase = (await import('@/services/supabase/supabase')).default;
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'github',
         options: { redirectTo: '/' }

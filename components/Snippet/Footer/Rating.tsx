@@ -4,7 +4,7 @@ import { Button, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
 import { SnippetType } from '@/services/types';
-import supabase from '@/services/supabase';
+import supabase from '@/services/supabase/supabase';
 
 type RatingProps = Pick<SnippetType['rating'], 'id' | 'rating'>;
 
