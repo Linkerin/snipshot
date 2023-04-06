@@ -1,4 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { ButtonGroup, Card, CardBody, IconButton } from '@chakra-ui/react';
 
@@ -6,12 +7,19 @@ import { AuthContext } from '@/context/AuthContext';
 import CodeIcon from '@/components/Icons/CodeIcon';
 import { DeviceContext } from '@/context/DeviceContext';
 import HomeIcon from '@/components/Icons/HomeIcon';
-import LanguagesList from '../LanguagesList';
-import MobileNavModal from './MobileNavModal';
-import MobileSearchContainer from './MobileSearchContainer';
 import PlusIcon from '@/components/Icons/PlusIcon';
 import SearchIcon from '@/components/Icons/SearchIcon';
 import UserIcon from '@/components/Icons/UserIcon';
+
+const LanguagesList = dynamic(() => import('@/components/LanguagesList'), {
+  ssr: false
+});
+const MobileNavModal = dynamic(() => import('./MobileNavModal'), {
+  ssr: false
+});
+const MobileSearchContainer = dynamic(() => import('./MobileSearchContainer'), {
+  ssr: false
+});
 
 const openedDefaultState = {
   languages: false,
