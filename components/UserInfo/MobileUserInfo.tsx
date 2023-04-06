@@ -1,7 +1,5 @@
-import { useContext } from 'react';
 import { As, Box, Flex, Text } from '@chakra-ui/react';
 
-import { DeviceContext } from '@/context/DeviceContext';
 import MobileProfileStats from './MobileProfileStats';
 import UserAvatar from '@/components/UserInfo/Avatars/UserAvatar';
 import Username from '@/components/UserInfo/Username';
@@ -21,8 +19,6 @@ function MobileUserInfo({
   userId,
   username
 }: UserInfoProps) {
-  const { isMobile } = useContext(DeviceContext);
-
   return (
     <>
       <Flex

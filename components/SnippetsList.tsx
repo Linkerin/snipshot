@@ -3,12 +3,12 @@ import {
   Center,
   Grid,
   GridItem,
-  Spinner,
   VStack,
   useBreakpoint
 } from '@chakra-ui/react';
 import { log } from 'next-axiom';
 
+import CustomSpinner from '@/components/CustomSpinner';
 import { MOBILE_BREAKPOINTS } from '@/services/constants';
 import Snippet from '@/components/Snippet/Snippet';
 import { SnippetType } from '@/services/types';
@@ -112,13 +112,7 @@ function SnippetsList({
 
       {isLoading && (
         <Center my={5}>
-          <Spinner
-            thickness="5px"
-            color="primary"
-            emptyColor="gray.200"
-            size="xl"
-            speed="0.5s"
-          />
+          <CustomSpinner />
         </Center>
       )}
     </>

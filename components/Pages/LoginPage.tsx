@@ -2,7 +2,6 @@ import { SyntheticEvent, useCallback, useState } from 'react';
 import {
   Button,
   Center,
-  Spinner,
   Heading,
   Highlight,
   useColorModeValue,
@@ -10,6 +9,7 @@ import {
   VStack
 } from '@chakra-ui/react';
 
+import CustomSpinner from '@/components/CustomSpinner';
 import GithubIcon from '@/components/Icons/GithubIcon';
 import Meta from '@/components/Meta/Meta';
 import useAuth from '@/hooks/useAuth';
@@ -86,13 +86,7 @@ function LoginPage() {
           </Heading>
         </VStack>
         {user?.id ? (
-          <Spinner
-            thickness="5px"
-            color="primary"
-            emptyColor="gray.200"
-            size="xl"
-            speed="0.5s"
-          />
+          <CustomSpinner />
         ) : (
           <Button
             leftIcon={<GithubIcon boxSize={8} />}
