@@ -43,15 +43,16 @@ function UserAvatar({
 }: UserAvatarProps) {
   return (
     <Avatar
+      name={disabled ? '' : username}
+      src={disabled ? '' : avatar ?? '/images/GuestAvatar.svg'}
       icon={<CustomSpinner size="xl" emptyColor="transparent" />}
+      loading="lazy"
+      borderColor="primary"
+      showBorder={disabled ? false : !noBorder}
+      borderWidth={disabled || noBorder ? 'none' : sizes[size].borderWidth}
       h={sizes[size].side}
       w={sizes[size].side}
       p={disabled || noBorder ? 0 : sizes[size].padding}
-      name={disabled ? '' : username}
-      src={disabled ? '' : avatar ?? '/images/GuestAvatar.svg'}
-      showBorder={disabled ? false : !noBorder}
-      borderColor="primary"
-      borderWidth={disabled || noBorder ? 'none' : sizes[size].borderWidth}
       {...props}
     />
   );

@@ -1,7 +1,11 @@
+import dynamic from 'next/dynamic';
 import { Flex } from '@chakra-ui/react';
 
-import SearchBox from './SearchBox';
 import ThemeSwitch from './ThemeSwitch';
+
+const SearchBox = dynamic(() => import('./SearchBox'), {
+  loading: () => <div />
+});
 
 function TopBar() {
   return (

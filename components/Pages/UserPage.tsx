@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { Grid, GridItem, Flex, Text } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
-import CodeIcon from '../Icons/CodeIcon';
+import CodeIcon from '@/components/Icons/CodeIcon';
 import { DeviceContext } from '@/context/DeviceContext';
 import { hideScrollbarCss } from '@/services/utils';
 import Meta from '@/components/Meta/Meta';

@@ -1,7 +1,11 @@
+import dynamic from 'next/dynamic';
 import { Flex } from '@chakra-ui/react';
 
 import ThemeSwitch from './ThemeSwitch';
-import Logo from '../Logo';
+
+const Logo = dynamic(() => import('@/components/Logo'), {
+  loading: () => <div />
+});
 
 function MobileTopBar() {
   return (

@@ -1,7 +1,7 @@
 import { Text } from '@chakra-ui/react';
 
-import Meta from '../Meta/Meta';
-import SnippetsList from '../SnippetsList';
+import Meta from '@/components/Meta/Meta';
+import SnippetsList from '@/components/SnippetsList';
 import { TagPageProps } from '@/pages/tags/[tag]';
 
 function TagPage({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
