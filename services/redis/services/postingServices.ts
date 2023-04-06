@@ -1,7 +1,7 @@
 import type { NextApiRequest } from 'next';
 
-import { POSTING_COOLDOWN_SEC } from '../constants';
-import redis from './redis';
+import { POSTING_COOLDOWN_SEC } from '@/services/constants';
+import redis from '@/services/redis/redis';
 
 /**
  * Gets real IP address from request (using Vercel headers)
@@ -69,28 +69,4 @@ export async function isPostingAllowed({
   await redis.expire(redisKey, POSTING_COOLDOWN_SEC);
 
   return { allowed: true, message: 'Posting allowed' };
-}
-
-/**
- * Fetch `/api/is-posting-allowed` route
- * @param userId userId (optional)
- * @returns An object with two keys: `allowed` and `message`
- * @example
- * const postingPermission = await fetchIsPostingAllowed(userId);
- */
-export async function fetchIsPostingAllowed(userId?: string) {
-  let url = '/api/is-posting-allowed';
-  if (userId) {
-    url += `?userId=${userId}`;
-  }
-
-  const res = await fetch(url);
-  if (!res.ok) {
-    const error = await res.json();
-    throw error;
-  }
-
-  const postingPermission = await res.json();
-
-  return postingPermission as { allowed: boolean; message: string };
 }

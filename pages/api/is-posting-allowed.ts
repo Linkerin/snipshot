@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { isPostingAllowed } from '@/services/redis/postingServices';
+import { isPostingAllowed } from '@/services/redis/services/postingServices';
 
 export default async function handler(
   req: NextApiRequest,

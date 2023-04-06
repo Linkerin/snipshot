@@ -21,7 +21,7 @@ import {
 } from '@chakra-ui/react';
 
 import { snippetContextValueDefault } from '@/context/SnippetContext';
-import { fetchIsPostingAllowed } from '@/services/redis/postingServices';
+import fetchIsPostingAllowed from '@/services/redis/services/fetchIsPostingAllowed';
 import { LANGS } from '@/services/constants';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
 import Meta from '@/components/Meta/Meta';
