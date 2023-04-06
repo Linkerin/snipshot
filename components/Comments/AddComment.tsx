@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
-import { fetchIsPostingAllowed } from '@/services/utils';
+import { fetchIsPostingAllowed } from '@/services/redis/postingServices';
 import SendIcon from '@/components/Icons/SendIcon';
 import { SnippetIdContext } from '../Pages/SnippetPage';
 
