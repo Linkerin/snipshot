@@ -32,9 +32,7 @@ function LoginPage() {
         authErrorToast({
           description: 'GitHub authorization failed. Please, try again',
           status: 'error',
-          duration: 2000,
-          isClosable: true,
-          variant: 'subtle'
+          duration: 2000
         });
         setIsAuthorizing(false);
 

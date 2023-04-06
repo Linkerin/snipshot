@@ -56,10 +56,7 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
     snippetCopiedToast({
       description: 'Snippet copied!',
       status: 'success',
-      duration: 2000,
-      isClosable: true,
-      position: 'bottom-left',
-      variant: 'subtle'
+      duration: 2000
     });
 
     return;

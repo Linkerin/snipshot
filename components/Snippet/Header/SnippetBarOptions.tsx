@@ -50,10 +50,7 @@ function SnippetBarOptions() {
     toast({
       description: 'Link to the snippet copied!',
       status: 'success',
-      duration: 2000,
-      isClosable: true,
-      position: 'bottom-left',
-      variant: 'subtle'
+      duration: 2000
     });
 
     return;

@@ -50,10 +50,7 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
           description:
             'Ooops, seems like you are not the creator of this snippet',
           status: 'warning',
-          duration: 4000,
-          isClosable: true,
-          position: 'bottom-left',
-          variant: 'subtle'
+          duration: 4000
         });
         setIsRemoving(false);
         onClose();
@@ -80,10 +77,7 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
         title: 'Snippet deleted',
         description: `Snippet '${title} was permanently deleted'`,
         status: 'success',
-        duration: 3000,
-        isClosable: true,
-        position: 'bottom-left',
-        variant: 'subtle'
+        duration: 3000
       });
     } catch (err) {
       log.error('Error while deleting snippet', {
@@ -95,10 +89,7 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
         title: 'An error occured',
         description: 'Something went wrong. Please, try again later',
         status: 'error',
-        duration: 3000,
-        isClosable: true,
-        position: 'bottom-left',
-        variant: 'subtle'
+        duration: 3000
       });
       onClose();
 

@@ -2,9 +2,18 @@ import { GetServerSideProps } from 'next';
 import {
   ChakraBaseProvider,
   cookieStorageManagerSSR,
-  localStorageManager
+  localStorageManager,
+  ToastProviderProps
 } from '@chakra-ui/react';
 import theme from '@/services/theme/theme';
+
+const toastOptions: ToastProviderProps = {
+  defaultOptions: {
+    position: 'bottom-left',
+    isClosable: true,
+    variant: 'subtle'
+  }
+};
 
 interface ChakraProps {
   cookies?: string;
@@ -18,7 +27,11 @@ export function Chakra({ cookies, children }: ChakraProps) {
       : localStorageManager;
 
   return (
-    <ChakraBaseProvider colorModeManager={colorModeManager} theme={theme}>
+    <ChakraBaseProvider
+      colorModeManager={colorModeManager}
+      theme={theme}
+      toastOptions={toastOptions}
+    >
       {children}
     </ChakraBaseProvider>
   );

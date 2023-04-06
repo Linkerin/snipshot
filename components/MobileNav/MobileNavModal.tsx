@@ -14,11 +14,10 @@ function HeaderButton({ color = defaultHeaderBtnColor }: { color: string }) {
   return (
     <Box
       bgColor={color}
-      borderRadius="5px"
       cursor="pointer"
       mx="auto"
-      my={2.5}
-      height="5px"
+      my={1}
+      height="2px"
       width="40%"
     />
   );
@@ -88,7 +87,7 @@ function MobileNavModal({
         <ModalContent
           position="absolute"
           bottom={bottomPosition}
-          borderRadius="1rem 1rem 0 0"
+          borderRadius="0.5rem 0.5rem 0 0"
           m={0}
           maxHeight={maxHeightvh}
           onTouchStart={handleTouchStart}
@@ -97,7 +96,7 @@ function MobileNavModal({
           maxWidth="100%"
           bgColor="chakra-body-bg"
         >
-          <ModalHeader py={3} onClick={onClose}>
+          <ModalHeader py={2.5} onClick={onClose} cursor="pointer">
             <HeaderButton color={btnColor} />
           </ModalHeader>
           <ModalBody
@@ -105,7 +104,7 @@ function MobileNavModal({
             maxHeight={`calc(${maxHeightvh}) - 49px`}
             overflowY="scroll"
             py={0}
-            px={10}
+            px={5}
           >
             {children}
           </ModalBody>

@@ -40,12 +40,11 @@ function MobileSearchContainer() {
       <Card
         variant="none"
         justifyContent="flex-end"
-        h="50vh"
         overflowY="scroll"
         mb={2}
         bgColor="chakra-body-bg"
       >
-        <List>
+        <List minHeight="20vh" maxHeight="45vh">
           {searchValue &&
             results?.fetched &&
             (results?.snippets.length > 0 ? (
