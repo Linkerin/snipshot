@@ -43,7 +43,8 @@ function UserAvatar({
 }: UserAvatarProps) {
   return (
     <Avatar
-      name={disabled ? '' : username}
+      aria-label={`${username ?? 'guest'} avatar`}
+      name={disabled ? '' : username ?? 'guest'}
       src={disabled ? '' : avatar ?? '/images/GuestAvatar.svg'}
       loading="lazy"
       borderColor="primary"
