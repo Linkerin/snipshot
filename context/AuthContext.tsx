@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { Session } from '@supabase/supabase-js';
-
-import supabase from '@/services/supabase/supabase';
+import { log } from 'next-axiom';
+import type { Session, Subscription } from '@supabase/supabase-js';
 
 interface AuthProviderProps {
   children: React.ReactElement;
@@ -43,11 +42,11 @@ export const AuthContext = createContext<UserState | null>(null);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<UserState | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const getUserInfo = async () => {
       try {
+        const supabase = (await import('@/services/supabase/supabase')).default;
         const { data: sessionData, error: sessionError } =
           await supabase.auth.getSession();
         if (sessionError) throw sessionError;
@@ -56,7 +55,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         if (!user) {
           setUser(null);
-          setIsLoading(false);
           return;
         }
 
@@ -76,52 +74,59 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
           return { ...prevState, appRole: data.roles };
         });
-
-        setIsLoading(false);
       } catch (err) {
-        console.error(err);
+        log.error('AuthContext: getting user info', { err });
       }
     };
 
     getUserInfo();
-
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      (event, session) => {
-        let user;
-        switch (event) {
-          case 'SIGNED_IN':
-            user = parseUserInfo(session);
-            user ? setUser(user) : setUser(null);
-            break;
-
-          case 'USER_UPDATED':
-            user = parseUserInfo(session);
-            user ? setUser(user) : setUser(null);
-            break;
-
-          case 'SIGNED_OUT':
-            setUser(null);
-            break;
-
-          case 'USER_DELETED':
-            setUser(null);
-            break;
-
-          default:
-            break;
-        }
-      }
-    );
-
-    return () => {
-      listener?.subscription.unsubscribe();
-    };
   }, []);
 
-  return (
-    <AuthContext.Provider value={user}>
-      {children}
-      {/* {isLoading ? <SnipshotLogoLoader /> : children} */}
-    </AuthContext.Provider>
-  );
+  useEffect(() => {
+    let listener: Subscription;
+
+    const setListener = async () => {
+      try {
+        const supabase = (await import('@/services/supabase/supabase')).default;
+
+        const { data } = supabase.auth.onAuthStateChange((event, session) => {
+          let user;
+          switch (event) {
+            case 'SIGNED_IN':
+              user = parseUserInfo(session);
+              user ? setUser(user) : setUser(null);
+              break;
+
+            case 'USER_UPDATED':
+              user = parseUserInfo(session);
+              user ? setUser(user) : setUser(null);
+              break;
+
+            case 'SIGNED_OUT':
+              setUser(null);
+              break;
+
+            case 'USER_DELETED':
+              setUser(null);
+              break;
+
+            default:
+              break;
+          }
+        });
+
+        listener = data.subscription;
+      } catch (err) {
+        log.error('AuthContext: creating change subscription', { err });
+      }
+
+      return;
+    };
+
+    setListener();
+
+    return () => listener?.unsubscribe();
+  }, [user]);
+
+  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };

@@ -11,6 +11,7 @@ import {
   SkeletonText,
   Text
 } from '@chakra-ui/react';
+import type { RealtimeChannel, SupabaseClient } from '@supabase/supabase-js';
 
 import AddComment from './AddComment';
 import { AuthContext } from '@/context/AuthContext';
@@ -18,8 +19,7 @@ import Comment from './Comment';
 import CommentsIcon from '@/components/Icons/CommentsIcon';
 import { CommentType } from '@/services/types';
 import NoComments from './NoComments';
-import { SnippetIdContext } from '../Pages/SnippetPage';
-import supabase from '@/services/supabase/supabase';
+import { SnippetIdContext } from '@/components/Pages/SnippetPage';
 
 type LoadStatuses = 'idle' | 'loading' | 'finished';
 
@@ -37,6 +37,7 @@ function CommentsContainer() {
 
     const addedComment = payload.new;
     try {
+      const supabase = (await import('@/services/supabase/supabase')).default;
       const { data: userInfo, error } = await supabase
         .from('profiles')
         .select('name, avatar')
@@ -115,24 +116,32 @@ function CommentsContainer() {
     return () => controller.abort();
   }, [snippetId]);
 
-  // Subscribe to comments changes
   useEffect(() => {
-    const channel = supabase
-      .channel('any')
-      .on(
-        'postgres_changes',
-        { event: 'INSERT', schema: 'public', table: 'comments' },
-        handleCommentInsert
-      )
-      .on(
-        'postgres_changes',
-        { event: 'UPDATE', schema: 'public', table: 'comments' },
-        handleCommentDeleteUpdate
-      )
-      .subscribe();
+    let channel: RealtimeChannel;
+    let supabase: SupabaseClient;
+
+    const loadChannel = async () => {
+      supabase = (await import('@/services/supabase/supabase')).default;
+
+      channel = supabase
+        .channel('any')
+        .on(
+          'postgres_changes',
+          { event: 'INSERT', schema: 'public', table: 'comments' },
+          handleCommentInsert
+        )
+        .on(
+          'postgres_changes',
+          { event: 'UPDATE', schema: 'public', table: 'comments' },
+          handleCommentDeleteUpdate
+        )
+        .subscribe();
+    };
+
+    loadChannel();
 
     return () => {
-      supabase.removeChannel(channel);
+      supabase?.removeChannel(channel);
     };
   }, [handleCommentInsert, handleCommentDeleteUpdate]);
 

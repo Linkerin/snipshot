@@ -4,7 +4,6 @@ import { Button, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
 import { SnippetType } from '@/services/types';
-import supabase from '@/services/supabase/supabase';
 
 type RatingProps = Pick<SnippetType['rating'], 'id' | 'rating'>;
 
@@ -24,6 +23,7 @@ function Rating({ id, rating }: RatingProps) {
     action: 'increment' | 'decrement' | 'revoke'
   ) => {
     try {
+      const supabase = (await import('@/services/supabase/supabase')).default;
       // Get user's JWT
       const { data, error: sessionError } = await supabase.auth.getSession();
       if (sessionError) throw sessionError;
@@ -188,6 +188,7 @@ function Rating({ id, rating }: RatingProps) {
 
     const fetchRatingStatus = async () => {
       try {
+        const supabase = (await import('@/services/supabase/supabase')).default;
         const { data, error } = await supabase
           .from('snippets_ratings_records')
           .select('action')
