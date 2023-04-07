@@ -22,6 +22,9 @@ import SnippetContext from '@/context/SnippetContext';
 const SnippetDeleteModal = dynamic(() => import('./SnippetDeleteModal'), {
   ssr: false
 });
+const SnippetReportModal = dynamic(() => import('./SnippetReportModal'), {
+  ssr: false
+});
 
 const menuBtnStyles: SystemStyleObject = {
   display: 'flex',
@@ -35,7 +38,16 @@ const menuBtnStyles: SystemStyleObject = {
 const itemHoverBgColor = 'rgb(0, 0, 0, 0.07)';
 
 function SnippetBarOptions() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isDeleteOpen,
+    onOpen: onDeleteOpen,
+    onClose: onDeleteClose
+  } = useDisclosure();
+  const {
+    isOpen: isReportOpen,
+    onOpen: onReportOpen,
+    onClose: onReportClose
+  } = useDisclosure();
 
   const user = useContext(AuthContext);
   const { slug, lang, author } = useContext(SnippetContext);
@@ -92,7 +104,8 @@ function SnippetBarOptions() {
                 bgColor="inherit"
                 icon={<DeleteIcon />}
                 _hover={{ bgColor: itemHoverBgColor, color: 'red.500' }}
-                onClick={onOpen}
+                title="Click to open delete snippet modal"
+                onClick={onDeleteOpen}
               >
                 Delete
               </MenuItem>
@@ -102,16 +115,17 @@ function SnippetBarOptions() {
           <MenuItem
             bgColor="inherit"
             icon={<ExclamationIcon />}
-            _hover={{ bgColor: itemHoverBgColor }}
+            _hover={{ bgColor: itemHoverBgColor, color: 'primary-dark' }}
             borderRadius="0 0 6px 6px "
-            isDisabled
-            title="Reporting is coming soon"
+            title="Click to open a report form"
+            onClick={onReportOpen}
           >
             Report
           </MenuItem>
         </MenuList>
       </Menu>
-      <SnippetDeleteModal isOpen={isOpen} onClose={onClose} />
+      <SnippetDeleteModal isOpen={isDeleteOpen} onClose={onDeleteClose} />
+      <SnippetReportModal isOpen={isReportOpen} onClose={onReportClose} />
     </>
   );
 }
