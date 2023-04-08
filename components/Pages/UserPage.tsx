@@ -35,7 +35,7 @@ function UserPage({
   return (
     <>
       <Meta
-        title={`${username} profile – snipshot`}
+        title={`${username} profile · snipshot`}
         description="Post a code snippet to snipshot on this page"
         keywords={`profile, user, ${username}, snippets`}
       />

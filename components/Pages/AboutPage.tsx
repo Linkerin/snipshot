@@ -25,7 +25,7 @@ export function AboutPage() {
   return (
     <>
       <Meta
-        title="About – snipshot"
+        title="About &#183; snipshot"
         description="Page about the snipshot project"
         keywords="about, information, snipshot"
       />

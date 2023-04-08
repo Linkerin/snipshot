@@ -60,7 +60,7 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
   return (
     <>
       <Meta
-        title={`${snippet.title} – snipshot`}
+        title={`${snippet.title} · snipshot`}
         description={description}
         keywords={`development, programming, snippets, code, samples${
           keywordsTags ? `, ${keywordsTags}` : ''

@@ -45,7 +45,7 @@ function LoginPage() {
   return (
     <>
       <Meta
-        title="Login – snipshot"
+        title="Login &#183; snipshot"
         keywords="login, snipshot"
         description="User login page for snipshot"
       />
