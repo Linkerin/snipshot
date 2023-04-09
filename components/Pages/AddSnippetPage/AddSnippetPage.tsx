@@ -73,6 +73,7 @@ function AddSnippetPage() {
       if (!value && key !== 'tag') return;
     }
 
+    setIsUploading(true);
     try {
       // Get user's id and JWT
       const supabase = (await import('@/services/supabase/supabase')).default;
@@ -85,6 +86,8 @@ function AddSnippetPage() {
       if (!postingPermission.allowed) {
         setError(true);
         console.log(postingPermission.message);
+        setIsUploading(false);
+
         return;
       }
 
@@ -104,7 +107,6 @@ function AddSnippetPage() {
         })
       };
 
-      setIsUploading(true);
       const res = await fetch('/api/snippets/', options);
 
       if (!res.ok) {
@@ -128,7 +130,7 @@ function AddSnippetPage() {
           })
         });
 
-        router.push(
+        await router.push(
           `/snippets/${encodeURIComponent(data.snippet.lang)}/${
             data.snippet.slug
           }/`
@@ -145,7 +147,7 @@ function AddSnippetPage() {
   return (
     <>
       <Meta
-        title="Create a new snippet – snipshot"
+        title="Create a new snippet · snipshot"
         description="Post a code snippet to snipshot on this page"
         keywords="add, create, post, new, snippet, code, snipshot"
       />

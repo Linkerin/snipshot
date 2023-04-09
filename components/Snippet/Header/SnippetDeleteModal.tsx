@@ -75,7 +75,7 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
 
       toast({
         title: 'Snippet deleted',
-        description: `Snippet '${title} was permanently deleted'`,
+        description: `Snippet '${title}' was permanently deleted`,
         status: 'success',
         duration: 3000
       });
