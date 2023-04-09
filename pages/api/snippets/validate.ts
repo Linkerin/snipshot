@@ -88,7 +88,7 @@ export default async function handler(
       });
     }
 
-    console.log('reply back');
+    console.log('Started');
 
     try {
       const validationResult = await openAIValidateSnippet({
@@ -116,7 +116,8 @@ export default async function handler(
         err,
         snippetId: id
       });
-      return;
+
+      return res.status(500);
     }
   }
 
