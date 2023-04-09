@@ -15,7 +15,8 @@ Reply only with a JSON in the following structure: {
 Do not add any other text as your response will be automatically parsed by \`JSON.parse()\`
 You should validate the posts and report whether the posted code snippet was wrong,
 harmful, offensive, malicious, defective or  in any other way inappropriate.
-You should also consider as inapproprite snippets which titles do not match with the provided code.
+You should also consider as inapproprite snippets which titles do not match with the provided code or
+when the programming language of the code snippet does not match the language provided in \`lang\` field.
 In addition, mark as inappropriate code snippets that can ruin user's data, file system, erase database
 or do anything similar.
 Here is the code snippet that you should check: 
