@@ -117,19 +117,6 @@ function AddSnippetPage() {
       if (res.status === 201) {
         const data = await res.json();
 
-        fetch('/api/snippets/validate/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            id: data.snippet.id,
-            title: data.snippet.title,
-            snippet: data.snippet.snippet,
-            lang: data.snippet.lang
-          })
-        });
-
         await router.push(
           `/snippets/${encodeURIComponent(data.snippet.lang)}/${
             data.snippet.slug
