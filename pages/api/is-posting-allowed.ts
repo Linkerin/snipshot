@@ -16,6 +16,10 @@ export default async function handler(
 
     const postingPermission = await isPostingAllowed({ req, userId });
 
+    if (!postingPermission.allowed) {
+      return res.status(429).json(postingPermission);
+    }
+
     return res.status(200).json(postingPermission);
   }
 

@@ -12,7 +12,7 @@ export default async function fetchIsPostingAllowed(userId?: string) {
   }
 
   const res = await fetch(url);
-  if (!res.ok) {
+  if (!res.ok && res.status !== 429) {
     const error = await res.json();
     throw error;
   }
