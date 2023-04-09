@@ -143,6 +143,8 @@ serve(async req => {
       lang: record.lang
     };
 
+    console.log('Edge function started with the following data:');
+    console.log(snippetData);
     const responseMsg = await openAIValidateReq(snippetData);
 
     let result: validationResult;
@@ -167,6 +169,7 @@ serve(async req => {
     const recordId = await recordValidationResult(result);
     if (!recordId) throw new Error('Validation results were not recorded');
 
+    console.log('Edge function successfully ended.');
     return new Response(
       JSON.stringify({ message: 'Open AI validation recorded', recordId }),
       { headers: { 'Content-Type': 'application/json' }, status: 201 }
