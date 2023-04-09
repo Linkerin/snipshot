@@ -82,12 +82,13 @@ export default async function handler(
     const { id, title, snippet, lang } = req.body;
 
     if (!title || !snippet || !lang || !id) {
+      console.log('400');
       return res.status(400).json({
         message: 'Title, snippet, language and id are required fields.'
       });
     }
 
-    res.status(200).send('OK');
+    console.log('reply back');
 
     try {
       const validationResult = await openAIValidateSnippet({
@@ -96,16 +97,20 @@ export default async function handler(
         snippet,
         lang
       });
+      console.log(validationResult);
       const recorded = await recordValidationResult(validationResult);
+      console.log(recorded);
 
       if (!recorded) {
         log.warn('Validation result was not recorded to DB', {
           snippetId: id,
           validationResult
         });
+
+        return res.status(404);
       }
 
-      return;
+      return res.status(200).send('OK');
     } catch (err) {
       log.error('Error while validating snippet at OpenAI', {
         err,

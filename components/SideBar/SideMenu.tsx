@@ -12,7 +12,8 @@ import {
   LinkOverlay,
   List,
   ListIcon,
-  useColorModeValue
+  useColorModeValue,
+  Divider
 } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -112,14 +113,14 @@ function SideMenu() {
         </Accordion>
       </CenteredListItem>
 
-      {user?.id && (
+      {/* {user?.id && (
         <StyledMenuItem onClick={handleLogOut} cursor="pointer">
           <Box as="button">
             <ListIcon as={SignOutIcon} />
             Logout
           </Box>
         </StyledMenuItem>
-      )}
+      )} */}
 
       <LinkBox as={StyledMenuItem}>
         <ListIcon as={InfoIcon} />
@@ -132,6 +133,16 @@ function SideMenu() {
           About
         </LinkOverlay>
       </LinkBox>
+
+      <Divider my={2} w="87%" mx="auto" />
+      {user?.id && (
+        <StyledMenuItem onClick={handleLogOut} cursor="pointer">
+          <Box as="button">
+            <ListIcon as={SignOutIcon} />
+            Logout
+          </Box>
+        </StyledMenuItem>
+      )}
     </List>
   );
 }
