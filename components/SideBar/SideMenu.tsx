@@ -134,14 +134,16 @@ function SideMenu() {
         </LinkOverlay>
       </LinkBox>
 
-      <Divider my={2} w="87%" mx="auto" />
       {user?.id && (
-        <StyledMenuItem onClick={handleLogOut} cursor="pointer">
-          <Box as="button">
-            <ListIcon as={SignOutIcon} />
-            Logout
-          </Box>
-        </StyledMenuItem>
+        <>
+          <Divider my={2} w="87%" mx="auto" />
+          <StyledMenuItem onClick={handleLogOut} cursor="pointer">
+            <Box as="button">
+              <ListIcon as={SignOutIcon} />
+              Logout
+            </Box>
+          </StyledMenuItem>
+        </>
       )}
     </List>
   );
