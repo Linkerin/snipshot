@@ -113,15 +113,6 @@ function SideMenu() {
         </Accordion>
       </CenteredListItem>
 
-      {/* {user?.id && (
-        <StyledMenuItem onClick={handleLogOut} cursor="pointer">
-          <Box as="button">
-            <ListIcon as={SignOutIcon} />
-            Logout
-          </Box>
-        </StyledMenuItem>
-      )} */}
-
       <LinkBox as={StyledMenuItem}>
         <ListIcon as={InfoIcon} />
         <LinkOverlay
