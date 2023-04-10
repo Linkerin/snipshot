@@ -4,7 +4,7 @@ import { cleanObjDataTypesForNextJS } from '@/services/utils';
 import getAllSnippetsSlugs from '@/services/prisma/snippetsService/getAllSnippetsSlugs';
 import getBySlug from '@/services/prisma/snippetsService/getBySlug';
 import { SnippetType } from '@/services/types';
-import SnippetPage from '@/components/Pages/SnippetPage';
+import SnippetPage from '@/components/Pages/SnippetPage/SnippetPage';
 
 function Snippet({ snippetData }: { snippetData: SnippetType[] }) {
   return <SnippetPage snippetData={snippetData} />;

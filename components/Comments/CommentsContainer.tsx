@@ -19,7 +19,7 @@ import Comment from './Comment';
 import CommentsIcon from '@/components/Icons/CommentsIcon';
 import { CommentType } from '@/services/types';
 import NoComments from './NoComments';
-import { SnippetIdContext } from '@/components/Pages/SnippetPage';
+import { SnippetIdContext } from '@/components/Pages/SnippetPage/SnippetPage';
 
 type LoadStatuses = 'idle' | 'loading' | 'finished';
 

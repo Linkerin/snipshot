@@ -12,7 +12,7 @@ import {
 import { AuthContext } from '@/context/AuthContext';
 import fetchIsPostingAllowed from '@/services/redis/services/fetchIsPostingAllowed';
 import SendIcon from '@/components/Icons/SendIcon';
-import { SnippetIdContext } from '../Pages/SnippetPage';
+import { SnippetIdContext } from '@/components/Pages/SnippetPage/SnippetPage';
 
 function AddComment() {
   const [comment, setComment] = useState('');
