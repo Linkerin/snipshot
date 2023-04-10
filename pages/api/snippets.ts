@@ -1,7 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { LANGS } from '@/services/constants';
-import { create as createSnippet } from '@/services/supabase/snippetsApi';
+import {
+  create as createSnippet,
+  update as updateSnippet
+} from '@/services/supabase/snippetsApi';
 import get from '@/services/prisma/snippetsService/get';
 import { cleanObjDataTypesForNextJS } from '@/services/utils';
 
@@ -42,6 +45,43 @@ export default async function handler(
       return res
         .status(500)
         .json({ message: 'Internal error while saving a snippet' });
+    }
+  }
+
+  if (req.method === 'PATCH') {
+    try {
+      const { title, snippet, lang, tags, snippetId, jwt } = req.body;
+
+      if (!title || !snippet || !lang || !snippetId || !jwt) {
+        return res.status(400).json({
+          message: 'ID, title, snippet, language and token are required fields.'
+        });
+      }
+
+      if (!LANGS.includes(lang)) {
+        return res.status(400).json({
+          message: `${lang} language is not supported.`
+        });
+      }
+
+      const result = await updateSnippet({
+        title,
+        snippet,
+        lang,
+        tags,
+        snippetId,
+        jwt
+      });
+      if (result.status === 'error') {
+        return res.status(400).json(result);
+      }
+
+      return res.status(200).json(result);
+    } catch (err) {
+      console.log(err);
+      return res
+        .status(500)
+        .json({ message: 'Internal error while updating a snippet' });
     }
   }
 

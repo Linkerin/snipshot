@@ -10,7 +10,7 @@ import {
 
 import { AuthContext } from '@/context/AuthContext';
 
-function Alerts({ error }: { error: boolean }) {
+function Alerts({ error }: { error: string }) {
   const user = useContext(AuthContext);
 
   return (
@@ -27,12 +27,10 @@ function Alerts({ error }: { error: boolean }) {
           </AlertDescription>
         </Alert>
       )}
-      {error && (
+      {!!error && (
         <Alert status="error" py={2} px={3}>
           <AlertIcon boxSize={4} />
-          <AlertDescription fontSize="sm">
-            Sorry, something went wrong. Please, try again in a few minutes
-          </AlertDescription>
+          <AlertDescription fontSize="sm">{error}</AlertDescription>
         </Alert>
       )}
     </VStack>

@@ -3,7 +3,7 @@ import { useCallback, useState } from 'react';
 import { isAscii } from '@/services/utils';
 import { LangsType } from '@/services/types';
 
-interface UserInput {
+export interface UserInput {
   title: string;
   snippet: string;
   lang: LangsType;
@@ -21,6 +21,19 @@ function useSnippetInputHandler() {
   const [userInput, setUserInput] = useState(defaultInput);
   const [inputHelpers, setInputHelpers] = useState(defaultInput);
   const [tags, setTags] = useState([] as string[]);
+
+  const updateUserValues = useCallback((input?: UserInput, tags?: string[]) => {
+    if (input && typeof input === 'object') {
+      const validKeys = Object.keys(defaultInput);
+      for (let [key, value] of Object.entries(input)) {
+        if (!validKeys.includes(key) || typeof value !== 'string') return;
+      }
+
+      setUserInput(input);
+    }
+
+    if (tags && Array.isArray(tags) && tags.length > 0) setTags(tags);
+  }, []);
 
   const handleChange = useCallback(
     (
@@ -167,7 +180,14 @@ function useSnippetInputHandler() {
     setTags(prevState => prevState.filter(tag => tag !== tagValue));
   }, []);
 
-  return { handleChange, handleTagDelete, inputHelpers, userInput, tags };
+  return {
+    handleChange,
+    handleTagDelete,
+    updateUserValues,
+    inputHelpers,
+    userInput,
+    tags
+  };
 }
 
 export default useSnippetInputHandler;

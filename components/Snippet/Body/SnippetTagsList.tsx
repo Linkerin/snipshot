@@ -5,7 +5,7 @@ import CloseIcon from '@/components/Icons/CloseIcon';
 import TagWrapper from '@/components/CustomTag/TagWrapper';
 import TagsListContainer from '@/components/CustomTag/TagsListContainer';
 
-interface SnippetTagsListProps {
+export interface SnippetTagsListProps {
   tags?: string[];
   handleTagDelete?: (tag: string) => void;
 }

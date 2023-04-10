@@ -1,5 +1,6 @@
 import { useCallback, useContext } from 'react';
 import dynamic from 'next/dynamic';
+import NextLink from 'next/link';
 import {
   IconButton,
   Menu,
@@ -50,12 +51,20 @@ function SnippetBarOptions() {
   } = useDisclosure();
 
   const user = useContext(AuthContext);
-  const { slug, lang, author } = useContext(SnippetContext);
+  const { id, slug, lang, author } = useContext(SnippetContext);
 
   const toast = useToast();
 
   const handleShareClick = useCallback(async () => {
     if (typeof navigator === 'undefined') return;
+    if (!slug || !lang) {
+      toast({
+        description: 'Not possible to share',
+        status: 'error',
+        duration: 2000
+      });
+      return;
+    }
 
     const url = `${process.env.NEXT_PUBLIC_BASE_URL}/snippets/${lang}/${slug}/`;
     await navigator.clipboard.writeText(url);
@@ -92,11 +101,12 @@ function SnippetBarOptions() {
           {user?.id && user.id === author?.id && (
             <>
               <MenuItem
+                as={NextLink}
+                href={`/snippets/edit?snippetId=${id}`}
                 bgColor="inherit"
                 icon={<EditIcon />}
                 _hover={{ bgColor: itemHoverBgColor }}
-                isDisabled
-                title="Editing is coming soon"
+                title="Navigate to edit page"
               >
                 Edit
               </MenuItem>

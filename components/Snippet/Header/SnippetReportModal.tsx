@@ -70,6 +70,18 @@ function SnippetReportModal({ isOpen, onClose }: SnippetReportModalProps) {
 
     try {
       setErrorMsg('');
+      if (!snippetId) {
+        toast({
+          description: 'The snippet was not identified',
+          status: 'warning',
+          duration: 3000
+        });
+        setReport('');
+        onClose();
+
+        return;
+      }
+
       setIsSending(true);
       const fetchIsPostingAllowed = (
         await import('@/services/redis/services/fetchIsPostingAllowed')
