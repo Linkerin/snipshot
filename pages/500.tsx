@@ -1,7 +1,7 @@
 import NextLink from 'next/link';
 import { Button, Flex, Heading, Img, Text, Show } from '@chakra-ui/react';
 
-function Custom404() {
+function Custom500() {
   return (
     <Flex
       flexDirection="column"
@@ -13,11 +13,11 @@ function Custom404() {
         fontSize={{ base: '7rem', md: '9rem', lg: '12rem' }}
         color="primary"
       >
-        404
+        500
       </Heading>
       <Flex
         flexDirection="row"
-        alignItems="flex-start"
+        alignItems="center"
         justifyContent="center"
         gap={{ base: 2, md: 5 }}
       >
@@ -35,12 +35,9 @@ function Custom404() {
             fontStyle="italic"
             letterSpacing="wide"
           >
-            Everything is rough in the Unknown Regions
+            Anything that can go wrong will go wrong
           </Heading>
-          <Text>
-            You are trying to find something that is beyond our reach. Maybe
-            someday.
-          </Text>
+          <Text>We learn from mistakes. Maybe we will even fix them.</Text>
           <Button
             as={NextLink}
             href="/"
@@ -56,8 +53,8 @@ function Custom404() {
         </Flex>
         <Show above="sm">
           <Img
-            src="/images/LeiaFox.webp"
-            alt="Cartoon fox as Princess Leia"
+            src="/images/Repair.webp"
+            alt="Astronaut and repair droid"
             height="auto"
             width={{ base: '42vw', sm: '34vw', md: '28vw', lg: '20vw' }}
           />
@@ -67,4 +64,4 @@ function Custom404() {
   );
 }
 
-export default Custom404;
+export default Custom500;
