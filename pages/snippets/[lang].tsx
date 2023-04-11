@@ -1,41 +1,25 @@
 import { GetServerSideProps } from 'next';
 import { withAxiomGetServerSideProps } from 'next-axiom';
-import { Text } from '@chakra-ui/react';
 
 import { cleanObjDataTypesForNextJS } from '@/services/utils';
 import get from '@/services/prisma/snippetsService/get';
-import Meta from '@/components/Meta/Meta';
-import SnippetsList from '@/components/SnippetsList';
-import { SnippetType } from '@/services/types';
+import { LangsType, SnippetType } from '@/services/types';
 
-interface LangProps {
+import LangPage from '@/components/Pages/LangPage';
+
+export interface LangPageProps {
   snippetsData: SnippetType[];
-  lang: string;
+  lang: LangsType;
   apiHandlerUrl: string;
 }
 
-function Lang({ snippetsData, lang, apiHandlerUrl }: LangProps) {
-  if (snippetsData.length === 0) {
-    return (
-      <>
-        <Text mt={5} fontSize="2xl" align="center">
-          {`No snippets for ${lang} yet 😞`}
-          <br />
-          Be the first to create!
-        </Text>
-      </>
-    );
-  }
-
+function Lang({ snippetsData, lang, apiHandlerUrl }: LangPageProps) {
   return (
-    <>
-      <Meta
-        title={`${lang} code snippets · snipshot`}
-        keywords={`${lang}, development, programming, snippets, code, samples`}
-        description={`${lang} code snippets on snipshot. Get and share your ${lang} snips`}
-      />
-      <SnippetsList snippetsData={snippetsData} fetchUrl={apiHandlerUrl} />
-    </>
+    <LangPage
+      snippetsData={snippetsData}
+      lang={lang}
+      apiHandlerUrl={apiHandlerUrl}
+    />
   );
 }
 

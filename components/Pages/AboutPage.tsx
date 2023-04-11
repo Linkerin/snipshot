@@ -107,7 +107,7 @@ export function AboutPage() {
               </Link>
             </ListItem>
             <ListItem>
-              Cute Sloth created by{' '}
+              Cute pictures created by{' '}
               <Link
                 as={NextLink}
                 href="https://www.freepik.com/author/catalyststuff"
