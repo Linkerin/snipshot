@@ -16,9 +16,10 @@ function UserDescription({ username }: { username: string | undefined }) {
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState('');
   const [description, setDescription] = useState('');
-  const [fetchedIds, setFetchedIds] = useState({
+  const [fetchedData, setFetchedData] = useState({
     userId: '',
-    descriptionId: ''
+    descriptionId: '',
+    description: ''
   });
 
   const user = useContext(AuthContext);
@@ -51,7 +52,7 @@ function UserDescription({ username }: { username: string | undefined }) {
         setIsSaving(true);
         const supabase = (await import('@/services/supabase/supabase')).default;
 
-        if (fetchedIds.descriptionId && fetchedIds.descriptionId.length > 1) {
+        if (fetchedData.descriptionId && fetchedData.descriptionId.length > 1) {
           const { error } = await supabase
             .from('profiles_descriptions')
             .update({
@@ -59,7 +60,7 @@ function UserDescription({ username }: { username: string | undefined }) {
               updated: new Date()
             })
             .eq('user_id', user?.id)
-            .eq('id', fetchedIds.descriptionId)
+            .eq('id', fetchedData.descriptionId)
             .select();
           if (error) throw error;
         } else {
@@ -74,6 +75,7 @@ function UserDescription({ username }: { username: string | undefined }) {
         }
 
         setIsEditing(false);
+        setFetchedData(prevState => ({ ...prevState, description }));
         toast({
           description: 'The description was saved',
           status: 'success',
@@ -89,7 +91,7 @@ function UserDescription({ username }: { username: string | undefined }) {
         setIsSaving(false);
       }
     },
-    [user?.id, description, toast, fetchedIds]
+    [user?.id, description, toast, fetchedData]
   );
 
   // Initially get user's description
@@ -112,7 +114,7 @@ function UserDescription({ username }: { username: string | undefined }) {
 
         const userId = userData[0]?.id;
         if (!userId) throw new Error(`ID for ${username} was not found`);
-        setFetchedIds(prevState => ({ ...prevState, userId }));
+        setFetchedData(prevState => ({ ...prevState, userId }));
 
         const { data: descriptionData, error } = await supabase
           .from('profiles_descriptions')
@@ -124,9 +126,10 @@ function UserDescription({ username }: { username: string | undefined }) {
 
         if (!descriptionData[0]?.description) return;
         setDescription(descriptionData[0].description);
-        setFetchedIds(prevState => ({
+        setFetchedData(prevState => ({
           ...prevState,
-          descriptionId: descriptionData[0].id
+          descriptionId: descriptionData[0].id,
+          description: descriptionData[0].description
         }));
       } catch (err) {
         log.error(`Error while fetching user's description`, { err, username });
@@ -145,15 +148,15 @@ function UserDescription({ username }: { username: string | undefined }) {
   ) : (
     <Box mt={5}>
       {!isEditing &&
-        description &&
-        description.split(/\n|\r/).map((paragraph, i) => (
+        fetchedData.description &&
+        fetchedData.description.split(/\n|\r/).map((paragraph, i) => (
           <Text key={i} fontSize="xs" lineHeight="1.3rem" px={1}>
             {paragraph}
           </Text>
         ))}
-      {!isEditing && user?.id === fetchedIds.userId && (
+      {!isEditing && user?.id === fetchedData.userId && (
         <>
-          {!description && (
+          {!fetchedData.description && (
             <Text fontSize=".7rem" fontStyle="italic" color="text-secondary">
               Do you want to write something about yourself here?
             </Text>
@@ -167,7 +170,7 @@ function UserDescription({ username }: { username: string | undefined }) {
           </DescriptionBtn>
         </>
       )}
-      {isEditing && user?.id === fetchedIds.userId && (
+      {isEditing && user?.id === fetchedData.userId && (
         <DescriptionEditor
           description={description}
           onChange={handleChange}
