@@ -3,6 +3,7 @@ import { As, Box, Flex, Text } from '@chakra-ui/react';
 import MobileProfileStats from './MobileProfileStats';
 import UserAvatar from '@/components/UserInfo/Avatars/UserAvatar';
 import Username from '@/components/UserInfo/Username';
+import MobileUserDescription from './MobileUserDescription/MobileUserDescription';
 
 interface UserInfoProps {
   as?: As<any>;
@@ -45,6 +46,7 @@ function MobileUserInfo({
           </Text>
         </Box>
       </Flex>
+      <MobileUserDescription username={username} />
       <MobileProfileStats userId={userId} username={username} />
     </>
   );

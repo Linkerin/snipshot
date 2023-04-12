@@ -14,8 +14,7 @@ const MobileUserInfo = dynamic(
   () => import('@/components/UserInfo/MobileUserInfo')
 );
 const UserDescription = dynamic(
-  () => import('@/components/UserInfo/UserDescription/UserDescription'),
-  { ssr: false }
+  () => import('@/components/UserInfo/UserDescription/UserDescription')
 );
 const UserInfo = dynamic(() => import('@/components/UserInfo/UserInfo'));
 
@@ -43,11 +42,7 @@ function UserPage({
         description="Post a code snippet to snipshot on this page"
         keywords={`profile, user, ${username}, snippets`}
       />
-      <Grid
-        // gridTemplateColumns={username === user?.username ? '1fr' : gridTempalate}
-        gridTemplateColumns={gridTempalate}
-      >
-        {/* {username !== user?.username && ( */}
+      <Grid gridTemplateColumns={gridTempalate}>
         {username && !isMobile && (
           <>
             <GridItem />

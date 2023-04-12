@@ -1,17 +1,29 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
-import dynamic from 'next/dynamic';
 import { log } from 'next-axiom';
-import { Box, Text, useToast } from '@chakra-ui/react';
+import { useToast } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
-import DescriptionBtn from './DescriptionBtn';
-import EditIcon from '@/components/Icons/EditIcon';
-import DescriptionAlert from '../DescriptionAlert';
 
-const DescriptionEditor = dynamic(() => import('./DescriptionEditor'));
-
-function UserDescription({ username }: { username: string | undefined }) {
-  // TODO: change to useUserDescription hook
+/**
+ * The hook that emplements all the logic regarding fetching and updating description
+ * inside user's profile page.
+ * @param username Username to fetch info about
+ * @returns An object with all necessary states and handlers
+ * @example
+ * const {
+ *   description,
+ *   initialDescription,
+ *   fetchedUserId,
+ *   isEditing,
+ *   isLoading,
+ *   isSaving,
+ *   toggleEditingMode,
+ *   handleChange,
+ *   handleSave,
+ *   error
+ * } = useUserDescription(username);
+ */
+function useUserDescription(username?: string) {
   const [isLoading, setIsLoading] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -24,6 +36,7 @@ function UserDescription({ username }: { username: string | undefined }) {
   });
 
   const user = useContext(AuthContext);
+
   const toast = useToast();
 
   const toggleEditingMode: React.MouseEventHandler = e => {
@@ -144,45 +157,18 @@ function UserDescription({ username }: { username: string | undefined }) {
     return () => controller.abort();
   }, [username]);
 
-  return isLoading ? (
-    <></>
-  ) : (
-    <Box mt={5}>
-      {!isEditing &&
-        fetchedData.description &&
-        fetchedData.description.split(/\n|\r/).map((paragraph, i) => (
-          <Text key={i} fontSize="xs" lineHeight="1.3rem" px={1}>
-            {paragraph}
-          </Text>
-        ))}
-      {!isEditing && user?.id === fetchedData.userId && (
-        <>
-          {!fetchedData.description && (
-            <Text fontSize=".7rem" fontStyle="italic" color="text-secondary">
-              Do you want to write something about yourself here?
-            </Text>
-          )}
-          <DescriptionBtn
-            leftIcon={<EditIcon />}
-            onClick={toggleEditingMode}
-            mt={2}
-          >
-            Edit description
-          </DescriptionBtn>
-        </>
-      )}
-      {isEditing && user?.id === fetchedData.userId && (
-        <DescriptionEditor
-          description={description}
-          onChange={handleChange}
-          onSave={handleSave}
-          toggleEditingMode={toggleEditingMode}
-          isSaving={isSaving}
-        />
-      )}
-      {!!error && <DescriptionAlert error={error} />}
-    </Box>
-  );
+  return {
+    initialDescription: fetchedData.description,
+    fetchedUserId: fetchedData.userId,
+    description,
+    isLoading,
+    isEditing,
+    isSaving,
+    toggleEditingMode,
+    handleChange,
+    handleSave,
+    error
+  };
 }
 
-export default UserDescription;
+export default useUserDescription;
