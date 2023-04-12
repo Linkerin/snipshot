@@ -13,6 +13,10 @@ import { UserPageProps } from '@/pages/users/[user]';
 const MobileUserInfo = dynamic(
   () => import('@/components/UserInfo/MobileUserInfo')
 );
+const UserDescription = dynamic(
+  () => import('@/components/UserInfo/UserDescription/UserDescription'),
+  { ssr: false }
+);
 const UserInfo = dynamic(() => import('@/components/UserInfo/UserInfo'));
 
 const gridTempalate = {
@@ -58,6 +62,7 @@ function UserPage({
                 username={username}
                 registered={registered}
               />
+              <UserDescription username={username} />
             </GridItem>
           </>
         )}

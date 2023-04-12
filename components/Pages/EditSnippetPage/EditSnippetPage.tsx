@@ -8,7 +8,7 @@ import {
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { log } from 'next-axiom';
-import { Button, Center, Grid, GridItem } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
 import fetchIsPostingAllowed from '@/services/redis/services/fetchIsPostingAllowed';

@@ -17,6 +17,7 @@ function MobileTopBar() {
       py={2}
       zIndex={1}
       mb={1}
+      backgroundColor="chakra-body-bg"
     >
       <Logo height={45} isLink />
       <ThemeSwitch mr={0} />
