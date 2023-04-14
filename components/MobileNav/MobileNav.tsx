@@ -20,6 +20,9 @@ const MobileNavModal = dynamic(() => import('./MobileNavModal'), {
 const MobileSearchContainer = dynamic(() => import('./MobileSearchContainer'), {
   ssr: false
 });
+const UserAvatar = dynamic(
+  () => import('@/components/UserInfo/Avatars/UserAvatar')
+);
 
 const openedDefaultState = {
   languages: false,
@@ -137,7 +140,18 @@ function MobileNav() {
             />
             <IconButton
               aria-label="Profile"
-              icon={<UserIcon boxSize={5} />}
+              icon={
+                user?.id ? (
+                  <UserAvatar
+                    avatar={user.avatar}
+                    username={user.username}
+                    size="micro"
+                    // noBorder
+                  />
+                ) : (
+                  <UserIcon boxSize={5} />
+                )
+              }
               variant="ghost"
               w="100%"
               h="100%"

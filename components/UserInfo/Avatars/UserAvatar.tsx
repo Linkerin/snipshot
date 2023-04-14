@@ -1,6 +1,11 @@
 import { Avatar, AvatarProps } from '@chakra-ui/react';
 
 const sizes = {
+  micro: {
+    side: 25,
+    borderWidth: '1px',
+    padding: '2px'
+  },
   xs: {
     side: 34,
     borderWidth: '1px',
