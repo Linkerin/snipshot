@@ -4,7 +4,7 @@ import { useToast } from '@chakra-ui/react';
 import { AuthContext } from '@/context/AuthContext';
 
 /**
- * The hook that emplements all the logic regarding fetching and updating description
+ * Hook that emplements all the logic regarding fetching and updating description
  * inside user's profile page.
  * @param username Username to fetch info about
  * @returns An object with all necessary states and handlers
