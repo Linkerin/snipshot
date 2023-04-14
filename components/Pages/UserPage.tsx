@@ -10,7 +10,7 @@ import SnippetsList from '@/components/SnippetsList';
 import { UserPageProps } from '@/pages/users/[user]';
 
 const MobileUserInfo = dynamic(
-  () => import('@/components/UserInfo/MobileUserInfo')
+  () => import('@/components/UserInfo/Mobile/MobileUserInfo')
 );
 const UserDescription = dynamic(
   () => import('@/components/UserInfo/UserDescription/UserDescription')

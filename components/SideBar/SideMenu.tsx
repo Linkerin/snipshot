@@ -25,20 +25,13 @@ import SettingsIcon from '@/components/Icons/SettingsIcon';
 import SignInIcon from '@/components/Icons/SignInIcon';
 import SignOutIcon from '@/components/Icons/SignOutIcon';
 import UserIcon from '@/components/Icons/UserIcon';
+import useLogout from '@/hooks/logout';
 
 const LanguagesList = dynamic(() => import('@/components/LanguagesList'));
 
 function SideMenu() {
   const user = useContext(AuthContext);
-
-  const handleLogOut = async (e: React.MouseEvent) => {
-    const supabase = (await import('@/services/supabase/supabase')).default;
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      console.error(error.message);
-    }
-  };
+  const handleLogout = useLogout();
 
   const menuItemHoverColor = useColorModeValue(
     'blackAlpha.50',
@@ -128,7 +121,7 @@ function SideMenu() {
       {user?.id && (
         <>
           <Divider my={2} w="87%" mx="auto" />
-          <StyledMenuItem onClick={handleLogOut} cursor="pointer">
+          <StyledMenuItem onClick={handleLogout} cursor="pointer">
             <Box as="button">
               <ListIcon as={SignOutIcon} />
               Logout

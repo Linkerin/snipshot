@@ -1,25 +1,19 @@
 import { As, Box, Flex, Text } from '@chakra-ui/react';
 
+import MobileLogoutBtn from './MobileLogoutBtn';
 import MobileProfileStats from './MobileProfileStats';
+import MobileUserDescription from './MobileUserDescription/MobileUserDescription';
 import UserAvatar from '@/components/UserInfo/Avatars/UserAvatar';
 import Username from '@/components/UserInfo/Username';
-import MobileUserDescription from './MobileUserDescription/MobileUserDescription';
 
 interface UserInfoProps {
   as?: As<any>;
   avatar?: string;
   registered?: string;
-  userId?: string;
   username?: string;
 }
 
-function MobileUserInfo({
-  as,
-  avatar,
-  registered,
-  userId,
-  username
-}: UserInfoProps) {
+function MobileUserInfo({ as, avatar, registered, username }: UserInfoProps) {
   return (
     <>
       <Flex
@@ -45,9 +39,10 @@ function MobileUserInfo({
             Member since {registered}
           </Text>
         </Box>
+        <MobileLogoutBtn username={username} />
       </Flex>
       <MobileUserDescription username={username} />
-      <MobileProfileStats userId={userId} username={username} />
+      <MobileProfileStats username={username} />
     </>
   );
 }
