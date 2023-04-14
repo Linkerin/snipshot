@@ -2,11 +2,10 @@ import { useContext } from 'react';
 import { Box, Collapse, Flex, Text, IconButton } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
+import DescriptionAlert from '@/components/UserInfo/DescriptionAlert';
 import EditIcon from '@/components/Icons/EditIcon';
 import MobileDescriptionEditor from './MobileDescriptionEditor';
-import useUserDescription from '@/hooks/special/useUserDescription';
-
-import DescriptionAlert from '../DescriptionAlert';
+import useUserDescription from '@/hooks/forPages/useUserDescription';
 
 function MobileUserDescription({ username }: { username?: string }) {
   const {

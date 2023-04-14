@@ -73,8 +73,7 @@ function useUserDescription(username?: string) {
               updated: new Date()
             })
             .eq('user_id', user?.id)
-            .eq('id', fetchedData.descriptionId)
-            .select();
+            .eq('id', fetchedData.descriptionId);
           if (error) throw error;
         } else {
           // create a new description record as the user did never have a description
