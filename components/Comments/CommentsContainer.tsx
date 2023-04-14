@@ -31,61 +31,69 @@ function CommentsContainer() {
   const snippetId = useContext(SnippetIdContext);
 
   // Callback for a supabase subscription
-  const handleCommentInsert = useCallback(async (payload: any) => {
-    if (payload.eventType !== 'INSERT') return;
+  const handleCommentInsert = useCallback(
+    async (payload: any) => {
+      if (payload.eventType !== 'INSERT') return;
+      if (payload.new.snippet_id !== snippetId) return;
 
-    const addedComment = payload.new;
-    try {
-      const supabase = (await import('@/services/supabase/supabase')).default;
-      const { data: userInfo, error } = await supabase
-        .from('profiles')
-        .select('name, avatar')
-        .eq('id', addedComment.user_id)
-        .limit(1)
-        .single();
-      if (error) throw error;
-      if (!userInfo) return;
+      const addedComment = payload.new;
+      try {
+        const supabase = (await import('@/services/supabase/supabase')).default;
+        const { data: userInfo, error } = await supabase
+          .from('profiles')
+          .select('name, avatar')
+          .eq('id', addedComment.user_id)
+          .limit(1)
+          .single();
+        if (error) throw error;
+        if (!userInfo) return;
 
-      setComments(prevState => {
-        const newComment: CommentType = {
-          id: addedComment.id,
-          comment: addedComment.comment,
-          parent: addedComment.parent,
-          created: addedComment.created,
-          deleted: addedComment.deleted,
-          snippetId: addedComment.snippet_id,
-          author: {
-            id: addedComment.user_id,
-            name: userInfo.name,
-            avatar: userInfo.avatar
-          }
-        };
+        setComments(prevState => {
+          const newComment: CommentType = {
+            id: addedComment.id,
+            comment: addedComment.comment,
+            parent: addedComment.parent,
+            created: addedComment.created,
+            deleted: addedComment.deleted,
+            snippetId: addedComment.snippet_id,
+            author: {
+              id: addedComment.user_id,
+              name: userInfo.name,
+              avatar: userInfo.avatar
+            }
+          };
 
-        return [...prevState, newComment];
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
+          return [...prevState, newComment];
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    },
+    [snippetId]
+  );
 
   // Callback for a supabase subscription
-  const handleCommentDeleteUpdate = useCallback((payload: any) => {
-    if (payload.eventType !== 'UPDATE') return;
+  const handleCommentDeleteUpdate = useCallback(
+    (payload: any) => {
+      if (payload.eventType !== 'UPDATE') return;
+      if (payload.new.snippet_id !== snippetId) return;
 
-    const { id, deleted } = payload.new;
-    if (!id || !deleted) return;
+      const { id, deleted } = payload.new;
+      if (!id || !deleted) return;
 
-    setComments(prevState => {
-      const newState = prevState.map(comment => {
-        if (comment.id === id) {
-          comment.deleted = deleted;
-        }
-        return comment;
+      setComments(prevState => {
+        const newState = prevState.map(comment => {
+          if (comment.id === id) {
+            comment.deleted = deleted;
+          }
+          return comment;
+        });
+
+        return newState;
       });
-
-      return newState;
-    });
-  }, []);
+    },
+    [snippetId]
+  );
 
   // Fetch all comments
   useEffect(() => {
@@ -116,6 +124,7 @@ function CommentsContainer() {
     return () => controller.abort();
   }, [snippetId]);
 
+  // Listen for updates in comments
   useEffect(() => {
     let channel: RealtimeChannel;
     let supabase: SupabaseClient;
