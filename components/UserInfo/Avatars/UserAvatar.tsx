@@ -1,7 +1,5 @@
 import { Avatar, AvatarProps } from '@chakra-ui/react';
 
-import CustomSpinner from '@/components/CustomSpinner';
-
 const sizes = {
   xs: {
     side: 34,
@@ -57,59 +55,5 @@ function UserAvatar({
     />
   );
 }
-
-// function UserAvatar({
-//   avatar,
-//   username,
-//   size = 'lg',
-//   disabled = false,
-//   noBorder = false
-// }: UserAvatarProps) {
-//   const AvatarContainer = ({ children }: { children: React.ReactNode }) => {
-//     return (
-//       <Box
-//         sx={{
-//           borderWidth: sizes[size].borderWidth,
-//           borderStyle: 'solid',
-//           borderColor: 'primary',
-//           borderRadius: '50%',
-//           border: noBorder ? 'none' : undefined,
-//           margin: 0,
-//           padding: sizes[size].padding,
-//           height: 'fit-content',
-//           width: 'fit-content',
-//           svg: {
-//             width: sizes[size].width,
-//             height: 'auto',
-//             borderRadius: '50%'
-//           },
-//           img: {
-//             height: 'auto',
-//             width: sizes[size].width,
-//             borderRadius: '50%'
-//           }
-//         }}
-//       >
-//         {children}
-//       </Box>
-//     );
-//   };
-
-//   return (
-//     <AvatarContainer>
-//       {disabled ? (
-//         <UserIcon bgColor="gray.200" />
-//       ) : avatar ? (
-//         <Image
-//           src={avatar}
-//           alt={`${username} avatar`}
-//           fallback={<UserIcon />}
-//         />
-//       ) : (
-//         <GuestAvatar />
-//       )}
-//     </AvatarContainer>
-//   );
-// }
 
 export default UserAvatar;

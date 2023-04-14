@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { Grid, GridItem, Flex, Text } from '@chakra-ui/react';
 
-import { AuthContext } from '@/context/AuthContext';
 import CodeIcon from '@/components/Icons/CodeIcon';
 import { DeviceContext } from '@/context/DeviceContext';
 import { hideScrollbarCss } from '@/services/utils';
@@ -32,7 +31,6 @@ function UserPage({
   username,
   snippetsData
 }: UserPageProps) {
-  const user = useContext(AuthContext);
   const { isMobile, mobileNavHeightvh } = useContext(DeviceContext);
 
   return (
