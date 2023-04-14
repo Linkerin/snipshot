@@ -53,7 +53,7 @@ function MobileUserDescription({ username }: { username?: string }) {
               icon={<EditIcon />}
               variant="ghost"
               onClick={toggleEditingMode}
-              size={{ base: 'md', sm: 'lg' }}
+              size="lg"
             />
           </>
         )}

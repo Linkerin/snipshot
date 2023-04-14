@@ -3,6 +3,7 @@ import NextLink from 'next/link';
 import { Flex, IconButton, Link, Text } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
+import { DeviceContext } from '@/context/DeviceContext';
 import { CommentType } from '@/services/types';
 import CrossIcon from '@/components/Icons/CrossIcon';
 import DeleteIcon from '@/components/Icons/DeleteIcon';
@@ -15,6 +16,7 @@ function Comment({ comment }: { comment: CommentType }) {
   const [removing, setRemoving] = useState(false);
 
   const user = useContext(AuthContext);
+  const { isMobile } = useContext(DeviceContext);
 
   const handleDelete = async (
     e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>
@@ -85,12 +87,13 @@ function Comment({ comment }: { comment: CommentType }) {
         user?.id === comment.author.id && (
           <IconButton
             aria-label="Delete comment"
-            icon={<DeleteIcon />}
+            icon={<DeleteIcon boxSize={isMobile ? 5 : undefined} />}
             colorScheme="red"
             isDisabled={showConfirmation}
-            size="sm"
+            size={isMobile ? 'md' : 'sm'}
             variant="outline"
             onClick={e => setShowConfirmation(true)}
+            px={2}
           />
         )}
       {!comment.deleted &&
@@ -99,19 +102,19 @@ function Comment({ comment }: { comment: CommentType }) {
           <Flex gap={2}>
             <IconButton
               aria-label="Confirm deletion"
-              icon={<TickIcon />}
+              icon={<TickIcon boxSize={isMobile ? 6 : undefined} />}
               colorScheme="red"
               isLoading={removing}
-              size="sm"
+              size={isMobile ? 'md' : 'sm'}
               variant="outline"
               onClick={handleDelete}
             />
             <IconButton
               aria-label="Cancel deletion"
-              icon={<CrossIcon />}
+              icon={<CrossIcon boxSize={isMobile ? 6 : undefined} />}
               colorScheme="green"
               isLoading={removing}
-              size="sm"
+              size={isMobile ? 'md' : 'sm'}
               variant="outline"
               onClick={e => setShowConfirmation(false)}
             />
