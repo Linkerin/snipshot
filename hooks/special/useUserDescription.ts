@@ -1,5 +1,4 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { log } from 'next-axiom';
 import { useToast } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -96,6 +95,7 @@ function useUserDescription(username?: string) {
           duration: 2000
         });
       } catch (err) {
+        const log = (await import('next-axiom')).log;
         log.error(`Error while saving user's description`, {
           err,
           userId: user?.id
@@ -146,6 +146,7 @@ function useUserDescription(username?: string) {
           description: descriptionData[0].description
         }));
       } catch (err) {
+        const log = (await import('next-axiom')).log;
         log.error(`Error while fetching user's description`, { err, username });
       } finally {
         setIsLoading(false);

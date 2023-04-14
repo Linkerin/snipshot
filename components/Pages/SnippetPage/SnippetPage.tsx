@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
-import { log } from 'next-axiom';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -52,6 +51,7 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
         .eq('id', snippet.id);
       if (error) throw error;
     } catch (err) {
+      const log = (await import('next-axiom')).log;
       log.error(`Error while verifying snippet ID ${snippet.id}`, {
         err,
         snippetId: snippet.id
@@ -88,6 +88,7 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
 
         return;
       } catch (err) {
+        const log = (await import('next-axiom')).log;
         log.error("Error while getting snippet's reporting info", {
           err,
           snippetId: snippet.id

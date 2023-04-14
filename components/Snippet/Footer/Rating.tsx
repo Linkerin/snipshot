@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import { log } from 'next-axiom';
 import { Button, Flex, Text, useColorModeValue } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -211,6 +210,7 @@ function Rating({ id, rating }: RatingProps) {
         if (data[0]?.action === 'decrement') setStatus('disliked');
         return;
       } catch (err) {
+        const log = (await import('next-axiom')).log;
         log.error("Error while fetching user's activity on rating", {
           err,
           ratingId: id

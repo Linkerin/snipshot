@@ -1,5 +1,4 @@
 import { useCallback, useContext, useState } from 'react';
-import { log } from 'next-axiom';
 import {
   Button,
   ButtonGroup,
@@ -112,6 +111,7 @@ function SnippetReportModal({ isOpen, onClose }: SnippetReportModalProps) {
         duration: 3000
       });
     } catch (err) {
+      const log = (await import('next-axiom')).log;
       log.error('Error while posting report on snippet', {
         snippetId,
         timestamp: Date.now(),

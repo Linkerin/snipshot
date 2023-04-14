@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { log } from 'next-axiom';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 import fetchIsPostingAllowed from '@/services/redis/services/fetchIsPostingAllowed';
@@ -80,6 +79,7 @@ function AddSnippetPage() {
         );
       }
     } catch (err) {
+      const log = (await import('next-axiom')).log;
       log.error('Error while adding snippet', { err });
       setError(
         'Sorry, something went wrong. Please, try again in a few minutes'

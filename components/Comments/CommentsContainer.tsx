@@ -1,5 +1,4 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { log } from 'next-axiom';
 import {
   Card,
   CardBody,
@@ -105,6 +104,7 @@ function CommentsContainer() {
           setComments(data.comments);
         }
       } catch (err) {
+        const log = (await import('next-axiom')).log;
         log.error('Error while fetching comments', { err, snippetId });
       } finally {
         setCommentsLoadStatus('finished');

@@ -6,7 +6,6 @@ import {
   VStack,
   useBreakpoint
 } from '@chakra-ui/react';
-import { log } from 'next-axiom';
 
 import CustomSpinner from '@/components/CustomSpinner';
 import { MOBILE_BREAKPOINTS } from '@/services/constants';
@@ -48,7 +47,7 @@ function SnippetsList({
           updateObserver();
         }
       } catch (err) {
-        console.warn('Error while fetching snippets');
+        const log = (await import('next-axiom')).log;
         log.error('Error occurred while fetching snippets', { err });
       } finally {
         setIsLoading(false);

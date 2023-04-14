@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
-import { log } from 'next-axiom';
 import {
   Button,
   ButtonGroup,
@@ -80,6 +79,7 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
         duration: 3000
       });
     } catch (err) {
+      const log = (await import('next-axiom')).log;
       log.error('Error while deleting snippet', {
         snippetId: id,
         timestamp: Date.now(),

@@ -1,5 +1,4 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { log } from 'next-axiom';
 import type { Session, Subscription } from '@supabase/supabase-js';
 
 interface AuthProviderProps {
@@ -75,6 +74,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           return { ...prevState, appRole: data.roles };
         });
       } catch (err) {
+        const log = (await import('next-axiom')).log;
         log.error('AuthContext: getting user info', { err });
       }
     };
@@ -117,6 +117,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
         listener = data.subscription;
       } catch (err) {
+        const log = (await import('next-axiom')).log;
         log.error('AuthContext: creating change subscription', { err });
       }
 

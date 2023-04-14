@@ -7,7 +7,6 @@ import {
 } from 'react';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { log } from 'next-axiom';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -107,6 +106,7 @@ function EditSnippetPage() {
         );
       }
     } catch (err) {
+      const log = (await import('next-axiom')).log;
       log.error('Error while editing snippet', { err });
       setError(
         'Sorry, something went wrong. Please, try again in a few minutes'
@@ -171,6 +171,7 @@ function EditSnippetPage() {
         );
         setIsLoadingSnippet(false);
       } catch (err) {
+        const log = (await import('next-axiom')).log;
         log.error('Error while fetching snippet data for editing', {
           err,
           snippetId
