@@ -1,4 +1,5 @@
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
+import { withAxiomGetServerSideProps } from 'next-axiom';
 
 import { cleanObjDataTypesForNextJS } from '@/services/utils';
 import getByUser from '@/services/prisma/snippetsService/getByUser';
@@ -25,60 +26,40 @@ function User({ avatar, registered, username, snippetsData }: UserPageProps) {
   );
 }
 
-export async function getStaticPaths() {
-  try {
-    const { data, error } = await supabase.from('profiles').select('name');
-    if (error) throw error;
+export const getServerSideProps: GetServerSideProps =
+  withAxiomGetServerSideProps(async ({ res, params, log }) => {
+    try {
+      const username = params?.user;
+      if (!username || username instanceof Array)
+        throw new Error('Invalid username value');
 
-    return {
-      paths: data.map(element => ({ params: { user: element.name } })),
-      fallback: 'blocking'
-    };
-  } catch (err) {
-    console.error('Error while fetching all usernames');
-    console.error(err);
+      const snippetsReq = getByUser({ username });
 
-    return {
-      paths: [],
-      fallback: 'blocking'
-    };
-  }
-}
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('created, avatar')
+        .eq('name', username)
+        .limit(1)
+        .single();
+      if (error) throw error;
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  try {
-    const username = params?.user;
-    if (!username || username instanceof Array)
-      throw new Error('Invalid username value');
+      const registered = parseDate(data?.created);
 
-    const snippetsReq = getByUser({ username });
+      const snippets = await snippetsReq;
+      const snippetsData = snippets.map(snippet =>
+        cleanObjDataTypesForNextJS(snippet)
+      );
 
-    const { data, error } = await supabase
-      .from('profiles')
-      .select('created, avatar')
-      .eq('name', username)
-      .limit(1)
-      .single();
-    if (error) throw error;
+      return {
+        props: { avatar: data.avatar, registered, username, snippetsData }
+      };
+    } catch (err) {
+      log.error('Error while fetching user profile page', { err });
 
-    const registered = parseDate(data?.created);
-
-    const snippets = await snippetsReq;
-    const snippetsData = snippets.map(snippet =>
-      cleanObjDataTypesForNextJS(snippet)
-    );
-
-    return {
-      props: { avatar: data.avatar, registered, username, snippetsData }
-    };
-  } catch (err) {
-    console.warn('Error while fetching user for SSG');
-    console.error(err);
-
-    return {
-      props: { avatar: '', registered: '', username: '', snippetsData: [] }
-    };
-  }
-};
+      return {
+        props: { avatar: '', registered: '', username: '', snippetsData: [] }
+      };
+    }
+  });
 
 export default User;
