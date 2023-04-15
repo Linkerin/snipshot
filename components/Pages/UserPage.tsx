@@ -60,7 +60,7 @@ function UserPage({
           </>
         )}
         <GridItem
-          px={{ sm: 2, lg: 7, '2xl': 14 }}
+          px={{ sm: 0, lg: 7, '2xl': 14 }}
           h={
             isMobile
               ? `calc(100vh - 85px - ${mobileNavHeightvh})`

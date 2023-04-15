@@ -67,7 +67,6 @@ function Layout({ children }: { children: React.ReactNode }) {
           </GridItem>
           <GridItem
             as="main"
-            px={3}
             area="main"
             // h={
             //   isMobile
@@ -79,6 +78,8 @@ function Layout({ children }: { children: React.ReactNode }) {
               md: 'calc(100vh - 64px)'
             }}
             overflowY="scroll"
+            pl={3}
+            pr={1}
             pt={3}
             pb={2}
           >

@@ -19,7 +19,6 @@ import {
 import { AuthContext } from '@/context/AuthContext';
 import CenteredListItem from '../CenteredListItem';
 import CodeIcon from '@/components/Icons/CodeIcon';
-import { hideScrollbarCss } from '@/services/utils';
 import InfoIcon from '../Icons/InfoIcon';
 import SettingsIcon from '@/components/Icons/SettingsIcon';
 import SignInIcon from '@/components/Icons/SignInIcon';
@@ -93,13 +92,7 @@ function SideMenu() {
               <ListIcon as={CodeIcon} />
               Languages
             </AccordionButton>
-            <AccordionPanel
-              maxHeight="35vh"
-              overflowY="scroll"
-              ml={7}
-              p={0}
-              sx={hideScrollbarCss}
-            >
+            <AccordionPanel maxHeight="35vh" overflowY="scroll" ml={7} p={0}>
               <LanguagesList />
             </AccordionPanel>
           </AccordionItem>

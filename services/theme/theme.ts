@@ -1,4 +1,6 @@
 import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
+import { mode } from '@chakra-ui/theme-tools';
+import type { StyleFunctionProps } from '@chakra-ui/styled-system';
 
 import { alertTheme } from './alertTheme';
 import { cardTheme } from './cardTheme';
@@ -17,13 +19,28 @@ const config: ThemeConfig = {
 const theme = extendTheme({
   config,
   styles: {
-    global: {
+    global: (props: StyleFunctionProps) => ({
       '*': {
         padding: 0,
         margin: 0,
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        scrollbarWidth: '4px',
+        scrollbarColor: 'primary-dark'
+      },
+      '*::-webkit-scrollbar': {
+        width: '8px',
+        direction: 'rtl'
+      },
+      '*::-webkit-scrollbar-thumb': {
+        // backgroundColor: 'primary-dark',
+        borderRadius: '4px',
+        border: 'solid 2px transparent',
+        boxShadow: `inset 0 0 2px 2px ${mode('#7854C5', '#009c83')(props)}`
+      },
+      '*::-webkit-scrollbar-track': {
+        borderRadius: '4px'
       }
-    }
+    })
   },
   colors: {
     'primary-light-theme': {
