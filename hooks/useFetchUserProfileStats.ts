@@ -88,8 +88,8 @@ export default function useFetchUserProfileStats({
         }, 0);
         setStats(prevState => ({ ...prevState, rating, favorites: 0 })); // TODO: add count for favorites
       } catch (err) {
-        console.error("Error while fetching user's stats");
-        console.error(err);
+        const log = (await import('next-axiom')).log;
+        log.error("Error while fetching user's stats", { err });
       } finally {
         setIsLoading(false);
       }
