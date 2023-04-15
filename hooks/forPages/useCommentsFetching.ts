@@ -145,7 +145,7 @@ function useCommentsFetching(snippetId: string | null) {
         }
       } catch (err) {
         const log = (await import('next-axiom')).log;
-        log.error('Error while fetching comments supa', { err, snippetId });
+        log.error('Error while fetching comments', { err, snippetId });
       } finally {
         setCommentsLoadStatus('finished');
       }
