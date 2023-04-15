@@ -38,7 +38,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           xl: '18vw 1fr',
           '2xl': '15vw 1fr'
         }}
-        h="100vh"
+        h="100%"
       >
         {!isMobile && (
           <GridItem area="sidebar" zIndex={2}>
@@ -48,7 +48,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         <GridItem
           cursor="default"
           maxHeight="100vh"
-          height="100vh"
+          height="100%"
           px={{ base: 0, '2xl': 10 }}
         >
           <GridItem area="topbar" position="sticky" top={0} zIndex={1}>
