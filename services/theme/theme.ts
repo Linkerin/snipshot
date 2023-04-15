@@ -28,14 +28,12 @@ const theme = extendTheme({
         scrollbarColor: 'primary-dark'
       },
       '*::-webkit-scrollbar': {
-        width: '8px',
-        direction: 'rtl'
+        width: '8px'
       },
       '*::-webkit-scrollbar-thumb': {
-        // backgroundColor: 'primary-dark',
+        backgroundColor: 'primary-dark',
         borderRadius: '4px',
-        border: 'solid 2px transparent',
-        boxShadow: `inset 0 0 2px 2px ${mode('#7854C5', '#009c83')(props)}`
+        border: `solid 2px ${mode(whiteColor, blackColor)(props)}`
       },
       '*::-webkit-scrollbar-track': {
         borderRadius: '4px'
