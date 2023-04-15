@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps =
 
       res.setHeader(
         'Cache-Control',
-        'public, s-maxage=10, stale-while-revalidate=59'
+        'public, s-maxage=300, stale-while-revalidate=59'
       );
 
       return { props: { snippetsData, apiHandlerUrl, lang: params?.lang } };
