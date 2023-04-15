@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   Center,
   Grid,
@@ -8,6 +8,7 @@ import {
 } from '@chakra-ui/react';
 
 import CustomSpinner from '@/components/CustomSpinner';
+import { DeviceContext } from '@/context/DeviceContext';
 import { MOBILE_BREAKPOINTS } from '@/services/constants';
 import Snippet from '@/components/Snippet/Snippet';
 import { SnippetType } from '@/services/types';
@@ -28,6 +29,7 @@ function SnippetsList({
   const [snippets, setSnippets] = useState(snippetsData);
   const [isLoading, setIsLoading] = useState(false);
 
+  const { isMobile } = useContext(DeviceContext);
   const breakpoint = useBreakpoint();
 
   const [isIntersecting, targetRef, updateObserver] = useScrollRef();
@@ -63,7 +65,7 @@ function SnippetsList({
 
   return (
     <>
-      {MOBILE_BREAKPOINTS.includes(breakpoint) || oneColumn ? (
+      {isMobile || oneColumn || MOBILE_BREAKPOINTS.includes(breakpoint) ? (
         <Grid templateColumns="1fr" gap={4}>
           <GridItem as={VStack} alignItems="flex-start" spacing={3}>
             {snippets.map((snippet, index) => {

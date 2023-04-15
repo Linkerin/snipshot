@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Chakra>
       <AuthProvider>
-        <DeviceProvider>
+        <DeviceProvider device={pageProps.device}>
           <Layout>
             <Component {...pageProps} />
           </Layout>

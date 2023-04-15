@@ -24,7 +24,11 @@ function Lang({ snippetsData, lang, apiHandlerUrl }: LangPageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps =
-  withAxiomGetServerSideProps(async ({ res, params, log }) => {
+  withAxiomGetServerSideProps(async ({ req, res, params, log }) => {
+    const device = {
+      type: req.headers['x-device-type'] ?? '',
+      model: req.headers['x-device-model'] ?? ''
+    };
     const apiHandlerUrl = `/snippets?lang=${params?.lang}`;
 
     try {
@@ -38,14 +42,18 @@ export const getServerSideProps: GetServerSideProps =
         'public, s-maxage=300, stale-while-revalidate=59'
       );
 
-      return { props: { snippetsData, apiHandlerUrl, lang: params?.lang } };
+      return {
+        props: { snippetsData, apiHandlerUrl, device, lang: params?.lang }
+      };
     } catch (err) {
       log.error('Error while getting props for /snippets/lang page', {
         err,
         params
       });
 
-      return { props: { snippetsData: [], apiHandlerUrl, lang: params?.lang } };
+      return {
+        props: { snippetsData: [], apiHandlerUrl, device, lang: params?.lang }
+      };
     }
   });
 

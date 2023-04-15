@@ -19,18 +19,18 @@ const SideBar = dynamic(() => import('@/components/SideBar/SideBar'), {
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { isMobile, mobileNavHeightvh } = useContext(DeviceContext);
+  const templateAreas = isMobile
+    ? `"topbar"
+       "main"
+       "nav"`
+    : `"sidebar topbar"
+       "sidebar main"`;
 
   return (
     <>
       <Meta />
       <Grid
-        templateAreas={{
-          base: `"topbar"
-                 "main"
-                 "nav"`,
-          md: `"sidebar topbar"
-               "sidebar main"`
-        }}
+        templateAreas={templateAreas}
         gridTemplateColumns={{
           base: '1fr',
           md: '25vw 1fr',

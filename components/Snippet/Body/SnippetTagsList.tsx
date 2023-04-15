@@ -22,7 +22,11 @@ function SnippetTagsList({ tags, handleTagDelete }: SnippetTagsListProps) {
           <LinkBox key={tag} display="flex" alignItems="center">
             <TagWrapper>
               <TagLabel>
-                <LinkOverlay as={NextLink} href={`/tags/${tag}`}>
+                <LinkOverlay
+                  as={NextLink}
+                  href={`/tags/${tag}`}
+                  prefetch={false}
+                >
                   {tag.toLowerCase()}
                 </LinkOverlay>
               </TagLabel>

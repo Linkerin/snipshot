@@ -27,7 +27,12 @@ function User({ avatar, registered, username, snippetsData }: UserPageProps) {
 }
 
 export const getServerSideProps: GetServerSideProps =
-  withAxiomGetServerSideProps(async ({ res, params, log }) => {
+  withAxiomGetServerSideProps(async ({ req, res, params, log }) => {
+    const device = {
+      type: req.headers['x-device-type'] ?? '',
+      model: req.headers['x-device-model'] ?? ''
+    };
+
     try {
       const username = params?.user;
       if (!username || username instanceof Array)
@@ -50,14 +55,31 @@ export const getServerSideProps: GetServerSideProps =
         cleanObjDataTypesForNextJS(snippet)
       );
 
+      res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=300, stale-while-revalidate=59'
+      );
+
       return {
-        props: { avatar: data.avatar, registered, username, snippetsData }
+        props: {
+          avatar: data.avatar,
+          registered,
+          username,
+          snippetsData,
+          device
+        }
       };
     } catch (err) {
       log.error('Error while fetching user profile page', { err });
 
       return {
-        props: { avatar: '', registered: '', username: '', snippetsData: [] }
+        props: {
+          avatar: '',
+          registered: '',
+          username: '',
+          snippetsData: [],
+          device
+        }
       };
     }
   });

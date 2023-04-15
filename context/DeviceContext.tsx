@@ -1,8 +1,12 @@
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useBreakpoint } from '@chakra-ui/react';
 
 interface DeviceProviderProps {
   children: React.ReactElement;
+  device: {
+    type: string;
+    model: string;
+  };
 }
 
 interface DeviceContextValue {
@@ -16,18 +20,31 @@ export const DeviceContext = createContext({
   isAppleMobile: false
 } as DeviceContextValue);
 
-export const DeviceProvider = ({ children }: DeviceProviderProps) => {
+export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
   const breakpoint = useBreakpoint();
-  const isMobile = useMemo(
-    () => ['base', 'sm'].includes(breakpoint),
-    [breakpoint]
+  const [isMobile, setIsMobile] = useState(device?.type === 'mobile');
+  const [isAppleMobile, setIsAppleMobile] = useState(
+    ['iPhone', 'iPad'].includes(device?.model)
   );
-
-  const [isAppleMobile, setIsAppleMobile] = useState(false);
   const mobileNavHeightvh = useMemo(
     () => (isAppleMobile ? '8.5vh' : '7vh'),
     [isAppleMobile]
   );
+
+  const firstRender = useRef(true);
+
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
+    if (['base', 'sm'].includes(breakpoint)) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, [breakpoint]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;

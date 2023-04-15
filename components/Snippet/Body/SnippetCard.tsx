@@ -114,6 +114,7 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
         <IconButton
           as={NextLink}
           href={`/snippets/${escapedLang}`}
+          prefetch={false}
           aria-label={`${lang} snippets`}
           icon={<LangIcon lang={lang} focusable />}
           variant="ghost"
