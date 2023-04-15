@@ -34,4 +34,4 @@ export const POSTING_COOLDOWN_SEC = 60;
 /**
  * Chakra UI breakpoints values that are used for mobile devices
  */
-export const MOBILE_BREAKPOINTS: ReadonlyArray<string> = ['base', 'sm', 'md'];
+export const MOBILE_BREAKPOINTS: ReadonlyArray<string> = ['sm', 'md'];
