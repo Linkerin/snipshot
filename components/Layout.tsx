@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import dynamic from 'next/dynamic';
-import { Grid, GridItem, Show } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
 
 import { DeviceContext } from '@/context/DeviceContext';
 import SideBarSkeleton from './Skeletons/SideBarSkeleton';
@@ -40,16 +40,11 @@ function Layout({ children }: { children: React.ReactNode }) {
         }}
         h="100vh"
       >
-        {/* {!isMobile && (
+        {!isMobile && (
           <GridItem area="sidebar" zIndex={2}>
             <SideBar />
           </GridItem>
-        )} */}
-        <Show above="md">
-          <GridItem area="sidebar" zIndex={2}>
-            <SideBar />
-          </GridItem>
-        </Show>
+        )}
         <GridItem
           cursor="default"
           maxHeight="100vh"
@@ -57,22 +52,11 @@ function Layout({ children }: { children: React.ReactNode }) {
           px={{ base: 0, '2xl': 10 }}
         >
           <GridItem area="topbar" position="sticky" top={0} zIndex={1}>
-            <Show above="md">
-              <TopBar />
-            </Show>
-            <Show below="md">
-              <MobileTopBar />
-            </Show>
-            {/* {isMobile ? <MobileTopBar /> : <TopBar />} */}
+            {isMobile ? <MobileTopBar /> : <TopBar />}
           </GridItem>
           <GridItem
             as="main"
             area="main"
-            // h={
-            //   isMobile
-            //     ? `calc(100vh - 65px - ${mobileNavHeightvh})`
-            //     : 'calc(100vh - 64px)'
-            // }
             h={{
               base: `calc(100vh - 65px - ${mobileNavHeightvh})`,
               md: 'calc(100vh - 64px)'
@@ -85,22 +69,14 @@ function Layout({ children }: { children: React.ReactNode }) {
           >
             {children}
           </GridItem>
-          {/* {isMobile && (
+          {isMobile && (
             <GridItem as="nav" area="nav" position="sticky" bottom="0px">
               <MobileNav />
             </GridItem>
-          )} */}
-          <Show below="md">
-            <GridItem as="nav" area="nav" position="sticky" bottom="0px">
-              <MobileNav />
-            </GridItem>
-          </Show>
+          )}
         </GridItem>
       </Grid>
-      <Show above="md">
-        <AddSnippetButton />
-      </Show>
-      {/* {!isMobile && <AddSnippetButton />} */}
+      {!isMobile && <AddSnippetButton />}
     </>
   );
 }
