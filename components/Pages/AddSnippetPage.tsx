@@ -5,7 +5,7 @@ import { Grid, GridItem } from '@chakra-ui/react';
 
 import fetchIsPostingAllowed from '@/services/redis/services/fetchIsPostingAllowed';
 import Meta from '@/components/Meta/Meta';
-import useSnippetInputHandler from '@/hooks/useSnippetInputHandler';
+import useSnippetInputHandler from '@/hooks/forPages/useSnippetInputHandler';
 
 const Alerts = dynamic(() => import('@/components/SnippetInput/Alerts'), {
   ssr: false

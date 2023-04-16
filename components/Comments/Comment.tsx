@@ -7,7 +7,7 @@ import { DeviceContext } from '@/context/DeviceContext';
 import { CommentType } from '@/services/types';
 import CrossIcon from '@/components/Icons/CrossIcon';
 import DeleteIcon from '@/components/Icons/DeleteIcon';
-import { parseDate } from '@/services/date';
+import { parseDate } from '@/services/utils/date';
 import TickIcon from '@/components/Icons/TickIcon';
 import UserAvatar from '@/components/UserInfo/Avatars/UserAvatar';
 

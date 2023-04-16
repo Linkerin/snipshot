@@ -17,7 +17,7 @@ import {
 import LangsSelectInput from './LangsSelectInput';
 import { SnippetTagsListProps } from '@/components/Snippet/Body/SnippetTagsList';
 import useButtonDisabled from '@/hooks/useButtonDisabled';
-import { UserInput } from '@/hooks/useSnippetInputHandler';
+import { UserInput } from '@/hooks/forPages/useSnippetInputHandler';
 
 const SnippetTagsList = dynamic(
   () => import('@/components/Snippet/Body/SnippetTagsList'),

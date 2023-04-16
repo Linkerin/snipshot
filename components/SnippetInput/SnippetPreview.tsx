@@ -2,7 +2,7 @@ import { Heading, Show } from '@chakra-ui/react';
 
 import Snippet from '@/components/Snippet/Snippet';
 import { snippetContextValueDefault } from '@/context/SnippetContext';
-import { UserInput } from '@/hooks/useSnippetInputHandler';
+import { UserInput } from '@/hooks/forPages/useSnippetInputHandler';
 
 interface SnippetPreviewProps {
   userInput: UserInput;

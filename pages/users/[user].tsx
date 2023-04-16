@@ -1,9 +1,9 @@
 import { GetServerSideProps } from 'next';
 import { withAxiomGetServerSideProps } from 'next-axiom';
 
-import { cleanObjDataTypesForNextJS } from '@/services/utils';
+import cleanObjDataTypesForNextJS from '@/services/utils/cleanObjDataTypesForNextJS';
 import getByUser from '@/services/prisma/snippetsService/getByUser';
-import { parseDate } from '@/services/date';
+import { parseDate } from '@/services/utils/date';
 import { SnippetType } from '@/services/types';
 import supabase from '@/services/supabase/supabase';
 import UserPage from '@/components/Pages/UserPage';

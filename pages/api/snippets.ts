@@ -5,8 +5,8 @@ import {
   create as createSnippet,
   update as updateSnippet
 } from '@/services/supabase/snippetsApi';
+import cleanObjDataTypesForNextJS from '@/services/utils/cleanObjDataTypesForNextJS';
 import get from '@/services/prisma/snippetsService/get';
-import { cleanObjDataTypesForNextJS } from '@/services/utils';
 
 export default async function handler(
   req: NextApiRequest,

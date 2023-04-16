@@ -2,8 +2,9 @@ import { createClient } from '@supabase/supabase-js';
 
 import createSnippetTree from '@/services/snippets';
 import getUserIdByJwt from './getUserIdByJwt';
+import randomString from '@/services/utils/randomstring';
 import { SnippetType } from '@/services/types';
-import { randomString, slugify } from '@/services/utils';
+import slugify from '@/services/utils/slugify';
 import supabase from './supabase';
 
 /**

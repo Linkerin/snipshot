@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next';
 
-import { cleanObjDataTypesForNextJS } from '@/services/utils';
+import cleanObjDataTypesForNextJS from '@/services/utils/cleanObjDataTypesForNextJS';
 import getAllSnippetsSlugs from '@/services/prisma/snippetsService/getAllSnippetsSlugs';
 import getBySlug from '@/services/prisma/snippetsService/getBySlug';
 import { SnippetType } from '@/services/types';

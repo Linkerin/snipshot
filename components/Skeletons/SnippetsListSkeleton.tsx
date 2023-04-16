@@ -1,6 +1,6 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 
-import { nLengthArray } from '@/services/utils';
+import nLengthArray from '@/services/utils/nLengthArray';
 import SnippetSkeleton from './SnippetSkeleton';
 
 function SnippetsListSkeleton({ oneColumn }: { oneColumn?: boolean }) {

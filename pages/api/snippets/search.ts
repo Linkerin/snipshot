@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { cleanObjDataTypesForNextJS } from '@/services/utils';
+import cleanObjDataTypesForNextJS from '@/services/utils/cleanObjDataTypesForNextJS';
 import search from '@/services/prisma/snippetsService/search';
 
 export default async function handler(

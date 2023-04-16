@@ -14,7 +14,7 @@ import fetchIsPostingAllowed from '@/services/redis/services/fetchIsPostingAllow
 import LoadingInfo from './LoadingInfo';
 import Meta from '@/components/Meta/Meta';
 import SnippetInputForm from '@/components/SnippetInput/SnippetInputForm';
-import useSnippetInputHandler from '@/hooks/useSnippetInputHandler';
+import useSnippetInputHandler from '@/hooks/forPages/useSnippetInputHandler';
 
 const Alerts = dynamic(() => import('@/components/SnippetInput/Alerts'), {
   ssr: false

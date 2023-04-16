@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { isAscii } from '@/services/utils';
+import isAscii from '@/services/utils/isAscii';
 import { LangsType } from '@/services/types';
 
 export interface UserInput {

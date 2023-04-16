@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 
 import CheckedIcon from '@/components/Icons/CheckedIcon';
-import { parseDate } from '@/services/date';
+import { parseDate } from '@/services/utils/date';
 import Rating from './Rating';
 import SnippetContext from '@/context/SnippetContext';
 
