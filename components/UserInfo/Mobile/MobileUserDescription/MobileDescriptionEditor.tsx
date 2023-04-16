@@ -63,7 +63,7 @@ function MobileDescriptionEditor({
           aria-label="Cancel descripton editing"
           icon={<CrossIcon />}
           colorScheme="red"
-          isLoading={isSaving}
+          isDisabled={isSaving}
           onClick={toggleEditingMode}
         />
       </ButtonGroup>

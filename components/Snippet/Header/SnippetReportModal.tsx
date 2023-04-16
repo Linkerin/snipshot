@@ -183,7 +183,7 @@ function SnippetReportModal({ isOpen, onClose }: SnippetReportModalProps) {
           <Button
             aria-label="Close the modal window"
             colorScheme={backBtnColor}
-            isLoading={isSending}
+            isDisabled={isSending}
             onClick={onClose}
           >
             Go back

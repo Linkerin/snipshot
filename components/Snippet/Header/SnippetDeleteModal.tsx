@@ -117,6 +117,7 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
             aria-label="Delete snippet"
             colorScheme="red"
             isLoading={isRemoving}
+            loadingText="Deleting..."
             onClick={handleDelete}
           >
             Delete snippet
@@ -124,7 +125,7 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
           <Button
             aria-label="Close delete confirmation"
             colorScheme={cancelBtnColor}
-            isLoading={isRemoving}
+            isDisabled={isRemoving}
             onClick={onClose}
           >
             Cancel

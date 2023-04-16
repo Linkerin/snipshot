@@ -113,7 +113,7 @@ function Comment({ comment }: { comment: CommentType }) {
               aria-label="Cancel deletion"
               icon={<CrossIcon boxSize={isMobile ? 6 : undefined} />}
               colorScheme="green"
-              isLoading={removing}
+              isDisabled={removing}
               size={isMobile ? 'md' : 'sm'}
               variant="outline"
               onClick={e => setShowConfirmation(false)}

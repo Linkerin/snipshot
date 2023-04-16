@@ -134,7 +134,7 @@ function SnippetInputForm({
       <ButtonGroup w="100%">
         <Button
           onClick={handleBackClick}
-          isLoading={isUploading}
+          isDisabled={isUploading}
           colorScheme={backBtnColor}
           variant="outline"
           w="35%"
@@ -145,6 +145,7 @@ function SnippetInputForm({
           isDisabled={disabledSaveBtn}
           onClick={onSave}
           isLoading={isUploading}
+          loadingText="Saving..."
           colorScheme={saveBtnColor}
           variant="outline"
           w="65%"

@@ -53,7 +53,7 @@ function DescriptionEditor({
         </DescriptionBtn>
         <DescriptionBtn
           leftIcon={<CrossCircledIcon />}
-          isLoading={isSaving}
+          isDisabled={isSaving}
           onClick={toggleEditingMode}
         >
           Cancel
