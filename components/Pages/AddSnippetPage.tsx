@@ -5,7 +5,6 @@ import { Grid, GridItem } from '@chakra-ui/react';
 
 import fetchIsPostingAllowed from '@/services/redis/services/fetchIsPostingAllowed';
 import Meta from '@/components/Meta/Meta';
-import SnippetInputForm from '@/components/SnippetInput/SnippetInputForm';
 import useSnippetInputHandler from '@/hooks/useSnippetInputHandler';
 
 const Alerts = dynamic(() => import('@/components/SnippetInput/Alerts'), {
@@ -14,6 +13,9 @@ const Alerts = dynamic(() => import('@/components/SnippetInput/Alerts'), {
 const SnippetPreview = dynamic(
   () => import('@/components/SnippetInput/SnippetPreview'),
   { ssr: false }
+);
+const SnippetInputForm = dynamic(
+  () => import('@/components/SnippetInput/SnippetInputForm')
 );
 
 function AddSnippetPage() {

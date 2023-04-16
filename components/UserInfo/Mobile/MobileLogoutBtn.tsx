@@ -3,7 +3,7 @@ import { IconButton } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
 import SignOutIcon from '@/components/Icons/SignOutIcon';
-import useLogout from '@/hooks/logout';
+import useLogout from '@/hooks/useLogout';
 
 function MobileLogoutBtn({ username }: { username: string | undefined }) {
   const user = useContext(AuthContext);

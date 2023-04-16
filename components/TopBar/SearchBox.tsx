@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { useCallback, useRef, useState } from 'react';
 import NextLink from 'next/link';
 import {
@@ -9,10 +10,11 @@ import {
   LinkOverlay
 } from '@chakra-ui/react';
 
-import CenteredListItem from '@/components/CenteredListItem';
-import LangIcon from '@/components/Icons/LangIcons/LangIcon';
-import SearchInput from '@/components/SearchInput';
 import { SearchFocusHandler, SnippetInfo } from '@/services/types';
+
+const CenteredListItem = dynamic(() => import('@/components/CenteredListItem'));
+const LangIcon = dynamic(() => import('@/components/Icons/LangIcons/LangIcon'));
+const SearchInput = dynamic(() => import('@/components/SearchInput'));
 
 function SearchBox() {
   const [searchValue, setSearchValue] = useState<string>('');

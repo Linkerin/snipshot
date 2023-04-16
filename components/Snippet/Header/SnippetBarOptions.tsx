@@ -134,8 +134,12 @@ function SnippetBarOptions() {
           </MenuItem>
         </MenuList>
       </Menu>
-      <SnippetDeleteModal isOpen={isDeleteOpen} onClose={onDeleteClose} />
-      <SnippetReportModal isOpen={isReportOpen} onClose={onReportClose} />
+      {isDeleteOpen && (
+        <SnippetDeleteModal isOpen={isDeleteOpen} onClose={onDeleteClose} />
+      )}
+      {isReportOpen && (
+        <SnippetReportModal isOpen={isReportOpen} onClose={onReportClose} />
+      )}
     </>
   );
 }

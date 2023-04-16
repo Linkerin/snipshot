@@ -17,15 +17,15 @@ import {
 } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
-import CenteredListItem from '../CenteredListItem';
 import CodeIcon from '@/components/Icons/CodeIcon';
-import InfoIcon from '../Icons/InfoIcon';
+import InfoIcon from '@/components/Icons/InfoIcon';
 import SettingsIcon from '@/components/Icons/SettingsIcon';
 import SignInIcon from '@/components/Icons/SignInIcon';
 import SignOutIcon from '@/components/Icons/SignOutIcon';
 import UserIcon from '@/components/Icons/UserIcon';
-import useLogout from '@/hooks/logout';
+import useLogout from '@/hooks/useLogout';
 
+const CenteredListItem = dynamic(() => import('@/components/CenteredListItem'));
 const LanguagesList = dynamic(() => import('@/components/LanguagesList'));
 
 function SideMenu() {

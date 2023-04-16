@@ -13,6 +13,7 @@ function AddSnippetButton() {
     <IconButton
       as={NextLink}
       href="/add"
+      prefetch={false}
       colorScheme={buttonColor}
       aria-label="Add Snippet"
       icon={<PlusIcon boxSize={9} color={'custom-white'} />}
