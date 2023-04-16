@@ -1,9 +1,11 @@
+import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import { LinkBox, LinkOverlay, TagLabel } from '@chakra-ui/react';
 
-import CloseIcon from '@/components/Icons/CloseIcon';
 import TagWrapper from '@/components/CustomTag/TagWrapper';
 import TagsListContainer from '@/components/CustomTag/TagsListContainer';
+
+const CloseIcon = dynamic(() => import('@/components/Icons/CloseIcon'));
 
 export interface SnippetTagsListProps {
   tags?: string[];

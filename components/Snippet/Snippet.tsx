@@ -1,14 +1,14 @@
-import { chakra } from '@chakra-ui/react';
 import dynamic from 'next/dynamic';
+import { chakra } from '@chakra-ui/react';
 
 import SnippetCard from './Body/SnippetCard';
 import SnippetContext from '@/context/SnippetContext';
-import SnippetInfoFooter from './Footer/SnippetInfoFooter';
 import { SnippetType } from '@/services/types';
 
 const SnippetCode = dynamic(
   () => import('@/components/Snippet/Body/SnippetCode')
 );
+const SnippetInfoFooter = dynamic(() => import('./Footer/SnippetInfoFooter'));
 
 export interface SnippetProps {
   snippet: SnippetType;

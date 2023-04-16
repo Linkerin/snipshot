@@ -45,7 +45,8 @@
   color: #d19a66;
 }
 
-.code-light .hljs-number {
+.code-light .hljs-number,
+.code-light .hljs-params {
   color: #ff7042;
 }
 
@@ -157,7 +158,8 @@
   color: #d19a66;
 }
 
-.code-dark .hljs-number {
+.code-dark .hljs-number,
+.code-dark .hljs-params {
   color: #d19a66;
 }
 

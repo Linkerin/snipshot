@@ -34,7 +34,6 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
 
   const [hovered, handleMouseEnter, handleMouseLeave] = useHovered();
 
-  const codeClassName = useColorModeValue('code-light', 'code-dark');
   const headingDividerColor = useColorModeValue('gray.300', 'chakra-body-bg');
   const copyIconColor = useColorModeValue('text-secondary', 'custom-white');
   const copyIconHoverBgColor = useColorModeValue(
@@ -83,7 +82,6 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
         onClick={handleCopyClick}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={codeClassName}
         cursor="pointer"
         lineHeight="5"
         position="relative"

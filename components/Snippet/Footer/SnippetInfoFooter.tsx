@@ -1,18 +1,13 @@
 import { useContext } from 'react';
+import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
-import {
-  Link,
-  Stack,
-  Text,
-  Tag,
-  TagLabel,
-  TagLeftIcon
-} from '@chakra-ui/react';
+import { Link, Stack, Text } from '@chakra-ui/react';
 
-import CheckedIcon from '@/components/Icons/CheckedIcon';
 import { parseDate } from '@/services/utils/date';
 import Rating from './Rating';
 import SnippetContext from '@/context/SnippetContext';
+
+const VerificationTag = dynamic(() => import('./VerificationTag'));
 
 function SnippetInfoFooter() {
   const { author, created, rating, verified } = useContext(SnippetContext);
@@ -26,25 +21,7 @@ function SnippetInfoFooter() {
         justifyContent="space-between"
       >
         <Rating id={rating.id} rating={rating.rating} />
-        {verified && (
-          <Tag
-            variant="outline"
-            size="sm"
-            border="1px"
-            borderColor={'primary'}
-            borderRadius="full"
-            boxShadow="none"
-            _hover={{ bg: 'none' }}
-            pl={1}
-            pr={1.5}
-            py={1}
-          >
-            <TagLeftIcon as={CheckedIcon} boxSize={4} color="primary" mr={1} />
-            <TagLabel color="primary" cursor="default">
-              Verified
-            </TagLabel>
-          </Tag>
-        )}
+        {verified && <VerificationTag />}
       </Stack>
       <Stack direction="row" spacing={2} alignItems="flex-end">
         <Text

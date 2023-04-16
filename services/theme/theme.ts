@@ -6,6 +6,7 @@ import { alertTheme } from './alertTheme';
 import { cardTheme } from './cardTheme';
 import { linkTheme } from './linkTheme';
 import { tagTheme } from './tagTheme';
+import snippetCodeStyles from './snippetCodeStyles';
 
 const hour = new Date().getHours();
 const whiteColor = hour >= 18 || hour < 9 ? '#fffff3' : '#fafdfa';
@@ -37,7 +38,8 @@ const theme = extendTheme({
       },
       '*::-webkit-scrollbar-track': {
         borderRadius: '4px'
-      }
+      },
+      ...snippetCodeStyles(props)
     })
   },
   colors: {

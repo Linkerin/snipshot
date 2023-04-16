@@ -1,5 +1,5 @@
 import { lowlight } from 'lowlight';
-import { Span, Text } from 'lowlight/lib/core';
+import type { Span, Text } from 'lowlight/lib/core';
 import haskell from 'highlight.js/lib/languages/haskell';
 
 import { LangsType } from './types';

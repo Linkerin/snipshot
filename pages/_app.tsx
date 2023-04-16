@@ -1,5 +1,3 @@
-import '@/styles/globals.css';
-import '@/styles/snippetCode.css';
 import type { AppProps } from 'next/app';
 
 import { AuthProvider } from '@/context/AuthContext';
