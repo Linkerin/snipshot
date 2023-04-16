@@ -1,10 +1,9 @@
-import React from 'react';
 import Image from 'next/image';
 import NextLink from 'next/link';
 import { Box, SystemStyleObject, useColorModeValue } from '@chakra-ui/react';
 
-import LogoLight from '@/public/images/LogoLight.svg';
 import LogoDark from '@/public/images/LogoDark.svg';
+import LogoLight from '@/public/images/LogoLight.svg';
 
 interface LogoProps {
   height?: number;

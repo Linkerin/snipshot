@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import { Card, CardBody, CardHeader, Center } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
-import { hideScrollbarCss } from '@/services/utils';
-import Logo from '../Logo';
+import hideScrollbarCss from '@/services/utils/hideScrollbarCss';
+import Logo from '@/components/Logo';
 import SideMenu from './SideMenu';
 import UserInfo from '@/components/UserInfo/UserInfo';
 

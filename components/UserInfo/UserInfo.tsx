@@ -1,8 +1,12 @@
+import dynamic from 'next/dynamic';
 import { As, Flex, Text } from '@chakra-ui/react';
 
 import UserAvatar from '@/components/UserInfo/Avatars/UserAvatar';
 import Username from '@/components/UserInfo/Username';
-import ProfileStats from '@/components/UserInfo/ProfileStats';
+
+const ProfileStats = dynamic(
+  () => import('@/components/UserInfo/ProfileStats')
+);
 
 interface UserInfoProps {
   as?: As<any>;
@@ -31,7 +35,9 @@ function UserInfo({ as, avatar, registered, userId, username }: UserInfoProps) {
       >
         Member since {registered}
       </Text>
-      <ProfileStats userId={userId} username={username} />
+      {(userId || username) && (
+        <ProfileStats userId={userId} username={username} />
+      )}
     </Flex>
   );
 }

@@ -19,7 +19,7 @@ function ProfileStats({ userId, username }: ProfileStatsProps) {
   } = useFetchUserProfileStats({ userId, username });
 
   return isLoading || (!userId && !username) ? (
-    <></>
+    <div />
   ) : (
     <Stack
       direction="row"
