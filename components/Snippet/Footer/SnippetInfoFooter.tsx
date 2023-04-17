@@ -41,7 +41,7 @@ function SnippetInfoFooter() {
             'anonymous'
           )}
         </Text>
-        <Text fontSize="xs" color="text-secondary" lineHeight="21px">
+        <Text as="time" fontSize="xs" color="text-secondary" lineHeight="21px">
           {parseDate(created) ?? ''}
         </Text>
       </Stack>

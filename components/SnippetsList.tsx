@@ -67,9 +67,9 @@ function SnippetsList({
     <>
       {isMobile || oneColumn || MOBILE_BREAKPOINTS.includes(breakpoint) ? (
         <Grid templateColumns="1fr" gap={4}>
-          <GridItem as={VStack} alignItems="flex-start" spacing={3}>
+          <GridItem as={VStack} alignItems="flex-start" spacing={4}>
             {snippets.map((snippet, index) => {
-              const refItem = index === snippets.length - 2;
+              const refItem = index === snippets.length - 3;
               return (
                 <Snippet
                   key={snippet.id}
@@ -82,9 +82,9 @@ function SnippetsList({
         </Grid>
       ) : (
         <Grid templateColumns="1fr 1fr" gap={4}>
-          <GridItem as={VStack} alignItems="flex-start" spacing={3}>
+          <GridItem as={VStack} alignItems="flex-start" spacing={5}>
             {snippets.map((snippet, index) => {
-              const refItem = index === snippets.length - 2;
+              const refItem = index === snippets.length - 3;
               if (index % 2 === 0)
                 return (
                   <Snippet
@@ -95,9 +95,9 @@ function SnippetsList({
                 );
             })}
           </GridItem>
-          <GridItem as={VStack} alignItems="flex-start" spacing={3}>
+          <GridItem as={VStack} alignItems="flex-start" spacing={5}>
             {snippets.map((snippet, index) => {
-              const refItem = index === snippets.length - 2;
+              const refItem = index === snippets.length - 3;
               if (index % 2 !== 0)
                 return (
                   <Snippet

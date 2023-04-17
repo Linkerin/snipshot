@@ -62,7 +62,7 @@ function Comment({ comment }: { comment: CommentType }) {
                 {comment.author.name}
               </Link>
             </Text>
-            <Text fontSize="xs" color="text-secondary">
+            <Text as="time" fontSize="xs" color="text-secondary">
               {parseDate(comment.created, {
                 year: 'numeric',
                 month: 'numeric',
