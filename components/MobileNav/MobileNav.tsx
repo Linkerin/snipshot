@@ -102,7 +102,7 @@ function MobileNav() {
             w="100%"
             spacing={0}
             isAttached
-            pb={isAppleMobile ? '1.5vh' : 0}
+            pb={isAppleMobile ? '1.5dvh' : 0}
           >
             <IconButton
               aria-label="Go to homepage"

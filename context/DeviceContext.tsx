@@ -12,7 +12,7 @@ interface DeviceProviderProps {
 interface DeviceContextValue {
   isMobile: boolean;
   isAppleMobile: boolean;
-  mobileNavHeightvh: '8.5vh' | '7vh';
+  mobileNavHeightvh: '8.5dvh' | '7dvh';
 }
 
 export const DeviceContext = createContext({
@@ -27,7 +27,7 @@ export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
     ['iPhone', 'iPad'].includes(device?.model)
   );
   const mobileNavHeightvh = useMemo(
-    () => (isAppleMobile ? '8.5vh' : '7vh'),
+    () => (isAppleMobile ? '8.5dvh' : '7dvh'),
     [isAppleMobile]
   );
 

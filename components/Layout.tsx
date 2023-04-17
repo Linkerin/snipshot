@@ -47,7 +47,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         )}
         <GridItem
           cursor="default"
-          maxHeight="100vh"
+          maxHeight="100dvh"
           height="100%"
           px={{ base: 0, '2xl': 10 }}
         >
@@ -58,8 +58,8 @@ function Layout({ children }: { children: React.ReactNode }) {
             as="main"
             area="main"
             h={{
-              base: `calc(100vh - 65px - ${mobileNavHeightvh})`,
-              md: 'calc(100vh - 64px)'
+              base: `calc(100dvh - 65px - ${mobileNavHeightvh})`,
+              md: 'calc(100dvh - 64px)'
             }}
             overflowY="scroll"
             pl={3}
