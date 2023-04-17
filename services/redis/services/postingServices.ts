@@ -1,6 +1,7 @@
 import type { NextApiRequest } from 'next';
 
 import { POSTING_COOLDOWN_SEC } from '@/services/constants';
+import { Ratelimit } from '@upstash/ratelimit';
 import redis from '@/services/redis/redis';
 
 /**
@@ -48,25 +49,21 @@ export async function isPostingAllowed({
 
     redisKey = ipAddress;
   }
-  const redisTimestamp = await redis.get<number>(redisKey);
 
-  if (redisTimestamp) {
-    const timePassedSec = (Date.now() - redisTimestamp) / 1000;
+  const ratelimit = new Ratelimit({
+    redis,
+    limiter: Ratelimit.slidingWindow(2, `${POSTING_COOLDOWN_SEC} s`),
+    analytics: true
+  });
+  const { success, reset } = await ratelimit.limit(redisKey);
 
-    if (timePassedSec < POSTING_COOLDOWN_SEC) {
-      const timeLeft = POSTING_COOLDOWN_SEC - Math.floor(timePassedSec);
-
-      return {
-        allowed: false,
-        message: `You can't post anything for about ${timeLeft} seconds`
-      };
-    }
-
-    return { allowed: true, message: 'Posting allowed' };
+  if (!success) {
+    const timeLeft = Math.floor((reset - Date.now()) / 1000);
+    return {
+      allowed: false,
+      message: `You can't post anything for about ${timeLeft} seconds`
+    };
   }
-
-  await redis.set(redisKey, Date.now());
-  await redis.expire(redisKey, POSTING_COOLDOWN_SEC);
 
   return { allowed: true, message: 'Posting allowed' };
 }
