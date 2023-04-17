@@ -17,7 +17,6 @@ import LangIcon from '@/components/Icons/LangIcons/LangIcon';
 import SnippetBar from '../Header/SnippetBar';
 import SnippetContext from '@/context/SnippetContext';
 import SnippetTagsList from './SnippetTagsList';
-import SnippetTitle from '../Header/SnippetTitle';
 import { SnippetType } from '@/services/types';
 import useHovered from '@/hooks/useHovered';
 
@@ -71,9 +70,7 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
       h="max-content"
     >
       <CardHeader py={1.5} pr={1}>
-        <SnippetBar>
-          <SnippetTitle />
-        </SnippetBar>
+        <SnippetBar />
       </CardHeader>
       <Divider color={headingDividerColor} />
       <CardBody
