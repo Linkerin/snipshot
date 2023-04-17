@@ -74,7 +74,6 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
       </CardHeader>
       <Divider color={headingDividerColor} />
       <CardBody
-        as="section"
         title="Click to copy"
         onClick={handleCopyClick}
         onMouseEnter={handleMouseEnter}

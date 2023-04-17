@@ -13,7 +13,7 @@ function SnippetInfoFooter() {
   const { author, created, rating, verified } = useContext(SnippetContext);
 
   return (
-    <Stack ml={2} mb={2} mt={1} spacing={0.5}>
+    <Stack as="footer" ml={2} mb={2} mt={1} spacing={0.5}>
       <Stack
         direction="row"
         align="center"
