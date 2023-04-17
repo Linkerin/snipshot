@@ -108,7 +108,8 @@ function useCommentsFetching(snippetId: string | null) {
           )`
           )
           .eq('snippet_id', snippetId)
-          .abortSignal(controller.signal);
+          .abortSignal(controller.signal)
+          .order('created', { ascending: true });
         if (error) throw error;
         if (data?.length > 0) {
           // Formats comment object according to the CommentType

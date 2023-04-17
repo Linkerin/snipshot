@@ -29,7 +29,7 @@ function CommentsContainer() {
       variant="outline"
       as="section"
       bgColor="chakra-body-bg"
-      maxHeight={{ base: '100%', lg: '85vh' }}
+      maxHeight={{ base: '100%', lg: '80vh' }}
     >
       <CardHeader px={3} pt={2} pb={2}>
         <Flex alignItems="center" gap={1}>

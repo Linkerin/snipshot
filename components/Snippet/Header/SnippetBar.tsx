@@ -24,6 +24,7 @@ function SnippetBar() {
               as={NextLink}
               href={`/snippets/${lang}/${slug}/`}
               prefetch={false}
+              _hover={{ color: 'primary' }}
             >
               {title}
             </LinkOverlay>
