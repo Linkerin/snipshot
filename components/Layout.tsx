@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 import { DeviceContext } from '@/context/DeviceContext';
+import hideScrollbarCss from '@/services/utils/hideScrollbarCss';
 import SideBarSkeleton from './Skeletons/SideBarSkeleton';
 import TopBar from './TopBar/TopBar';
 import Meta from '@/components/Meta/Meta';
@@ -62,8 +63,8 @@ function Layout({ children }: { children: React.ReactNode }) {
               md: 'calc(100vh - 64px)'
             }}
             overflowY="scroll"
-            pl={3}
-            pr={1}
+            sx={hideScrollbarCss}
+            px={3}
             pt={3}
             pb={2}
           >

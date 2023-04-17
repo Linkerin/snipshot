@@ -1,11 +1,10 @@
 import { extendTheme, type ThemeConfig } from '@chakra-ui/react';
-import { mode } from '@chakra-ui/theme-tools';
 import type { StyleFunctionProps } from '@chakra-ui/styled-system';
 
-import { alertTheme } from './alertTheme';
-import { cardTheme } from './cardTheme';
-import { linkTheme } from './linkTheme';
-import { tagTheme } from './tagTheme';
+import { alertTheme } from './components/alertTheme';
+import { cardTheme } from './components/cardTheme';
+import { linkTheme } from './components/linkTheme';
+import { tagTheme } from './components/tagTheme';
 import snippetCodeStyles from './snippetCodeStyles';
 
 const hour = new Date().getHours();
@@ -26,18 +25,18 @@ const theme = extendTheme({
         margin: 0,
         boxSizing: 'border-box',
         scrollbarWidth: '4px',
-        scrollbarColor: 'primary-dark'
+        scrollbarColor: 'primary-dark',
+        scrollBehavior: 'smooth'
       },
       '*::-webkit-scrollbar': {
-        width: '8px'
+        width: '4px'
       },
       '*::-webkit-scrollbar-thumb': {
         backgroundColor: 'primary-dark',
-        borderRadius: '4px',
-        border: `solid 2px ${mode(whiteColor, blackColor)(props)}`
+        borderRadius: '2px'
       },
       '*::-webkit-scrollbar-track': {
-        borderRadius: '4px'
+        borderRadius: '2px'
       },
       ...snippetCodeStyles(props)
     })
