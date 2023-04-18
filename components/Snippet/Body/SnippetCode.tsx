@@ -23,7 +23,7 @@ function SnippetCode({ snippet, lang, snippetTree = false }: SnippetCodeProps) {
 
   return createElement(
     'code',
-    { style: { whiteSpace: 'pre-wrap' } },
+    { style: { whiteSpace: 'pre-wrap', maxWidth: '64ch' } },
     codeElement
   );
 }
