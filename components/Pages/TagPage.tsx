@@ -1,17 +1,13 @@
+import dynamic from 'next/dynamic';
 import { Text } from '@chakra-ui/react';
 
 import Meta from '@/components/Meta/Meta';
 import SnippetsList from '@/components/SnippetsList';
 import { TagPageProps } from '@/pages/tags/[tag]';
 
+const NoSnippets = dynamic(() => import('@/components/NoSnippets'));
+
 function TagPage({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
-  if (snippetsData.length === 0) {
-    return (
-      <Text mt={5} fontSize="2xl" textAlign="center">
-        {`No snippets for "${tag}" tag yet 😞`}
-      </Text>
-    );
-  }
   return (
     <>
       <Meta
@@ -19,7 +15,11 @@ function TagPage({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
         keywords={`${tag}, development, programming, snippets, code, samples`}
         description={`Code snippets for ${tag} on snipshot. Get and share your snips for ${tag}`}
       />
-      <SnippetsList snippetsData={snippetsData} fetchUrl={apiHandlerUrl} />
+      {snippetsData.length === 0 ? (
+        <NoSnippets tag={tag} />
+      ) : (
+        <SnippetsList snippetsData={snippetsData} fetchUrl={apiHandlerUrl} />
+      )}
     </>
   );
 }
