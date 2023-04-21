@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import dynamic from 'next/dynamic';
 import { Box, Collapse, Flex, Text, IconButton } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -6,6 +7,10 @@ import DescriptionAlert from '@/components/UserInfo/DescriptionAlert';
 import EditIcon from '@/components/Icons/EditIcon';
 import MobileDescriptionEditor from './MobileDescriptionEditor';
 import useUserDescription from '@/hooks/forPages/useUserDescription';
+
+const NoDescriptionPlaceholder = dynamic(
+  () => import('@/components/UserInfo/NoDescriptionPlaceholder')
+);
 
 function MobileUserDescription({ username }: { username?: string }) {
   const {
@@ -44,11 +49,7 @@ function MobileUserDescription({ username }: { username?: string }) {
 
         {!isEditing && user?.id === fetchedUserId && (
           <>
-            {!initialDescription && (
-              <Text fontSize="xs" fontStyle="italic" color="text-secondary">
-                Do you want to write something about yourself here?
-              </Text>
-            )}
+            {!initialDescription && <NoDescriptionPlaceholder />}
             <IconButton
               aria-label="Edit description"
               icon={<EditIcon />}

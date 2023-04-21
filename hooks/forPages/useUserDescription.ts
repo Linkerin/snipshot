@@ -65,6 +65,7 @@ function useUserDescription(username?: string) {
         setIsSaving(true);
         const supabase = (await import('@/services/supabase/supabase')).default;
 
+        console.log(fetchedData.descriptionId);
         if (fetchedData.descriptionId && fetchedData.descriptionId.length > 1) {
           const { error } = await supabase
             .from('profiles_descriptions')
@@ -137,7 +138,7 @@ function useUserDescription(username?: string) {
           .limit(1);
         if (error) throw error;
 
-        if (!descriptionData[0]?.description) return;
+        if (!descriptionData[0]?.id) return;
         setDescription(descriptionData[0].description);
         setFetchedData(prevState => ({
           ...prevState,

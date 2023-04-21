@@ -33,12 +33,13 @@ function MobileDescriptionEditor({
           value={description}
           onChange={onChange}
           fontSize="sm"
+          lineHeight="1.35rem"
           resize="vertical"
           title="No more than 500 symbols of description"
           maxLength={500}
-          rows={5}
-          px={2}
-          py={1}
+          rows={description.split(/\n|\r/).length + 1}
+          p={0}
+          variant="flushed"
         />
         <FormHelperText fontSize="0.7rem" textAlign="end">
           {description.length} / 500

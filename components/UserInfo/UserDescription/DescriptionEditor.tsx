@@ -36,8 +36,10 @@ function DescriptionEditor({
         resize="vertical"
         title="No more than 500 symbols of description"
         maxLength={500}
-        rows={6}
-        px={2}
+        rows={description.split(/\n|\r/).length + 1}
+        py={0}
+        px={1}
+        variant="flushed"
       />
       <FormHelperText fontSize="0.7rem" textAlign="end">
         {description.length} / 500
