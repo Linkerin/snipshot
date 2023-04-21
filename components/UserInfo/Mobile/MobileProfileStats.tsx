@@ -28,7 +28,7 @@ function MobileProfileStats({ userId, username }: MobileProfileStatsProps) {
       spacing={0}
       position="sticky"
       zIndex={1}
-      top="57px"
+      top="56px"
       pb={1}
       px={0}
       w="100%"
