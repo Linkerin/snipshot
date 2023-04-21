@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import dynamic from 'next/dynamic';
-import { Grid, GridItem, Flex, Text } from '@chakra-ui/react';
+import { Grid, GridItem, Flex, Text, useBreakpoint } from '@chakra-ui/react';
 
 import CodeIcon from '@/components/Icons/CodeIcon';
 import { DeviceContext } from '@/context/DeviceContext';
@@ -20,7 +20,7 @@ const UserInfo = dynamic(() => import('@/components/UserInfo/UserInfo'));
 
 const gridTempalate = {
   base: '1fr',
-  md: '25vw 20fr 1fr',
+  md: '1fr',
   lg: '22vw 18fr 1fr',
   xl: '18vw 5fr 1fr',
   '2xl': '15vw 5fr 2fr'
@@ -32,6 +32,7 @@ function UserPage({
   username,
   snippetsData
 }: UserPageProps) {
+  const breakpoint = useBreakpoint();
   const { isMobile } = useContext(DeviceContext);
 
   return (
@@ -42,7 +43,7 @@ function UserPage({
         keywords={`profile, user, ${username}, snippets`}
       />
       <Grid gridTemplateColumns={gridTempalate} pt={3}>
-        {username && !isMobile && (
+        {username && !isMobile && breakpoint !== 'md' && (
           <>
             <GridItem />
             <GridItem
@@ -66,7 +67,7 @@ function UserPage({
           sx={hideScrollbarCss}
           position="relative"
         >
-          {isMobile && (
+          {(isMobile || breakpoint === 'md') && (
             <MobileUserInfo
               avatar={avatar}
               username={username}
@@ -75,7 +76,7 @@ function UserPage({
           )}
 
           <PageContentWrapper>
-            {!isMobile && (
+            {!isMobile && breakpoint !== 'md' && (
               <Flex alignItems="center" mb={3} gap={1}>
                 <CodeIcon boxSize={5} />
                 <Text fontSize="xl">Snippets</Text>
