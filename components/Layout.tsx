@@ -42,7 +42,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         h="100%"
       >
         {!isMobile && (
-          <GridItem area="sidebar" zIndex={2}>
+          <GridItem area="sidebar" zIndex={4}>
             <SideBar />
           </GridItem>
         )}
@@ -52,7 +52,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           height="100%"
           px={{ base: 0, '2xl': 10 }}
         >
-          <GridItem area="topbar" position="sticky" top={0} zIndex={1}>
+          <GridItem area="topbar" position="sticky" top={0} zIndex={3}>
             {isMobile ? <MobileTopBar /> : <TopBar />}
           </GridItem>
           <GridItem

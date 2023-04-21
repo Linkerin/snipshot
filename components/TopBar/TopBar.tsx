@@ -16,7 +16,6 @@ function TopBar() {
       pt={4}
       pb={2}
       px={3}
-      zIndex={1}
       mb={0}
     >
       <SearchBox />
