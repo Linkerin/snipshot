@@ -2,19 +2,11 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Grid, GridItem } from '@chakra-ui/react';
 
-import { AuthContext } from '@/context/AuthContext';
 import Meta from '@/components/Meta/Meta';
-import Snippet from '../../Snippet/Snippet';
+import PageContentWrapper from '@/components/PageContentWrapper';
+import Snippet from '@/components/Snippet/Snippet';
 import { SnippetType } from '@/services/types';
 
-const Button = dynamic(
-  () => import('@chakra-ui/react').then(chakra => chakra.Button),
-  { ssr: false }
-);
-
-const CheckedIcon = dynamic(() => import('@/components/Icons/CheckedIcon'), {
-  ssr: false
-});
 const CommentsContainer = dynamic(
   () => import('@/components/Comments/CommentsContainer'),
   { ssr: false }
@@ -28,9 +20,6 @@ export const SnippetIdContext = createContext<string | null>(null);
 function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
   const [snippet] = snippetData;
   const [reported, setReported] = useState(false);
-  const [verifying, setVerifying] = useState(false);
-
-  const user = useContext(AuthContext);
 
   let description = `Page of "${snippet.title}" snippet source code in ${snippet.lang}.`;
   if (snippet.author?.name) {
@@ -38,28 +27,6 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
   }
 
   const keywordsTags = snippet.tags?.join(', ');
-
-  const handleVerification = async () => {
-    if (!user?.appRole?.includes('admin')) return;
-
-    setVerifying(true);
-    try {
-      const supabase = (await import('@/services/supabase/supabase')).default;
-      const { data, error } = await supabase
-        .from('snippets')
-        .update({ verified: true })
-        .eq('id', snippet.id);
-      if (error) throw error;
-    } catch (err) {
-      const log = (await import('next-axiom')).log;
-      log.error(`Error while verifying snippet ID ${snippet.id}`, {
-        err,
-        snippetId: snippet.id
-      });
-    } finally {
-      setVerifying(false);
-    }
-  };
 
   // Load info whether the snippet was marked as inappropriate
   useEffect(() => {
@@ -111,31 +78,21 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
           keywordsTags ? `, ${keywordsTags}` : ''
         }`}
       />
-      <Grid templateColumns={{ base: '1fr', lg: '4fr 3fr' }} gap={1}>
+      <PageContentWrapper
+        as={Grid}
+        gridTemplateColumns={{ base: '1fr', lg: '4fr 3fr' }}
+        gap={1}
+      >
         <GridItem>
           {reported && <ValidationAlert />}
           <Snippet snippet={snippet} />
-          {!snippet.verified && user?.appRole?.includes('admin') && (
-            <Button
-              rightIcon={<CheckedIcon boxSize={4} />}
-              size="sm"
-              colorScheme="green"
-              variant="outline"
-              px={2}
-              mt={3}
-              isLoading={verifying}
-              onClick={handleVerification}
-            >
-              Verify snippet
-            </Button>
-          )}
         </GridItem>
         <GridItem>
           <SnippetIdContext.Provider value={snippet.id}>
             <CommentsContainer />
           </SnippetIdContext.Provider>
         </GridItem>
-      </Grid>
+      </PageContentWrapper>
     </>
   );
 }

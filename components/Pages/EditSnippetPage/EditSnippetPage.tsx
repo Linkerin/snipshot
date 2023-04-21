@@ -13,6 +13,7 @@ import { AuthContext } from '@/context/AuthContext';
 import fetchIsPostingAllowed from '@/services/redis/services/fetchIsPostingAllowed';
 import LoadingInfo from './LoadingInfo';
 import Meta from '@/components/Meta/Meta';
+import PageContentWrapper from '@/components/PageContentWrapper';
 import SnippetInputForm from '@/components/SnippetInput/SnippetInputForm';
 import useSnippetInputHandler from '@/hooks/forPages/useSnippetInputHandler';
 
@@ -194,48 +195,51 @@ function EditSnippetPage() {
         description="Edit your code snippet on this page"
         keywords="edit, snippet, code, snipshot"
       />
-
-      {isLoadingSnippet ? (
-        <LoadingInfo />
-      ) : (
-        <>
-          {unavailableSnippet && (
-            <UnavailablePlaceholder onBackClick={handleUnavailableBackClick} />
-          )}
-          {!unavailableSnippet && (
-            <>
-              <Alerts error={error} />
-              <Grid
-                templateAreas={{
-                  base: `"preview"
+      <PageContentWrapper>
+        {isLoadingSnippet ? (
+          <LoadingInfo />
+        ) : (
+          <>
+            {unavailableSnippet && (
+              <UnavailablePlaceholder
+                onBackClick={handleUnavailableBackClick}
+              />
+            )}
+            {!unavailableSnippet && (
+              <>
+                <Alerts error={error} />
+                <Grid
+                  templateAreas={{
+                    base: `"preview"
                  "form"`,
-                  lg: `"form preview"`
-                }}
-                as="section"
-                templateColumns={{ sm: '1fr', lg: '1fr 1fr' }}
-                gap={{ base: 2, lg: 4 }}
-              >
-                <GridItem area="form">
-                  <SnippetInputForm
-                    userInput={userInput}
-                    inputHelpers={inputHelpers}
-                    tags={tags}
-                    handleTagDelete={handleTagDelete}
-                    onChange={handleChange}
-                    onSave={handleSave}
-                    isUploading={isUploading}
-                  />
-                </GridItem>
-                {userInput.snippet && (
-                  <GridItem area="preview" mt={0} mb={1}>
-                    <SnippetPreview userInput={userInput} tags={tags} />
+                    lg: `"form preview"`
+                  }}
+                  as="section"
+                  templateColumns={{ sm: '1fr', lg: '1fr 1fr' }}
+                  gap={{ base: 2, lg: 4 }}
+                >
+                  <GridItem area="form">
+                    <SnippetInputForm
+                      userInput={userInput}
+                      inputHelpers={inputHelpers}
+                      tags={tags}
+                      handleTagDelete={handleTagDelete}
+                      onChange={handleChange}
+                      onSave={handleSave}
+                      isUploading={isUploading}
+                    />
                   </GridItem>
-                )}
-              </Grid>
-            </>
-          )}
-        </>
-      )}
+                  {userInput.snippet && (
+                    <GridItem area="preview" mt={0} mb={1}>
+                      <SnippetPreview userInput={userInput} tags={tags} />
+                    </GridItem>
+                  )}
+                </Grid>
+              </>
+            )}
+          </>
+        )}
+      </PageContentWrapper>
     </>
   );
 }

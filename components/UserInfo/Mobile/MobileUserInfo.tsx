@@ -26,7 +26,8 @@ function MobileUserInfo({ as, avatar, registered, username }: UserInfoProps) {
         top={0}
         zIndex={1}
         bgColor="chakra-body-bg"
-        pb={3}
+        pb={1}
+        px={3}
       >
         <UserAvatar avatar={avatar} username={username} size="sm" />
         <Box w="100%">

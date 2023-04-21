@@ -29,7 +29,8 @@ function MobileUserDescription({ username }: { username?: string }) {
         justifyContent="space-between"
         w="100%"
         mb={2}
-        pl={1}
+        pl={4}
+        pr={3}
       >
         {!isEditing && initialDescription && (
           <Box>

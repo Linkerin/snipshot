@@ -16,10 +16,9 @@ function MobileTopBar() {
       px={3}
       py={2}
       zIndex={1}
-      mb={1}
       backgroundColor="chakra-body-bg"
     >
-      <Logo height={45} isLink />
+      <Logo height={42} isLink />
       <ThemeSwitch mr={0} />
     </Flex>
   );

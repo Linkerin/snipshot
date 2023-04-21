@@ -5,6 +5,7 @@ import { Grid, GridItem } from '@chakra-ui/react';
 
 import fetchIsPostingAllowed from '@/services/redis/services/fetchIsPostingAllowed';
 import Meta from '@/components/Meta/Meta';
+import PageContentWrapper from '../PageContentWrapper';
 import useSnippetInputHandler from '@/hooks/forPages/useSnippetInputHandler';
 
 const Alerts = dynamic(() => import('@/components/SnippetInput/Alerts'), {
@@ -98,34 +99,36 @@ function AddSnippetPage() {
         description="Post a code snippet to snipshot on this page"
         keywords="add, create, post, new, snippet, code, snipshot"
       />
-      <Alerts error={error} />
-      <Grid
-        templateAreas={{
-          base: `"preview"
+      <PageContentWrapper>
+        <Alerts error={error} />
+        <Grid
+          templateAreas={{
+            base: `"preview"
                  "form"`,
-          lg: `"form preview"`
-        }}
-        as="section"
-        templateColumns={{ sm: '1fr', lg: '1fr 1fr' }}
-        gap={{ base: 2, lg: 4 }}
-      >
-        <GridItem area="form">
-          <SnippetInputForm
-            userInput={userInput}
-            inputHelpers={inputHelpers}
-            tags={tags}
-            handleTagDelete={handleTagDelete}
-            onChange={handleChange}
-            onSave={handleSave}
-            isUploading={isUploading}
-          />
-        </GridItem>
-        {userInput.snippet && (
-          <GridItem area="preview" mt={0} mb={1}>
-            <SnippetPreview userInput={userInput} tags={tags} />
+            lg: `"form preview"`
+          }}
+          as="section"
+          templateColumns={{ sm: '1fr', lg: '1fr 1fr' }}
+          gap={{ base: 2, lg: 4 }}
+        >
+          <GridItem area="form">
+            <SnippetInputForm
+              userInput={userInput}
+              inputHelpers={inputHelpers}
+              tags={tags}
+              handleTagDelete={handleTagDelete}
+              onChange={handleChange}
+              onSave={handleSave}
+              isUploading={isUploading}
+            />
           </GridItem>
-        )}
-      </Grid>
+          {userInput.snippet && (
+            <GridItem area="preview" mt={0} mb={1}>
+              <SnippetPreview userInput={userInput} tags={tags} />
+            </GridItem>
+          )}
+        </Grid>
+      </PageContentWrapper>
     </>
   );
 }

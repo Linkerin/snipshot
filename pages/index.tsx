@@ -3,16 +3,16 @@ import { withAxiomGetServerSideProps } from 'next-axiom';
 
 import cleanObjDataTypesForNextJS from '@/services/utils/cleanObjDataTypesForNextJS';
 import get from '@/services/prisma/snippetsService/get';
-import SnippetsList from '@/components/SnippetsList';
+import HomePage from '@/components/Pages/HomePage';
 import { SnippetType } from '@/services/types';
 
-interface HomeProps {
+export interface HomeProps {
   snippetsData: SnippetType[];
   apiHandlerUrl: string;
 }
 
 export default function Home({ snippetsData, apiHandlerUrl }: HomeProps) {
-  return <SnippetsList snippetsData={snippetsData} fetchUrl={apiHandlerUrl} />;
+  return <HomePage snippetsData={snippetsData} apiHandlerUrl={apiHandlerUrl} />;
 }
 
 export const getServerSideProps: GetServerSideProps =

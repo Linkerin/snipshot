@@ -59,13 +59,11 @@ function Layout({ children }: { children: React.ReactNode }) {
             as="main"
             area="main"
             h={{
-              base: `calc(100dvh - 65px - ${mobileNavHeightvh})`,
+              base: `calc(100dvh - 58px - ${mobileNavHeightvh})`,
               md: 'calc(100dvh - 64px)'
             }}
             overflowY="scroll"
             sx={hideScrollbarCss}
-            px={3}
-            pt={3}
             pb={2}
           >
             {children}

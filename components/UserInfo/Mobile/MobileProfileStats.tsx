@@ -22,14 +22,18 @@ function MobileProfileStats({ userId, username }: MobileProfileStatsProps) {
     <></>
   ) : (
     <Stack
+      bgColor="chakra-body-bg"
       direction="row"
       justifyContent="space-evenly"
-      w="100%"
       spacing={0}
-      p={0}
-      mb={3}
+      position="sticky"
+      zIndex={1}
+      top="57px"
+      pb={1}
+      px={0}
+      w="100%"
     >
-      <Stack alignItems="center" spacing={0} py={0.5}>
+      <Stack alignItems="center" spacing={0} py={0}>
         <Text fontSize="sm" as="b">
           {snippets !== null ? snippets : '–'}
         </Text>
@@ -38,7 +42,7 @@ function MobileProfileStats({ userId, username }: MobileProfileStatsProps) {
         </Text>
       </Stack>
       <VerticalDivider />
-      <Stack alignItems="center" spacing={0} py={0.5}>
+      <Stack alignItems="center" spacing={0} py={0}>
         <Text fontSize="sm" as="b">
           {favorites !== null ? favorites : '–'}
         </Text>
@@ -47,7 +51,7 @@ function MobileProfileStats({ userId, username }: MobileProfileStatsProps) {
         </Text>
       </Stack>
       <VerticalDivider />
-      <Stack alignItems="center" spacing={0} py={0.5}>
+      <Stack alignItems="center" spacing={0} py={0}>
         <Text fontSize="sm" as="b">
           {rating !== null ? rating : '–'}
         </Text>
