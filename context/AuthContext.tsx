@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import type { Session, Subscription } from '@supabase/supabase-js';
+import type { Subscription, SupabaseClient } from '@supabase/supabase-js';
 
 interface AuthProviderProps {
   children: React.ReactElement;
@@ -7,30 +7,62 @@ interface AuthProviderProps {
 
 interface UserState {
   id: string;
-  email?: string;
-  role?: string;
   username?: string;
-  provider?: string;
   avatar?: string;
   registered?: string;
   appRole?: Array<'user' | 'admin'>;
 }
 
+interface RetrieveUserDataParams {
+  userId: string;
+  supabase: SupabaseClient;
+  signal: AbortSignal;
+}
+
+/**
+ * Fetch Supabase for user's info
+ * @returns null in case there are no records in the database or UserData
+ */
+async function retrieveUserData({
+  userId,
+  supabase,
+  signal
+}: RetrieveUserDataParams) {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select(
+      `id,
+       name,
+       avatar,
+       created,
+       users_roles (
+         roles
+      )`
+    )
+    .eq('id', userId)
+    .abortSignal(signal)
+    .limit(1);
+  if (error) throw error;
+  if (data.length === 0) return null;
+
+  return data[0];
+}
+
+type UserData = Awaited<ReturnType<typeof retrieveUserData>>;
 /**
  * Create a custom user object with necessary data from user object
  * returned by Supabase
- * @param session Supabase session data
  * @returns user object for Context API
  */
-function parseUserInfo(session: Session | null): UserState | null {
-  if (session?.user) {
+function parseUserInfo(userData: UserData): UserState | null {
+  if (userData && userData?.id) {
     return {
-      id: session.user.id,
-      email: session.user.email,
-      role: session.user.role,
-      username: session.user.user_metadata?.user_name,
-      provider: session.user.app_metadata?.provider,
-      avatar: session.user.user_metadata?.avatar_url
+      id: userData.id,
+      username: userData.name,
+      avatar: userData.avatar,
+      registered: userData.created,
+      appRole:
+        Array.isArray(userData.users_roles) && userData.users_roles[0]?.roles
     };
   }
 
@@ -43,6 +75,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<UserState | null>(null);
 
   useEffect(() => {
+    const controller = new AbortController();
     const getUserInfo = async () => {
       try {
         const supabase = (await import('@/services/supabase/supabase')).default;
@@ -50,7 +83,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           await supabase.auth.getSession();
         if (sessionError) throw sessionError;
 
-        const user = parseUserInfo(sessionData.session);
+        const userId = sessionData.session?.user.id;
+        if (!userId) {
+          setUser(null);
+          return;
+        }
+
+        const userData = await retrieveUserData({
+          userId,
+          supabase,
+          signal: controller.signal
+        });
+        if (!userData) {
+          setUser(null);
+          return;
+        }
+
+        const user = parseUserInfo(userData);
 
         if (!user) {
           setUser(null);
@@ -58,21 +107,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         }
 
         setUser(user);
-
-        const { data, error } = await supabase
-          .from('users_roles')
-          .select('roles')
-          .match({ id: user?.id })
-          .limit(1)
-          .single();
-        if (error) throw error;
-        if (!data) return;
-
-        setUser(prevState => {
-          if (prevState === null) return prevState;
-
-          return { ...prevState, appRole: data.roles };
-        });
       } catch (err) {
         const log = (await import('next-axiom')).log;
         log.error('AuthContext: getting user info', { err });
@@ -80,40 +114,74 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     };
 
     getUserInfo();
+
+    return () => controller.abort();
   }, []);
 
   useEffect(() => {
     let listener: Subscription;
+    const controller = new AbortController();
 
     const setListener = async () => {
       try {
         const supabase = (await import('@/services/supabase/supabase')).default;
 
-        const { data } = supabase.auth.onAuthStateChange((event, session) => {
-          let user;
-          switch (event) {
-            case 'SIGNED_IN':
-              user = parseUserInfo(session);
-              user ? setUser(user) : setUser(null);
-              break;
+        const { data } = supabase.auth.onAuthStateChange(
+          async (event, session) => {
+            try {
+              let user;
+              switch (event) {
+                case 'SIGNED_IN':
+                  if (!session?.user.id) {
+                    setUser(null);
+                    break;
+                  }
 
-            case 'USER_UPDATED':
-              user = parseUserInfo(session);
-              user ? setUser(user) : setUser(null);
-              break;
+                  user = parseUserInfo(
+                    await retrieveUserData({
+                      userId: session.user.id,
+                      signal: controller.signal,
+                      supabase
+                    })
+                  );
+                  user ? setUser(user) : setUser(null);
+                  break;
 
-            case 'SIGNED_OUT':
-              setUser(null);
-              break;
+                case 'USER_UPDATED':
+                  if (!session?.user.id) {
+                    setUser(null);
+                    break;
+                  }
 
-            case 'USER_DELETED':
-              setUser(null);
-              break;
+                  user = parseUserInfo(
+                    await retrieveUserData({
+                      userId: session.user.id,
+                      signal: controller.signal,
+                      supabase
+                    })
+                  );
+                  user ? setUser(user) : setUser(null);
+                  break;
 
-            default:
-              break;
+                case 'SIGNED_OUT':
+                  setUser(null);
+                  break;
+
+                case 'USER_DELETED':
+                  setUser(null);
+                  break;
+
+                default:
+                  break;
+              }
+            } catch (err) {
+              const log = (await import('next-axiom')).log;
+              log.error('AuthContext: error while handling state change', {
+                err
+              });
+            }
           }
-        });
+        );
 
         listener = data.subscription;
       } catch (err) {
@@ -126,7 +194,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     setListener();
 
-    return () => listener?.unsubscribe();
+    return () => {
+      listener?.unsubscribe();
+      controller.abort();
+    };
   }, [user]);
 
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
