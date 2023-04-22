@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import NextLink from 'next/link';
 import { Box, Flex, Heading, LinkBox, LinkOverlay } from '@chakra-ui/react';
 
+import { LangsType } from '@/services/types';
 import SnippetBarOptions from './SnippetBarOptions';
 import SnippetContext from '@/context/SnippetContext';
 
@@ -11,6 +12,10 @@ function SnippetHeadCircle({ color }: { color: string }) {
 
 function SnippetBar() {
   const { lang, slug, title } = useContext(SnippetContext);
+  let escapedLang: LangsType | string = lang;
+  if (lang) {
+    escapedLang = encodeURIComponent(lang);
+  }
 
   return (
     <Flex as="header" gap={5} alignItems="center" h={4} w="100%">
@@ -22,7 +27,7 @@ function SnippetBar() {
           {slug ? (
             <LinkOverlay
               as={NextLink}
-              href={`/snippets/${lang}/${slug}/`}
+              href={`/snippets/${escapedLang}/${slug}/`}
               prefetch={false}
               _hover={{ color: 'primary' }}
             >
