@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import { AuthContext } from '@/context/AuthContext';
 
 /**
- * Hook that returns an authorization value and set method from the Context
+ * Hook that returns an authorized user info from the Context
  * and redirects unauthorized users to `/` or `/login` routes
  * @param redirectHome If `true` authorized user redirects to `/` route,
  *                     otherwise to `/login`
- * @returns Authorization status as `auth` value and `setAuth` function from the Context
+ * @returns UserState object from the Context
  * @example const user = useAuth(true) // redirects to home page if authorized
  */
 export default function useAuth(redirectHome?: boolean) {

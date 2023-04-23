@@ -1,13 +1,17 @@
+import { useContext } from 'react';
 import dynamic from 'next/dynamic';
-import { Flex } from '@chakra-ui/react';
+import { ButtonGroup, Flex } from '@chakra-ui/react';
 
+import { AuthContext } from '@/context/AuthContext';
 import ThemeSwitch from './ThemeSwitch';
 
 const Logo = dynamic(() => import('@/components/Logo'), {
   loading: () => <div />
 });
+const SettingsButton = dynamic(() => import('./SettingsButton'));
 
 function MobileTopBar() {
+  const user = useContext(AuthContext);
   return (
     <Flex
       as="header"
@@ -19,7 +23,10 @@ function MobileTopBar() {
       backgroundColor="chakra-body-bg"
     >
       <Logo height={42} isLink />
-      <ThemeSwitch mr={0} />
+      <ButtonGroup>
+        {user?.id && <SettingsButton />}
+        <ThemeSwitch mr={0} />
+      </ButtonGroup>
     </Flex>
   );
 }

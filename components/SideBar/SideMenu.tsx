@@ -62,12 +62,18 @@ function SideMenu() {
               Profile
             </LinkOverlay>
           </LinkBox>
-          {/* <LinkBox as={StyledMenuItem}>
-            <ListIcon as={SettingsIcon} />
-            <LinkOverlay as={NextLink} href="#" aria-label="Settings page">
-              Settings
-            </LinkOverlay>
-          </LinkBox> */}
+          {user?.id && (
+            <LinkBox as={StyledMenuItem}>
+              <ListIcon as={SettingsIcon} />
+              <LinkOverlay
+                as={NextLink}
+                href="/settings"
+                aria-label="Settings page"
+              >
+                Settings
+              </LinkOverlay>
+            </LinkBox>
+          )}
         </>
       )}
 
