@@ -1,10 +1,5 @@
 import NextLink from 'next/link';
-import {
-  HTMLChakraProps,
-  IconButton,
-  ThemingProps,
-  useColorModeValue
-} from '@chakra-ui/react';
+import { IconButton, useColorModeValue } from '@chakra-ui/react';
 
 import SettingsIcon from '@/components/Icons/SettingsIcon';
 

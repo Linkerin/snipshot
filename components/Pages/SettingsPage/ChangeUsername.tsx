@@ -2,6 +2,7 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   Button,
+  ButtonGroup,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -18,6 +19,7 @@ import {
 import { AuthContext } from '@/context/AuthContext';
 import SaveIcon from '@/components/Icons/SaveIcon';
 import TickIcon from '@/components/Icons/TickIcon';
+import useActionConfirmation from '@/hooks/useActionConfirmation';
 import useTrottling from '@/hooks/useTrottling';
 
 function ChangeUsername() {
@@ -36,6 +38,7 @@ function ChangeUsername() {
     );
   }, [inputUsername, user?.username, error, helper]);
 
+  const { showConfirmation, toggleConfirmation } = useActionConfirmation();
   const router = useRouter();
   const toast = useToast();
 
@@ -140,6 +143,10 @@ function ChangeUsername() {
       <Heading size="md" fontWeight="normal">
         Change name
       </Heading>
+      <Text fontSize="sm">
+        You may change your username here if the one you prefer is not occupied
+        by another user.
+      </Text>
       <FormControl isInvalid={!!error}>
         <Flex alignItems="center" justifyContent="flex-start" gap={2}>
           <InputGroup w={{ base: '100%', lg: '50%' }}>
@@ -155,17 +162,39 @@ function ChangeUsername() {
               </InputRightElement>
             )}
           </InputGroup>
-          <Button
-            leftIcon={<SaveIcon />}
-            variant="outline"
-            colorScheme={btnColor}
-            isDisabled={!validUsername}
-            isLoading={isSaving}
-            loadingText="Saving..."
-            onClick={handleSave}
-          >
-            Save
-          </Button>
+          {!showConfirmation && (
+            <Button
+              leftIcon={<SaveIcon />}
+              variant="outline"
+              colorScheme={btnColor}
+              isDisabled={!validUsername}
+              // isLoading={isSaving}
+              // loadingText="Saving..."
+              onClick={toggleConfirmation}
+            >
+              Save
+            </Button>
+          )}
+          {showConfirmation && (
+            <ButtonGroup gap={1} variant="outline">
+              <Button
+                colorScheme="green"
+                variant="outline"
+                isLoading={isSaving}
+                loadingText="Saving..."
+                onClick={handleSave}
+              >
+                Confirm
+              </Button>
+              <Button
+                colorScheme="red"
+                isDisabled={isSaving}
+                onClick={toggleConfirmation}
+              >
+                Cancel
+              </Button>
+            </ButtonGroup>
+          )}
         </Flex>
         {error ? (
           <FormErrorMessage>{error}</FormErrorMessage>
