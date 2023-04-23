@@ -69,6 +69,7 @@ function SideMenu() {
                 as={NextLink}
                 href="/settings"
                 aria-label="Settings page"
+                prefetch={false}
               >
                 Settings
               </LinkOverlay>
