@@ -6,7 +6,7 @@ import {
   InputProps
 } from '@chakra-ui/react';
 
-import SearchIcon from './Icons/SearchIcon';
+import SearchIcon from '../Icons/SearchIcon';
 import { SearchFocusHandler, SnippetInfo } from '@/services/types';
 
 const delay = 600; // 600ms delay before making a search request to the server

@@ -12,9 +12,11 @@ import {
 
 import { SearchFocusHandler, SnippetInfo } from '@/services/types';
 
-const CenteredListItem = dynamic(() => import('@/components/CenteredListItem'));
+const CenteredListItem = dynamic(
+  () => import('@/components/Common/CenteredListItem')
+);
 const LangIcon = dynamic(() => import('@/components/Icons/LangIcons/LangIcon'));
-const SearchInput = dynamic(() => import('@/components/SearchInput'));
+const SearchInput = dynamic(() => import('@/components/Common/SearchInput'));
 
 function SearchBox() {
   const [searchValue, setSearchValue] = useState<string>('');

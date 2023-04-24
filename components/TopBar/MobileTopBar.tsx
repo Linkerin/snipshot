@@ -5,7 +5,7 @@ import { ButtonGroup, Flex } from '@chakra-ui/react';
 import { AuthContext } from '@/context/AuthContext';
 import ThemeSwitch from './ThemeSwitch';
 
-const Logo = dynamic(() => import('@/components/Logo'), {
+const Logo = dynamic(() => import('@/components/Common/Logo'), {
   loading: () => <div />
 });
 const SettingsButton = dynamic(() => import('./SettingsButton'));

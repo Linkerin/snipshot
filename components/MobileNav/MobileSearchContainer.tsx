@@ -9,9 +9,9 @@ import {
   LinkOverlay
 } from '@chakra-ui/react';
 
-import CenteredListItem from '@/components/CenteredListItem';
+import CenteredListItem from '@/components/Common/CenteredListItem';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
-import SearchInput from '@/components/SearchInput';
+import SearchInput from '@/components/Common/SearchInput';
 import { SnippetInfo } from '@/services/types';
 
 function MobileSearchContainer() {

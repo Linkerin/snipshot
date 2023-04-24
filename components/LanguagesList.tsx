@@ -9,7 +9,7 @@ import {
   ListProps
 } from '@chakra-ui/react';
 
-import CenteredListItem from './CenteredListItem';
+import CenteredListItem from './Common/CenteredListItem';
 import { DeviceContext } from '@/context/DeviceContext';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
 import { LANGS } from '@/services/constants';

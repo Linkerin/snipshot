@@ -7,7 +7,7 @@ import {
   useBreakpoint
 } from '@chakra-ui/react';
 
-import CustomSpinner from '@/components/CustomSpinner';
+import CustomSpinner from '@/components/Common/CustomSpinner';
 import { DeviceContext } from '@/context/DeviceContext';
 import { MOBILE_BREAKPOINTS } from '@/services/constants';
 import Snippet from '@/components/Snippet/Snippet';

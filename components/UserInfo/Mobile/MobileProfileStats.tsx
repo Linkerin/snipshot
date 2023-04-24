@@ -1,6 +1,6 @@
 import { Collapse, Stack, Text } from '@chakra-ui/react';
 
-import VerticalDivider from '@/components/VerticalDivider';
+import VerticalDivider from '@/components/Common/VerticalDivider';
 import useFetchUserProfileStats from '@/hooks/useFetchUserProfileStats';
 
 interface MobileProfileStatsProps {

@@ -1,6 +1,6 @@
 import { Center, Text } from '@chakra-ui/react';
 
-import CustomSpinner from '@/components/CustomSpinner';
+import CustomSpinner from '@/components/Common/CustomSpinner';
 
 function LoadingInfo() {
   return (

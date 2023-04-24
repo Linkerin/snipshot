@@ -25,7 +25,9 @@ import SignOutIcon from '@/components/Icons/SignOutIcon';
 import UserIcon from '@/components/Icons/UserIcon';
 import useLogout from '@/hooks/useLogout';
 
-const CenteredListItem = dynamic(() => import('@/components/CenteredListItem'));
+const CenteredListItem = dynamic(
+  () => import('@/components/Common/CenteredListItem')
+);
 const LanguagesList = dynamic(() => import('@/components/LanguagesList'));
 
 function SideMenu() {

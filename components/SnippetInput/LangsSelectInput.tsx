@@ -3,7 +3,7 @@ import { ListIcon } from '@chakra-ui/react';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
 import { LANGS } from '@/services/constants';
 import { LangsType } from '@/services/types';
-import SelectInput, { SelectOption } from '@/components/SelectInput';
+import SelectInput, { SelectOption } from '@/components/Common/SelectInput';
 
 interface LangsSelectInputProps {
   onChange: React.ChangeEventHandler<

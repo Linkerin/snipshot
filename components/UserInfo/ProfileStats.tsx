@@ -1,7 +1,7 @@
 import { Stack, Text } from '@chakra-ui/react';
 
 import useFetchUserProfileStats from '@/hooks/useFetchUserProfileStats';
-import VerticalDivider from '@/components/VerticalDivider';
+import VerticalDivider from '@/components/Common/VerticalDivider';
 
 interface ProfileStatsProps {
   userId?: string;

@@ -9,7 +9,7 @@ import {
   VStack
 } from '@chakra-ui/react';
 
-import CustomSpinner from '@/components/CustomSpinner';
+import CustomSpinner from '@/components/Common/CustomSpinner';
 import GithubIcon from '@/components/Icons/GithubIcon';
 import Meta from '@/components/Meta/Meta';
 import useAuth from '@/hooks/useAuth';

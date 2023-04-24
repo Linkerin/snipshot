@@ -3,7 +3,7 @@ import { Card, CardBody, CardHeader, Center } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
 import hideScrollbarCss from '@/services/utils/hideScrollbarCss';
-import Logo from '@/components/Logo';
+import Logo from '@/components/Common/Logo';
 import SideMenu from './SideMenu';
 import UserInfo from '@/components/UserInfo/UserInfo';
 

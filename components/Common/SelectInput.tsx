@@ -16,8 +16,8 @@ import {
 } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
 
-import ArrowDownIcon from './Icons/ArrowDownIcon';
-import ArrowUpIcon from './Icons/ArrowUpIcon';
+import ArrowDownIcon from '../Icons/ArrowDownIcon';
+import ArrowUpIcon from '../Icons/ArrowUpIcon';
 import CenteredListItem from './CenteredListItem';
 
 const SelectContainer = chakra('div', {
