@@ -8,6 +8,7 @@ import useAuth from '@/hooks/useAuth';
 
 function SettingsPage() {
   const user = useAuth();
+
   return (
     <PageContentWrapper
       as={Flex}

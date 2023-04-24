@@ -1,12 +1,12 @@
-import { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 import { DeviceContext } from '@/context/DeviceContext';
 import hideScrollbarCss from '@/services/utils/hideScrollbarCss';
+import Meta from '@/components/Meta/Meta';
 import SideBarSkeleton from './Skeletons/SideBarSkeleton';
 import TopBar from './TopBar/TopBar';
-import Meta from '@/components/Meta/Meta';
+import { useContext } from 'react';
 
 const AddSnippetButton = dynamic(
   () => import('@/components/AddSnippetButton'),

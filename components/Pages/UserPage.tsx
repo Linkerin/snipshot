@@ -6,8 +6,8 @@ import CodeIcon from '@/components/Icons/CodeIcon';
 import { DeviceContext } from '@/context/DeviceContext';
 import hideScrollbarCss from '@/services/utils/hideScrollbarCss';
 import Meta from '@/components/Meta/Meta';
-import SnippetsList from '@/components/SnippetsList';
 import PageContentWrapper from '@/components/PageContentWrapper';
+import SnippetsList from '@/components/SnippetsList';
 import { UserPageProps } from '@/pages/users/[user]';
 
 const MobileUserInfo = dynamic(

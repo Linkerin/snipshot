@@ -1,4 +1,4 @@
-import { createContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useBreakpoint } from '@chakra-ui/react';
 
 interface ExtendedNavigator extends Navigator {
@@ -21,7 +21,8 @@ interface DeviceContextValue {
 
 export const DeviceContext = createContext({
   isMobile: true,
-  isAppleMobile: false
+  isAppleMobile: false,
+  mobileNavHeightDvh: '7dvh'
 } as DeviceContextValue);
 
 export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
@@ -35,21 +36,23 @@ export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
     [isAppleMobile]
   );
 
+  const firstRender = useRef(true);
+
   useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false;
+      return;
+    }
+
     setIsMobile(['base', 'sm'].includes(breakpoint));
   }, [breakpoint]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const navigator = window.navigator as ExtendedNavigator;
-    if (
-      navigator.standalone &&
-      navigator.userAgent.match(/iPhone|iPad/) !== null
-    ) {
-      setIsAppleMobile(true);
-    } else {
-      setIsAppleMobile(false);
-    }
+    const appleMobile =
+      navigator.standalone && navigator.userAgent.match(/iPhone|iPad/) !== null;
+    setIsAppleMobile(appleMobile);
   }, []);
 
   return (

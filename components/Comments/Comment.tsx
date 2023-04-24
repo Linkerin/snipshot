@@ -41,8 +41,8 @@ function Comment({ comment }: { comment: CommentType }) {
           .eq('id', comment.id);
         if (error) throw error;
       } catch (err) {
-        console.error(`Error while deleting comment ID ${comment.id}`);
-        console.error(err);
+        const log = (await import('next-axiom')).log;
+        log.error(`Error while deleting comment ID ${comment.id}`, { err });
       } finally {
         setRemoving(false);
         toggleConfirmation();
