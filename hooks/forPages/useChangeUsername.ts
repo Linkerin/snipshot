@@ -22,7 +22,7 @@ import { AuthContext } from '@/context/AuthContext';
  * } = useChangeUsername();
  */
 function useChangeUsername() {
-  const user = useContext(AuthContext);
+  const [user, userAction] = useContext(AuthContext);
 
   const [inputUsername, setInputUsername] = useState(user?.username ?? '');
   const [validUsername, setValidUsername] = useState(false);
@@ -127,6 +127,7 @@ function useChangeUsername() {
         status: 'success',
         duration: 3000
       });
+      userAction && userAction('update');
       await router.push(`/users/${encodeURIComponent(inputUsername)}`);
       setValidUsername(false);
     } catch (err) {
@@ -144,6 +145,7 @@ function useChangeUsername() {
     inputUsername,
     validUsername,
     user?.username,
+    userAction,
     router,
     toast
   ]);

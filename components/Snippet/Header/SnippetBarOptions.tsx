@@ -50,7 +50,7 @@ function SnippetBarOptions() {
     onClose: onReportClose
   } = useDisclosure();
 
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
   const { id, slug, lang, author } = useContext(SnippetContext);
 
   const toast = useToast();

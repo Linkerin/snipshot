@@ -12,7 +12,7 @@ import { AuthContext } from '@/context/AuthContext';
  * @example const user = useAuth(true) // redirects to home page if authorized
  */
 export default function useAuth(redirectHome?: boolean) {
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
   const router = useRouter();
 
   // if `redirectHome` is true, authorized users will be redirected to '/' route

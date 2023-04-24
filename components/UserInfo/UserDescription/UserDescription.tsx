@@ -27,7 +27,7 @@ function UserDescription({ username }: { username: string | undefined }) {
     error
   } = useUserDescription(username);
 
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   return (
     <Collapse in={!isLoading}>

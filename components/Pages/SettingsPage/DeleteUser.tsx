@@ -10,6 +10,7 @@ import {
   useToast
 } from '@chakra-ui/react';
 
+import { AuthContext } from '@/context/AuthContext';
 import { DeviceContext } from '@/context/DeviceContext';
 import useActionConfirmation from '@/hooks/useActionConfirmation';
 
@@ -18,6 +19,7 @@ function DeleteUser() {
 
   const { showConfirmation, toggleConfirmation } = useActionConfirmation();
   const { isMobile } = useContext(DeviceContext);
+  const [user, userAction] = useContext(AuthContext);
 
   const router = useRouter();
   const toast = useToast();
@@ -25,13 +27,15 @@ function DeleteUser() {
   const handleDelete: React.MouseEventHandler = useCallback(
     async e => {
       e.preventDefault;
+      if (!user?.id) return;
       try {
         setIsRemoving(true);
         const supabase = (await import('@/services/supabase/supabase')).default;
         const { error } = await supabase.functions.invoke('delete-user');
         if (error) throw error;
 
-        router.push('/');
+        userAction && userAction('delete');
+        await router.push('/');
       } catch (err) {
         const log = (await import('next-axiom')).log;
         log.error('Error while removing user account', { err });
@@ -45,7 +49,7 @@ function DeleteUser() {
         toggleConfirmation();
       }
     },
-    [router, toast, toggleConfirmation]
+    [router, toast, user?.id, toggleConfirmation, userAction]
   );
 
   return (

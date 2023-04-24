@@ -11,7 +11,7 @@ const Logo = dynamic(() => import('@/components/Logo'), {
 const SettingsButton = dynamic(() => import('./SettingsButton'));
 
 function MobileTopBar() {
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
   return (
     <Flex
       as="header"

@@ -11,7 +11,7 @@ import {
 import { AuthContext } from '@/context/AuthContext';
 
 function Alerts({ error }: { error: string }) {
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   return (
     <VStack spacing={2} mb={3}>

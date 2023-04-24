@@ -20,7 +20,7 @@ import { SnippetIdContext } from '@/components/Pages/SnippetPage/SnippetPage';
 import useCommentsFetching from '@/hooks/forPages/useCommentsFetching';
 
 function CommentsContainer() {
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
   const snippetId = useContext(SnippetIdContext);
   const { comments, commentsLoadStatus } = useCommentsFetching(snippetId);
 

@@ -20,7 +20,7 @@ function AddComment() {
   const [isSavingComment, setIsSavingComment] = useState(false);
 
   const snippetId = useContext(SnippetIdContext);
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   const sendBtnRef = useRef<HTMLButtonElement | null>(null);
 

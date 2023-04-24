@@ -15,7 +15,7 @@ function Comment({ comment }: { comment: CommentType }) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [removing, setRemoving] = useState(false);
 
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
   const { isMobile } = useContext(DeviceContext);
 
   const handleDelete = async (

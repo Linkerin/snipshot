@@ -34,7 +34,7 @@ function useUserDescription(username?: string) {
     description: ''
   });
 
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   const toast = useToast();
 

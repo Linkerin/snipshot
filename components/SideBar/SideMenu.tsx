@@ -29,7 +29,7 @@ const CenteredListItem = dynamic(() => import('@/components/CenteredListItem'));
 const LanguagesList = dynamic(() => import('@/components/LanguagesList'));
 
 function SideMenu() {
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
   const handleLogout = useLogout();
 
   const menuItemHoverColor = useColorModeValue(

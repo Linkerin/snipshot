@@ -25,7 +25,7 @@ function MobileUserDescription({ username }: { username?: string }) {
     handleSave,
     error
   } = useUserDescription(username);
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   return (
     <Collapse in={!isLoading}>

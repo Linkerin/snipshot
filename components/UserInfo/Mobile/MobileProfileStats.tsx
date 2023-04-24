@@ -1,4 +1,4 @@
-import { Stack, Text } from '@chakra-ui/react';
+import { Collapse, Stack, Text } from '@chakra-ui/react';
 
 import VerticalDivider from '@/components/VerticalDivider';
 import useFetchUserProfileStats from '@/hooks/useFetchUserProfileStats';
@@ -18,48 +18,48 @@ function MobileProfileStats({ userId, username }: MobileProfileStatsProps) {
     stats: { snippets, favorites, rating }
   } = useFetchUserProfileStats({ userId, username });
 
-  return isLoading || (!userId && !username) ? (
-    <></>
-  ) : (
-    <Stack
-      bgColor="chakra-body-bg"
-      direction="row"
-      justifyContent="space-evenly"
-      spacing={0}
-      position="sticky"
-      zIndex={1}
-      top="56px"
-      pb={1}
-      px={0}
-      w="100%"
-    >
-      <Stack alignItems="center" spacing={0} py={0}>
-        <Text fontSize="sm" as="b">
-          {snippets !== null ? snippets : '–'}
-        </Text>
-        <Text fontSize="xs" color="text-secondary">
-          snips
-        </Text>
+  return (
+    <Collapse in={!isLoading && (!!userId || !!username)}>
+      <Stack
+        bgColor="chakra-body-bg"
+        direction="row"
+        justifyContent="space-evenly"
+        spacing={0}
+        position="sticky"
+        zIndex={1}
+        top="56px"
+        pb={1}
+        px={0}
+        w="100%"
+      >
+        <Stack alignItems="center" spacing={0} py={0}>
+          <Text fontSize="sm" as="b">
+            {snippets !== null ? snippets : '–'}
+          </Text>
+          <Text fontSize="xs" color="text-secondary">
+            snips
+          </Text>
+        </Stack>
+        <VerticalDivider />
+        <Stack alignItems="center" spacing={0} py={0}>
+          <Text fontSize="sm" as="b">
+            {favorites !== null ? favorites : '–'}
+          </Text>
+          <Text fontSize="xs" color="text-secondary">
+            favorites
+          </Text>
+        </Stack>
+        <VerticalDivider />
+        <Stack alignItems="center" spacing={0} py={0}>
+          <Text fontSize="sm" as="b">
+            {rating !== null ? rating : '–'}
+          </Text>
+          <Text fontSize="xs" color="text-secondary">
+            rating
+          </Text>
+        </Stack>
       </Stack>
-      <VerticalDivider />
-      <Stack alignItems="center" spacing={0} py={0}>
-        <Text fontSize="sm" as="b">
-          {favorites !== null ? favorites : '–'}
-        </Text>
-        <Text fontSize="xs" color="text-secondary">
-          favorites
-        </Text>
-      </Stack>
-      <VerticalDivider />
-      <Stack alignItems="center" spacing={0} py={0}>
-        <Text fontSize="sm" as="b">
-          {rating !== null ? rating : '–'}
-        </Text>
-        <Text fontSize="xs" color="text-secondary">
-          rating
-        </Text>
-      </Stack>
-    </Stack>
+    </Collapse>
   );
 }
 

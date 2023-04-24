@@ -31,7 +31,7 @@ function SnippetReportModal({ isOpen, onClose }: SnippetReportModalProps) {
   const [errorMsg, setErrorMsg] = useState('');
 
   const { id: snippetId } = useContext(SnippetContext);
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   const toast = useToast();
   const backBtnColor = useColorModeValue(

@@ -32,7 +32,7 @@ const openedDefaultState = {
 function MobileNav() {
   const [opened, setOpened] = useState(openedDefaultState);
   const { isAppleMobile, mobileNavHeightvh } = useContext(DeviceContext);
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   const router = useRouter();
 

@@ -16,7 +16,7 @@ function Rating({ id, rating }: RatingProps) {
     'secondary-dark-theme'
   );
 
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   const fetchRatingUpdate = async (
     action: 'increment' | 'decrement' | 'revoke'

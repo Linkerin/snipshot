@@ -8,7 +8,7 @@ import SideMenu from './SideMenu';
 import UserInfo from '@/components/UserInfo/UserInfo';
 
 function SideBar() {
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   return (
     <Card

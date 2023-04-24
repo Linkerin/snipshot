@@ -1,10 +1,14 @@
+import { useContext } from 'react';
+import dynamic from 'next/dynamic';
 import { As, Box, Flex, Text } from '@chakra-ui/react';
 
-import MobileLogoutBtn from './MobileLogoutBtn';
+import { AuthContext } from '@/context/AuthContext';
 import MobileProfileStats from './MobileProfileStats';
 import MobileUserDescription from './MobileUserDescription/MobileUserDescription';
 import UserAvatar from '@/components/UserInfo/Avatars/UserAvatar';
 import Username from '@/components/UserInfo/Username';
+
+const MobileLogoutBtn = dynamic(() => import('./MobileLogoutBtn'));
 
 interface UserInfoProps {
   as?: As<any>;
@@ -14,6 +18,8 @@ interface UserInfoProps {
 }
 
 function MobileUserInfo({ as, avatar, registered, username }: UserInfoProps) {
+  const [user] = useContext(AuthContext);
+
   return (
     <>
       <Flex
@@ -40,7 +46,7 @@ function MobileUserInfo({ as, avatar, registered, username }: UserInfoProps) {
             Member since {registered}
           </Text>
         </Box>
-        <MobileLogoutBtn username={username} />
+        {username === user?.username && <MobileLogoutBtn />}
       </Flex>
       <MobileUserDescription username={username} />
       <MobileProfileStats username={username} />

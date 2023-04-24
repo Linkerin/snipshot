@@ -1,5 +1,9 @@
-import React, { createContext, useEffect, useState } from 'react';
-import type { Subscription, SupabaseClient } from '@supabase/supabase-js';
+import React, { createContext, useCallback, useEffect, useState } from 'react';
+import type {
+  Session,
+  Subscription,
+  SupabaseClient
+} from '@supabase/supabase-js';
 
 interface AuthProviderProps {
   children: React.ReactElement;
@@ -69,10 +73,68 @@ function parseUserInfo(userData: UserData): UserState | null {
   return null;
 }
 
-export const AuthContext = createContext<UserState | null>(null);
+export const AuthContext = createContext<
+  [UserState | null, (action: 'delete' | 'update') => Promise<void>] | []
+>([]);
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<UserState | null>(null);
+
+  const handleUserUpdate = useCallback(
+    async (
+      session: Session | null,
+      signal: AbortSignal,
+      supabase: SupabaseClient
+    ) => {
+      if (!session?.user.id) {
+        setUser(null);
+        return;
+      }
+
+      const userState = parseUserInfo(
+        await retrieveUserData({
+          userId: session.user.id,
+          signal,
+          supabase
+        })
+      );
+      userState ? setUser(userState) : setUser(null);
+    },
+    []
+  );
+
+  const userStateAction = useCallback(
+    async (action: 'delete' | 'update') => {
+      try {
+        const controller = new AbortController();
+        const supabase = (await import('@/services/supabase/supabase')).default;
+        const { data: sessionData, error: sessionError } =
+          await supabase.auth.getSession();
+        if (sessionError) throw sessionError;
+
+        switch (action) {
+          case 'update':
+            await handleUserUpdate(
+              sessionData.session,
+              controller.signal,
+              supabase
+            );
+            break;
+
+          case 'delete':
+            setUser(null);
+            break;
+
+          default:
+            break;
+        }
+      } catch (err) {
+        const log = (await import('next-axiom')).log;
+        log.error(`AuthStateAction: ${action} failed`, { err });
+      }
+    },
+    [handleUserUpdate]
+  );
 
   useEffect(() => {
     const controller = new AbortController();
@@ -83,30 +145,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           await supabase.auth.getSession();
         if (sessionError) throw sessionError;
 
-        const userId = sessionData.session?.user.id;
-        if (!userId) {
-          setUser(null);
-          return;
-        }
-
-        const userData = await retrieveUserData({
-          userId,
-          supabase,
-          signal: controller.signal
-        });
-        if (!userData) {
-          setUser(null);
-          return;
-        }
-
-        const user = parseUserInfo(userData);
-
-        if (!user) {
-          setUser(null);
-          return;
-        }
-
-        setUser(user);
+        await handleUserUpdate(
+          sessionData.session,
+          controller.signal,
+          supabase
+        );
       } catch (err) {
         const log = (await import('next-axiom')).log;
         log.error('AuthContext: getting user info', { err });
@@ -116,7 +159,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     getUserInfo();
 
     return () => controller.abort();
-  }, []);
+  }, [handleUserUpdate]);
 
   useEffect(() => {
     let listener: Subscription;
@@ -132,35 +175,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
               let user;
               switch (event) {
                 case 'SIGNED_IN':
-                  if (!session?.user.id) {
-                    setUser(null);
-                    break;
-                  }
-
-                  user = parseUserInfo(
-                    await retrieveUserData({
-                      userId: session.user.id,
-                      signal: controller.signal,
-                      supabase
-                    })
-                  );
-                  user ? setUser(user) : setUser(null);
+                  await handleUserUpdate(session, controller.signal, supabase);
                   break;
 
                 case 'USER_UPDATED':
-                  if (!session?.user.id) {
-                    setUser(null);
-                    break;
-                  }
-
-                  user = parseUserInfo(
-                    await retrieveUserData({
-                      userId: session.user.id,
-                      signal: controller.signal,
-                      supabase
-                    })
-                  );
-                  user ? setUser(user) : setUser(null);
+                  await handleUserUpdate(session, controller.signal, supabase);
                   break;
 
                 case 'SIGNED_OUT':
@@ -198,7 +217,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       listener?.unsubscribe();
       controller.abort();
     };
-  }, [user]);
+  }, [handleUserUpdate]);
 
-  return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={[user, userStateAction]}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

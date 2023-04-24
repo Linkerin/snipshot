@@ -1,14 +1,11 @@
-import { useContext } from 'react';
 import { IconButton } from '@chakra-ui/react';
 
-import { AuthContext } from '@/context/AuthContext';
 import SignOutIcon from '@/components/Icons/SignOutIcon';
 import useLogout from '@/hooks/useLogout';
 
-function MobileLogoutBtn({ username }: { username: string | undefined }) {
-  const user = useContext(AuthContext);
+function MobileLogoutBtn() {
   const handleLogout = useLogout();
-  return username === user?.username ? (
+  return (
     <IconButton
       aria-label="Logout"
       icon={<SignOutIcon />}
@@ -16,8 +13,6 @@ function MobileLogoutBtn({ username }: { username: string | undefined }) {
       size="lg"
       onClick={handleLogout}
     />
-  ) : (
-    <></>
   );
 }
 

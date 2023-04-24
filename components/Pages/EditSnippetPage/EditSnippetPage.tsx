@@ -45,7 +45,7 @@ function EditSnippetPage() {
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState('');
 
-  const user = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   const router = useRouter();
   const { snippetId } = router.query;
