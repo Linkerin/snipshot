@@ -31,7 +31,7 @@ const openedDefaultState = {
 
 function MobileNav() {
   const [opened, setOpened] = useState(openedDefaultState);
-  const { isAppleMobile, mobileNavHeightvh } = useContext(DeviceContext);
+  const { isAppleMobile, mobileNavHeightDvh } = useContext(DeviceContext);
   const [user] = useContext(AuthContext);
 
   const router = useRouter();
@@ -98,7 +98,7 @@ function MobileNav() {
       <Card borderRadius={0} bg="chakra-body-bg">
         <CardBody p={0}>
           <ButtonGroup
-            h={mobileNavHeightvh}
+            h={mobileNavHeightDvh}
             w="100%"
             spacing={0}
             isAttached

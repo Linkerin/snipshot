@@ -19,7 +19,7 @@ const SideBar = dynamic(() => import('@/components/SideBar/SideBar'), {
 });
 
 function Layout({ children }: { children: React.ReactNode }) {
-  const { isMobile, mobileNavHeightvh } = useContext(DeviceContext);
+  const { isMobile, mobileNavHeightDvh } = useContext(DeviceContext);
   const templateAreas = isMobile
     ? `"topbar"
        "main"
@@ -59,7 +59,7 @@ function Layout({ children }: { children: React.ReactNode }) {
             as="main"
             area="main"
             h={{
-              base: `calc(100dvh - 58px - ${mobileNavHeightvh})`,
+              base: `calc(100dvh - 58px - ${mobileNavHeightDvh})`,
               md: 'calc(100dvh - 64px)'
             }}
             overflowY="scroll"

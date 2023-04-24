@@ -1,4 +1,4 @@
-import { createContext, useEffect, useMemo, useRef, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import { useBreakpoint } from '@chakra-ui/react';
 
 interface ExtendedNavigator extends Navigator {
@@ -16,7 +16,7 @@ interface DeviceProviderProps {
 interface DeviceContextValue {
   isMobile: boolean;
   isAppleMobile: boolean;
-  mobileNavHeightvh: '8.5dvh' | '7dvh';
+  mobileNavHeightDvh: '8.5dvh' | '7dvh';
 }
 
 export const DeviceContext = createContext({
@@ -30,32 +30,21 @@ export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
   const [isAppleMobile, setIsAppleMobile] = useState(
     ['iPhone', 'iPad'].includes(device?.model)
   );
-  const mobileNavHeightvh = useMemo(
+  const mobileNavHeightDvh = useMemo(
     () => (isAppleMobile ? '8.5dvh' : '7dvh'),
     [isAppleMobile]
   );
 
-  // const firstRender = useRef(true);
-
   useEffect(() => {
-    // if (firstRender.current) {
-    //   firstRender.current = false;
-    //   return;
-    // }
-
-    if (['base', 'sm'].includes(breakpoint)) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
+    setIsMobile(['base', 'sm'].includes(breakpoint));
   }, [breakpoint]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const navigator = window.navigator as ExtendedNavigator;
     if (
-      window.navigator.userAgent.match(/iPhone|iPad/) !== null &&
-      navigator.standalone
+      navigator.standalone &&
+      navigator.userAgent.match(/iPhone|iPad/) !== null
     ) {
       setIsAppleMobile(true);
     } else {
@@ -65,7 +54,7 @@ export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
 
   return (
     <DeviceContext.Provider
-      value={{ isMobile, isAppleMobile, mobileNavHeightvh }}
+      value={{ isMobile, isAppleMobile, mobileNavHeightDvh }}
     >
       {children}
     </DeviceContext.Provider>
