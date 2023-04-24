@@ -1,6 +1,10 @@
 import { createContext, useEffect, useMemo, useRef, useState } from 'react';
 import { useBreakpoint } from '@chakra-ui/react';
 
+interface ExtendedNavigator extends Navigator {
+  standalone: boolean;
+}
+
 interface DeviceProviderProps {
   children: React.ReactElement;
   device: {
@@ -48,8 +52,14 @@ export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if (window.navigator.userAgent.match(/iPhone|iPad/) !== null) {
+    const navigator = window.navigator as ExtendedNavigator;
+    if (
+      window.navigator.userAgent.match(/iPhone|iPad/) !== null &&
+      navigator.standalone
+    ) {
       setIsAppleMobile(true);
+    } else {
+      setIsAppleMobile(false);
     }
   }, []);
 
