@@ -17,6 +17,7 @@ function AddSnippetButton() {
       colorScheme={buttonColor}
       aria-label="Add Snippet"
       icon={<PlusIcon boxSize={9} color={'custom-white'} />}
+      borderRadius="2xl"
       shadow="dark-lg"
       sx={{
         position: 'absolute',
@@ -25,7 +26,6 @@ function AddSnippetButton() {
         height: '3.5rem',
         width: '3.5rem'
       }}
-      isRound
     />
   );
 }
