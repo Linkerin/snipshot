@@ -39,7 +39,7 @@ function UserPage({
     <>
       <Meta
         title={`${username} profile · snipshot`}
-        description="Post a code snippet to snipshot on this page"
+        description={`${username}'s profile page. Discover his snippets, description and stats there.`}
         keywords={`profile, user, ${username}, snippets`}
       />
       <Grid gridTemplateColumns={gridTempalate} pt={3}>
