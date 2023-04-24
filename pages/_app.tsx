@@ -1,21 +1,21 @@
 import type { AppProps } from 'next/app';
 
 import { AuthProvider } from '@/context/AuthContext';
-import { Chakra } from '@/components/Chakra';
+import ChakraProvider from '@/context/ChakraContext';
 import { DeviceProvider } from '@/context/DeviceContext';
 
 import Layout from '@/components/Layout';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <Chakra>
+    <ChakraProvider cookies={pageProps.info?.cookies}>
       <AuthProvider>
-        <DeviceProvider device={pageProps.device}>
+        <DeviceProvider device={pageProps.info?.device}>
           <Layout>
             <Component {...pageProps} />
           </Layout>
         </DeviceProvider>
       </AuthProvider>
-    </Chakra>
+    </ChakraProvider>
   );
 }

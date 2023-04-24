@@ -17,10 +17,14 @@ export default function Home({ snippetsData, apiHandlerUrl }: HomeProps) {
 
 export const getServerSideProps: GetServerSideProps =
   withAxiomGetServerSideProps(async ({ req, res, log }) => {
-    const device = {
-      type: req.headers['x-device-type'] ?? '',
-      model: req.headers['x-device-model'] ?? ''
+    const info = {
+      device: {
+        type: req.headers['x-device-type'] ?? '',
+        model: req.headers['x-device-model'] ?? ''
+      },
+      cookies: req.headers.cookie ?? ''
     };
+
     const apiHandlerUrl = '/snippets';
 
     try {
@@ -35,10 +39,10 @@ export const getServerSideProps: GetServerSideProps =
         'public, s-maxage=180, stale-while-revalidate=59'
       );
 
-      return { props: { snippetsData, apiHandlerUrl, device } };
+      return { props: { snippetsData, apiHandlerUrl, info } };
     } catch (err) {
       log.error('Error while getting props for index page', { err });
 
-      return { props: { snippetsData: [], apiHandlerUrl, device } };
+      return { props: { snippetsData: [], apiHandlerUrl, info } };
     }
   });

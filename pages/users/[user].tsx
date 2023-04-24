@@ -28,9 +28,12 @@ function User({ avatar, registered, username, snippetsData }: UserPageProps) {
 
 export const getServerSideProps: GetServerSideProps =
   withAxiomGetServerSideProps(async ({ req, res, params, log }) => {
-    const device = {
-      type: req.headers['x-device-type'] ?? '',
-      model: req.headers['x-device-model'] ?? ''
+    const info = {
+      device: {
+        type: req.headers['x-device-type'] ?? '',
+        model: req.headers['x-device-model'] ?? ''
+      },
+      cookies: req.headers.cookie ?? ''
     };
 
     try {
@@ -66,7 +69,7 @@ export const getServerSideProps: GetServerSideProps =
           registered,
           username,
           snippetsData,
-          device
+          info
         }
       };
     } catch (err) {
@@ -78,7 +81,7 @@ export const getServerSideProps: GetServerSideProps =
           registered: '',
           username: '',
           snippetsData: [],
-          device
+          info
         }
       };
     }

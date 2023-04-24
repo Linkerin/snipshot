@@ -31,13 +31,13 @@ export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
     [isAppleMobile]
   );
 
-  const firstRender = useRef(true);
+  // const firstRender = useRef(true);
 
   useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
+    // if (firstRender.current) {
+    //   firstRender.current = false;
+    //   return;
+    // }
 
     if (['base', 'sm'].includes(breakpoint)) {
       setIsMobile(true);

@@ -13,6 +13,7 @@ function SideBar() {
   return (
     <Card
       h="100%"
+      maxHeight="100dvh"
       borderRadius="0 10px 10px 0"
       overflowY="scroll"
       sx={hideScrollbarCss}
