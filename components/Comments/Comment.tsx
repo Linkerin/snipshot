@@ -1,47 +1,55 @@
-import { useContext, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
+import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
-import { Flex, IconButton, Link, Text } from '@chakra-ui/react';
+import { ButtonGroup, Flex, IconButton, Link, Text } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
-import { DeviceContext } from '@/context/DeviceContext';
 import { CommentType } from '@/services/types';
-import CrossIcon from '@/components/Icons/CrossIcon';
 import DeleteIcon from '@/components/Icons/DeleteIcon';
+import { DeviceContext } from '@/context/DeviceContext';
 import { parseDate } from '@/services/utils/date';
-import TickIcon from '@/components/Icons/TickIcon';
 import UserAvatar from '@/components/UserInfo/Avatars/UserAvatar';
+import useActionConfirmation from '@/hooks/useActionConfirmation';
+
+const CrossIcon = dynamic(() => import('@/components/Icons/CrossIcon'));
+const TickIcon = dynamic(() => import('@/components/Icons/TickIcon'));
 
 function Comment({ comment }: { comment: CommentType }) {
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const [removing, setRemoving] = useState(false);
 
   const [user] = useContext(AuthContext);
   const { isMobile } = useContext(DeviceContext);
+  const { showConfirmation, toggleConfirmation } = useActionConfirmation();
 
-  const handleDelete = async (
-    e: React.MouseEvent<HTMLButtonElement> | React.TouchEvent<HTMLButtonElement>
-  ) => {
-    e.preventDefault();
-    if (removing) return;
-    if (user?.id !== comment.author.id) return;
+  const handleDelete = useCallback(
+    async (
+      e:
+        | React.MouseEvent<HTMLButtonElement>
+        | React.TouchEvent<HTMLButtonElement>
+    ) => {
+      e.preventDefault();
+      if (removing) return;
+      if (user?.id !== comment.author.id) return;
 
-    setRemoving(true);
-    try {
-      const supabase = (await import('@/services/supabase/supabase')).default;
+      setRemoving(true);
+      try {
+        const supabase = (await import('@/services/supabase/supabase')).default;
 
-      const { data, error } = await supabase
-        .from('comments')
-        .update({ deleted: true, updated: new Date() })
-        .eq('id', comment.id);
-      if (error) throw error;
-    } catch (err) {
-      console.error(`Error while deleting comment ID ${comment.id}`);
-      console.error(err);
-    } finally {
-      setRemoving(false);
-      setShowConfirmation(false);
-    }
-  };
+        const { data, error } = await supabase
+          .from('comments')
+          .update({ deleted: true, updated: new Date() })
+          .eq('id', comment.id);
+        if (error) throw error;
+      } catch (err) {
+        console.error(`Error while deleting comment ID ${comment.id}`);
+        console.error(err);
+      } finally {
+        setRemoving(false);
+        toggleConfirmation();
+      }
+    },
+    [comment.id, comment.author.id, removing, user?.id, toggleConfirmation]
+  );
 
   return (
     <Flex alignItems="center" justifyContent="space-between">
@@ -92,21 +100,20 @@ function Comment({ comment }: { comment: CommentType }) {
             isDisabled={showConfirmation}
             size={isMobile ? 'md' : 'sm'}
             variant="outline"
-            onClick={e => setShowConfirmation(true)}
+            onClick={toggleConfirmation}
             px={2}
           />
         )}
       {!comment.deleted &&
         showConfirmation &&
         user?.id === comment.author.id && (
-          <Flex gap={2}>
+          <ButtonGroup variant="outline">
             <IconButton
               aria-label="Confirm deletion"
               icon={<TickIcon boxSize={isMobile ? 6 : undefined} />}
               colorScheme="red"
               isLoading={removing}
               size={isMobile ? 'md' : 'sm'}
-              variant="outline"
               onClick={handleDelete}
             />
             <IconButton
@@ -115,10 +122,9 @@ function Comment({ comment }: { comment: CommentType }) {
               colorScheme="green"
               isDisabled={removing}
               size={isMobile ? 'md' : 'sm'}
-              variant="outline"
-              onClick={e => setShowConfirmation(false)}
+              onClick={toggleConfirmation}
             />
-          </Flex>
+          </ButtonGroup>
         )}
     </Flex>
   );
