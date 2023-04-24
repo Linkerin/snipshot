@@ -7,7 +7,6 @@ import {
   Heading,
   Highlight,
   Text,
-  useColorModeValue,
   useToast
 } from '@chakra-ui/react';
 
@@ -19,12 +18,8 @@ function DeleteUser() {
 
   const { showConfirmation, toggleConfirmation } = useActionConfirmation();
   const { isMobile } = useContext(DeviceContext);
-  const router = useRouter();
 
-  const btnColor = useColorModeValue(
-    'primary-light-theme',
-    'primary-dark-theme'
-  );
+  const router = useRouter();
   const toast = useToast();
 
   const handleDelete: React.MouseEventHandler = useCallback(
@@ -84,7 +79,7 @@ function DeleteUser() {
       {showConfirmation && !isMobile && (
         <ButtonGroup gap={3}>
           <Button
-            colorScheme={btnColor}
+            colorScheme="green"
             isDisabled={isRemoving}
             onClick={toggleConfirmation}
           >
@@ -113,7 +108,7 @@ function DeleteUser() {
             Confirm deletion
           </Button>
           <Button
-            colorScheme={btnColor}
+            colorScheme="green"
             isDisabled={isRemoving}
             minWidth="40%"
             onClick={toggleConfirmation}
