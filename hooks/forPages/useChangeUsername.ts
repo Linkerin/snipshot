@@ -128,7 +128,8 @@ function useChangeUsername() {
         duration: 3000
       });
       userAction && userAction('update');
-      await router.push(`/users/${encodeURIComponent(inputUsername)}`);
+      typeof window !== 'undefined' &&
+        (await router.push(`/users/${encodeURIComponent(inputUsername)}`));
       setValidUsername(false);
     } catch (err) {
       const log = (await import('next-axiom')).log;

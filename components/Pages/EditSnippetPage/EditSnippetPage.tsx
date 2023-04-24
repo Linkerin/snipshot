@@ -100,11 +100,12 @@ function EditSnippetPage() {
       if (res.status === 200) {
         const data = await res.json();
 
-        await router.push(
-          `/snippets/${encodeURIComponent(data.snippet.lang)}/${
-            data.snippet.slug
-          }/`
-        );
+        typeof window !== 'undefined' &&
+          (await router.push(
+            `/snippets/${encodeURIComponent(data.snippet.lang)}/${
+              data.snippet.slug
+            }/`
+          ));
       }
     } catch (err) {
       const log = (await import('next-axiom')).log;

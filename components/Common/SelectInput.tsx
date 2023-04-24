@@ -63,7 +63,7 @@ interface SelectOptionProps extends Omit<ListItemProps, 'value'> {
 }
 
 export function SelectOption(props: SelectOptionProps) {
-  return <CenteredListItem variant="selectable" {...props} />;
+  return <CenteredListItem variant="selectable" tabIndex={0} {...props} />;
 }
 
 interface SelectInputProps extends Omit<BoxProps, 'children' | 'onChange'> {

@@ -68,7 +68,10 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
 
       onClose();
       // Go to main page if the snippet was deleted from its page
-      if (router.asPath.split('/snippets/')[0] === '') {
+      if (
+        typeof window !== 'undefined' &&
+        router.asPath.split('/snippets/')[0] === ''
+      ) {
         router.push('/');
       }
 

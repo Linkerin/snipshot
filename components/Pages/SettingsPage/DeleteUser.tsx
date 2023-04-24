@@ -35,7 +35,7 @@ function DeleteUser() {
         if (error) throw error;
 
         userAction && userAction('delete');
-        await router.push('/');
+        typeof window !== 'undefined' && (await router.push('/'));
       } catch (err) {
         const log = (await import('next-axiom')).log;
         log.error('Error while removing user account', { err });
