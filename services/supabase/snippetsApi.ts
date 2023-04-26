@@ -103,7 +103,10 @@ export async function create({
     slug += `-${randomString()}`;
   }
 
-  const userId = await getUserIdByJwt(jwt);
+  let userId = null;
+  if (jwt) {
+    userId = await getUserIdByJwt(jwt);
+  }
 
   const { data: createdSnippet, error: insertError } = await supabase
     .from('snippets')

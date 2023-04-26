@@ -16,9 +16,9 @@ export default async function handler(
     try {
       const { title, snippet, lang, tags, jwt } = req.body;
 
-      if (!title || !snippet || !lang || !jwt) {
+      if (!title || !snippet || !lang) {
         return res.status(400).json({
-          message: 'Title, snippet, language and token are required fields.'
+          message: 'Title, snippet and language are required fields.'
         });
       }
 

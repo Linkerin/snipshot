@@ -42,7 +42,7 @@ function Logo({ isLink, height }: LogoProps) {
 
   return (
     <LogoContainer height={height} isLink={isLink}>
-      <Image src={logo} alt="snipshot logo" />
+      <Image src={logo} alt="snipshot logo" priority />
     </LogoContainer>
   );
 }
