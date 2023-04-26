@@ -26,7 +26,7 @@ export const DeviceContext = createContext({
 } as DeviceContextValue);
 
 export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
-  const breakpoint = useBreakpoint();
+  const breakpoint = useBreakpoint(device?.type === 'mobile' ? 'sm' : 'lg');
   const [isMobile, setIsMobile] = useState(device?.type === 'mobile');
   const [isAppleMobile, setIsAppleMobile] = useState(
     ['iPhone', 'iPad'].includes(device?.model)
