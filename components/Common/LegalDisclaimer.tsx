@@ -6,7 +6,7 @@ interface ActionTextProp {
 }
 
 function LegalDisclaimer({
-  actionText = 'using the Application',
+  actionText = 'using snipshot.dev',
   ...props
 }: TextProps & ActionTextProp) {
   return (
