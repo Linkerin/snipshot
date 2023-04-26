@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 
 import Meta from '@/components/Meta/Meta';
+import LegalDisclaimer from '@/components/Common/LegalDisclaimer';
 
 const accentWordsStyles: SystemStyleObject = {
   px: '2',
@@ -25,7 +26,7 @@ export function AboutPage() {
   return (
     <>
       <Meta
-        title="About &#183; snipshot"
+        title="About · snipshot"
         description="Page about the snipshot project"
         keywords="about, information, snipshot"
       />
@@ -67,7 +68,8 @@ export function AboutPage() {
             using it now!
           </Highlight>
         </Text>
-        <Stack direction="column" spacing={1} fontSize="sm" pt={10}>
+        <LegalDisclaimer pt={6} />
+        <Stack direction="column" spacing={1} fontSize="sm">
           <Text align="left" color="text-secondary">
             We would like to thank the following projects for their assets:
           </Text>

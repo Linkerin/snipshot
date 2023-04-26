@@ -11,6 +11,7 @@ import {
 
 import CustomSpinner from '@/components/Common/CustomSpinner';
 import GithubIcon from '@/components/Icons/GithubIcon';
+import LegalDisclaimer from '@/components/Common/LegalDisclaimer';
 import Meta from '@/components/Meta/Meta';
 import useAuth from '@/hooks/useAuth';
 
@@ -84,22 +85,30 @@ function LoginPage() {
             Do not hesitate to join GitHub community if you don&apos;t have an
             account yet!
           </Heading>
+
+          {user?.id ? (
+            <CustomSpinner />
+          ) : (
+            <Button
+              leftIcon={<GithubIcon boxSize={8} />}
+              size="lg"
+              onClick={handeGitHubLogin}
+              isLoading={isAuthorizing}
+              loadingText="Logging in with GitHub..."
+              variant="outline"
+              colorScheme="gray"
+            >
+              Continue with GitHub
+            </Button>
+          )}
+          <LegalDisclaimer
+            actionText="signing in"
+            color="text-secondary"
+            fontSize="xs"
+            lineHeight="short"
+            textAlign="center"
+          />
         </VStack>
-        {user?.id ? (
-          <CustomSpinner />
-        ) : (
-          <Button
-            leftIcon={<GithubIcon boxSize={8} />}
-            size="lg"
-            onClick={handeGitHubLogin}
-            isLoading={isAuthorizing}
-            loadingText="Logging in with GitHub..."
-            variant="outline"
-            colorScheme="gray"
-          >
-            Continue with GitHub
-          </Button>
-        )}
       </Center>
     </>
   );

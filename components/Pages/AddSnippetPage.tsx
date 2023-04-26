@@ -11,6 +11,9 @@ import useSnippetInputHandler from '@/hooks/forPages/useSnippetInputHandler';
 const Alerts = dynamic(() => import('@/components/SnippetInput/Alerts'), {
   ssr: false
 });
+const LegalDisclaimer = dynamic(
+  () => import('@/components/Common/LegalDisclaimer')
+);
 const SnippetPreview = dynamic(
   () => import('@/components/SnippetInput/SnippetPreview'),
   { ssr: false }
@@ -121,6 +124,13 @@ function AddSnippetPage() {
               onChange={handleChange}
               onSave={handleSave}
               isUploading={isUploading}
+            />
+            <LegalDisclaimer
+              actionText="saving the snippet"
+              color="text-secondary"
+              fontSize="xs"
+              lineHeight="short"
+              mt={2}
             />
           </GridItem>
           {userInput.snippet && (
