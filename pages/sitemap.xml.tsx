@@ -11,7 +11,10 @@ interface GenerateSiteMapParams {
     lang: string;
     updated: Date;
   }[];
-  users: (string | null)[];
+  users: {
+    name: string | null;
+    updated: Date | null;
+  }[];
 }
 
 function generateSiteMap({ tags, slugs, users }: GenerateSiteMapParams) {
@@ -67,13 +70,13 @@ function generateSiteMap({ tags, slugs, users }: GenerateSiteMapParams) {
         `;
        }
      })}
-     ${users.map(username => {
-       if (username) {
+     ${users.map(userObj => {
+       if (userObj.name && userObj.updated) {
+         const { name, updated } = userObj;
          return `
             <url>
-              <loc>${baseUrl}/users/${encodeURIComponent(username)}</loc>
-              <lastmod>${new Date().toISOString()}</lastmod>
-              <changefreq>daily</changefreq>
+              <loc>${baseUrl}/users/${encodeURIComponent(name)}</loc>
+              <lastmod>${updated.toISOString()}</lastmod>
               <priority>0.8</priority>
             </url>
         `;
@@ -104,8 +107,13 @@ export const getServerSideProps: GetServerSideProps =
         updated: new Date()
       }
     ];
+    let users: GenerateSiteMapParams['users'] = [
+      {
+        name: null,
+        updated: null
+      }
+    ];
     let tags: GenerateSiteMapParams['tags'] = [''];
-    let users: GenerateSiteMapParams['users'] = [''];
 
     try {
       const tagsQuery = sitemapServices.getAllTags();

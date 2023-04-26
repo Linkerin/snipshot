@@ -20,9 +20,11 @@ export async function getAllSnippetSlugs() {
 }
 
 export async function getAllUsernames() {
-  const usernames = await prisma.user.findMany({ select: { name: true } });
+  const usernames = await prisma.user.findMany({
+    select: { name: true, updated: true }
+  });
 
-  return usernames.map(usernameObj => usernameObj.name);
+  return usernames;
 }
 
 const sitemapServices = { getAllSnippetSlugs, getAllTags, getAllUsernames };
