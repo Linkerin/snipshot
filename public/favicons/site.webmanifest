@@ -15,5 +15,21 @@
   ],
   "background_color": "#282a36",
   "start_url": "https://snipshot.dev",
-  "display": "standalone"
+  "display": "standalone",
+  "shortcuts": [
+    {
+      "name": "Add snippet",
+      "short_name": "Add",
+      "description": "Post a new snippet",
+      "url": "/add",
+      "icons": [{ "src": "/icons/add.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "About snipshot",
+      "short_name": "About",
+      "description": "Application description and legal information",
+      "url": "/about",
+      "icons": [{ "src": "/icons/info.png", "sizes": "192x192" }]
+    }
+  ]
 }
