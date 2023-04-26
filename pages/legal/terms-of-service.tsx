@@ -1,4 +1,4 @@
-import TermsOfServicePage from '@/components/Pages/TermOfServicePage/TermsOfServicePage';
+import TermsOfServicePage from '@/components/Pages/Legal/TermOfServicePage/TermsOfServicePage';
 
 function TermsOfService() {
   return <TermsOfServicePage />;

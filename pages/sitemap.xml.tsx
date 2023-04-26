@@ -46,6 +46,18 @@ function generateSiteMap({ tags, slugs, users }: GenerateSiteMapParams) {
        <changefreq>yearly</changefreq>
        <priority>0.7</priority>
      </url>
+     <url>
+       <loc>${baseUrl}/legal/privacy-policy</loc>
+       <lastmod>2023-04-26T08:28:45.868Z</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.5</priority>
+     </url>
+     <url>
+       <loc>${baseUrl}/legal/terms-of-service</loc>
+       <lastmod>2023-04-26T08:28:45.868Z</lastmod>
+       <changefreq>monthly</changefreq>
+       <priority>0.5</priority>
+     </url>
      ${LANGS.map(lang => {
        if (lang)
          return `

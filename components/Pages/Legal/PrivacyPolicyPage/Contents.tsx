@@ -7,7 +7,7 @@ import {
   Heading,
   Link,
   ListItem,
-  OrderedList
+  UnorderedList
 } from '@chakra-ui/react';
 
 function Contents() {
@@ -19,45 +19,48 @@ function Contents() {
           <AccordionIcon />
         </AccordionButton>
         <AccordionPanel>
-          <OrderedList pl={2}>
+          <UnorderedList pl={2} spacing={1.5}>
             <ListItem>
-              <Link href="#application-use">Use of the Application</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="#user-content">User Content</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="#property">Intellectual Property</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="#links">
-                Links to Third-Party Websites or Resources
+              <Link href="#personal-info">
+                Personal identification information
               </Link>
             </ListItem>
             <ListItem>
-              <Link href="#warranties">Disclaimer of Warranties</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="#liabilities">Limitation of Liability</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="#indemnification">Indemnification</Link>
-            </ListItem>
-            <ListItem>
-              <Link href="#services-modification">
-                Modification or Termination of Services
+              <Link href="#non-personal-info">
+                Non-personal identification information
               </Link>
             </ListItem>
             <ListItem>
-              <Link href="#termination">Termination</Link>
+              <Link href="#cookies">Web browser cookies</Link>
             </ListItem>
             <ListItem>
-              <Link href="#miscellaneous">Miscellaneous</Link>
+              <Link href="#info-usage">How we use collected information</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="#info-protection">
+                How we protect your information
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="#info-sharing">
+                Sharing your personal information
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link href="#changes">Changes to this privacy policy</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="#acceptance">Your acceptance of these terms</Link>
+            </ListItem>
+            <ListItem>
+              <Link href="#ownership">
+                Ownership and Disposal of User Content
+              </Link>
             </ListItem>
             <ListItem>
               <Link href="#contact-us">Contacting us</Link>
             </ListItem>
-          </OrderedList>
+          </UnorderedList>
         </AccordionPanel>
       </AccordionItem>
     </Accordion>

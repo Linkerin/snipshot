@@ -37,7 +37,7 @@ function TermsOfServicePage() {
         <Text id="application-use">
           <Highlight
             query="1. Use of the Application."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             1. Use of the Application. The Application is a platform for
             developers to store and share useful code snippets in the web. By
@@ -50,7 +50,7 @@ function TermsOfServicePage() {
         <Text id="user-content">
           <Highlight
             query="2. User Content."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             2. User Content. You are solely responsible for the content that you
             post or submit to the Application (&#34;User Content&#34;). The User
@@ -71,7 +71,7 @@ function TermsOfServicePage() {
         <Text id="property">
           <Highlight
             query="3. Intellectual Property."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             3. Intellectual Property. The Application and its entire contents,
             features, and functionality (including but not limited to all
@@ -86,7 +86,7 @@ function TermsOfServicePage() {
         <Text id="links">
           <Highlight
             query="4. Links to Third-Party Websites or Resources."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             4. Links to Third-Party Websites or Resources. The Application may
             contain links to third-party websites or resources. The Site
@@ -101,7 +101,7 @@ function TermsOfServicePage() {
         <Text id="warranties">
           <Highlight
             query="5. Disclaimer of Warranties."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             5. Disclaimer of Warranties. The Application is provided &#34;as
             is&#34; and without warranty of any kind, whether express or
@@ -114,7 +114,7 @@ function TermsOfServicePage() {
         <Text id="liabilities">
           <Highlight
             query="6. Limitation of Liability."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             6. Limitation of Liability. In no event shall the Application, its
             affiliates, licensors, or service providers be liable for any
@@ -128,7 +128,7 @@ function TermsOfServicePage() {
         <Text id="indemnification">
           <Highlight
             query="7. Indemnification."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             7. Indemnification. You agree to indemnify and hold the Site, its
             affiliates, licensors, and service providers harmless from any claim
@@ -142,7 +142,7 @@ function TermsOfServicePage() {
         <Text id="services-modification">
           <Highlight
             query="8. Modification or Termination of Services."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             8. Modification or Termination of Services. The Site reserves the
             right to modify or terminate the Application or any services
@@ -158,7 +158,7 @@ function TermsOfServicePage() {
         <Text id="termination">
           <Highlight
             query="9. Termination."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             9. Termination. The Site may terminate these Terms and your access
             to the Application at any time, for any reason, without notice or
@@ -169,7 +169,7 @@ function TermsOfServicePage() {
         <Text id="miscellaneous">
           <Highlight
             query="10. Miscellaneous."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             10. Miscellaneous. These Terms constitute the entire agreement
             between you and the Site regarding the use of the Application. If
@@ -185,7 +185,7 @@ function TermsOfServicePage() {
         <Text id="contact-us">
           <Highlight
             query="11. Contacting us."
-            styles={{ fontWeight: 'bold', color: 'text' }}
+            styles={{ fontWeight: 'bold', color: 'chakra-body-text' }}
           >
             11. Contacting us. If you have any questions about these Terms or
           </Highlight>{' '}
