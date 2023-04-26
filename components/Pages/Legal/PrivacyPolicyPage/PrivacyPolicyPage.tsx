@@ -35,12 +35,15 @@ function PrivacyPolicyPage() {
         </Heading>
         <Contents />
         <Text>
-          This Privacy Policy governs the manner in which
-          <strong> snipshot.dev</strong> website (&#34;we&#34;, &#34;us&#34;,
-          &#34;our&#34;, or &#34;Site&#34;) collects, uses, maintains, and
-          discloses information collected from users (each, a &#34;User&#34;) of
-          the Site (&#34;Site&#34;). This privacy policy applies to the Site and
-          all products and services offered by <strong>snipshot.dev</strong>.
+          This Privacy Policy governs the manner in which{' '}
+          <Link as={NextLink} href="/" fontWeight="bold">
+            snipshot.dev
+          </Link>{' '}
+          website (&#34;we&#34;, &#34;us&#34;, &#34;our&#34;, or &#34;Site&#34;)
+          collects, uses, maintains, and discloses information collected from
+          users (each, a &#34;User&#34;) of the Site (&#34;Site&#34;). This
+          privacy policy applies to the Site and all products and services
+          offered by <strong>snipshot.dev</strong>.
         </Text>
 
         <Heading fontSize="xl" id="personal-info">
@@ -180,8 +183,12 @@ function PrivacyPolicyPage() {
           Contacting us
         </Heading>
         <Text>
-          If you have any questions about this Privacy Policy, the practices of
-          this Site, or your dealings with this Site, please contact us at{' '}
+          If you have any questions about this Privacy Policy, our{' '}
+          <Link as={NextLink} href="/legal/terms-of-service" fontWeight="bold">
+            Terms of Service
+          </Link>
+          , the practices of this Site, or your dealings with this Site, please
+          contact us at{' '}
           <Link as={NextLink} href="mailto:info@snipshot.dev" fontWeight="bold">
             info@snipshot.dev
           </Link>

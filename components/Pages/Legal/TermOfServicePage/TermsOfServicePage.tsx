@@ -29,7 +29,7 @@ function TermsOfServicePage() {
         <Contents />
 
         <Text>
-          Welcome to Snipshot.dev (the &#34;Application&#34;, or the
+          Welcome to snipshot.dev (the &#34;Application&#34;, or the
           &#34;Site&#34;). By accessing or using the Application, you agree to
           be bound by these Terms of Service (&#34;Terms&#34;).
         </Text>
@@ -76,9 +76,9 @@ function TermsOfServicePage() {
             3. Intellectual Property. The Application and its entire contents,
             features, and functionality (including but not limited to all
             information, software, text, displays, images, video, and audio, and
-            the design, selection, and arrangement thereof) are owned by
-            Snipshot.dev, its licensors, or other providers of such material and
-            are protected by international copyright, trademark, patent, trade
+            the design, selection, and arrangement thereof) are owned by the
+            Site, its licensors, or other providers of such material and are
+            protected by international copyright, trademark, patent, trade
             secret, and other intellectual property or proprietary rights laws.
           </Highlight>
         </Text>
@@ -147,10 +147,10 @@ function TermsOfServicePage() {
             8. Modification or Termination of Services. The Site reserves the
             right to modify or terminate the Application or any services
             provided through the Application at any time, without notice or
-            liability to you. Snipshot.dev may also modify these Terms at any
-            time, and such modifications shall be effective immediately upon
-            posting of the modified Terms on the Application. Your continued use
-            of the Application after such posting shall be deemed to constitute
+            liability to you. The Site may also modify these Terms at any time,
+            and such modifications shall be effective immediately upon posting
+            of the modified Terms on the Application. Your continued use of the
+            Application after such posting shall be deemed to constitute
             acceptance by you of the modified Terms.
           </Highlight>
         </Text>
@@ -197,7 +197,11 @@ function TermsOfServicePage() {
 
         <Text>
           By using the Application, you acknowledge that you have read,
-          understood, and agree to be bound by these Terms.
+          understood, and agree to be bound by these Terms and our{' '}
+          <Link as={NextLink} href="/legal/privacy-policy" fontWeight="bold">
+            Privacy Policy
+          </Link>
+          .
         </Text>
 
         <Text pt={3} color="text-secondary">
