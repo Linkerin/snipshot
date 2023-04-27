@@ -9,6 +9,7 @@ interface MetaProps {
   description?: string;
   robots?: string;
   imageDescription?: string;
+  imageUrl?: string;
 }
 
 function Meta({
@@ -16,7 +17,8 @@ function Meta({
   keywords,
   description,
   robots,
-  imageDescription
+  imageDescription,
+  imageUrl
 }: MetaProps) {
   return (
     <Head>
@@ -31,10 +33,7 @@ function Meta({
 
       {/* Facebook Meta Tags */}
       <meta property="og:url" content="https://snipshot.dev/" />
-      <meta
-        property="og:image"
-        content="https://snipshot.dev/meta_image.png/"
-      />
+      <meta property="og:image" content={imageUrl} />
       <meta property="og:image:alt" content={imageDescription} />
 
       <meta property="og:type" content="website" />
@@ -47,10 +46,7 @@ function Meta({
       <meta property="twitter:url" content="https://snipshot.dev/" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta
-        name="twitter:image"
-        content="https://snipshot.dev/meta_image.png/"
-      />
+      <meta name="twitter:image" content={imageUrl} />
 
       {/* Roboto font */}
       <style jsx global>{`
@@ -67,7 +63,8 @@ Meta.defaultProps = {
   keywords: 'development, programming, snippets, code, samples',
   description:
     'Explore and share code snippets for your favorite programming language. Insights are gained on shipshot.',
-  imageDescription: 'snipshot.dev website description',
+  imageDescription: 'snipshot.dev Open Graph image',
+  imageUrl: 'https://snipshot.dev/meta_image.png/',
   robots: 'index,follow'
 };
 
