@@ -35,15 +35,11 @@ function UserPage({
   const breakpoint = useBreakpoint();
   const { isMobile } = useContext(DeviceContext);
 
-  console.log(
-    `${process.env.NEXT_PUBLIC_API}/og/users?name=${username}&avatar=${avatar}`
-  );
-
   return (
     <>
       <Meta
         title={`${username} profile · snipshot`}
-        description={`${username}'s profile page. Discover his snippets, description and stats there.`}
+        description={`${username}'s profile page. Discover his snippets, description and stats`}
         keywords={`profile, user, ${username}, snippets`}
         imageUrl={`${process.env.NEXT_PUBLIC_API}/og/users?name=${username}&avatar=${avatar}`}
         imageDescription={`${username}'s profile Open Graph image with stats`}

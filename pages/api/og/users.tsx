@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { NextRequest } from 'next/server';
 import { ImageResponse } from '@vercel/og';
 import { log } from 'next-axiom';
@@ -8,6 +9,24 @@ export const config = {
 
 export default async function handler(request: NextRequest) {
   const primaryColor = '#00e0bc';
+  const statsBlockDisplayStyles: CSSProperties = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start'
+  };
+  const statsNumStyles: CSSProperties = {
+    display: 'flex',
+    fontSize: '42px',
+    lineHeight: '26px'
+  };
+  const statsLabelStyles: CSSProperties = {
+    display: 'flex',
+    color: '#a0b4ae',
+    fontSize: '36px',
+    lineHeight: '22px'
+  };
+
   try {
     const { searchParams } = new URL(request.url);
 
@@ -87,9 +106,9 @@ export default async function handler(request: NextRequest) {
             >
               <h1
                 style={{
-                  fontSize: '80px',
-                  lineHeight: '84px',
-                  marginBottom: '2rem'
+                  fontSize: '88px',
+                  lineHeight: '92px',
+                  marginBottom: '1.6rem'
                 }}
               >
                 {name}
@@ -105,89 +124,32 @@ export default async function handler(request: NextRequest) {
               >
                 <div
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
                     paddingRight: '4rem',
-                    borderRight: `2px solid ${primaryColor}`
+                    borderRight: `2px solid ${primaryColor}`,
+                    ...statsBlockDisplayStyles
                   }}
                 >
-                  <p
-                    style={{
-                      display: 'flex',
-                      fontSize: '36px',
-                      lineHeight: '20px'
-                    }}
-                  >
-                    {stats.numOfSnippets}
-                  </p>
-                  <p
-                    style={{
-                      display: 'flex',
-                      fontSize: '30px',
-                      lineHeight: '16px'
-                    }}
-                  >
-                    snips
-                  </p>
+                  <p style={statsNumStyles}>{stats.numOfSnippets}</p>
+                  <p style={statsLabelStyles}>snips</p>
                 </div>
                 <div
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-                    padding: '0 4rem'
+                    padding: '0 4rem',
+                    ...statsBlockDisplayStyles
                   }}
                 >
-                  <p
-                    style={{
-                      display: 'flex',
-                      fontSize: '36px',
-                      lineHeight: '20px'
-                    }}
-                  >
-                    {stats.numOfFavorites}
-                  </p>
-                  <p
-                    style={{
-                      display: 'flex',
-                      fontSize: '30px',
-                      lineHeight: '16px'
-                    }}
-                  >
-                    favorites
-                  </p>
+                  <p style={statsNumStyles}>{stats.numOfFavorites}</p>
+                  <p style={statsLabelStyles}>favorites</p>
                 </div>
                 <div
                   style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
                     paddingLeft: '4rem',
-                    borderLeft: `2px solid ${primaryColor}`
+                    borderLeft: `2px solid ${primaryColor}`,
+                    ...statsBlockDisplayStyles
                   }}
                 >
-                  <p
-                    style={{
-                      display: 'flex',
-                      fontSize: '36px',
-                      lineHeight: '20px'
-                    }}
-                  >
-                    {stats.rating}
-                  </p>
-                  <p
-                    style={{
-                      display: 'flex',
-                      fontSize: '30px',
-                      lineHeight: '16px'
-                    }}
-                  >
-                    rating
-                  </p>
+                  <p style={statsNumStyles}>{stats.rating}</p>
+                  <p style={statsLabelStyles}>rating</p>
                 </div>
               </div>
             </div>
