@@ -1,8 +1,4 @@
-import { useColorModeValue } from '@chakra-ui/react';
-
 function Favicon() {
-  const contentColor = useColorModeValue('#fafdfa', '#282a36');
-
   return (
     <>
       <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml" />
@@ -34,7 +30,7 @@ function Favicon() {
       <meta name="application-name" content="snipshot" />
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
-      <meta name="theme-color" content={`${contentColor ?? '#282a36'}`} />
+      <meta name="theme-color" content="#282a36" />
     </>
   );
 }
