@@ -1,4 +1,11 @@
-import { createContext, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  createContext,
+  startTransition,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 import { useBreakpoint } from '@chakra-ui/react';
 
 interface ExtendedNavigator extends Navigator {
@@ -44,7 +51,9 @@ export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
       return;
     }
 
-    setIsMobile(['base', 'sm'].includes(breakpoint));
+    startTransition(() => {
+      setIsMobile(['base', 'sm'].includes(breakpoint));
+    });
   }, [breakpoint]);
 
   useEffect(() => {
@@ -52,7 +61,9 @@ export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
     const navigator = window.navigator as ExtendedNavigator;
     const appleMobile =
       navigator.standalone && navigator.userAgent.match(/iPhone|iPad/) !== null;
-    setIsAppleMobile(appleMobile);
+    startTransition(() => {
+      setIsAppleMobile(appleMobile);
+    });
   }, []);
 
   return (

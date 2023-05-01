@@ -1,4 +1,10 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react';
+import React, {
+  createContext,
+  startTransition,
+  useCallback,
+  useEffect,
+  useState
+} from 'react';
 import type {
   Session,
   Subscription,
@@ -87,7 +93,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       supabase: SupabaseClient
     ) => {
       if (!session?.user.id) {
-        setUser(null);
+        startTransition(() => {
+          setUser(null);
+        });
         return;
       }
 
@@ -98,7 +106,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
           supabase
         })
       );
-      userState ? setUser(userState) : setUser(null);
+
+      startTransition(() => {
+        userState ? setUser(userState) : setUser(null);
+      });
     },
     []
   );
@@ -172,7 +183,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         const { data } = supabase.auth.onAuthStateChange(
           async (event, session) => {
             try {
-              let user;
               switch (event) {
                 case 'SIGNED_IN':
                   await handleUserUpdate(session, controller.signal, supabase);

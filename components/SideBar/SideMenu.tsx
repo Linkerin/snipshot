@@ -28,7 +28,9 @@ import useLogout from '@/hooks/useLogout';
 const CenteredListItem = dynamic(
   () => import('@/components/Common/CenteredListItem')
 );
-const LanguagesList = dynamic(() => import('@/components/LanguagesList'));
+const LanguagesList = dynamic(
+  () => import('@/components/LanguagesList/LanguagesList')
+);
 
 function SideMenu() {
   const [user] = useContext(AuthContext);

@@ -11,9 +11,12 @@ import PlusIcon from '@/components/Icons/PlusIcon';
 import SearchIcon from '@/components/Icons/SearchIcon';
 import UserIcon from '@/components/Icons/UserIcon';
 
-const LanguagesList = dynamic(() => import('@/components/LanguagesList'), {
-  ssr: false
-});
+const LanguagesList = dynamic(
+  () => import('@/components/LanguagesList/LanguagesList'),
+  {
+    ssr: false
+  }
+);
 const MobileNavModal = dynamic(() => import('./MobileNavModal'), {
   ssr: false
 });

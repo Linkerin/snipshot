@@ -1,37 +1,30 @@
-import { useContext } from 'react';
-import type { AriaRole } from 'react';
+import { useContext, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
-import {
-  LinkBox,
-  LinkOverlay,
-  List,
-  ListIcon,
-  ListProps
-} from '@chakra-ui/react';
+import { LinkBox, LinkOverlay, ListIcon } from '@chakra-ui/react';
 
-import CenteredListItem from './Common/CenteredListItem';
 import { DeviceContext } from '@/context/DeviceContext';
-import LangIcon from '@/components/Icons/LangIcons/LangIcon';
-import { LANGS } from '@/services/constants';
+import CenteredListItem from '@/components/Common/CenteredListItem';
 import { LangsType } from '@/services/types';
 import useHovered from '@/hooks/useHovered';
 
-function LanguagesListItem({
-  lang,
-  role
-}: {
+const LangIcon = dynamic(() => import('@/components/Icons/LangIcons/LangIcon'));
+
+interface LanguagesListItemProps {
   lang: LangsType;
-  role?: AriaRole;
-}) {
+  role?: React.AriaRole;
+}
+
+function LanguagesListItem({ lang, role }: LanguagesListItemProps) {
   const router = useRouter();
   const { isMobile } = useContext(DeviceContext);
   const [hovered, handleMouseEnter, handleMouseLeave] = useHovered();
 
-  let escapedLang: LangsType | string = lang;
-  if (lang) {
-    escapedLang = encodeURIComponent(lang);
-  }
+  let escapedLang: LangsType | string = useMemo(
+    () => (lang ? encodeURIComponent(lang) : ''),
+    [lang]
+  );
 
   return (
     <LinkBox w="100%">
@@ -67,20 +60,4 @@ function LanguagesListItem({
   );
 }
 
-function LanguagesList(props: ListProps) {
-  return (
-    <List
-      display="flex"
-      flexDirection="column"
-      alignItems="flex-start"
-      {...props}
-    >
-      {LANGS.map(lang => {
-        if (lang)
-          return <LanguagesListItem key={lang} lang={lang} role={props.role} />;
-      })}
-    </List>
-  );
-}
-
-export default LanguagesList;
+export default LanguagesListItem;
