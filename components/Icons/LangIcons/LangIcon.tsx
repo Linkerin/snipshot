@@ -31,73 +31,73 @@ interface LangIconProps extends IconProps {
   disabled?: boolean;
 }
 
-function LangIcon(props: LangIconProps) {
-  switch (props.lang) {
+function LangIcon({ lang, disabled, ...props }: LangIconProps) {
+  switch (lang) {
     case 'Bash':
-      return <BashIcon disabled={props.disabled} {...props} />;
+      return <BashIcon disabled={disabled} {...props} />;
 
     case 'C':
-      return <CIcon disabled={props.disabled} {...props} />;
+      return <CIcon disabled={disabled} {...props} />;
 
     case 'C++':
-      return <CPlusPlusIcon disabled={props.disabled} {...props} />;
+      return <CPlusPlusIcon disabled={disabled} {...props} />;
 
     case 'C#':
-      return <CSharpIcon disabled={props.disabled} {...props} />;
+      return <CSharpIcon disabled={disabled} {...props} />;
 
     case 'CSS':
-      return <CssIcon disabled={props.disabled} {...props} />;
+      return <CssIcon disabled={disabled} {...props} />;
 
     case 'Go':
-      return <GoIcon disabled={props.disabled} {...props} />;
+      return <GoIcon disabled={disabled} {...props} />;
 
     case 'Haskell':
-      return <HaskellIcon disabled={props.disabled} {...props} />;
+      return <HaskellIcon disabled={disabled} {...props} />;
 
     case 'HTML':
-      return <HtmlIcon disabled={props.disabled} {...props} />;
+      return <HtmlIcon disabled={disabled} {...props} />;
 
     case 'Java':
-      return <JavaIcon disabled={props.disabled} {...props} />;
+      return <JavaIcon disabled={disabled} {...props} />;
 
     case 'JavaScript':
-      return <JavaScriptIcon disabled={props.disabled} {...props} />;
+      return <JavaScriptIcon disabled={disabled} {...props} />;
 
     case 'Kotlin':
-      return <KotlinIcon disabled={props.disabled} {...props} />;
+      return <KotlinIcon disabled={disabled} {...props} />;
 
     case 'NextJS':
-      return <NextIcon disabled={props.disabled} {...props} />;
+      return <NextIcon disabled={disabled} {...props} />;
 
     case 'PHP':
-      return <PhpIcon disabled={props.disabled} {...props} />;
+      return <PhpIcon disabled={disabled} {...props} />;
 
     case 'Python':
-      return <PythonIcon disabled={props.disabled} {...props} />;
+      return <PythonIcon disabled={disabled} {...props} />;
 
     case 'R':
-      return <RIcon disabled={props.disabled} {...props} />;
+      return <RIcon disabled={disabled} {...props} />;
 
     case 'React':
-      return <ReactIcon disabled={props.disabled} {...props} />;
+      return <ReactIcon disabled={disabled} {...props} />;
 
     case 'Ruby':
-      return <RubyIcon disabled={props.disabled} {...props} />;
+      return <RubyIcon disabled={disabled} {...props} />;
 
     case 'Rust':
-      return <RustIcon disabled={props.disabled} {...props} />;
+      return <RustIcon disabled={disabled} {...props} />;
 
     case 'SQL':
-      return <SqlIcon disabled={props.disabled} {...props} />;
+      return <SqlIcon disabled={disabled} {...props} />;
 
     case 'Swift':
-      return <SwiftIcon disabled={props.disabled} {...props} />;
+      return <SwiftIcon disabled={disabled} {...props} />;
 
     case 'TypeScript':
-      return <TypeScriptIcon disabled={props.disabled} {...props} />;
+      return <TypeScriptIcon disabled={disabled} {...props} />;
 
     case 'Other':
-      return <OtherLangIcon disabled={props.disabled} {...props} />;
+      return <OtherLangIcon disabled={disabled} {...props} />;
 
     default:
       return <></>;

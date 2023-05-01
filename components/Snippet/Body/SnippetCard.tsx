@@ -110,7 +110,7 @@ function SnippetCard({ snippet, source, mt, mb, children }: SnippetCardProps) {
           href={`/snippets/${escapedLang}`}
           prefetch={false}
           aria-label={`${lang} snippets`}
-          icon={<LangIcon lang={lang} focusable />}
+          icon={<LangIcon lang={lang} role="link" focusable />}
           variant="ghost"
           size="sm"
           mr={2}

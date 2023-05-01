@@ -85,6 +85,7 @@ function SearchInput({
       <Input
         ref={inputRef}
         name="search"
+        title="Search input"
         value={value}
         size={size}
         placeholder="Search"

@@ -4,10 +4,10 @@ import type { StyleFunctionProps } from '@chakra-ui/styled-system';
 function snippetCodeStyles(props: StyleFunctionProps) {
   const styles = {
     '.code-line-number': {
-      color: '#8b949e'
+      color: mode('#676a6c', '#9ba5b0')(props)
     },
     code: {
-      color: mode('#66accc', '#e06c75')(props)
+      color: mode('#09769a', '#ff7a70')(props)
     },
     '.hljs': {
       color: '#abb2bf',
@@ -15,18 +15,18 @@ function snippetCodeStyles(props: StyleFunctionProps) {
     },
     '.hljs-doctag, .hljs-keyword, .hljs-meta, .hljs-keyword, .hljs-template-tag, .hljs-template-variable, .hljs-type, .hljs-variable.language_':
       {
-        color: mode('#ab47bc', '#c678dd')(props)
+        color: mode('#ab47bc', '#d385ea')(props)
       },
     '.hljs-title, .hljs-title.class_, .hljs-title.class_.inherited__, .hljs-title.function_':
       {
         color: mode('#2979ff', '#61afef')(props)
       },
     '.hljs-class': {
-      color: mode('#ffa000', '#e5c07b')(props)
+      color: mode('#ec6922', '#e5c07b')(props)
     },
     '.hljs-attr, .hljs-attribute, .hljs-literal, .hljs-meta, .hljs-operator, .hljs-selector-attr, .hljs-selector-class, .hljs-selector-id, .hljs-variable':
       {
-        color: '#d19a66'
+        color: mode('#bd5500', '#d19a66')(props)
       },
     '.hljs-number, .hljs-params': {
       color: mode('#ff7042', '#d19a66')(props)
@@ -41,12 +41,13 @@ function snippetCodeStyles(props: StyleFunctionProps) {
       color: mode('#5c6bc0', '#61aeee')(props)
     },
     '.hljs-code, .hljs-comment, .hljs-formula': {
-      color: '#8b949e',
+      color: mode('#676a6c', '#9ba5b0')(props),
       fontStyle: 'italic'
     },
-    '.hljs-name, .hljs-quote, .hljs-selector-pseudo, .hljs-selector-tag': {
-      color: '#e06c75'
-    },
+    '.hljs-name, .hljs-quote, .hljs-selector-pseudo, .hljs-selector-tag, .hljs-tag':
+      {
+        color: mode('#db3006', '#f9808a')(props)
+      },
     '.hljs-subst': {
       color: '#c9d1d9'
     },
@@ -75,6 +76,9 @@ function snippetCodeStyles(props: StyleFunctionProps) {
     },
     '.hljs-link': {
       textDecoration: 'underline'
+    },
+    '.hljs-property': {
+      color: mode('#af5f04', '#f0d800')(props)
     }
   };
   return styles;

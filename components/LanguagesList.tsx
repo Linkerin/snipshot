@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import type { AriaRole } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import {
@@ -16,7 +17,13 @@ import { LANGS } from '@/services/constants';
 import { LangsType } from '@/services/types';
 import useHovered from '@/hooks/useHovered';
 
-function LanguagesListItem({ lang }: { lang: LangsType }) {
+function LanguagesListItem({
+  lang,
+  role
+}: {
+  lang: LangsType;
+  role?: AriaRole;
+}) {
   const router = useRouter();
   const { isMobile } = useContext(DeviceContext);
   const [hovered, handleMouseEnter, handleMouseLeave] = useHovered();
@@ -38,18 +45,20 @@ function LanguagesListItem({ lang }: { lang: LangsType }) {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <ListIcon boxSize={6}>
-          <LangIcon
-            lang={lang}
-            disabled={
-              router.query.lang === lang || isMobile || hovered ? false : true
-            }
-          />
-        </ListIcon>
+        <ListIcon
+          as={LangIcon}
+          boxSize={6}
+          lang={lang}
+          disabled={
+            router.query.lang === lang || isMobile || hovered ? false : true
+          }
+          role={role}
+        />
         <LinkOverlay
           as={NextLink}
           href={`/snippets/${escapedLang}`}
           prefetch={false}
+          aria-label={`Navigate to ${lang} page`}
         >
           {lang}
         </LinkOverlay>
@@ -67,7 +76,8 @@ function LanguagesList(props: ListProps) {
       {...props}
     >
       {LANGS.map(lang => {
-        if (lang) return <LanguagesListItem key={lang} lang={lang} />;
+        if (lang)
+          return <LanguagesListItem key={lang} lang={lang} role={props.role} />;
       })}
     </List>
   );

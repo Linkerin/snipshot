@@ -102,7 +102,7 @@ function SideMenu() {
               Languages
             </AccordionButton>
             <AccordionPanel maxHeight="35vh" overflowY="scroll" ml={7} p={0}>
-              <LanguagesList />
+              <LanguagesList role="link" />
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
