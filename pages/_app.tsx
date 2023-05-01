@@ -8,9 +8,9 @@ import Layout from '@/components/Layout';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider cookies={pageProps.info?.cookies}>
+    <ChakraProvider>
       <AuthProvider>
-        <DeviceProvider device={pageProps.info?.device}>
+        <DeviceProvider device={pageProps.device}>
           <Layout>
             <Component {...pageProps} />
           </Layout>

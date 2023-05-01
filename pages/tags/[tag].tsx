@@ -24,12 +24,9 @@ function Tag({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
 
 export const getServerSideProps: GetServerSideProps =
   withAxiomGetServerSideProps(async ({ req, res, params, log }) => {
-    const info = {
-      device: {
-        type: req.headers['x-device-type'] ?? '',
-        model: req.headers['x-device-model'] ?? ''
-      },
-      cookies: req.headers.cookie ?? ''
+    const device = {
+      type: req.headers['x-device-type'] ?? '',
+      model: req.headers['x-device-model'] ?? ''
     };
     const apiHandlerUrl = `/snippets?tag=${params?.tag}`;
 
@@ -45,7 +42,7 @@ export const getServerSideProps: GetServerSideProps =
       );
 
       return {
-        props: { snippetsData, apiHandlerUrl, info, tag: params?.tag }
+        props: { snippetsData, apiHandlerUrl, device, tag: params?.tag }
       };
     } catch (err) {
       log.error(`Error while fetchind data for '${params?.tag}' tag page`, {
@@ -54,7 +51,7 @@ export const getServerSideProps: GetServerSideProps =
       });
 
       return {
-        props: { snippetsData: [], apiHandlerUrl, info, tag: params?.tag }
+        props: { snippetsData: [], apiHandlerUrl, device, tag: params?.tag }
       };
     }
   });

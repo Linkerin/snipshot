@@ -1,6 +1,8 @@
 import { Html, Head, Main, NextScript } from 'next/document';
+import { ColorModeScript } from '@chakra-ui/react';
 
 import Favicon from '@/components/Meta/Favicon';
+import theme from '@/services/theme/theme';
 
 export default function Document() {
   return (
@@ -9,6 +11,7 @@ export default function Document() {
         <Favicon />
       </Head>
       <body>
+        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <Main />
         <NextScript />
       </body>

@@ -10,6 +10,7 @@ interface MetaProps {
   robots?: string;
   imageDescription?: string;
   imageUrl?: string;
+  canonicalLink?: string;
 }
 
 function Meta({
@@ -18,7 +19,8 @@ function Meta({
   description,
   robots,
   imageDescription,
-  imageUrl
+  imageUrl,
+  canonicalLink
 }: MetaProps) {
   return (
     <Head>
@@ -54,6 +56,8 @@ function Meta({
           font-family: ${roboto.style.fontFamily};
         }
       `}</style>
+
+      {!!canonicalLink && <link rel="canonical" href={canonicalLink} />}
     </Head>
   );
 }

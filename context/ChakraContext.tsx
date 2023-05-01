@@ -1,8 +1,4 @@
-import {
-  ChakraProvider,
-  cookieStorageManagerSSR,
-  ToastProviderProps
-} from '@chakra-ui/react';
+import { ChakraProvider, ToastProviderProps } from '@chakra-ui/react';
 import theme from '@/services/theme/theme';
 
 const toastOptions: ToastProviderProps = {
@@ -14,17 +10,12 @@ const toastOptions: ToastProviderProps = {
 };
 
 interface ChakraProps {
-  cookies?: string;
   children: React.ReactNode | React.ReactNode[];
 }
 
-function Chakra({ children, cookies }: ChakraProps) {
+function Chakra({ children }: ChakraProps) {
   return (
-    <ChakraProvider
-      theme={theme}
-      toastOptions={toastOptions}
-      colorModeManager={cookieStorageManagerSSR(cookies ?? '')}
-    >
+    <ChakraProvider theme={theme} toastOptions={toastOptions}>
       {children}
     </ChakraProvider>
   );
