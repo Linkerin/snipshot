@@ -1,5 +1,6 @@
-import { Stack, Text } from '@chakra-ui/react';
+import { Stack } from '@chakra-ui/react';
 
+import ProfileStatsItem from '@/components/UserInfo/ProfileStatsItem';
 import useFetchUserProfileStats from '@/hooks/useFetchUserProfileStats';
 import VerticalDivider from '@/components/Common/VerticalDivider';
 
@@ -18,9 +19,7 @@ function ProfileStats({ userId, username }: ProfileStatsProps) {
     stats: { snippets, favorites, rating }
   } = useFetchUserProfileStats({ userId, username });
 
-  return isLoading || (!userId && !username) ? (
-    <div />
-  ) : (
+  return (
     <Stack
       direction="row"
       justifyContent="space-evenly"
@@ -29,26 +28,15 @@ function ProfileStats({ userId, username }: ProfileStatsProps) {
       px={1}
       spacing={0}
     >
-      <Stack alignItems="center" spacing={0}>
-        <Text as="b">{snippets !== null ? snippets : '–'}</Text>
-        <Text fontSize="sm" color="text-secondary">
-          snips
-        </Text>
-      </Stack>
-      <VerticalDivider />
-      <Stack alignItems="center" spacing={0}>
-        <Text as="b">{favorites !== null ? favorites : '–'}</Text>
-        <Text fontSize="sm" color="text-secondary">
-          favorites
-        </Text>
-      </Stack>
-      <VerticalDivider />
-      <Stack alignItems="center" spacing={0}>
-        <Text as="b">{rating !== null ? rating : '–'}</Text>
-        <Text fontSize="sm" color="text-secondary">
-          rating
-        </Text>
-      </Stack>
+      {!isLoading && (userId || username) && (
+        <>
+          <ProfileStatsItem value={snippets} label="snips" />
+          <VerticalDivider />
+          <ProfileStatsItem value={favorites} label="favorites" />
+          <VerticalDivider />
+          <ProfileStatsItem value={rating} label="rating" />
+        </>
+      )}
     </Stack>
   );
 }

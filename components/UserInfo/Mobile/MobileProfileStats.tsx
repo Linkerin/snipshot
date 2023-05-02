@@ -1,5 +1,6 @@
-import { Stack, Text } from '@chakra-ui/react';
+import { Stack } from '@chakra-ui/react';
 
+import ProfileStatsItem from '@/components/UserInfo/ProfileStatsItem';
 import VerticalDivider from '@/components/Common/VerticalDivider';
 import useFetchUserProfileStats from '@/hooks/useFetchUserProfileStats';
 
@@ -33,32 +34,29 @@ function MobileProfileStats({ userId, username }: MobileProfileStatsProps) {
       px={0}
       w="100%"
     >
-      <Stack alignItems="center" spacing={0} py={0}>
-        <Text fontSize="sm" as="b">
-          {snippets !== null ? snippets : '–'}
-        </Text>
-        <Text fontSize="xs" color="text-secondary">
-          snips
-        </Text>
-      </Stack>
+      <ProfileStatsItem
+        value={snippets}
+        label="snips"
+        py={0}
+        valueFontSize="sm"
+        labelFontSize="xs"
+      />
       <VerticalDivider />
-      <Stack alignItems="center" spacing={0} py={0}>
-        <Text fontSize="sm" as="b">
-          {favorites !== null ? favorites : '–'}
-        </Text>
-        <Text fontSize="xs" color="text-secondary">
-          favorites
-        </Text>
-      </Stack>
+      <ProfileStatsItem
+        value={favorites}
+        label="favorites"
+        py={0}
+        valueFontSize="sm"
+        labelFontSize="xs"
+      />
       <VerticalDivider />
-      <Stack alignItems="center" spacing={0} py={0}>
-        <Text fontSize="sm" as="b">
-          {rating !== null ? rating : '–'}
-        </Text>
-        <Text fontSize="xs" color="text-secondary">
-          rating
-        </Text>
-      </Stack>
+      <ProfileStatsItem
+        value={rating}
+        label="rating"
+        py={0}
+        valueFontSize="sm"
+        labelFontSize="xs"
+      />
     </Stack>
   );
 }
