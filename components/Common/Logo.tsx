@@ -22,7 +22,7 @@ const LogoContainer = ({ children, height, isLink }: LogoContainerProps) => {
   return (
     <Box sx={containerStyling}>
       {isLink ? (
-        <NextLink href="/" aria-label="Link to the main page">
+        <NextLink href="/" aria-label="Link to the main page" prefetch={false}>
           {children}
         </NextLink>
       ) : (

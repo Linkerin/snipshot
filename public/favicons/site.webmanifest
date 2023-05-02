@@ -3,13 +3,13 @@
   "short_name": "",
   "icons": [
     {
-      "src": "/favicons/pwa-192x192",
+      "src": "/favicons/pwa-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/favicons/pwa-512x512",
+      "src": "/favicons/pwa-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
