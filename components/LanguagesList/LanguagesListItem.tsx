@@ -1,15 +1,13 @@
 import { useContext, useMemo } from 'react';
-import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { LinkBox, LinkOverlay, ListIcon } from '@chakra-ui/react';
 
 import { DeviceContext } from '@/context/DeviceContext';
 import CenteredListItem from '@/components/Common/CenteredListItem';
+import LangIcon from '@/components/Icons/LangIcons/LangIcon';
 import { LangsType } from '@/services/types';
 import useHovered from '@/hooks/useHovered';
-
-const LangIcon = dynamic(() => import('@/components/Icons/LangIcons/LangIcon'));
 
 interface LanguagesListItemProps {
   lang: LangsType;

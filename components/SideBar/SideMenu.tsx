@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import {
   chakra,
@@ -17,20 +16,15 @@ import {
 } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
+import CenteredListItem from '@/components/Common/CenteredListItem';
 import CodeIcon from '@/components/Icons/CodeIcon';
 import InfoIcon from '@/components/Icons/InfoIcon';
+import LanguagesList from '@/components/LanguagesList/LanguagesList';
 import SettingsIcon from '@/components/Icons/SettingsIcon';
 import SignInIcon from '@/components/Icons/SignInIcon';
 import SignOutIcon from '@/components/Icons/SignOutIcon';
 import UserIcon from '@/components/Icons/UserIcon';
 import useLogout from '@/hooks/useLogout';
-
-const CenteredListItem = dynamic(
-  () => import('@/components/Common/CenteredListItem')
-);
-const LanguagesList = dynamic(
-  () => import('@/components/LanguagesList/LanguagesList')
-);
 
 function SideMenu() {
   const [user] = useContext(AuthContext);

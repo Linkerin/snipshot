@@ -7,7 +7,9 @@ import { parseDate } from '@/services/utils/date';
 import Rating from './Rating';
 import SnippetContext from '@/context/SnippetContext';
 
-const VerificationTag = dynamic(() => import('./VerificationTag'));
+const VerificationTag = dynamic(() => import('./VerificationTag'), {
+  ssr: false
+});
 
 function SnippetInfoFooter() {
   const { author, created, rating, verified } = useContext(SnippetContext);

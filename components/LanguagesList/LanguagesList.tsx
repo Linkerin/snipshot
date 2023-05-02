@@ -1,4 +1,4 @@
-import { List, ListProps, ListItem } from '@chakra-ui/react';
+import { List, ListProps } from '@chakra-ui/react';
 
 import { LANGS } from '@/services/constants';
 import LanguagesListItem from './LanguagesListItem';
