@@ -81,7 +81,7 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
       <PageContentWrapper
         as={Grid}
         gridTemplateColumns={{ base: '1fr', lg: '4fr 3fr' }}
-        gap={1}
+        gap={2}
       >
         <GridItem>
           {reported && <ValidationAlert />}

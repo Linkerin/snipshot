@@ -25,7 +25,7 @@ function MobileTopBar() {
       <Logo height={42} isLink />
       <ButtonGroup>
         {user?.id && <SettingsButton />}
-        <ThemeSwitch mr={0} />
+        <ThemeSwitch />
       </ButtonGroup>
     </Flex>
   );

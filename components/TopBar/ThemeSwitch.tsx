@@ -28,7 +28,6 @@ function ThemeSwitch(
       }
       onClick={toggleColorMode}
       variant="outline"
-      mr={5}
       {...props}
     />
   );
