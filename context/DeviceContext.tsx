@@ -8,10 +8,6 @@ import {
 } from 'react';
 import { useBreakpoint } from '@chakra-ui/react';
 
-interface ExtendedNavigator extends Navigator {
-  standalone: boolean;
-}
-
 interface DeviceProviderProps {
   children: React.ReactElement;
   device: {
@@ -33,7 +29,9 @@ export const DeviceContext = createContext({
 } as DeviceContextValue);
 
 export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
-  const breakpoint = useBreakpoint(device?.type === 'mobile' ? 'sm' : 'lg');
+  const breakpoint = useBreakpoint(
+    device?.type === 'mobile' ? 'sm' : device?.type === 'tablet' ? 'md' : 'lg'
+  );
   const [isMobile, setIsMobile] = useState(device?.type === 'mobile');
   const [isAppleMobile, setIsAppleMobile] = useState(
     ['iPhone', 'iPad'].includes(device?.model)
@@ -58,12 +56,13 @@ export const DeviceProvider = ({ device, children }: DeviceProviderProps) => {
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const navigator = window.navigator as ExtendedNavigator;
+
     const appleMobile =
-      navigator.standalone && navigator.userAgent.match(/iPhone|iPad/) !== null;
-    startTransition(() => {
-      setIsAppleMobile(appleMobile);
-    });
+      'standalone' in window.navigator
+        ? !!window.navigator.standalone &&
+          window.navigator.userAgent.match(/iPhone|iPad/) !== null
+        : false;
+    setIsAppleMobile(appleMobile);
   }, []);
 
   return (
