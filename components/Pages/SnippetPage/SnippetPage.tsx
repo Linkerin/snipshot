@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Grid, GridItem } from '@chakra-ui/react';
 

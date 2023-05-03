@@ -44,7 +44,7 @@ export interface SnippetType {
   lang: LangsType;
   slug?: string;
   verified: boolean;
-  author: {
+  author?: {
     id: string;
     name: string;
   };

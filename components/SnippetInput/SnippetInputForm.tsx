@@ -5,40 +5,22 @@ import {
   ButtonGroup,
   FormControl,
   FormHelperText,
-  FormLabel,
   Input,
-  SpaceProps,
-  Text,
   Textarea,
   useColorModeValue,
   VStack
 } from '@chakra-ui/react';
 
 import LangsSelectInput from './LangsSelectInput';
-import { SnippetTagsListProps } from '@/components/Snippet/Body/SnippetTagsList';
+import SnippetFormLabel from './SnippetFormLabel';
+import { SnippetTagsListProps } from '@/components/Snippet/Card/Footer/SnippetTagsList';
 import useButtonDisabled from '@/hooks/useButtonDisabled';
 import { UserInput } from '@/hooks/forPages/useSnippetInputHandler';
 
 const SnippetTagsList = dynamic(
-  () => import('@/components/Snippet/Body/SnippetTagsList'),
+  () => import('@/components/Snippet/Card/Footer/SnippetTagsList'),
   { ssr: false }
 );
-
-interface SnippetFormLabelProps {
-  label: string;
-  mb?: SpaceProps['mb'];
-  ml?: SpaceProps['ml'];
-}
-
-function SnippetFormLabel({ label, mb, ml }: SnippetFormLabelProps) {
-  return (
-    <FormLabel mb={mb} ml={ml ?? 2} sx={{ span: { color: 'primary' } }}>
-      <Text fontSize="xs" display="inline">
-        {label}
-      </Text>
-    </FormLabel>
-  );
-}
 
 interface SnippetInputFormProps extends SnippetTagsListProps {
   userInput: UserInput;

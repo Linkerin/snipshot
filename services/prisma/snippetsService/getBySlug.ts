@@ -16,7 +16,6 @@ async function getBySlug(slug: Snippet['slug']) {
       title: true,
       snippet: true,
       lang: true,
-      slug: true,
       tree: true,
       verified: true,
       tags: true,

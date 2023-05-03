@@ -18,7 +18,7 @@ import EditIcon from '@/components/Icons/EditIcon';
 import ExclamationIcon from '@/components/Icons/ExclamationIcon';
 import MoreDotsIcon from '@/components/Icons/MoreDotsIcon';
 import ShareIcon from '@/components/Icons/ShareIcon';
-import SnippetContext from '@/context/SnippetContext';
+import { SnippetType } from '@/services/types';
 
 const SnippetDeleteModal = dynamic(() => import('./SnippetDeleteModal'), {
   ssr: false
@@ -38,7 +38,19 @@ const menuBtnStyles: SystemStyleObject = {
 
 const itemHoverBgColor = 'rgb(0, 0, 0, 0.07)';
 
-function SnippetBarOptions() {
+interface SnippetBarOptionsProps {
+  snippetId: SnippetType['id'];
+  authorId?: string;
+  lang: SnippetType['lang'];
+  slug: SnippetType['slug'];
+}
+
+function SnippetBarOptions({
+  snippetId,
+  authorId,
+  lang,
+  slug
+}: SnippetBarOptionsProps) {
   const {
     isOpen: isDeleteOpen,
     onOpen: onDeleteOpen,
@@ -51,7 +63,6 @@ function SnippetBarOptions() {
   } = useDisclosure();
 
   const [user] = useContext(AuthContext);
-  const { id, slug, lang, author } = useContext(SnippetContext);
 
   const toast = useToast();
 
@@ -98,11 +109,11 @@ function SnippetBarOptions() {
           >
             Share
           </MenuItem>
-          {user?.id && user.id === author?.id && (
+          {user?.id && user.id === authorId && (
             <>
               <MenuItem
                 as={NextLink}
-                href={`/snippets/edit?snippetId=${id}`}
+                href={`/snippets/edit?snippetId=${snippetId}`}
                 bgColor="inherit"
                 icon={<EditIcon />}
                 _hover={{ bgColor: itemHoverBgColor }}
@@ -135,10 +146,19 @@ function SnippetBarOptions() {
         </MenuList>
       </Menu>
       {isDeleteOpen && (
-        <SnippetDeleteModal isOpen={isDeleteOpen} onClose={onDeleteClose} />
+        <SnippetDeleteModal
+          isOpen={isDeleteOpen}
+          onClose={onDeleteClose}
+          snippetId={snippetId}
+          authorId={authorId}
+        />
       )}
       {isReportOpen && (
-        <SnippetReportModal isOpen={isReportOpen} onClose={onReportClose} />
+        <SnippetReportModal
+          isOpen={isReportOpen}
+          onClose={onReportClose}
+          snippetId={snippetId}
+        />
       )}
     </>
   );

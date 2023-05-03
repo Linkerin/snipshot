@@ -1,19 +1,20 @@
-import { useContext } from 'react';
-import dynamic from 'next/dynamic';
 import NextLink from 'next/link';
 import { Link, Stack, Text } from '@chakra-ui/react';
 
 import { parseDate } from '@/services/utils/date';
-import Rating from './Rating';
-import SnippetContext from '@/context/SnippetContext';
+import { SnippetType } from '@/services/types';
 
-const VerificationTag = dynamic(() => import('./VerificationTag'), {
-  ssr: false
-});
+interface SnippetInfoFooterProps {
+  author: SnippetType['author'];
+  created: SnippetType['created'];
+  children: React.ReactNode | React.ReactNode[];
+}
 
-function SnippetInfoFooter() {
-  const { author, created, rating, verified } = useContext(SnippetContext);
-
+function SnippetInfoFooter({
+  author,
+  created,
+  children
+}: SnippetInfoFooterProps) {
   return (
     <Stack as="footer" ml={2} mb={2} mt={1} spacing={0.5}>
       <Stack
@@ -22,8 +23,7 @@ function SnippetInfoFooter() {
         wrap="wrap-reverse"
         justifyContent="space-between"
       >
-        <Rating id={rating.id} rating={rating.rating} />
-        {verified && <VerificationTag />}
+        {children}
       </Stack>
       <Stack direction="row" spacing={2} alignItems="flex-end">
         <Text

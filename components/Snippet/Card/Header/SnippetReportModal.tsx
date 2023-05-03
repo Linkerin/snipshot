@@ -18,19 +18,23 @@ import {
 } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
-import SnippetContext from '@/context/SnippetContext';
+import { SnippetType } from '@/services/types';
 
 interface SnippetReportModalProps {
   isOpen: boolean;
   onClose: () => void;
+  snippetId: SnippetType['id'];
 }
 
-function SnippetReportModal({ isOpen, onClose }: SnippetReportModalProps) {
+function SnippetReportModal({
+  isOpen,
+  onClose,
+  snippetId
+}: SnippetReportModalProps) {
   const [isSending, setIsSending] = useState(false);
   const [report, setReport] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
-  const { id: snippetId } = useContext(SnippetContext);
   const [user] = useContext(AuthContext);
 
   const toast = useToast();

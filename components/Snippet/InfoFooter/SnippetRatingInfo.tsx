@@ -6,7 +6,7 @@ import { SnippetType } from '@/services/types';
 
 type RatingProps = Pick<SnippetType['rating'], 'id' | 'rating'>;
 
-function Rating({ id, rating }: RatingProps) {
+function SnippetRatingInfo({ id, rating }: RatingProps) {
   const [currentRating, setCurrentRating] = useState<number>(Number(rating));
   const [status, setStatus] = useState<'liked' | 'disliked' | null>(null);
   const [isChangingRating, setIsChangingRating] = useState<boolean>(false);
@@ -266,4 +266,4 @@ function Rating({ id, rating }: RatingProps) {
   );
 }
 
-export default Rating;
+export default SnippetRatingInfo;

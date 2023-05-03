@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   Button,
@@ -13,16 +13,22 @@ import {
   useToast
 } from '@chakra-ui/react';
 
-import SnippetContext from '@/context/SnippetContext';
+import { SnippetType } from '@/services/types';
 
 interface SnippetDeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
+  snippetId: SnippetType['id'];
+  authorId: string | undefined;
 }
 
-function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
+function SnippetDeleteModal({
+  isOpen,
+  onClose,
+  snippetId,
+  authorId
+}: SnippetDeleteModalProps) {
   const [isRemoving, setIsRemoving] = useState(false);
-  const { id, author, title } = useContext(SnippetContext);
 
   const router = useRouter();
 
@@ -43,7 +49,7 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
 
       // Check whether the current user is the creator
       const userId = sessionData.session?.user?.id;
-      if (userId !== author.id) {
+      if (userId !== authorId) {
         toast({
           title: 'Something went wrong',
           description:
@@ -62,7 +68,7 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
       const { error } = await supabase
         .from('snippets')
         .delete()
-        .eq('id', id)
+        .eq('id', snippetId)
         .eq('user_id', userId);
       if (error) throw error;
 
@@ -77,16 +83,16 @@ function SnippetDeleteModal({ isOpen, onClose }: SnippetDeleteModalProps) {
 
       toast({
         title: 'Snippet deleted',
-        description: `Snippet '${title}' was permanently deleted`,
+        description: 'Snippet was permanently deleted',
         status: 'success',
         duration: 3000
       });
     } catch (err) {
       const log = (await import('next-axiom')).log;
       log.error('Error while deleting snippet', {
-        snippetId: id,
-        timestamp: Date.now(),
-        err
+        snippetId,
+        err,
+        timestamp: Date.now()
       });
       toast({
         title: 'An error occured',

@@ -1,31 +1,81 @@
 import dynamic from 'next/dynamic';
-import { chakra } from '@chakra-ui/react';
+import { Card, chakra } from '@chakra-ui/react';
 
-import SnippetCard from './Body/SnippetCard';
-import SnippetContext from '@/context/SnippetContext';
-import SnippetInfoFooter from '@/components/Snippet/Footer/SnippetInfoFooter';
+import SnippetBarOptions from '@/components/Snippet/Card/Header/SnippetBarOptions';
+import SnippetCardBody from '@/components/Snippet/Card/Body/SnippetCardBody';
+import SnippetCardFooter from '@/components/Snippet/Card/Footer/SnippetCardFooter';
+import SnippetCardHeader from '@/components/Snippet/Card/Header/SnippetCardHeader';
+import SnippetInfoFooter from '@/components/Snippet/InfoFooter/SnippetInfoFooter';
+import SnippetRatingInfo from '@/components/Snippet/InfoFooter/SnippetRatingInfo';
+import SnippetTagsList from '@/components/Snippet/Card/Footer/SnippetTagsList';
 import { SnippetType } from '@/services/types';
 
 const SnippetCode = dynamic(
-  () => import('@/components/Snippet/Body/SnippetCode')
+  () => import('@/components/Snippet/Card/Body/SnippetCode')
+);
+const VerificationTag = dynamic(
+  () => import('@/components/Snippet/InfoFooter/VerificationTag'),
+  { ssr: false }
 );
 
 export interface SnippetProps {
   snippet: SnippetType;
-  provideRef?: React.RefObject<HTMLElement>;
+  provideRef?: React.RefObject<HTMLDivElement>;
   noFooter?: boolean;
+  noOptionsBar?: boolean;
 }
 
-function Snippet({ snippet, provideRef, noFooter = false }: SnippetProps) {
+function Snippet({
+  snippet,
+  provideRef,
+  noFooter = false,
+  noOptionsBar = false
+}: SnippetProps) {
   const snippetContent = snippet.tree ? snippet.tree : snippet.snippet;
   return (
     <chakra.article ref={provideRef} w="100%">
-      <SnippetContext.Provider value={snippet}>
-        <SnippetCard snippet={snippetContent} source={snippet.snippet}>
-          <SnippetCode snippetTree={!!snippet.tree} />
-        </SnippetCard>
-        {!noFooter && <SnippetInfoFooter />}
-      </SnippetContext.Provider>
+      <Card
+        as="section"
+        variant="elevated"
+        size="sm"
+        borderRadius={10}
+        h="max-content"
+        w="100%"
+      >
+        <SnippetCardHeader
+          title={snippet.title}
+          slug={snippet.slug}
+          lang={snippet.lang}
+        >
+          {!noOptionsBar && (
+            <SnippetBarOptions
+              snippetId={snippet.id}
+              authorId={snippet.author?.id}
+              lang={snippet.lang}
+              slug={snippet.slug}
+            />
+          )}
+        </SnippetCardHeader>
+        <SnippetCardBody snippet={snippet.snippet}>
+          <SnippetCode
+            snippetTree={!!snippet.tree}
+            lang={snippet.lang}
+            snippet={snippetContent}
+          />
+        </SnippetCardBody>
+        <SnippetCardFooter lang={snippet.lang}>
+          <SnippetTagsList tags={snippet.tags} />
+        </SnippetCardFooter>
+      </Card>
+      {!noFooter && (
+        <SnippetInfoFooter author={snippet.author} created={snippet.created}>
+          <SnippetRatingInfo
+            id={snippet.rating.id}
+            rating={snippet.rating.rating}
+          />
+          {snippet.verified && <VerificationTag />}
+        </SnippetInfoFooter>
+      )}
     </chakra.article>
   );
 }

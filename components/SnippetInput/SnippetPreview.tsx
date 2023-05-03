@@ -1,8 +1,18 @@
 import { Heading, Show } from '@chakra-ui/react';
 
 import Snippet from '@/components/Snippet/Snippet';
-import { snippetContextValueDefault } from '@/context/SnippetContext';
 import { UserInput } from '@/hooks/forPages/useSnippetInputHandler';
+
+const defaultSnippetProps = {
+  id: '',
+  tree: '',
+  verified: false,
+  created: '',
+  rating: {
+    id: '',
+    rating: 0
+  }
+};
 
 interface SnippetPreviewProps {
   userInput: UserInput;
@@ -19,13 +29,14 @@ function SnippetPreview({ userInput, tags }: SnippetPreviewProps) {
       </Show>
       <Snippet
         snippet={{
-          ...snippetContextValueDefault,
+          ...defaultSnippetProps,
           title: userInput.title,
           lang: userInput.lang,
           snippet: userInput.snippet,
           tags
         }}
         noFooter
+        noOptionsBar
       />
     </>
   );
