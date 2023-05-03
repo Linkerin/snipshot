@@ -31,7 +31,6 @@ function Snippet({
   noFooter = false,
   noOptionsBar = false
 }: SnippetProps) {
-  const snippetContent = snippet.tree ? snippet.tree : snippet.snippet;
   return (
     <chakra.article ref={provideRef} w="100%">
       <Card
@@ -57,11 +56,7 @@ function Snippet({
           )}
         </SnippetCardHeader>
         <SnippetCardBody snippet={snippet.snippet}>
-          <SnippetCode
-            snippetTree={!!snippet.tree}
-            lang={snippet.lang}
-            snippet={snippetContent}
-          />
+          <SnippetCode snippetTree={snippet.tree} />
         </SnippetCardBody>
         <SnippetCardFooter lang={snippet.lang}>
           <SnippetTagsList tags={snippet.tags} />

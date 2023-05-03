@@ -1,6 +1,4 @@
-import { Heading, Show } from '@chakra-ui/react';
-
-import Snippet from '@/components/Snippet/Snippet';
+import RawSnippet from '@/components/Snippet/RawSnippet';
 import { UserInput } from '@/hooks/forPages/useSnippetInputHandler';
 
 const defaultSnippetProps = {
@@ -21,24 +19,15 @@ interface SnippetPreviewProps {
 
 function SnippetPreview({ userInput, tags }: SnippetPreviewProps) {
   return (
-    <>
-      <Show above="lg">
-        <Heading size="sm" mb={2}>
-          Preview
-        </Heading>
-      </Show>
-      <Snippet
-        snippet={{
-          ...defaultSnippetProps,
-          title: userInput.title,
-          lang: userInput.lang,
-          snippet: userInput.snippet,
-          tags
-        }}
-        noFooter
-        noOptionsBar
-      />
-    </>
+    <RawSnippet
+      snippet={{
+        ...defaultSnippetProps,
+        title: userInput.title,
+        lang: userInput.lang,
+        snippet: userInput.snippet,
+        tags
+      }}
+    />
   );
 }
 

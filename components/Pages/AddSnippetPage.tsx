@@ -5,7 +5,8 @@ import { Grid, GridItem } from '@chakra-ui/react';
 
 import fetchIsPostingAllowed from '@/services/redis/services/fetchIsPostingAllowed';
 import Meta from '@/components/Meta/Meta';
-import PageContentWrapper from '../PageContentWrapper';
+import PageContentWrapper from '@/components/PageContentWrapper';
+import SnippetSkeleton from '@/components/Skeletons/SnippetSkeleton';
 import useSnippetInputHandler from '@/hooks/forPages/useSnippetInputHandler';
 
 const Alerts = dynamic(() => import('@/components/SnippetInput/Alerts'), {
@@ -16,7 +17,7 @@ const LegalDisclaimer = dynamic(
 );
 const SnippetPreview = dynamic(
   () => import('@/components/SnippetInput/SnippetPreview'),
-  { ssr: false }
+  { loading: () => <SnippetSkeleton />, ssr: false }
 );
 const SnippetInputForm = dynamic(
   () => import('@/components/SnippetInput/SnippetInputForm')

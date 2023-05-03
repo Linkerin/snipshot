@@ -14,7 +14,6 @@ function MobileTopBar() {
   const [user] = useContext(AuthContext);
   return (
     <Flex
-      as="header"
       alignItems="center"
       justifyContent="space-between"
       px={3}

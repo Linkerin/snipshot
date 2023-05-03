@@ -15,7 +15,7 @@ function IconSkeleton(props: SkeletonProps) {
 }
 
 function TagSkeleton(props: SkeletonProps) {
-  return <Skeleton speed={2} borderRadius="2xl" h={5} w={12} {...props} />;
+  return <Skeleton speed={2} borderRadius="2xl" h={6} w={12} {...props} />;
 }
 
 function SnippetSkeleton() {

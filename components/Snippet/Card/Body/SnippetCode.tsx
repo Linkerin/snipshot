@@ -1,23 +1,12 @@
 import { createElement } from 'react';
 import { toH } from 'hast-to-hyperscript';
 
-import { LangsType } from '@/services/types';
-import createSnippetTree from '@/services/snippets';
+import { SnippetType } from '@/services/types';
 
-interface SnippetCodeProps {
-  snippet?: string;
-  lang?: LangsType;
-  snippetTree?: boolean;
-}
+function SnippetCode({ snippetTree }: { snippetTree: SnippetType['tree'] }) {
+  if (!snippetTree) return null;
 
-function SnippetCode({ snippet, lang, snippetTree = false }: SnippetCodeProps) {
-  if (!snippet) return null;
-
-  let tree;
-
-  snippetTree
-    ? (tree = JSON.parse(snippet))
-    : (tree = createSnippetTree(snippet, lang));
+  const tree = JSON.parse(snippetTree);
 
   const codeElement = toH(createElement, tree);
 

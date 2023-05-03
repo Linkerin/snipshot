@@ -10,7 +10,6 @@ const SearchBox = dynamic(() => import('./SearchBox'), {
 function TopBar() {
   return (
     <Flex
-      as="header"
       alignItems="center"
       justifyContent="space-between"
       pt={4}

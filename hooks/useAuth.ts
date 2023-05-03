@@ -11,7 +11,7 @@ import { AuthContext } from '@/context/AuthContext';
  * @returns UserState object from the Context
  * @example const user = useAuth(true) // redirects to home page if authorized
  */
-export default function useAuth(redirectHome?: boolean) {
+export default function useAuth(redirectHome: boolean = false) {
   const [user] = useContext(AuthContext);
   const router = useRouter();
 
@@ -24,11 +24,16 @@ export default function useAuth(redirectHome?: boolean) {
   useEffect(() => {
     const checkForRedirect = () => {
       if (user?.id) {
-        home && typeof window !== undefined && router.push('/');
+        if (home && typeof window !== undefined) {
+          router.push('/', undefined, { shallow: true });
+        }
+
         return;
       }
 
-      login && typeof window !== undefined && router.push('/login');
+      login &&
+        typeof window !== undefined &&
+        router.push('/login', undefined, { shallow: true });
     };
 
     checkForRedirect();

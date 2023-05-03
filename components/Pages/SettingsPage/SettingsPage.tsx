@@ -7,7 +7,7 @@ import PageContentWrapper from '@/components/PageContentWrapper';
 import useAuth from '@/hooks/useAuth';
 
 function SettingsPage() {
-  const user = useAuth();
+  useAuth();
 
   return (
     <PageContentWrapper

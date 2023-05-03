@@ -15,6 +15,7 @@ import LoadingInfo from './LoadingInfo';
 import Meta from '@/components/Meta/Meta';
 import PageContentWrapper from '@/components/PageContentWrapper';
 import SnippetInputForm from '@/components/SnippetInput/SnippetInputForm';
+import SnippetSkeleton from '@/components/Skeletons/SnippetSkeleton';
 import useSnippetInputHandler from '@/hooks/forPages/useSnippetInputHandler';
 
 const Alerts = dynamic(() => import('@/components/SnippetInput/Alerts'), {
@@ -22,7 +23,7 @@ const Alerts = dynamic(() => import('@/components/SnippetInput/Alerts'), {
 });
 const SnippetPreview = dynamic(
   () => import('@/components/SnippetInput/SnippetPreview'),
-  { ssr: false }
+  { loading: () => <SnippetSkeleton />, ssr: false }
 );
 const UnavailablePlaceholder = dynamic(
   () => import('./UnavailablePlaceholder'),
