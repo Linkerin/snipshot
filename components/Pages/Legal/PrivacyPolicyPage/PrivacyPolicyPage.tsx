@@ -91,31 +91,41 @@ function PrivacyPolicyPage() {
         <Heading fontSize="xl" id="info-usage">
           How we use collected information
         </Heading>
-        <Text>
-          We may collect and use Users&#39; personal information for the
-          following purposes:
-          <UnorderedList pl={2}>
+        <VStack alignItems="flex-start">
+          <Text>
+            We may collect and use Users&#39; personal information for the
+            following purposes:
+          </Text>
+          <UnorderedList pl={4}>
             <ListItem>
-              To improve customer service: Information you provide helps us
-              respond to your customer service requests and support needs more
-              efficiently.
+              <Text>
+                To improve customer service: Information you provide helps us
+                respond to your customer service requests and support needs more
+                efficiently.
+              </Text>
             </ListItem>
             <ListItem>
-              To personalize User&#39;s experience: We may use aggregated
-              information to understand how our Users as a group use the
-              services and resources provided on our Site.
+              <Text>
+                To personalize User&#39;s experience: We may use aggregated
+                information to understand how our Users as a group use the
+                services and resources provided on our Site.
+              </Text>
             </ListItem>
             <ListItem>
-              To improve our Site: We may use feedback you provide to improve
-              our products and services.
+              <Text>
+                To improve our Site: We may use feedback you provide to improve
+                our products and services.
+              </Text>
             </ListItem>
             <ListItem>
-              To send periodic emails: We may use the email address to send
-              Users information and updates pertaining to their account or to
-              respond to their inquiries, questions, and/or other requests.
+              <Text>
+                To send periodic emails: We may use the email address to send
+                Users information and updates pertaining to their account or to
+                respond to their inquiries, questions, and/or other requests.
+              </Text>
             </ListItem>
           </UnorderedList>
-        </Text>
+        </VStack>
 
         <Heading fontSize="xl" id="info-protection">
           How we protect your information
