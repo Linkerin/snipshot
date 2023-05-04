@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { Grid, GridItem } from '@chakra-ui/react';
 
@@ -6,12 +7,15 @@ import hideScrollbarCss from '@/services/utils/hideScrollbarCss';
 import Meta from '@/components/Meta/Meta';
 import SideBarSkeleton from './Skeletons/SideBarSkeleton';
 import TopBar from './TopBar/TopBar';
-import { useContext } from 'react';
+import useCookiesConsent from '@/hooks/useCookiesConsent';
 
 const AddSnippetButton = dynamic(
   () => import('@/components/AddSnippetButton'),
   { ssr: false }
 );
+const CookiesConsentPortal = dynamic(() => import('./CookiesConsentPortal'), {
+  ssr: false
+});
 const MobileNav = dynamic(() => import('@/components/MobileNav/MobileNav'));
 const MobileTopBar = dynamic(() => import('@/components/TopBar/MobileTopBar'));
 const SideBar = dynamic(() => import('@/components/SideBar/SideBar'), {
@@ -20,6 +24,8 @@ const SideBar = dynamic(() => import('@/components/SideBar/SideBar'), {
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { isMobile, mobileNavHeightDvh } = useContext(DeviceContext);
+
+  const { showConsent, acceptCookiesHandler } = useCookiesConsent();
   const templateAreas = isMobile
     ? `"topbar"
        "main"
@@ -83,6 +89,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         </GridItem>
       </Grid>
       {!isMobile && <AddSnippetButton />}
+      <CookiesConsentPortal show={showConsent} onClose={acceptCookiesHandler} />
     </>
   );
 }
