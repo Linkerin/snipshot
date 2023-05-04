@@ -1,5 +1,7 @@
 import { Avatar, AvatarProps } from '@chakra-ui/react';
 
+import fadeInAnimation from '@/services/utils/styling/fadeInAnimation';
+
 const sizes = {
   micro: {
     side: 25,
@@ -47,7 +49,7 @@ function UserAvatar({
   return (
     <Avatar
       aria-label={`${username ?? 'guest'} avatar`}
-      name={disabled ? '' : username ?? 'guest'}
+      name={disabled ? '' : username ?? ''}
       src={disabled ? '' : avatar ?? '/images/GuestAvatar.svg'}
       loading="lazy"
       borderColor="primary"
@@ -56,6 +58,7 @@ function UserAvatar({
       h={sizes[size].side}
       w={sizes[size].side}
       p={disabled || noBorder ? 0 : sizes[size].padding}
+      sx={fadeInAnimation()}
       {...props}
     />
   );

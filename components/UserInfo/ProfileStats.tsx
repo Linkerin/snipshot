@@ -1,5 +1,6 @@
 import { Stack } from '@chakra-ui/react';
 
+import fadeInAnimation from '@/services/utils/styling/fadeInAnimation';
 import ProfileStatsItem from '@/components/UserInfo/ProfileStatsItem';
 import useFetchUserProfileStats from '@/hooks/useFetchUserProfileStats';
 import VerticalDivider from '@/components/Common/VerticalDivider';
@@ -27,6 +28,7 @@ function ProfileStats({ userId, username }: ProfileStatsProps) {
       w="100%"
       px={1}
       spacing={0}
+      sx={fadeInAnimation()}
     >
       {!isLoading && (userId || username) && (
         <>

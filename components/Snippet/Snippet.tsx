@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import { Card, chakra } from '@chakra-ui/react';
 
+import fadeInAnimation from '@/services/utils/styling/fadeInAnimation';
 import SnippetBarOptions from '@/components/Snippet/Card/Header/SnippetBarOptions';
 import SnippetCardBody from '@/components/Snippet/Card/Body/SnippetCardBody';
 import SnippetCardFooter from '@/components/Snippet/Card/Footer/SnippetCardFooter';
@@ -32,7 +33,7 @@ function Snippet({
   noOptionsBar = false
 }: SnippetProps) {
   return (
-    <chakra.article ref={provideRef} w="100%">
+    <chakra.article ref={provideRef} w="100%" sx={fadeInAnimation()}>
       <Card
         as="section"
         className="snippet-card"
