@@ -35,6 +35,7 @@ function Snippet({
     <chakra.article ref={provideRef} w="100%">
       <Card
         as="section"
+        className="snippet-card"
         variant="elevated"
         size="sm"
         borderRadius={10}

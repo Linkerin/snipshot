@@ -11,6 +11,7 @@ function RawSnippet({ snippet }: { snippet: SnippetType }) {
   return (
     <Card
       as="section"
+      className="snippet-card"
       variant="elevated"
       size="sm"
       borderRadius={10}
