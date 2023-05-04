@@ -1,5 +1,6 @@
 import { Stack } from '@chakra-ui/react';
 
+import fadeInAnimation from '@/services/utils/styling/fadeInAnimation';
 import ProfileStatsItem from '@/components/UserInfo/ProfileStatsItem';
 import VerticalDivider from '@/components/Common/VerticalDivider';
 import useFetchUserProfileStats from '@/hooks/useFetchUserProfileStats';
@@ -33,6 +34,7 @@ function MobileProfileStats({ userId, username }: MobileProfileStatsProps) {
       pb={1}
       px={0}
       w="100%"
+      sx={fadeInAnimation()}
     >
       <ProfileStatsItem
         value={snippets}

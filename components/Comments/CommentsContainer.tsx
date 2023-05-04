@@ -15,6 +15,7 @@ import AddComment from './AddComment';
 import { AuthContext } from '@/context/AuthContext';
 import Comment from './Comment';
 import CommentsIcon from '@/components/Icons/CommentsIcon';
+import fadeInAnimation from '@/services/utils/styling/fadeInAnimation';
 import NoComments from './NoComments';
 import { SnippetIdContext } from '@/components/Pages/SnippetPage/SnippetPage';
 import useCommentsFetching from '@/hooks/forPages/useCommentsFetching';
@@ -30,6 +31,7 @@ function CommentsContainer() {
       as="section"
       bgColor="chakra-body-bg"
       maxHeight={{ base: '100%', lg: '80vh' }}
+      sx={fadeInAnimation()}
     >
       <CardHeader px={3} pt={2} pb={2}>
         <Flex alignItems="center" gap={1}>
