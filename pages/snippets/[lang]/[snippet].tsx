@@ -36,6 +36,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     const slug = params?.snippet;
     if (!slug || slug instanceof Array) throw new Error('Invalid slug value');
     const snippet = await getBySlug(slug);
+    if (snippet.length === 0) {
+      return { notFound: true };
+    }
+
     const snippetData = snippet.map(snippet =>
       cleanObjDataTypesForNextJS(snippet)
     );
