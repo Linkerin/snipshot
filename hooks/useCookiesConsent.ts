@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import NextLocalStorage from '@/services/NextLocalStorage';
 
@@ -8,13 +8,17 @@ import NextLocalStorage from '@/services/NextLocalStorage';
  * and a callback function `acceptCookiesHandler` to close the modal
  */
 function useCookiesConsent() {
-  const [showConsent, setShowConsent] = useState(
-    !(NextLocalStorage.getItem('cookiesConsent') === 'true')
-  );
+  const [showConsent, setShowConsent] = useState(false);
 
   const acceptCookiesHandler = useCallback(() => {
     NextLocalStorage.setItem('cookiesConsent', 'true');
     setShowConsent(false);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setShowConsent(!(NextLocalStorage.getItem('cookiesConsent') === 'true'));
+    }
   }, []);
 
   return { showConsent, acceptCookiesHandler };
