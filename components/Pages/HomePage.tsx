@@ -1,12 +1,12 @@
 import { HomeProps } from '@/pages';
 import SnippetsList from '@/components/SnippetsList';
-import SnippetsListWrapper from '@/components/PageContentWrapper';
+import PageContentWrapper from '@/components/PageContentWrapper';
 
 function HomePage({ snippetsData, apiHandlerUrl }: HomeProps) {
   return (
-    <SnippetsListWrapper>
+    <PageContentWrapper>
       <SnippetsList snippetsData={snippetsData} fetchUrl={apiHandlerUrl} />
-    </SnippetsListWrapper>
+    </PageContentWrapper>
   );
 }
 

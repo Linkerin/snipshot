@@ -87,7 +87,6 @@ function UserPage({
             <SnippetsList
               snippetsData={snippetsData}
               fetchUrl={`/users/${username}`}
-              oneColumn
             />
           </PageContentWrapper>
         </GridItem>

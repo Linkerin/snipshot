@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 interface UsePaginatedHandlerOptions {
   first?: boolean;
@@ -18,41 +18,56 @@ interface UsePaginatedHandlerOptions {
 export default function usePaginatedHandler<T>(
   link: string,
   { first = false, params }: UsePaginatedHandlerOptions = {}
-): [() => Promise<T[]>, boolean] {
+): [(controller: AbortController) => Promise<T[]>, boolean] {
   const startPage = first ? 1 : 2;
   const [page, setPage] = useState(startPage);
   const [hasMore, setHasMore] = useState(true);
 
-  // Remove the following `/` if there is one and append `page` param
-  let url = link.replace(/\/$/, '') + `?page=${page}`;
+  let url = useMemo(
+    () =>
+      new URL(
+        // Remove the following `/` if there is one
+        '/api' + link.replace(/\/$/, ''),
+        process.env.NEXT_PUBLIC_BASE_URL
+      ),
+    [link]
+  );
+  url.searchParams.set('page', `${page}`);
 
   // Add additional parameters to the url
   if (params) {
     for (let [key, value] of Object.entries(params)) {
-      url += `&${key}=${value}`;
+      url.searchParams.set(`${key}`, `${value}`);
     }
   }
 
-  const fetchData = useCallback(async () => {
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API}${url}`);
-      if (!res.ok) {
+  const fetchData = useCallback(
+    async (controller: AbortController) => {
+      try {
+        const res = await fetch(url, {
+          signal: controller.signal
+        });
+        if (!res.ok) {
+          const data = await res.json();
+          throw new Error(data.message);
+        }
         const data = await res.json();
-        throw new Error(data.message);
-      }
-      const data = await res.json();
-      if (data?.length == 0) {
-        setHasMore(false);
+        if (data?.length == 0) {
+          setHasMore(false);
+          return [] as T[];
+        }
+        setPage(prevState => prevState + 1);
+
+        return [...data] as T[];
+      } catch (err) {
+        controller.abort();
+        const log = (await import('next-axiom')).log;
+        log.error('Pagination fetching error', { err, url });
         return [] as T[];
       }
-      setPage(prevState => prevState + 1);
-
-      return [...data] as T[];
-    } catch (err) {
-      console.error(err);
-      return [] as T[];
-    }
-  }, [url]);
+    },
+    [url]
+  );
 
   return [fetchData, hasMore];
 }

@@ -1,15 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
-import {
-  Center,
-  Grid,
-  GridItem,
-  VStack,
-  useBreakpoint
-} from '@chakra-ui/react';
+import { startTransition, useEffect, useState } from 'react';
+import { Center, Grid, GridItem } from '@chakra-ui/react';
 
 import CustomSpinner from '@/components/Common/CustomSpinner';
-import { DeviceContext } from '@/context/DeviceContext';
-import { MOBILE_BREAKPOINTS } from '@/services/constants';
 import Snippet from '@/components/Snippet/Snippet';
 import { SnippetType } from '@/services/types';
 import usePaginatedHandler from '@/hooks/usePaginatedHandler';
@@ -18,19 +10,11 @@ import useScrollRef from '@/hooks/useScrollRef';
 interface SnippetsListProps {
   snippetsData: SnippetType[];
   fetchUrl: string;
-  oneColumn?: boolean;
 }
 
-function SnippetsList({
-  snippetsData,
-  fetchUrl,
-  oneColumn = false
-}: SnippetsListProps) {
+function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
   const [snippets, setSnippets] = useState(snippetsData);
   const [isLoading, setIsLoading] = useState(false);
-
-  const { isMobile } = useContext(DeviceContext);
-  const breakpoint = useBreakpoint();
 
   const [isIntersecting, targetRef, updateObserver] = useScrollRef();
   const [fetchData, hasMore] = usePaginatedHandler<SnippetType>(fetchUrl);
@@ -38,14 +22,17 @@ function SnippetsList({
   useEffect(() => {
     // Check for end of the page, no current fetching and that there are items left
     if (!isIntersecting || isLoading || !hasMore) return;
+    const controller = new AbortController();
 
     const fetchSnippets = async () => {
       setIsLoading(true);
 
       try {
-        const snippets = await fetchData();
+        const snippets = await fetchData(controller);
         if (snippets && snippets?.length > 0) {
-          setSnippets(prevState => [...prevState, ...snippets]);
+          startTransition(() => {
+            setSnippets(prevState => [...prevState, ...snippets]);
+          });
           updateObserver();
         }
       } catch (err) {
@@ -65,51 +52,23 @@ function SnippetsList({
 
   return (
     <>
-      {isMobile || oneColumn || MOBILE_BREAKPOINTS.includes(breakpoint) ? (
-        <Grid templateColumns="1fr" gap={4}>
-          <GridItem as={VStack} alignItems="flex-start" spacing={4}>
-            {snippets.map((snippet, index) => {
-              const refItem = index === snippets.length - 3;
-              return (
-                <Snippet
-                  key={snippet.id}
-                  snippet={snippet}
-                  provideRef={refItem ? targetRef : undefined}
-                />
-              );
-            })}
-          </GridItem>
-        </Grid>
-      ) : (
-        <Grid templateColumns="1fr 1fr" gap={4}>
-          <GridItem as={VStack} alignItems="flex-start" spacing={5}>
-            {snippets.map((snippet, index) => {
-              const refItem = index === snippets.length - 3;
-              if (index % 2 === 0)
-                return (
-                  <Snippet
-                    key={snippet.id}
-                    snippet={snippet}
-                    provideRef={refItem ? targetRef : undefined}
-                  />
-                );
-            })}
-          </GridItem>
-          <GridItem as={VStack} alignItems="flex-start" spacing={5}>
-            {snippets.map((snippet, index) => {
-              const refItem = index === snippets.length - 3;
-              if (index % 2 !== 0)
-                return (
-                  <Snippet
-                    key={snippet.id}
-                    snippet={snippet}
-                    provideRef={refItem ? targetRef : undefined}
-                  />
-                );
-            })}
-          </GridItem>
-        </Grid>
-      )}
+      <Grid
+        templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
+        rowGap={2}
+        columnGap={{ base: 4, '2xl': 10 }}
+      >
+        {snippets.map((snippet, index) => {
+          const refItem = index === snippets.length - 3;
+          return (
+            <GridItem key={snippet.id}>
+              <Snippet
+                snippet={snippet}
+                provideRef={refItem ? targetRef : undefined}
+              />
+            </GridItem>
+          );
+        })}
+      </Grid>
 
       {isLoading && (
         <Center my={5}>
