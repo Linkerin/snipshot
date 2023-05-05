@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 
+import { AuthContext } from '@/context/AuthContext';
 import NextLocalStorage from '@/services/NextLocalStorage';
 
 /**
@@ -9,6 +10,7 @@ import NextLocalStorage from '@/services/NextLocalStorage';
  */
 function useCookiesConsent() {
   const [showConsent, setShowConsent] = useState(false);
+  const [user] = useContext(AuthContext);
 
   const acceptCookiesHandler = useCallback(() => {
     NextLocalStorage.setItem('cookiesConsent', 'true');
@@ -17,9 +19,11 @@ function useCookiesConsent() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setShowConsent(!(NextLocalStorage.getItem('cookiesConsent') === 'true'));
+      setShowConsent(
+        !(NextLocalStorage.getItem('cookiesConsent') === 'true' || user?.id)
+      );
     }
-  }, []);
+  }, [user?.id]);
 
   return { showConsent, acceptCookiesHandler };
 }
