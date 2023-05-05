@@ -61,12 +61,9 @@ async function getByUser({
           }
         },
     where: {
-      author: {
-        name: {
-          equals: username
-        }
-      }
-    }
+      author: { name: { equals: username } }
+    },
+    orderBy: [{ created: 'desc' }, { verified: 'desc' }]
   });
 
   return snippets;

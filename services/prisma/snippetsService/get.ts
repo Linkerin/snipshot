@@ -84,16 +84,7 @@ async function get({ page = '1', tag = [], lang }: GetFuncArgs = {}) {
       }
     },
     where: whereParams,
-    orderBy: [
-      {
-        rating: {
-          rating: 'desc'
-        }
-      },
-      {
-        verified: 'desc'
-      }
-    ]
+    orderBy: [{ created: 'desc' }, { verified: 'desc' }]
   });
 
   return snippets;

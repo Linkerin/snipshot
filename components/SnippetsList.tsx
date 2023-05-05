@@ -10,9 +10,14 @@ import useScrollRef from '@/hooks/useScrollRef';
 interface SnippetsListProps {
   snippetsData: SnippetType[];
   fetchUrl: string;
+  oneColumn?: boolean;
 }
 
-function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
+function SnippetsList({
+  snippetsData,
+  fetchUrl,
+  oneColumn = false
+}: SnippetsListProps) {
   const [snippets, setSnippets] = useState(snippetsData);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -53,7 +58,10 @@ function SnippetsList({ snippetsData, fetchUrl }: SnippetsListProps) {
   return (
     <>
       <Grid
-        templateColumns={{ base: '1fr', lg: '1fr 1fr' }}
+        templateColumns={{
+          base: '1fr',
+          lg: oneColumn ? '1fr' : '1fr 1fr'
+        }}
         rowGap={2}
         columnGap={{ base: 4, '2xl': 10 }}
       >
