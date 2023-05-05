@@ -7,9 +7,9 @@ import SnippetCardBody from '@/components/Snippet/Card/Body/SnippetCardBody';
 import SnippetCardFooter from '@/components/Snippet/Card/Footer/SnippetCardFooter';
 import SnippetCardHeader from '@/components/Snippet/Card/Header/SnippetCardHeader';
 import SnippetInfoFooter from '@/components/Snippet/InfoFooter/SnippetInfoFooter';
-import SnippetRatingInfo from '@/components/Snippet/InfoFooter/SnippetRatingInfo';
 import SnippetTagsList from '@/components/Snippet/Card/Footer/SnippetTagsList';
 import { SnippetType } from '@/services/types';
+import RatingInfoSkeleton from '@/components/Skeletons/RatingInfoSkeleton';
 
 const SnippetCode = dynamic(
   () => import('@/components/Snippet/Card/Body/SnippetCode')
@@ -17,6 +17,10 @@ const SnippetCode = dynamic(
 const VerificationTag = dynamic(
   () => import('@/components/Snippet/InfoFooter/VerificationTag'),
   { ssr: false }
+);
+const SnippetRatingInfo = dynamic(
+  () => import('@/components/Snippet/InfoFooter/SnippetRatingInfo'),
+  { loading: () => <RatingInfoSkeleton />, ssr: false }
 );
 
 export interface SnippetProps {
@@ -67,7 +71,7 @@ function Snippet({
       {!noFooter && (
         <SnippetInfoFooter author={snippet.author} created={snippet.created}>
           <SnippetRatingInfo
-            id={snippet.rating.id}
+            ratingId={snippet.rating.id}
             rating={snippet.rating.rating}
           />
           {snippet.verified && <VerificationTag />}
