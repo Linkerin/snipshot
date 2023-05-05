@@ -61,7 +61,6 @@ export default async function handler(request: NextRequest) {
             padding: '2rem'
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="https://snipshot.dev/images/LogoDark.svg"
             alt="snipshot logo"
@@ -89,7 +88,6 @@ export default async function handler(request: NextRequest) {
                 width: '336px'
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={avatar}
                 alt={`${name ?? 'guest'} avatar`}
@@ -160,7 +158,10 @@ export default async function handler(request: NextRequest) {
       ),
       {
         width: 1200,
-        height: 630
+        height: 630,
+        headers: {
+          'cache-control': 'public, immutable, no-transform, max-age=86400'
+        }
       }
     );
   } catch (err) {

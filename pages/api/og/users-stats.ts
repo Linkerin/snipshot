@@ -52,6 +52,11 @@ export default async function handler(
       }, 0);
       let numOfFavorites = 0;
 
+      res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=86400, stale-while-revalidate=59'
+      );
+
       return res.status(200).json({ numOfSnippets, numOfFavorites, rating });
     } catch (err) {
       log.error('Error while getting user stats for OG', { err });
