@@ -13,16 +13,13 @@ function useRatingActions({ ratingId, rating }: SnippetRatingInfoProps) {
   const [user] = useContext(AuthContext);
 
   /**
-   * Calls Supabase functions for rating updates
+   * Fetches API to make Supabase function calls.
+   * Implementation with Next API is necessary due to table restrictions
+   * and necessity to use Supabase service client.
    * @returns Rating number in case of success, `null` otherwise
    */
   const updateRating = useCallback(
     async (action: 'increment' | 'decrement' | 'revoke') => {
-      //   const supabaseAction:
-      //     | 'increment_rating'
-      //     | 'decrement_rating'
-      //     | 'revoke_rating' = `${action}_rating`;
-
       try {
         const supabase = (await import('@/services/supabase/supabase')).default;
         const { data: sessionData, error: sessionError } =
@@ -49,12 +46,6 @@ function useRatingActions({ ratingId, rating }: SnippetRatingInfoProps) {
         }
 
         const data = await res.json();
-
-        // const { data, error } = await supabase.rpc(supabaseAction, {
-        //   rating_key: ratingId,
-        //   user_key: userId
-        // });
-        // if (error) throw error;
 
         return Number(data.rating);
       } catch (err) {
