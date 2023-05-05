@@ -1,6 +1,7 @@
 import { Tag, TagLabel, TagLeftIcon } from '@chakra-ui/react';
 
 import CheckedIcon from '@/components/Icons/CheckedIcon';
+import fadeInAnimation from '@/services/utils/styling/fadeInAnimation';
 
 function VerificationTag() {
   return (
@@ -15,6 +16,7 @@ function VerificationTag() {
       pl={1}
       pr={1.5}
       py={1}
+      sx={fadeInAnimation()}
     >
       <TagLeftIcon as={CheckedIcon} boxSize={4} color="primary" mr={1} />
       <TagLabel color="primary" cursor="default">
