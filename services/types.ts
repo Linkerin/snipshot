@@ -90,3 +90,8 @@ export interface CommentType {
     avatar: string;
   };
 }
+
+export interface SnippetRatingInfoProps {
+  ratingId: SnippetType['rating']['id'];
+  rating: SnippetType['rating']['rating'];
+}

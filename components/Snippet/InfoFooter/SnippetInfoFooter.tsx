@@ -1,5 +1,5 @@
 import NextLink from 'next/link';
-import { Link, Stack, Text } from '@chakra-ui/react';
+import { Flex, Link, Stack, Text } from '@chakra-ui/react';
 
 import { parseDate } from '@/services/utils/date';
 import { SnippetType } from '@/services/types';
@@ -17,14 +17,14 @@ function SnippetInfoFooter({
 }: SnippetInfoFooterProps) {
   return (
     <Stack as="footer" ml={2} mb={2} mt={1} spacing={0.5}>
-      <Stack
+      <Flex
         direction="row"
         align="center"
         wrap="wrap-reverse"
         justifyContent="space-between"
       >
         {children}
-      </Stack>
+      </Flex>
       <Stack direction="row" spacing={2} alignItems="flex-end">
         <Text
           fontSize="sm"
