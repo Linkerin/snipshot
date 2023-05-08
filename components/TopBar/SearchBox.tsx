@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import { useCallback, useRef, useState } from 'react';
-import NextLink from 'next/link';
 import {
   Box,
   Card,
@@ -76,8 +75,8 @@ function SearchBox() {
                       <LangIcon lang={snippet.lang} />
                     </ListIcon>
                     <LinkOverlay
-                      as={NextLink}
                       href={`/snippets/${snippet.lang}/${snippet.slug}`}
+                      aria-label={`Navigate to ${snippet.title} page`}
                     >
                       {snippet.title}
                     </LinkOverlay>

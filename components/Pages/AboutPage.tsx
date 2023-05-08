@@ -1,4 +1,3 @@
-import NextLink from 'next/link';
 import {
   Heading,
   Highlight,
@@ -76,11 +75,10 @@ export function AboutPage() {
           <UnorderedList color="text-secondary" pl={6}>
             <ListItem>
               <Link
-                as={NextLink}
                 href="https://chakra-ui.com"
-                prefetch={false}
                 rel="noreferrer"
                 fontWeight="bold"
+                isExternal
               >
                 Chakra UI
               </Link>
@@ -88,22 +86,20 @@ export function AboutPage() {
             <ListItem>
               Unicons by{' '}
               <Link
-                as={NextLink}
                 href="https://iconscout.com/"
-                prefetch={false}
                 rel="noreferrer"
                 fontWeight="bold"
+                isExternal
               >
                 IconScout
               </Link>
             </ListItem>
             <ListItem>
               <Link
-                as={NextLink}
                 href="https://devicon.dev"
-                prefetch={false}
                 rel="noreferrer"
                 fontWeight="bold"
+                isExternal
               >
                 Devicon
               </Link>
@@ -111,21 +107,19 @@ export function AboutPage() {
             <ListItem>
               Cute pictures created by{' '}
               <Link
-                as={NextLink}
                 href="https://www.freepik.com/author/catalyststuff"
-                prefetch={false}
                 rel="noreferrer"
                 fontWeight="bold"
+                isExternal
               >
                 catalyststuff
               </Link>
               {' on '}
               <Link
-                as={NextLink}
                 href="https://www.freepik.com/"
-                prefetch={false}
                 rel="noreferrer"
                 fontWeight="bold"
+                isExternal
               >
                 Freepik
               </Link>

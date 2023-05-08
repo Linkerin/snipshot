@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import NextLink from 'next/link';
 import {
   Alert,
   AlertDescription,
@@ -20,7 +19,7 @@ function Alerts({ error }: { error: string }) {
           <AlertIcon boxSize={4} />
           <AlertDescription fontSize="sm">
             Hey, how about{' '}
-            <Link as={NextLink} href="/login" color="primary">
+            <Link aria-label="Login page" href="/login" color="primary">
               logging in
             </Link>{' '}
             to be the author of your snippet? 😊

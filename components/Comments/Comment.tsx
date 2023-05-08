@@ -1,6 +1,5 @@
 import { useCallback, useContext, useState } from 'react';
 import dynamic from 'next/dynamic';
-import NextLink from 'next/link';
 import { ButtonGroup, Flex, IconButton, Link, Text } from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -54,7 +53,10 @@ function Comment({ comment }: { comment: CommentType }) {
   return (
     <Flex alignItems="center" justifyContent="space-between">
       <Flex alignItems="center" gap={2}>
-        <Link as={NextLink} href={`/users/${comment.author.name}`}>
+        <Link
+          aria-label={`Navigate to ${comment.author.name} profile page`}
+          href={`/users/${comment.author.name}`}
+        >
           <UserAvatar
             avatar={comment.author.avatar}
             username={comment.author.name}
@@ -66,7 +68,10 @@ function Comment({ comment }: { comment: CommentType }) {
         <Flex direction="column" justifyContent="flex-start">
           <Flex alignItems="flex-end" gap={2}>
             <Text fontSize="sm" fontWeight="bold">
-              <Link as={NextLink} href={`/users/${comment.author.name}`}>
+              <Link
+                aria-label={`Navigate to ${comment.author.name} profile page`}
+                href={`/users/${comment.author.name}`}
+              >
                 {comment.author.name}
               </Link>
             </Text>

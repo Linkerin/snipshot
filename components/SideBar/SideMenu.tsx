@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import NextLink from 'next/link';
 import {
   chakra,
   Accordion,
@@ -52,10 +51,8 @@ function SideMenu() {
           <LinkBox as={StyledMenuItem}>
             <ListIcon as={UserIcon} />
             <LinkOverlay
-              as={NextLink}
               href={`/users/${user?.username}`}
               aria-label="Profile page"
-              prefetch={false}
             >
               Profile
             </LinkOverlay>
@@ -63,12 +60,7 @@ function SideMenu() {
           {user?.id && (
             <LinkBox as={StyledMenuItem}>
               <ListIcon as={SettingsIcon} />
-              <LinkOverlay
-                as={NextLink}
-                href="/settings"
-                aria-label="Settings page"
-                prefetch={false}
-              >
+              <LinkOverlay href="/settings" aria-label="Settings page">
                 Settings
               </LinkOverlay>
             </LinkBox>
@@ -79,12 +71,7 @@ function SideMenu() {
       {!user?.id && (
         <LinkBox as={StyledMenuItem}>
           <ListIcon as={SignInIcon} />
-          <LinkOverlay
-            as={NextLink}
-            href="/login"
-            aria-label="Settings page"
-            prefetch={false}
-          >
+          <LinkOverlay href="/login" aria-label="Settings page">
             Sign In
           </LinkOverlay>
         </LinkBox>
@@ -106,12 +93,7 @@ function SideMenu() {
 
       <LinkBox as={StyledMenuItem}>
         <ListIcon as={InfoIcon} />
-        <LinkOverlay
-          as={NextLink}
-          href="/about"
-          aria-label="About page"
-          prefetch={false}
-        >
+        <LinkOverlay href="/about" aria-label="About page">
           About
         </LinkOverlay>
       </LinkBox>
