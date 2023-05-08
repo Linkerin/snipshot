@@ -1,10 +1,17 @@
-const CACHE_NAME = 'offline-cache';
-const urlsToCache = [
+const VERSION = 1;
+const CACHE_NAME = `offline-cache-v${VERSION}`;
+const RESOURCES = [
   '/',
+  '/add',
+  '/about',
+  '/settings',
+  '/#languages',
+  '/#search',
+  '/legal/privacy-policy',
+  '/legal/terms-of-service',
   '/favicons/pwa-192x192.png',
   '/favicons/pwa-512x512.png',
-  '/icons/add.png',
-  '/icons/info.png',
+  '/favicons/site.webmanifest',
   '/images/GuestAvatar.svg',
   '/images/LeiaFox.webp',
   '/images/LogoDark.svg',
@@ -13,64 +20,55 @@ const urlsToCache = [
   '/images/YogaSloth.webp'
 ];
 
+// Install phase
+const preCache = async resources => {
+  try {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.addAll(resources);
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
 self.addEventListener('install', event => {
-  event.waitUntil(async () => {
-    try {
-      const cache = await caches.open(CACHE_NAME);
-      return cache.addAll(urlsToCache);
-    } catch (err) {
-      const log = (await import('next-axiom')).log;
-      log.err('Initial cache loading failed', { err });
-    }
-  });
+  event.waitUntil(preCache(RESOURCES));
 });
 
-// self.addEventListener('fetch', event => {
-//   event.respondWith(async () => {
-//     try {
-//         const cachedResponse = await caches.match(event.request);
-//         const networkFetch = fetch(event.request);
+// Fetching block
+const putInCache = async (request, response) => {
+  if (request.method !== 'GET') return;
 
-//               if (cachedResponse) {
-//         return cachedResponse;
-//       }
+  const cache = await caches.open(CACHE_NAME);
+  await cache.put(request, response);
+};
 
-//         const response = await networkFetch;
-//         const responseClone = response.clone();
+const fetchRequest = async request => {
+  const networkResponse = await fetch(request);
+  await putInCache(request, networkResponse.clone());
 
-//         const cache = await caches.open(url.seachParams.get('name'));
-//         cache.put(event.request, responseClone);
+  return networkResponse;
+};
 
-//         return response;
+const staleWhileRevalidate = async request => {
+  try {
+    const cache = await caches.open(CACHE_NAME);
+    const cachedResponse = await cache.match(request);
 
-//       if (cachedResponse) {
-//         return cachedResponse;
-//       }
-//     //   return fetch(event.request);
-//     } catch (err) {
-//       const log = (await import('next-axiom')).log;
-//       log.err('Fetch request caching failed', { err, request: event.request });
-//     }
-//   });
-// });
+    if (cachedResponse) {
+      // Serve cached response while revalidating
+      fetchRequest(request);
+      return cachedResponse;
+    }
 
-// self.addEventListener('fetch', event => {
-//   event.respondWith(
-//     caches.match(event.request).then(cachedResponse => {
-//       const networkFetch = fetch(event.request)
-//         .then(response => {
-//           // update the cache with a clone of the network response
-//           const responseClone = response.clone();
-//           caches.open(url.searchParams.get('name')).then(cache => {
-//             cache.put(event.request, responseClone);
-//           });
-//           return response;
-//         })
-//         .catch(function (reason) {
-//           console.error('ServiceWorker fetch failed: ', reason);
-//         });
-//       // prioritize cached response over network
-//       return cachedResponse || networkFetch;
-//     })
-//   );
-// });
+    // If no cached response, fetch from network and cache
+    const networkResponse = await fetchRequest(request);
+
+    return networkResponse;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+
+self.addEventListener('fetch', async event => {
+  event.respondWith(staleWhileRevalidate(event.request));
+});
