@@ -1,5 +1,4 @@
-import NextLink from 'next/link';
-import { IconButton, useColorModeValue } from '@chakra-ui/react';
+import { IconButton, Link, useColorModeValue } from '@chakra-ui/react';
 
 import SettingsIcon from '@/components/Icons/SettingsIcon';
 
@@ -10,10 +9,9 @@ function SettingsButton() {
   );
   return (
     <IconButton
-      as={NextLink}
+      as={Link}
       href="/settings"
       aria-label="Navigate to settings page"
-      prefetch={false}
       colorScheme={btnColor}
       borderRadius="30%"
       icon={<SettingsIcon boxSize={6} />}

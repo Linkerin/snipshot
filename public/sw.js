@@ -84,6 +84,6 @@ const staleWhileRevalidate = async request => {
   }
 };
 
-// self.addEventListener('fetch', async event => {
-//   event.respondWith(staleWhileRevalidate(event.request));
-// });
+self.addEventListener('fetch', async event => {
+  event.respondWith(staleWhileRevalidate(event.request));
+});

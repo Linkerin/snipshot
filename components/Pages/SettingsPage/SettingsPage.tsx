@@ -1,14 +1,10 @@
-import NextLink from 'next/link';
 import { Divider, Flex, Heading, Link, Show } from '@chakra-ui/react';
 
 import ChangeUsername from './ChangeUsername';
 import DeleteUser from './DeleteUser';
 import PageContentWrapper from '@/components/PageContentWrapper';
-import useAuth from '@/hooks/useAuth';
 
 function SettingsPage() {
-  useAuth();
-
   return (
     <PageContentWrapper
       as={Flex}
@@ -25,7 +21,7 @@ function SettingsPage() {
       <DeleteUser />
       <Show below="md">
         <Divider />
-        <Link as={NextLink} href="/about" aria-label="About page" fontSize="xl">
+        <Link href="/about" aria-label="About page" fontSize="xl">
           About snipshot
         </Link>
       </Show>

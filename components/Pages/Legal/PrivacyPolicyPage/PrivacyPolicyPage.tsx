@@ -1,4 +1,3 @@
-import NextLink from 'next/link';
 import {
   Heading,
   Highlight,
@@ -36,7 +35,7 @@ function PrivacyPolicyPage() {
         <Contents />
         <Text>
           This Privacy Policy governs the manner in which{' '}
-          <Link as={NextLink} href="/" fontWeight="bold">
+          <Link aria-label="Home page" href="/" fontWeight="bold">
             snipshot.dev
           </Link>{' '}
           website (&#34;we&#34;, &#34;us&#34;, &#34;our&#34;, or &#34;Site&#34;)
@@ -194,12 +193,20 @@ function PrivacyPolicyPage() {
         </Heading>
         <Text>
           If you have any questions about this Privacy Policy, our{' '}
-          <Link as={NextLink} href="/legal/terms-of-service" fontWeight="bold">
+          <Link
+            aria-label="Terms of Service page"
+            href="/legal/terms-of-service"
+            fontWeight="bold"
+          >
             Terms of Service
           </Link>
           , the practices of this Site, or your dealings with this Site, please
           contact us at{' '}
-          <Link as={NextLink} href="mailto:info@snipshot.dev" fontWeight="bold">
+          <Link
+            aria-label="Contact e-mail"
+            href="mailto:info@snipshot.dev"
+            fontWeight="bold"
+          >
             info@snipshot.dev
           </Link>
         </Text>

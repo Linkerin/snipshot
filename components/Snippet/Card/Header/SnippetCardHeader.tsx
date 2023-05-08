@@ -1,10 +1,10 @@
-import NextLink from 'next/link';
 import {
   Box,
   CardHeader,
   Divider,
   Flex,
   Heading,
+  Link,
   LinkBox,
   LinkOverlay,
   useColorModeValue
@@ -44,9 +44,9 @@ function SnippetCardHeader({
             <Heading as="h2" fontSize="sm" noOfLines={1} pl={1}>
               {slug ? (
                 <LinkOverlay
-                  as={NextLink}
+                  as={Link}
+                  aria-label={`Navigate to ${title} snippet page`}
                   href={`/snippets/${escapedLang}/${slug}/`}
-                  prefetch={false}
                   _hover={{ color: 'primary' }}
                 >
                   {title}

@@ -1,5 +1,5 @@
 import { useContext, useMemo } from 'react';
-import NextLink from 'next/link';
+// import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import { LinkBox, LinkOverlay, ListIcon } from '@chakra-ui/react';
 
@@ -46,9 +46,7 @@ function LanguagesListItem({ lang, role }: LanguagesListItemProps) {
           role={role}
         />
         <LinkOverlay
-          as={NextLink}
           href={`/snippets/${escapedLang}`}
-          prefetch={false}
           aria-label={`Navigate to ${lang} page`}
         >
           {lang}

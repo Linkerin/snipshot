@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import {
   Box,
@@ -65,7 +64,6 @@ function CookiesConsentPortal({ show, onClose }: CookiesConsentPortalProps) {
               Our application uses stricly necessary cookies 🍪. Before
               continuing, you agree and accept our{' '}
               <Link
-                as={NextLink}
                 href={`${process.env.NEXT_PUBLIC_BASE_URL}/legal/privacy-policy#cookies`}
                 aria-label="Navigate to Privacy Policy page"
                 fontWeight="bold"

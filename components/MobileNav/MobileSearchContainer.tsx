@@ -1,5 +1,4 @@
 import { useCallback, useState } from 'react';
-import NextLink from 'next/link';
 import {
   Box,
   Card,
@@ -55,8 +54,8 @@ function MobileSearchContainer() {
                       <LangIcon lang={snippet.lang} />
                     </ListIcon>
                     <LinkOverlay
-                      as={NextLink}
                       href={`/snippets/${snippet.lang}/${snippet.slug}`}
+                      aria-label={`Navigate to ${snippet.title} page`}
                     >
                       {snippet.title}
                     </LinkOverlay>

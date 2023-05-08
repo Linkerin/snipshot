@@ -1,5 +1,4 @@
-import NextLink from 'next/link';
-import { Button, Flex, Heading, Img, Text, Show } from '@chakra-ui/react';
+import { Button, Flex, Heading, Img, Link, Text, Show } from '@chakra-ui/react';
 
 function Custom404() {
   return (
@@ -42,7 +41,7 @@ function Custom404() {
             someday.
           </Text>
           <Button
-            as={NextLink}
+            as={Link}
             href="/"
             aria-label="Homepage"
             variant="outline"
