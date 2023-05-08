@@ -6,14 +6,12 @@ import SnippetBarOptions from '@/components/Snippet/Card/Header/SnippetBarOption
 import SnippetCardBody from '@/components/Snippet/Card/Body/SnippetCardBody';
 import SnippetCardFooter from '@/components/Snippet/Card/Footer/SnippetCardFooter';
 import SnippetCardHeader from '@/components/Snippet/Card/Header/SnippetCardHeader';
+import SnippetCode from '@/components/Snippet/Card/Body/SnippetCode';
 import SnippetInfoFooter from '@/components/Snippet/InfoFooter/SnippetInfoFooter';
 import SnippetTagsList from '@/components/Snippet/Card/Footer/SnippetTagsList';
 import { SnippetRemoveHandlerType, SnippetType } from '@/services/types';
 import RatingInfoSkeleton from '@/components/Skeletons/RatingInfoSkeleton';
 
-const SnippetCode = dynamic(
-  () => import('@/components/Snippet/Card/Body/SnippetCode')
-);
 const VerificationTag = dynamic(
   () => import('@/components/Snippet/InfoFooter/VerificationTag'),
   { ssr: false }
