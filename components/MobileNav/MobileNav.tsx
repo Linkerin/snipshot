@@ -13,9 +13,7 @@ import UserIcon from '@/components/Icons/UserIcon';
 
 const LanguagesList = dynamic(
   () => import('@/components/LanguagesList/LanguagesList'),
-  {
-    ssr: false
-  }
+  { ssr: false }
 );
 const MobileNavModal = dynamic(() => import('./MobileNavModal'), {
   ssr: false

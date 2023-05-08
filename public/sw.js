@@ -1,5 +1,6 @@
-const VERSION = 'v0.1';
-const CACHE_NAME = `offline-cache-${VERSION}`;
+const version = 'v0.2';
+const CACHE_LABEL = 'offline-cache';
+const CACHE_NAME = `${CACHE_LABEL}-${version}`;
 const RESOURCES = [
   '/',
   '/add',
@@ -35,8 +36,17 @@ self.addEventListener('install', event => {
 });
 
 // Activate phase
+const clearCaches = async () => {
+  const keys = await caches.keys();
+  keys.forEach(async key => {
+    if (key !== CACHE_NAME) {
+      await caches.delete(key);
+    }
+  });
+};
+
 self.addEventListener('activate', async event => {
-  await caches.delete('offline-cache-1');
+  event.waitUntil(clearCaches());
 });
 
 // Fetching block

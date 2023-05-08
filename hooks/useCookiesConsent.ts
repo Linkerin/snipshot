@@ -25,6 +25,7 @@ function useCookiesConsent() {
 
       if (user?.id && storageConsent !== 'true') {
         NextLocalStorage.setItem('cookiesConsent', 'true');
+        setShowConsent(false);
       }
     }
   }, [user?.id]);
