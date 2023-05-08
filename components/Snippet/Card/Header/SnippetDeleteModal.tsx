@@ -13,20 +13,22 @@ import {
   useToast
 } from '@chakra-ui/react';
 
-import { SnippetType } from '@/services/types';
+import { SnippetRemoveHandlerType, SnippetType } from '@/services/types';
 
 interface SnippetDeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
   snippetId: SnippetType['id'];
   authorId: string | undefined;
+  handleSnippetRemove?: SnippetRemoveHandlerType;
 }
 
 function SnippetDeleteModal({
   isOpen,
   onClose,
   snippetId,
-  authorId
+  authorId,
+  handleSnippetRemove
 }: SnippetDeleteModalProps) {
   const [isRemoving, setIsRemoving] = useState(false);
 
@@ -79,6 +81,8 @@ function SnippetDeleteModal({
         router.asPath.split('/snippets/')[0] === ''
       ) {
         router.push('/');
+      } else {
+        handleSnippetRemove && handleSnippetRemove(snippetId);
       }
 
       toast({

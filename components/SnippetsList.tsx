@@ -1,9 +1,9 @@
-import { startTransition, useEffect, useState } from 'react';
+import { startTransition, useCallback, useEffect, useState } from 'react';
 import { Center, Grid, GridItem } from '@chakra-ui/react';
 
 import CustomSpinner from '@/components/Common/CustomSpinner';
 import Snippet from '@/components/Snippet/Snippet';
-import { SnippetType } from '@/services/types';
+import { SnippetRemoveHandlerType, SnippetType } from '@/services/types';
 import usePaginatedHandler from '@/hooks/usePaginatedHandler';
 import useScrollRef from '@/hooks/useScrollRef';
 
@@ -23,6 +23,12 @@ function SnippetsList({
 
   const [isIntersecting, targetRef, updateObserver] = useScrollRef();
   const [fetchData, hasMore] = usePaginatedHandler<SnippetType>(fetchUrl);
+
+  const handleSnippetRemove: SnippetRemoveHandlerType = useCallback(id => {
+    startTransition(() => {
+      setSnippets(prevState => prevState.filter(snippet => snippet.id !== id));
+    });
+  }, []);
 
   useEffect(() => {
     // Check for end of the page, no current fetching and that there are items left
@@ -72,6 +78,7 @@ function SnippetsList({
               <Snippet
                 snippet={snippet}
                 provideRef={refItem ? targetRef : undefined}
+                handleSnippetRemove={handleSnippetRemove}
               />
             </GridItem>
           );

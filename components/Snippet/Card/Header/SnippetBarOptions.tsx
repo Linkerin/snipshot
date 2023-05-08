@@ -18,7 +18,7 @@ import EditIcon from '@/components/Icons/EditIcon';
 import ExclamationIcon from '@/components/Icons/ExclamationIcon';
 import MoreDotsIcon from '@/components/Icons/MoreDotsIcon';
 import ShareIcon from '@/components/Icons/ShareIcon';
-import { SnippetType } from '@/services/types';
+import { SnippetRemoveHandlerType, SnippetType } from '@/services/types';
 
 const SnippetDeleteModal = dynamic(() => import('./SnippetDeleteModal'), {
   ssr: false
@@ -43,13 +43,15 @@ interface SnippetBarOptionsProps {
   authorId?: string;
   lang: SnippetType['lang'];
   slug: SnippetType['slug'];
+  handleSnippetRemove?: SnippetRemoveHandlerType;
 }
 
 function SnippetBarOptions({
   snippetId,
   authorId,
   lang,
-  slug
+  slug,
+  handleSnippetRemove
 }: SnippetBarOptionsProps) {
   const {
     isOpen: isDeleteOpen,
@@ -151,6 +153,7 @@ function SnippetBarOptions({
           onClose={onDeleteClose}
           snippetId={snippetId}
           authorId={authorId}
+          handleSnippetRemove={handleSnippetRemove}
         />
       )}
       {isReportOpen && (

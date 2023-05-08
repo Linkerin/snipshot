@@ -95,3 +95,5 @@ export interface SnippetRatingInfoProps {
   ratingId: SnippetType['rating']['id'];
   rating: SnippetType['rating']['rating'];
 }
+
+export type SnippetRemoveHandlerType = (id: SnippetType['id']) => void;

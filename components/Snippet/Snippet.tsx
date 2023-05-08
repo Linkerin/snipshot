@@ -8,7 +8,7 @@ import SnippetCardFooter from '@/components/Snippet/Card/Footer/SnippetCardFoote
 import SnippetCardHeader from '@/components/Snippet/Card/Header/SnippetCardHeader';
 import SnippetInfoFooter from '@/components/Snippet/InfoFooter/SnippetInfoFooter';
 import SnippetTagsList from '@/components/Snippet/Card/Footer/SnippetTagsList';
-import { SnippetType } from '@/services/types';
+import { SnippetRemoveHandlerType, SnippetType } from '@/services/types';
 import RatingInfoSkeleton from '@/components/Skeletons/RatingInfoSkeleton';
 
 const SnippetCode = dynamic(
@@ -28,13 +28,16 @@ export interface SnippetProps {
   provideRef?: React.RefObject<HTMLDivElement>;
   noFooter?: boolean;
   noOptionsBar?: boolean;
+  handleSnippetRemove?: SnippetRemoveHandlerType;
 }
 
 function Snippet({
   snippet,
   provideRef,
+
   noFooter = false,
-  noOptionsBar = false
+  noOptionsBar = false,
+  handleSnippetRemove
 }: SnippetProps) {
   return (
     <chakra.article ref={provideRef} w="100%" sx={fadeInAnimation()}>
@@ -58,6 +61,7 @@ function Snippet({
               authorId={snippet.author?.id}
               lang={snippet.lang}
               slug={snippet.slug}
+              handleSnippetRemove={handleSnippetRemove}
             />
           )}
         </SnippetCardHeader>
