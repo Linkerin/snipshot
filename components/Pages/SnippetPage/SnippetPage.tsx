@@ -23,7 +23,7 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
 
   let description = `Page of "${snippet.title}" snippet source code in ${snippet.lang}.`;
   if (snippet.author?.name) {
-    description += ` Created by ${snippet.author.name}`;
+    description += ` Created by ${snippet.author?.name}`;
   }
 
   const keywordsTags = snippet.tags?.join(', ');
