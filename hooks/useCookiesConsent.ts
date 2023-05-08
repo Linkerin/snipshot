@@ -19,9 +19,13 @@ function useCookiesConsent() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      setShowConsent(
-        !(NextLocalStorage.getItem('cookiesConsent') === 'true' || user?.id)
-      );
+      const storageConsent = NextLocalStorage.getItem('cookiesConsent');
+
+      setShowConsent(!(user?.id || storageConsent === 'true'));
+
+      if (user?.id && storageConsent !== 'true') {
+        NextLocalStorage.setItem('cookiesConsent', 'true');
+      }
     }
   }, [user?.id]);
 

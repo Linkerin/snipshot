@@ -19,7 +19,9 @@ export const getServerSideProps: GetServerSideProps =
     const slug = params?.snippet ?? null;
 
     try {
-      if (Array.isArray(slug)) throw new Error('Invalid `slug` value');
+      if (Array.isArray(slug) || slug === null) {
+        throw new Error('Invalid `slug` value');
+      }
 
       const snippet = await getBySlug(slug);
       const snippetData = snippet.map(snippet =>

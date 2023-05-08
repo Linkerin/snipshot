@@ -1,5 +1,5 @@
-const VERSION = 1;
-const CACHE_NAME = `offline-cache-v${VERSION}`;
+const VERSION = 'v0.1';
+const CACHE_NAME = `offline-cache-${VERSION}`;
 const RESOURCES = [
   '/',
   '/add',
@@ -32,6 +32,11 @@ const preCache = async resources => {
 
 self.addEventListener('install', event => {
   event.waitUntil(preCache(RESOURCES));
+});
+
+// Activate phase
+self.addEventListener('activate', async event => {
+  await caches.delete('offline-cache-1');
 });
 
 // Fetching block
@@ -69,6 +74,6 @@ const staleWhileRevalidate = async request => {
   }
 };
 
-self.addEventListener('fetch', async event => {
-  event.respondWith(staleWhileRevalidate(event.request));
-});
+// self.addEventListener('fetch', async event => {
+//   event.respondWith(staleWhileRevalidate(event.request));
+// });
