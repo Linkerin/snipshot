@@ -1,3 +1,4 @@
+import NextLink from 'next/link';
 import { Heading, Highlight, Link, Text, VStack } from '@chakra-ui/react';
 
 import Contents from './Contents';
@@ -190,6 +191,7 @@ function TermsOfServicePage() {
           </Highlight>{' '}
           the Application, please contact us at{' '}
           <Link
+            as={NextLink}
             aria-label="Contact e-mail"
             href="mailto:info@snipshot.dev"
             fontWeight="bold"
@@ -202,6 +204,7 @@ function TermsOfServicePage() {
           By using the Application, you acknowledge that you have read,
           understood, and agree to be bound by these Terms and our{' '}
           <Link
+            as={NextLink}
             aria-label="Privacy Policy page"
             href="/legal/privacy-policy"
             fontWeight="bold"

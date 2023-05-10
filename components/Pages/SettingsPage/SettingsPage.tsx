@@ -1,3 +1,4 @@
+import NextLink from 'next/link';
 import { Divider, Flex, Heading, Link, Show } from '@chakra-ui/react';
 
 import ChangeUsername from './ChangeUsername';
@@ -21,7 +22,7 @@ function SettingsPage() {
       <DeleteUser />
       <Show below="md">
         <Divider />
-        <Link href="/about" aria-label="About page" fontSize="xl">
+        <Link as={NextLink} href="/about" aria-label="About page" fontSize="xl">
           About snipshot
         </Link>
       </Show>
