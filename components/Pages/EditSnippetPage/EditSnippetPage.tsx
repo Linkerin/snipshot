@@ -105,7 +105,7 @@ function EditSnippetPage() {
           (await router.push(
             `/snippets/${encodeURIComponent(data.snippet.lang)}/${
               data.snippet.slug
-            }/`
+            }?status=edited`
           ));
       }
     } catch (err) {

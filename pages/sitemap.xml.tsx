@@ -100,7 +100,7 @@ function generateSiteMap({ tags, slugs, users }: GenerateSiteMapParams) {
               <loc>${baseUrl}/tags/${encodeURIComponent(tag)}</loc>
               <lastmod>${new Date().toISOString()}</lastmod>
               <changefreq>hourly</changefreq>
-              <priority>0.8</priority>
+              <priority>0.6</priority>
             </url>
           `
      )}
