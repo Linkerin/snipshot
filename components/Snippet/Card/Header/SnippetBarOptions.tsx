@@ -1,8 +1,8 @@
 import { useCallback, useContext } from 'react';
 import dynamic from 'next/dynamic';
+import NextLink from 'next/link';
 import {
   IconButton,
-  Link,
   Menu,
   MenuButton,
   MenuList,
@@ -114,9 +114,10 @@ function SnippetBarOptions({
           {user?.id && user.id === authorId && (
             <>
               <MenuItem
-                as={Link}
-                href={`/snippets/edit?snippetId=${snippetId}`}
+                as={NextLink}
                 aria-label="Edit snippet page"
+                href={`/snippets/edit?snippetId=${snippetId}`}
+                prefetch={false}
                 bgColor="inherit"
                 icon={<EditIcon />}
                 _hover={{ bgColor: itemHoverBgColor }}

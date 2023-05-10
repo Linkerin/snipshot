@@ -1,4 +1,5 @@
-import { CardFooter, IconButton, Link } from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { CardFooter, IconButton } from '@chakra-ui/react';
 
 import fadeInAnimation from '@/services/utils/styling/fadeInAnimation';
 import LangIcon from '@/components/Icons/LangIcons/LangIcon';
@@ -15,9 +16,10 @@ function SnippetCardFooter({ lang, children }: SnippetCardFooterProps) {
   return (
     <CardFooter pt={0}>
       <IconButton
-        as={Link}
-        href={`/snippets/${escapedLang}`}
+        as={NextLink}
         aria-label={`${lang} snippets`}
+        href={`/snippets/${escapedLang}`}
+        prefetch={false}
         icon={
           <LangIcon
             lang={lang}

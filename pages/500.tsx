@@ -1,4 +1,5 @@
-import { Button, Flex, Heading, Img, Link, Text, Show } from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { Button, Flex, Heading, Img, Text, Show } from '@chakra-ui/react';
 
 function Custom500() {
   return (
@@ -38,9 +39,9 @@ function Custom500() {
           </Heading>
           <Text>We learn from mistakes. Maybe we will even fix them.</Text>
           <Button
-            as={Link}
+            as={NextLink}
+            aria-label="Home page"
             href="/"
-            aria-label="Homepage"
             variant="outline"
             alignSelf="flex-start"
             mt={4}

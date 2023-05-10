@@ -1,3 +1,4 @@
+import NextLink from 'next/link';
 import { Flex, Link, Stack, Text } from '@chakra-ui/react';
 
 import { parseDate } from '@/services/utils/date';
@@ -32,8 +33,10 @@ function SnippetInfoFooter({
         >
           {author?.name ? (
             <Link
+              as={NextLink}
               aria-label={`Navigate to ${author?.name} profile page`}
               href={`/users/${author?.name}`}
+              prefetch={false}
             >
               {author?.name}
             </Link>

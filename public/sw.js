@@ -1,4 +1,4 @@
-const version = 'v0.2';
+const version = 'v0.1';
 const CACHE_LABEL = 'offline-cache';
 const CACHE_NAME = `${CACHE_LABEL}-${version}`;
 const RESOURCES = [
@@ -84,6 +84,6 @@ const staleWhileRevalidate = async request => {
   }
 };
 
-self.addEventListener('fetch', async event => {
-  event.respondWith(staleWhileRevalidate(event.request));
-});
+// self.addEventListener('fetch', async event => {
+//   event.respondWith(staleWhileRevalidate(event.request));
+// });

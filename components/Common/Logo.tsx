@@ -1,10 +1,6 @@
 import Image from 'next/image';
-import {
-  Box,
-  Link,
-  SystemStyleObject,
-  useColorModeValue
-} from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { Box, SystemStyleObject, useColorModeValue } from '@chakra-ui/react';
 
 import fadeInAnimation from '@/services/utils/styling/fadeInAnimation';
 import LogoDark from '@/public/images/LogoDark.svg';
@@ -34,9 +30,14 @@ const LogoContainer = ({
   return (
     <Box sx={containerStyling}>
       {isLink ? (
-        <Link href="/" aria-label="Link to the main page">
+        <NextLink
+          href="/"
+          aria-label="Link to the main page"
+          prefetch={false}
+          shallow
+        >
           {children}
-        </Link>
+        </NextLink>
       ) : (
         children
       )}

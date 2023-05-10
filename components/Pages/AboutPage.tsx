@@ -1,3 +1,4 @@
+import NextLink from 'next/link';
 import {
   Heading,
   Highlight,
@@ -75,7 +76,10 @@ export function AboutPage() {
           <UnorderedList color="text-secondary" pl={6}>
             <ListItem>
               <Link
+                as={NextLink}
+                aria-label="Navigate to external Chakra-UI.com page"
                 href="https://chakra-ui.com"
+                prefetch={false}
                 rel="noreferrer"
                 fontWeight="bold"
                 isExternal
@@ -86,7 +90,10 @@ export function AboutPage() {
             <ListItem>
               Unicons by{' '}
               <Link
+                as={NextLink}
+                aria-label="Navigate to external IconScout.com page"
                 href="https://iconscout.com/"
+                prefetch={false}
                 rel="noreferrer"
                 fontWeight="bold"
                 isExternal
@@ -96,7 +103,10 @@ export function AboutPage() {
             </ListItem>
             <ListItem>
               <Link
+                as={NextLink}
+                aria-label="Navigate to external DevIcon.dev page"
                 href="https://devicon.dev"
+                prefetch={false}
                 rel="noreferrer"
                 fontWeight="bold"
                 isExternal
@@ -107,7 +117,10 @@ export function AboutPage() {
             <ListItem>
               Cute pictures created by{' '}
               <Link
+                as={NextLink}
+                aria-label="Navigate to external catalyststuff profile page on Freepik"
                 href="https://www.freepik.com/author/catalyststuff"
+                prefetch={false}
                 rel="noreferrer"
                 fontWeight="bold"
                 isExternal
@@ -116,7 +129,10 @@ export function AboutPage() {
               </Link>
               {' on '}
               <Link
+                as={NextLink}
+                aria-label="Navigate to external Freepik.com page"
                 href="https://www.freepik.com/"
+                prefetch={false}
                 rel="noreferrer"
                 fontWeight="bold"
                 isExternal

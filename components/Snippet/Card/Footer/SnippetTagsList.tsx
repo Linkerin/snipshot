@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import NextLink from 'next/link';
 import { LinkBox, LinkOverlay, TagLabel } from '@chakra-ui/react';
 
 import TagWrapper from '@/components/CustomTag/TagWrapper';
@@ -24,8 +25,10 @@ function SnippetTagsList({ tags, handleTagDelete }: SnippetTagsListProps) {
             <TagWrapper>
               <TagLabel>
                 <LinkOverlay
+                  as={NextLink}
                   aria-label={`${tag} tag page`}
                   href={`/tags/${tag}`}
+                  prefetch={false}
                 >
                   {tag.toLowerCase()}
                 </LinkOverlay>
