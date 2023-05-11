@@ -1,8 +1,11 @@
-const version = 'v0.1';
+'use strict';
+
+const version = 'v0.2';
 const CACHE_LABEL = 'offline-cache';
 const CACHE_NAME = `${CACHE_LABEL}-${version}`;
 const RESOURCES = [
   '/',
+  '/offline',
   '/add',
   '/about',
   '/settings',
@@ -59,6 +62,10 @@ const putInCache = async (request, response) => {
 
 const fetchRequest = async request => {
   const networkResponse = await fetch(request);
+  if (!networkResponse.ok) {
+    throw new Error(await networkResponse.json());
+  }
+
   await putInCache(request, networkResponse.clone());
 
   return networkResponse;
@@ -86,4 +93,6 @@ const staleWhileRevalidate = async request => {
 
 // self.addEventListener('fetch', async event => {
 //   event.respondWith(staleWhileRevalidate(event.request));
+//   const staticDataRegexp = new RegExp(/\.(?:json|xml|csv)/i);
+//   const authRegexp = new RegExp('supabase.co/auth');
 // });

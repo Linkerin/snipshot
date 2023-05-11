@@ -61,7 +61,7 @@ function useSnippetInputHandler() {
             setInputHelpers(prevState => {
               return {
                 ...prevState,
-                snippet: 'Maximum is 10 rows of 80 symbols'
+                snippet: 'Maximum is 10 rows of 80 symbols each'
               };
             });
             return;
