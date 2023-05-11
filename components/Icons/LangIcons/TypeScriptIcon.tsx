@@ -8,7 +8,7 @@ function TypeScriptIcon(props: LangIconProps) {
   const { colorMode } = useColorMode();
 
   return (
-    <Icon {...props}>
+    <Icon viewBox="0 0 128 128" boxSize={7} {...props}>
       {props.disabled || colorMode === 'light' ? (
         <path
           fill={props.disabled ? '#bbb' : '#007acc'}
