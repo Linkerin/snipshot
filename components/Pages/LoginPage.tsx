@@ -56,7 +56,7 @@ function LoginPage() {
         gap={10}
         h="100%"
         w={{
-          base: '90%',
+          base: '85%',
           sm: '80%',
           md: '65%',
           lg: '50%',

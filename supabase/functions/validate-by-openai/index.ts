@@ -1,5 +1,6 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts';
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+import { supabaseClient } from '../_shared/supabaseClient.ts';
 
 /**
  * A prompt describing how ChatGPT should act himself.
@@ -92,13 +93,49 @@ type validationResult = {
 };
 
 async function recordValidationResult(result: validationResult) {
-  const supabase = createClient(
-    Deno.env.get('SUPABASE_URL') ?? '',
-    Deno.env.get('SUPABASE_ANON_KEY') ?? ''
-  );
+  const { count: existingRecord, error: existingRecordError } =
+    await supabaseClient
+      .from('snippets_validation_results')
+      .select('id', { count: 'exact', head: true })
+      .eq('snippet_id', result.snippetId);
+  if (existingRecordError) throw existingRecordError;
 
+  console.log('Count value', existingRecord);
+
+  // The snippet was previosly checked
+  if (Number.isInteger(existingRecord) && existingRecord > 0) {
+    if (result.reported === null) {
+      const { error } = await supabaseClient
+        .from('snippets_validation_results')
+        .update({
+          snippet_id: result.snippetId,
+          reason: result.reason,
+          checked: false,
+          updated: new Date()
+        })
+        .eq('snippet_id', result.snippetId);
+      if (error) throw error;
+
+      return true;
+    }
+
+    const { error } = await supabaseClient
+      .from('snippets_validation_results')
+      .update({
+        snippet_id: result.snippetId,
+        reason: result.reason,
+        reported: result.reported,
+        updated: new Date()
+      })
+      .eq('snippet_id', result.snippetId);
+    if (error) throw error;
+
+    return true;
+  }
+
+  // No previous checks
   if (result.reported === null) {
-    const { error } = await supabase
+    const { error } = await supabaseClient
       .from('snippets_validation_results')
       .insert({
         snippet_id: result.snippetId,
@@ -110,11 +147,13 @@ async function recordValidationResult(result: validationResult) {
     return true;
   }
 
-  const { error } = await supabase.from('snippets_validation_results').insert({
-    snippet_id: result.snippetId,
-    reason: result.reason,
-    reported: result.reported
-  });
+  const { error } = await supabaseClient
+    .from('snippets_validation_results')
+    .insert({
+      snippet_id: result.snippetId,
+      reason: result.reason,
+      reported: result.reported
+    });
   if (error) throw error;
 
   return true;
@@ -122,6 +161,10 @@ async function recordValidationResult(result: validationResult) {
 
 serve(async req => {
   try {
+    // Check that the request is sent by the DB
+    const userAgent = req.headers.get('user-agent') ?? '';
+    if (!/pg_net/.test(userAgent)) throw new Error('Invalid client');
+
     const { record } = await req.json();
 
     if (!record.title || !record.snippet || !record.lang || !record.id) {
