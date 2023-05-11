@@ -54,7 +54,7 @@ export function AboutPage() {
               query="grateful"
               styles={{ color: 'primary', fontWeight: 'extrabold' }}
             >
-              We are grateful to the following projects
+              We are grateful to the following projects:
             </Highlight>
           </Heading>
           <Acknowledgements />
