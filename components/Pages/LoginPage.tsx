@@ -1,12 +1,11 @@
 import { SyntheticEvent, useCallback, useState } from 'react';
 import {
   Button,
-  Center,
+  Flex,
   Heading,
   Highlight,
   useColorModeValue,
-  useToast,
-  VStack
+  useToast
 } from '@chakra-ui/react';
 
 import CustomSpinner from '@/components/Common/CustomSpinner';
@@ -50,42 +49,48 @@ function LoginPage() {
         keywords="login, snipshot"
         description="User login page for snipshot"
       />
-      <Center h="80%" flexDirection="column">
-        <VStack
-          w={{ base: '75vw', md: '40vw', lg: '30vw', xl: '24vw' }}
-          mb={12}
-          spacing={7}
+      <Flex
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        gap={10}
+        h="100%"
+        w={{
+          base: '90%',
+          sm: '80%',
+          md: '65%',
+          lg: '50%',
+          xl: '40%'
+        }}
+        mx="auto"
+      >
+        <Heading
+          as="p"
+          textAlign="left"
+          size={{ base: 'md', lg: 'lg' }}
+          textColor="primary"
         >
-          <Heading
-            as="p"
-            textAlign="left"
-            size={{ base: 'md', lg: 'lg' }}
-            textColor="primary"
+          <Highlight
+            query="GitHub"
+            styles={{
+              px: 3,
+              py: 0.5,
+              borderRadius: '20px',
+              bgColor: useColorModeValue('custom-black', 'custom-white'),
+              color: useColorModeValue('custom-white', 'custom-black')
+            }}
           >
-            <Highlight
-              query="GitHub"
-              styles={{
-                px: 3,
-                py: 0.5,
-                borderRadius: '20px',
-                bgColor: useColorModeValue('custom-black', 'custom-white'),
-                color: useColorModeValue('custom-white', 'custom-black')
-              }}
-            >
-              We use GitHub as a secure and reliable option for authentication
-              process.
-            </Highlight>
-          </Heading>
-          <Heading
-            as="p"
-            textAlign="right"
-            size={{ base: 'sm', lg: 'md' }}
-            textColor="text-secondary"
-          >
-            Do not hesitate to join GitHub community if you don&apos;t have an
-            account yet!
-          </Heading>
+            We use GitHub as a secure and reliable option for authentication
+            process.
+          </Highlight>
+        </Heading>
 
+        <Flex
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
+          gap={3}
+        >
           {user?.id ? (
             <CustomSpinner />
           ) : (
@@ -97,6 +102,7 @@ function LoginPage() {
               loadingText="Logging in with GitHub..."
               variant="outline"
               colorScheme="gray"
+              w="100%"
             >
               Continue with GitHub
             </Button>
@@ -108,8 +114,8 @@ function LoginPage() {
             lineHeight="short"
             textAlign="center"
           />
-        </VStack>
-      </Center>
+        </Flex>
+      </Flex>
     </>
   );
 }

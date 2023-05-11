@@ -5,6 +5,7 @@ import { ButtonGroup, Flex } from '@chakra-ui/react';
 import { AuthContext } from '@/context/AuthContext';
 import ThemeSwitch from './ThemeSwitch';
 
+const AboutMobileButton = dynamic(() => import('./AboutMobileButton'));
 const Logo = dynamic(() => import('@/components/Common/Logo'), {
   loading: () => <div />
 });
@@ -24,6 +25,7 @@ function MobileTopBar() {
       <Logo height={42} isLink />
       <ButtonGroup>
         {user?.id && <SettingsButton />}
+        {!user?.id && <AboutMobileButton />}
         <ThemeSwitch />
       </ButtonGroup>
     </Flex>

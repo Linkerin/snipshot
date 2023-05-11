@@ -1,8 +1,16 @@
 import NextLink from 'next/link';
-import { Divider, Flex, Heading, Link, Show } from '@chakra-ui/react';
+import {
+  Divider,
+  Flex,
+  Heading,
+  LinkBox,
+  LinkOverlay,
+  Show
+} from '@chakra-ui/react';
 
 import ChangeUsername from './ChangeUsername';
 import DeleteUser from './DeleteUser';
+import InfoIcon from '@/components/Icons/InfoIcon';
 import PageContentWrapper from '@/components/PageContentWrapper';
 
 function SettingsPage() {
@@ -22,9 +30,23 @@ function SettingsPage() {
       <DeleteUser />
       <Show below="md">
         <Divider />
-        <Link as={NextLink} href="/about" aria-label="About page" fontSize="xl">
-          About snipshot
-        </Link>
+        <LinkBox
+          as={Flex}
+          alignItems="center"
+          gap={1.5}
+          _hover={{ color: 'primary' }}
+        >
+          <InfoIcon boxSize={5} />
+          <LinkOverlay
+            as={NextLink}
+            href="/about"
+            aria-label="About page"
+            fontSize="lg"
+            fontWeight="bold"
+          >
+            About snipshot
+          </LinkOverlay>
+        </LinkBox>
       </Show>
     </PageContentWrapper>
   );
