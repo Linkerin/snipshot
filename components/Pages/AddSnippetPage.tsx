@@ -136,7 +136,7 @@ function AddSnippetPage() {
             />
           </GridItem>
           {userInput.snippet && (
-            <GridItem area="preview" mt={0} mb={1}>
+            <GridItem area="preview" aria-label="Snippet preview" mt={0} mb={1}>
               <SnippetPreview userInput={userInput} tags={tags} />
             </GridItem>
           )}

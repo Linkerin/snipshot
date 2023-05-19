@@ -53,7 +53,6 @@ function Layout({ children }: { children: React.ReactNode }) {
           </GridItem>
         )}
         <GridItem
-          as="section"
           cursor="default"
           maxHeight="100dvh"
           height="100%"
@@ -62,6 +61,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           <GridItem
             as="header"
             area="topbar"
+            aria-label="Topbar"
             position="sticky"
             top={0}
             zIndex={3}
@@ -82,7 +82,13 @@ function Layout({ children }: { children: React.ReactNode }) {
             {children}
           </GridItem>
           {isMobile && (
-            <GridItem as="nav" area="nav" position="sticky" bottom="0px">
+            <GridItem
+              as="nav"
+              area="nav"
+              role="menubar"
+              position="sticky"
+              bottom="0px"
+            >
               <MobileNav />
             </GridItem>
           )}

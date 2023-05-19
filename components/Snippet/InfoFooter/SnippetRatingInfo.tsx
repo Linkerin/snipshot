@@ -38,7 +38,12 @@ function SnippetRatingInfo({ ratingId, rating }: SnippetRatingInfoProps) {
       >
         <Text fontWeight="bold">++</Text>
       </Button>
-      <Text fontWeight="bold" minWidth="1rem" textAlign="center">
+      <Text
+        aria-label="Snippet's rating"
+        fontWeight="bold"
+        minWidth="1rem"
+        textAlign="center"
+      >
         {currentRating}
       </Text>
       <Button

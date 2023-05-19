@@ -11,7 +11,7 @@ function AboutMobileButton() {
   return (
     <IconButton
       as={NextLink}
-      aria-label="Navigate to About page"
+      aria-label="To About page"
       href="/about"
       prefetch={false}
       colorScheme={btnColor}

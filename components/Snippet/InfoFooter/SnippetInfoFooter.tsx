@@ -34,7 +34,7 @@ function SnippetInfoFooter({
           {author?.name ? (
             <Link
               as={NextLink}
-              aria-label={`Navigate to ${author?.name} profile page`}
+              aria-label={`To ${author?.name} profile page`}
               href={`/users/${author?.name}`}
               prefetch={false}
             >
@@ -44,7 +44,13 @@ function SnippetInfoFooter({
             'anonymous'
           )}
         </Text>
-        <Text as="time" fontSize="xs" color="text-secondary" lineHeight="21px">
+        <Text
+          as="time"
+          aria-label="Snippet creation date"
+          fontSize="xs"
+          color="text-secondary"
+          lineHeight="21px"
+        >
           {parseDate(created) ?? ''}
         </Text>
       </Stack>

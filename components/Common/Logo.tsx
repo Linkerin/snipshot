@@ -32,7 +32,7 @@ const LogoContainer = ({
       {isLink ? (
         <NextLink
           href="/"
-          aria-label="Link to the main page"
+          aria-label="To the main page"
           prefetch={false}
           shallow
         >

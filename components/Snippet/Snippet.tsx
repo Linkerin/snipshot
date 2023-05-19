@@ -38,7 +38,12 @@ function Snippet({
   handleSnippetRemove
 }: SnippetProps) {
   return (
-    <chakra.article ref={provideRef} w="100%" sx={fadeInAnimation()}>
+    <chakra.article
+      ref={provideRef}
+      aria-label={`${snippet.title}`}
+      w="100%"
+      sx={fadeInAnimation()}
+    >
       <Card
         as="section"
         className="snippet-card"

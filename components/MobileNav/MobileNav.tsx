@@ -104,56 +104,54 @@ function MobileNav() {
             spacing={0}
             isAttached
             pb={isAppleMobile ? '1.5dvh' : 0}
+            variant="ghost"
           >
             <IconButton
-              aria-label="Go to homepage"
+              aria-label="To homepage"
+              role="link"
               icon={<HomeIcon boxSize={5} />}
-              variant="ghost"
               w="100%"
               h="100%"
               onClick={() => handleMenuClick('home')}
             />
 
             <IconButton
-              variant="ghost"
               w="100%"
               h="100%"
-              aria-label="Search"
+              aria-label="Search modal"
               icon={<SearchIcon boxSize={5} />}
               onClick={() => handleMenuClick('search')}
             />
             <IconButton
-              variant="ghost"
-              aria-label="Add Snippet"
+              aria-label="To add snippet page"
+              role="link"
               icon={<PlusIcon boxSize={6} color="primary" />}
               w="100%"
               h="100%"
               onClick={() => handleMenuClick('add')}
             />
             <IconButton
-              aria-label="Languages"
+              aria-label="Languages list modal"
               icon={<CodeIcon boxSize={5} />}
-              variant="ghost"
               w="100%"
               h="100%"
               value={'test'}
               onClick={() => handleMenuClick('languages')}
             />
             <IconButton
-              aria-label="Profile"
+              aria-label="To profile page"
+              role="link"
               icon={
                 user?.id ? (
                   <UserAvatar
                     avatar={user.avatar}
                     username={user.username}
                     size="micro"
-                    // noBorder
                   />
                 ) : (
                   <UserIcon boxSize={5} />
                 )
               }
-              variant="ghost"
               w="100%"
               h="100%"
               onClick={() => handleMenuClick('profile')}
@@ -165,7 +163,7 @@ function MobileNav() {
         <MobileSearchContainer />
       </MobileNavModal>
       <MobileNavModal isOpen={opened.languages} onClose={handleMenuClose}>
-        <LanguagesList />
+        <LanguagesList role="navigation" />
       </MobileNavModal>
     </>
   );

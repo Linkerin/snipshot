@@ -26,7 +26,7 @@ function SnippetTagsList({ tags, handleTagDelete }: SnippetTagsListProps) {
               <TagLabel>
                 <LinkOverlay
                   as={NextLink}
-                  aria-label={`${tag} tag page`}
+                  aria-label={`To ${tag} tag page`}
                   href={`/tags/${tag}`}
                   prefetch={false}
                 >

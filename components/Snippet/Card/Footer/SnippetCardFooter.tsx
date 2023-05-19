@@ -14,10 +14,10 @@ function SnippetCardFooter({ lang, children }: SnippetCardFooterProps) {
   const escapedLang = lang ? encodeURIComponent(lang) : '';
 
   return (
-    <CardFooter pt={0}>
+    <CardFooter pt={0} as="footer">
       <IconButton
         as={NextLink}
-        aria-label={`${lang} snippets`}
+        aria-label={`To ${lang} snippets page`}
         href={`/snippets/${escapedLang}`}
         prefetch={false}
         icon={

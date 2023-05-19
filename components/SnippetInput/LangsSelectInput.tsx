@@ -17,6 +17,7 @@ function LangsSelectInput({ onChange, langValue }: LangsSelectInputProps) {
     <SelectInput
       id="lang"
       name="lang"
+      aria-label="Language select input"
       placeholder="Select language"
       h={{ base: 12, lg: 10 }}
       value={langValue}

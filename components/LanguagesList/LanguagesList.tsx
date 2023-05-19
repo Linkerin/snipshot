@@ -12,7 +12,7 @@ function LanguagesList(props: ListProps) {
       {...props}
     >
       {LANGS.map(lang => {
-        return <LanguagesListItem key={lang} lang={lang} role={props.role} />;
+        return <LanguagesListItem key={lang} lang={lang} />;
       })}
     </List>
   );

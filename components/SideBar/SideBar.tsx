@@ -18,7 +18,7 @@ function SideBar() {
       overflowY="scroll"
       sx={hideScrollbarCss}
     >
-      <CardHeader as="header" p={2}>
+      <CardHeader as="header" aria-label="snipshot.dev logo" p={2}>
         <Logo isLink />
       </CardHeader>
       <CardBody width="100%" mt={4} px={0} py={0}>

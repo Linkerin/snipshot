@@ -46,10 +46,10 @@ function SideMenu() {
   const StyledMenuItem = chakra(CenteredListItem, menuItemStyles);
 
   return (
-    <List as="menu" spacing={0}>
+    <List as="menu" role="menu" spacing={0}>
       {user?.id && (
         <>
-          <LinkBox as={StyledMenuItem}>
+          <LinkBox as={StyledMenuItem} role="menuitem">
             <ListIcon as={UserIcon} />
             <LinkOverlay
               as={NextLink}
@@ -59,24 +59,23 @@ function SideMenu() {
               Profile
             </LinkOverlay>
           </LinkBox>
-          {user?.id && (
-            <LinkBox as={StyledMenuItem}>
-              <ListIcon as={SettingsIcon} />
-              <LinkOverlay
-                as={NextLink}
-                aria-label="Settings page"
-                href="/settings"
-                prefetch={false}
-              >
-                Settings
-              </LinkOverlay>
-            </LinkBox>
-          )}
+
+          <LinkBox as={StyledMenuItem} role="menuitem">
+            <ListIcon as={SettingsIcon} />
+            <LinkOverlay
+              as={NextLink}
+              aria-label="Settings page"
+              href="/settings"
+              prefetch={false}
+            >
+              Settings
+            </LinkOverlay>
+          </LinkBox>
         </>
       )}
 
       {!user?.id && (
-        <LinkBox as={StyledMenuItem}>
+        <LinkBox as={StyledMenuItem} role="menuitem">
           <ListIcon as={SignInIcon} />
           <LinkOverlay as={NextLink} href="/login" aria-label="Settings page">
             Sign In
@@ -84,7 +83,7 @@ function SideMenu() {
         </LinkBox>
       )}
 
-      <CenteredListItem>
+      <CenteredListItem role="menuitem">
         <Accordion allowToggle w="100%">
           <AccordionItem border="none">
             <AccordionButton>
@@ -92,13 +91,13 @@ function SideMenu() {
               Languages
             </AccordionButton>
             <AccordionPanel maxHeight="35vh" overflowY="scroll" ml={7} p={0}>
-              <LanguagesList role="link" />
+              <LanguagesList role="navigation" />
             </AccordionPanel>
           </AccordionItem>
         </Accordion>
       </CenteredListItem>
 
-      <LinkBox as={StyledMenuItem}>
+      <LinkBox as={StyledMenuItem} role="menuitem">
         <ListIcon as={InfoIcon} />
         <LinkOverlay
           as={NextLink}
@@ -113,7 +112,11 @@ function SideMenu() {
       {user?.id && (
         <>
           <Divider my={2} w="87%" mx="auto" />
-          <StyledMenuItem onClick={handleLogout} cursor="pointer">
+          <StyledMenuItem
+            onClick={handleLogout}
+            cursor="pointer"
+            role="menuitem"
+          >
             <Box as="button">
               <ListIcon as={SignOutIcon} />
               Logout

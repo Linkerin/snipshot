@@ -16,13 +16,19 @@ function Alerts({ error }: { error: string }) {
   return (
     <VStack spacing={2} mb={3}>
       {!user?.id && (
-        <Alert status="info" py={2} px={3} variant="info">
-          <AlertIcon boxSize={4} />
+        <Alert
+          aria-label="Log in to be a snippet author"
+          status="info"
+          py={2}
+          px={3}
+          variant="info"
+        >
+          <AlertIcon aria-label="Info icon" boxSize={4} />
           <AlertDescription fontSize="sm">
             Hey, how about{' '}
             <Link
               as={NextLink}
-              aria-label="Login page"
+              aria-label="To login page"
               href="/login"
               color="primary"
             >
@@ -33,8 +39,8 @@ function Alerts({ error }: { error: string }) {
         </Alert>
       )}
       {!!error && (
-        <Alert status="error" py={2} px={3}>
-          <AlertIcon boxSize={4} />
+        <Alert aria-label="Error" status="error" py={2} px={3}>
+          <AlertIcon aria-label="Error icon" boxSize={4} />
           <AlertDescription fontSize="sm">{error}</AlertDescription>
         </Alert>
       )}

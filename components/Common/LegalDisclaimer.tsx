@@ -10,7 +10,7 @@ function LegalDisclaimer({
   ...props
 }: TextProps & ActionTextProp) {
   return (
-    <Text fontSize="sm" {...props}>
+    <Text aria-label="Legal disclaimer" fontSize="sm" {...props}>
       By {actionText}, you acknowledge that you have read, understood, and agree
       to be bound by our{' '}
       <Link

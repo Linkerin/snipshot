@@ -96,7 +96,12 @@ function MobileNavModal({
           maxWidth="100%"
           bgColor="chakra-body-bg"
         >
-          <ModalHeader py={2.5} onClick={onClose} cursor="pointer">
+          <ModalHeader
+            aria-label="Close modal area"
+            py={2.5}
+            onClick={onClose}
+            cursor="pointer"
+          >
             <HeaderButton color={btnColor} />
           </ModalHeader>
           <ModalBody

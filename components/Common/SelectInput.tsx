@@ -223,7 +223,7 @@ function SelectInput({
 
               return React.cloneElement(
                 child,
-                { onClick: handleClick },
+                { onClick: handleClick, tabIndex: 0 },
                 child.props.children
               );
             })}

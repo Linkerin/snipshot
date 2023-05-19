@@ -10,7 +10,8 @@ import { SnippetType } from '@/services/types';
 function RawSnippet({ snippet }: { snippet: SnippetType }) {
   return (
     <Card
-      as="section"
+      as="article"
+      aria-label={`${snippet.title}`}
       className="snippet-card"
       variant="elevated"
       size="sm"

@@ -9,12 +9,7 @@ import LangIcon from '@/components/Icons/LangIcons/LangIcon';
 import { LangsType } from '@/services/types';
 import useHovered from '@/hooks/useHovered';
 
-interface LanguagesListItemProps {
-  lang: LangsType;
-  role?: React.AriaRole;
-}
-
-function LanguagesListItem({ lang, role }: LanguagesListItemProps) {
+function LanguagesListItem({ lang }: { lang: LangsType }) {
   const router = useRouter();
   const { isMobile } = useContext(DeviceContext);
   const [hovered, handleMouseEnter, handleMouseLeave] = useHovered();
@@ -43,11 +38,10 @@ function LanguagesListItem({ lang, role }: LanguagesListItemProps) {
           disabled={
             router.query.lang === lang || isMobile || hovered ? false : true
           }
-          role={role}
         />
         <LinkOverlay
           as={NextLink}
-          aria-label={`Navigate to ${lang} page`}
+          aria-label={`To ${lang} language page`}
           href={`/snippets/${escapedLang}`}
           prefetch={false}
         >

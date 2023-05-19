@@ -15,7 +15,7 @@ function AddSnippetButton() {
       href="/add"
       prefetch={false}
       colorScheme={buttonColor}
-      aria-label="Add Snippet"
+      aria-label="Add snippet page"
       icon={<PlusIcon boxSize={9} color={'custom-white'} />}
       borderRadius="2xl"
       shadow="dark-lg"

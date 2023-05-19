@@ -60,7 +60,7 @@ function SnippetInputForm({
   };
 
   return (
-    <VStack as="form" autoComplete="off" spacing={3}>
+    <VStack as="form" autoComplete="off" spacing={3} role="form">
       <FormControl isRequired>
         <SnippetFormLabel label="Title" mb={0} />
         <Input
