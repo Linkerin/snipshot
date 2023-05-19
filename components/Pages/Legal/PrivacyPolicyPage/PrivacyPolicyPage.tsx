@@ -20,6 +20,7 @@ function PrivacyPolicyPage() {
         title="Privacy Policy · snipshot"
         description="Privacy Policy of snipshot.dev web application"
         keywords="legal, information, policy, snipshot"
+        ogUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/legal/privacy-policy/`}
       />
       <PageContentWrapper
         as={VStack}

@@ -48,6 +48,7 @@ function LoginPage() {
         title="Login &#183; snipshot"
         keywords="login, snipshot"
         description="User login page for snipshot"
+        ogUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/login/`}
       />
       <Flex
         flexDirection="column"

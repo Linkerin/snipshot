@@ -10,8 +10,9 @@ function TermsOfServicePage() {
     <>
       <Meta
         title="Terms of Service · snipshot"
-        description="Terms of Service of snipshot.dev web application"
+        description="See our Terms of our Service and how they relate to you."
         keywords="legal, information, terms, service, snipshot"
+        ogUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/legal/terms-of-service/`}
       />
       <PageContentWrapper
         as={VStack}

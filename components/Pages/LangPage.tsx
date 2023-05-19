@@ -14,6 +14,9 @@ function LangPage({ snippetsData, lang, apiHandlerUrl }: LangPageProps) {
         title={`${lang} code snippets · snipshot`}
         keywords={`${lang}, development, programming, snippets, code, samples`}
         description={`${lang} code snippets on snipshot. Get and share your ${lang} snips`}
+        ogUrl={`${
+          process.env.NEXT_PUBLIC_BASE_URL
+        }/snippets/${encodeURIComponent(lang)}/`}
       />
       <PageContentWrapper>
         {snippetsData.length === 0 ? (

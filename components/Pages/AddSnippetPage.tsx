@@ -103,6 +103,7 @@ function AddSnippetPage() {
         title="Create a new snippet · snipshot"
         description="Post a code snippet to snipshot on this page"
         keywords="add, create, post, new, snippet, code, snipshot"
+        ogUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/add/`}
       />
       <PageContentWrapper>
         <Alerts error={error} />

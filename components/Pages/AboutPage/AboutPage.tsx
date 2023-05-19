@@ -16,6 +16,7 @@ export function AboutPage() {
         title="About · snipshot"
         description="Page about the snipshot project"
         keywords="about, information, snipshot"
+        ogUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/about/`}
       />
       <Flex
         as="article"

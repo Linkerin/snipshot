@@ -41,6 +41,9 @@ function UserPage({
         title={`${username} profile · snipshot`}
         description={`${username}'s profile page. Discover his snippets, description and stats`}
         keywords={`profile, user, ${username}, snippets`}
+        ogUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/users/${encodeURIComponent(
+          `${username}`
+        )}/`}
         imageUrl={`${process.env.NEXT_PUBLIC_API}/og/users?name=${username}&avatar=${avatar}`}
         imageDescription={`${username}'s profile Open Graph image with stats`}
       />

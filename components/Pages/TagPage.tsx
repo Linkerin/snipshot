@@ -15,6 +15,9 @@ function TagPage({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
         keywords={`${tag}, development, programming, snippets, code, samples`}
         description={`Code snippets for ${tag} on snipshot. Get and share your snips for ${tag}`}
         canonicalLink={`${process.env.NEXT_PUBLIC_BASE_URL}/tags/${tag}`}
+        ogUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/tags/${encodeURIComponent(
+          tag
+        )}/`}
       />
       <PageContentWrapper>
         {snippetsData.length === 0 ? (

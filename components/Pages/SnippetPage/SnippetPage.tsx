@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 import Meta from '@/components/Meta/Meta';
@@ -20,6 +21,8 @@ export const SnippetIdContext = createContext<string | null>(null);
 function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
   const [snippet] = snippetData;
   const [reported, setReported] = useState(false);
+
+  const router = useRouter();
 
   let description = `Page of "${snippet.title}" snippet source code in ${snippet.lang}.`;
   if (snippet.author?.name) {
@@ -77,6 +80,7 @@ function SnippetPage({ snippetData }: { snippetData: SnippetType[] }) {
         keywords={`development, programming, snippets, code, samples${
           keywordsTags ? `, ${keywordsTags}` : ''
         }`}
+        ogUrl={`${process.env.NEXT_PUBLIC_BASE_URL}${router.asPath}/`}
       />
       <PageContentWrapper
         as={Grid}
