@@ -24,6 +24,10 @@ export const getServerSideProps: GetServerSideProps =
       }
 
       const snippet = await getBySlug(slug);
+      if (!snippet.length) {
+        throw new Error(`Snippet for '${slug}' slug was not found`);
+      }
+
       const snippetData = snippet.map(snippet =>
         cleanObjDataTypesForNextJS(snippet)
       );
