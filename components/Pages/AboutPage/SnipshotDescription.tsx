@@ -22,6 +22,7 @@ function SnipshotDescription() {
       alignItems="flex-start"
       gap={6}
       justifyContent="flex-start"
+      pt={4}
     >
       <Heading size="3xl" textAlign="left" mb={5}>
         <Highlight query="snipshot" styles={{ color: 'primary' }}>
