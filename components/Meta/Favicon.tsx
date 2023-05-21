@@ -30,16 +30,7 @@ function Favicon() {
       <meta name="application-name" content="snipshot" />
       <meta name="msapplication-TileColor" content="#da532c" />
       <meta name="msapplication-config" content="/favicons/browserconfig.xml" />
-      <meta
-        name="theme-color"
-        media="(prefers-color-scheme: dark)"
-        content="#282a36"
-      />
-      <meta
-        name="theme-color"
-        media="(prefers-color-scheme: light)"
-        content="#fafdfa"
-      />
+      <meta name="theme-color" content="#282a36" />
     </>
   );
 }
