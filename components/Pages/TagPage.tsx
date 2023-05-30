@@ -11,7 +11,7 @@ function TagPage({ snippetsData, tag, apiHandlerUrl }: TagPageProps) {
   return (
     <>
       <Meta
-        title={`${tag} code snippets · snipshot`}
+        title={`\`${tag}\` tag code snippets · snipshot`}
         keywords={`${tag}, development, programming, snippets, code, samples`}
         description={`Code snippets for ${tag} on snipshot. Get and share your snips for ${tag}`}
         canonicalLink={`${process.env.NEXT_PUBLIC_BASE_URL}/tags/${tag}`}
