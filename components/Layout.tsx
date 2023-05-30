@@ -35,7 +35,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <Meta canonicalLink="https://snipshot.dev" />
+      <Meta />
       <Grid
         templateAreas={templateAreas}
         gridTemplateColumns={{
