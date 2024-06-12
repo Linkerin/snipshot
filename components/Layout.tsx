@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import dynamic from 'next/dynamic';
 import { Grid, GridItem } from '@chakra-ui/react';
+import { Roboto_Flex } from 'next/font/google';
 
 import { DeviceContext } from '@/context/DeviceContext';
 import hideScrollbarCss from '@/services/utils/hideScrollbarCss';
@@ -8,6 +9,8 @@ import Meta from '@/components/Meta/Meta';
 import SideBarSkeleton from './Skeletons/SideBarSkeleton';
 import TopBar from './TopBar/TopBar';
 import useCookiesConsent from '@/hooks/useCookiesConsent';
+
+const roboto = Roboto_Flex({ subsets: ['latin-ext'] });
 
 const AddSnippetButton = dynamic(
   () => import('@/components/AddSnippetButton'),
@@ -45,6 +48,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           xl: '18vw 1fr',
           '2xl': '15vw 1fr'
         }}
+        className={roboto.className}
         h="100%"
       >
         {!isMobile && (

@@ -1,7 +1,4 @@
 import Head from 'next/head';
-import { Roboto_Flex } from '@next/font/google';
-
-const roboto = Roboto_Flex({ subsets: ['latin-ext'] });
 
 interface MetaProps {
   title?: string;
@@ -51,13 +48,6 @@ function Meta({
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={imageUrl} />
-
-      {/* Roboto font */}
-      <style jsx global>{`
-        html {
-          font-family: ${roboto.style.fontFamily};
-        }
-      `}</style>
 
       {!!canonicalLink && <link rel="canonical" href={canonicalLink} />}
     </Head>
